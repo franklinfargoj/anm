@@ -10,11 +10,16 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group(['middleware'=>'auth'], function (){
 
-Route::get('/', function () { return view('welcome'); });
+    Route::get('/', 'TargetdataController@index')->name('dashboard');
+    Route::post('import-file', 'TargetdataController@importFile')->name('import.file');
+   // Route::get('/home', 'TargetdataController@homePage')->name('home');
+    //Route::get('/home', 'HomeController@index')->name('home');
+    //Route::post('register', 'Controller@importFile')->name('register');
+    //Route::get('login', 'LoginController@login')->name('login');
+    // Route::get('/', function () { return view('fileupload'); });
+});
 
 
-
-Route::post('import-file', 'Controller@importFile')->name('import.file');
-
-
+Auth::routes();
