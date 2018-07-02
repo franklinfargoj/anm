@@ -62,6 +62,7 @@ class TargetdataController extends Controller
                 //$data = \Excel::selectSheets('beneficiary_details')->load($path)->get()->toArray();
                 //$data = \Excel::selectSheets('phc_translations')->load($path)->get()->toArray();
                 $file_name = time() .$request->sample_file->getClientOriginalName();
+                $og_file_name =$request->sample_file->getClientOriginalName();
                 $day_time = Carbon::now()->toDateTimeString('Y-m-d');
                 $day = Carbon::now()->toDateString('Y-m-d');
 
@@ -79,7 +80,8 @@ class TargetdataController extends Controller
                             'scenerio' =>$value["scenario"],
                             'created_at'=> $day_time,
                             'uploaded_on'=>$day,
-                            'filename'=>$file_name
+                            'filename'=>$file_name,
+                            'og_filename'=>$og_file_name
                         ];
                     }
 
