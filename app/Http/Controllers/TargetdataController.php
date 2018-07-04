@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AnmTargetDataModel;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -14,6 +15,7 @@ use Illuminate\Http\Request;
 use Excel;
 use File;
 use DB;
+use DataTables;
 
 
 
@@ -29,9 +31,23 @@ class TargetdataController extends Controller
 
     public function index()
     {
-        return view('home');
+        return view('import');
     }
 
+    public function fetchTargetData()
+    {
+        $target_data = AnmTargetDataModel::select('id', 'og_filename as filenames', 'uploaded_on', 'status')
+            ->groupBy('filename')
+            ->get();
+
+        $db = Datatables::of($target_data);
+
+        $db->addColumn('actions', function ($target_data) {
+            return '<a class="btn btn-xs btn-primary" href="">View</a>';
+        })
+        ->rawColumns(['actions']);
+        return $db->make(true);
+    }
 
     public function importFile(Request $request)
     {

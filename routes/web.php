@@ -19,6 +19,8 @@ Route::group(['middleware'=>'auth'], function (){
     //Route::post('register', 'Controller@importFile')->name('register');
     //Route::get('login', 'LoginController@login')->name('login');
     // Route::get('/', function () { return view('fileupload'); });
+
+    Route::get('/get-anm-target-data', 'TargetdataController@fetchTargetData');
 });
 
 
