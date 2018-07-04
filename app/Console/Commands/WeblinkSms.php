@@ -73,6 +73,5 @@ class WeblinkSms extends Command
             $lstPhcDetails[$value['phc_name']][$value['performer_category']][] = $value;
 
         }
-        dd($lstPhcDetails);
     }
 }
