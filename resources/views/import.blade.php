@@ -1,49 +1,114 @@
 @extends('layouts.main')
 
 @section('content')
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
 
-        <section class="content">
-            {{--<div class="flex-center position-ref full-height">--}}
-                {{--{!!  Form::open(array('route' => 'import.file','method'=>'POST','files'=>'true','enctype'=>"multipart/form-data")) !!}--}}
-                {{--<div class="row">--}}
-
-                    {{--<div class="col-xs-12 col-sm-12 col-md-12">--}}
-                        {{--<div class="form-group">--}}
-                            {{--{!! Form::label('sample_file','Select File to Import:',['class'=>'col-md-3']) !!}--}}
-                            {{--<div class="col-md-9">--}}
-                                {{--{!! Form::file('sample_file', array('class' => 'form-control')) !!}--}}
-                                {{--{!!  $errors->first('sample_file', '<p class="alert alert-danger">:message</p>') !!}--}}
-                                {{--@if (session()->has('error'))--}}
-                                    {{--<p class="alert alert-danger">--}}
-                                        {{--{{ session()->get('error') }}<br>--}}
-                                    {{--</p>--}}
-                                {{--@endif--}}
-                                {{--@if(session()->has('success'))--}}
-                                    {{--<p class="alert alert-success">--}}
-                                        {{--{{ session()->get('success') }}--}}
-                                    {{--</p>--}}
-                                {{--@endif--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-
-                    {{--<div class="col-xs-12 col-sm-12 col-md-12 text-center">--}}
-                        {{--{!! Form::submit('Upload',['class'=>'btn btn-primary']) !!}--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-                {{--{!! Form::close() !!}--}}
-            {{--</div>--}}
-
+    <section>
+        <div class="container">
             <div class="row">
-                <div class="col-xs-12">
-                    <div class="box">
-                        <div class="box-header">
-                            <h3 class="box-title">Data Table With Full Features</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
+                <div class="col-md-12">
+                    <h1>Dashboard</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @if (session()->has('error'))
+        <p class="alert alert-danger">
+            {{ session()->get('error') }}<br>
+        </p>
+    @endif
+    @if(session()->has('success'))
+        <p class="alert alert-success">
+            {{ session()->get('success') }}
+        </p>
+    @endif
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Upload Target File</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {!!  Form::open(array('route' => 'import.file','method'=>'POST','files'=>'true','enctype'=>"multipart/form-data")) !!}
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>State</label>
+                        <select class="form-control">
+                            <option>Maharashtra</option>
+                            <option>Maharashtra</option>
+                            <option>Maharashtra</option>
+                            <option>Maharashtra</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>District</label>
+                        <select class="form-control">
+                            <option>Maharashtra</option>
+                            <option>Maharashtra</option>
+                            <option>Maharashtra</option>
+                            <option>Maharashtra</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+
+
+                        <label>Select File to Import:</label>
+                        <input type="file" class="form-control" name="sample_file" >
+                            {{--
+                            <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    {!! Form::label('sample_file','Select File to Import:',['class'=>'col-md-3']) !!}
+                                    <div class="col-md-9">
+                                        {!! Form::file('sample_file', array('class' => 'form-control')) !!}
+                                        {!!  $errors->first('sample_file', '<p class="alert alert-danger">:message</p>') !!}
+                                        @if (session()->has('error'))
+                                            <p class="alert alert-danger">
+                                                {{ session()->get('error') }}<br>
+                                            </p>
+                                        @endif
+                                        @if(session()->has('success'))
+                                            <p class="alert alert-success">
+                                                {{ session()->get('success') }}
+                                            </p>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                                {!! Form::submit('Upload',['class'=>'btn btn-primary']) !!}
+                            </div>
+                            </div>
+                            --}}
+
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="form-group btn-area">
+                        <button type="submit" class="btn btn-primary">Upload File</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {!! Form::close() !!}
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Uploaded File Details</h3>
                             <table id="uploadData" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
@@ -55,19 +120,13 @@
                                 </tr>
                                 </thead>
                             </table>
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
-                    <!-- /.box -->
                 </div>
-                <!-- /.col -->
             </div>
-            <!-- /.row -->
-        </section>
-        <!-- /.content -->
-    </div>
+        </div>
+    </section>
+
 @endsection
-<!-- ./wrapper -->
+
 @section('js')
     <script>
         $(function () {
@@ -79,7 +138,7 @@
                 "ajax": "<?php echo url('/get-anm-target-data');?>",
                 "columns": [
 
-                    { "data": "id" },
+                    { "data": "sr_no" },
                     { "data": "filenames" },
                     { "data": "uploaded_on" },
                     { "data": "status" },
