@@ -37,13 +37,17 @@ class TargetdataController extends Controller
     public function fetchTargetData()
     {
         $target_data = AnmTargetDataModel::select('id', 'og_filename as filenames', 'uploaded_on', 'status')
+            ->selectRaw("(CASE WHEN status='N' THEN 'Pending' WHEN status='Y' THEN 'Successful' END) as status")
             ->groupBy('filename')
             ->get();
 
         $db = Datatables::of($target_data);
+        $db->addColumn('sr_no', function ($target_data){ static $i = 0; $i++; return $i; }) ->rawColumns(['id']);
+
+
 
         $db->addColumn('actions', function ($target_data) {
-            return '<a class="btn btn-xs btn-primary" href="">View</a>';
+            return '<a href="'.route('processedfile',$target_data['id']).'">View details</a>';
         })
         ->rawColumns(['actions']);
         return $db->make(true);
@@ -58,16 +62,21 @@ class TargetdataController extends Controller
             if ($extension == "xlsx" || $extension == "xls") {
                 $path = $request->file('sample_file')->getRealPath();
                 $data = \Excel::selectSheets('target_data')->load($path)->get()->toArray();
-                //$data = \Excel::selectSheets('anm_translations')->load($path)->get()->toArray();
-                //$data = \Excel::selectSheets('beneficiary_details')->load($path)->get()->toArray();
-                //$data = \Excel::selectSheets('phc_translations')->load($path)->get()->toArray();
                 $file_name = time() .$request->sample_file->getClientOriginalName();
                 $og_file_name =$request->sample_file->getClientOriginalName();
                 $day_time = Carbon::now()->toDateTimeString('Y-m-d');
                 $day = Carbon::now()->toDateString('Y-m-d');
+                $web = array();
 
                 if (count($data)>0) {
+
                     foreach ($data as $key => $value) {
+
+                        if(!in_array($value["phc_name"],$web)){
+                            $web[]= $value["phc_name"];
+                            $web[$value["phc_name"]] = "test".$key;
+                        }
+
                         $arr[] = [
                             'district' => $value["district"],
                             'block' => $value["block"],
@@ -80,6 +89,7 @@ class TargetdataController extends Controller
                             'scenerio' =>$value["scenario"],
                             'created_at'=> $day_time,
                             'uploaded_on'=>$day,
+                            'weblink'=>$web[$value["phc_name"]],
                             'filename'=>$file_name,
                             'og_filename'=>$og_file_name
                         ];
@@ -88,9 +98,13 @@ class TargetdataController extends Controller
                     if (!empty($arr)) {
                         $inserted = DB::table('anm_target_data')->insert($arr);
                         if($inserted){
+                            Session::flash('success', 'File Uploaded successfully!');
                             Storage::putFileAs('FileUpload',$request->file('sample_file'), $file_name);
                         }
                     }
+                }else {
+                    Session::flash('error', 'Please select valid data file.');
+                    return back();
                 }
             } else {
                 Session::flash('error', 'File is a ' . $extension . ' file.!! Please upload a valid xls/xlsx file..!!');
