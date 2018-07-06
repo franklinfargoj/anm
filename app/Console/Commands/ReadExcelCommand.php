@@ -114,7 +114,10 @@ class ReadExcelCommand extends Command
                         if($sheet == "anm_translations"){
                             if(!empty($data)){
                             foreach ($data as $key => $value){
-
+                                if($value['anm_name'] == null && $value['translation'] == null && $value['languageid'] == null )
+                                {
+                                    continue;
+                                }
                                 $arrayListAnm['anm_name'] = $value['anm_name'];
                                 $arrayListAnm['anm_mobile_number'] = 9999999999;
                                 $arrayListAnm['anm_translation'] = $value['translation'];
@@ -130,13 +133,14 @@ class ReadExcelCommand extends Command
 
 
                         if($sheet == "phc_translations"){
+
                             if(!empty($data)){
                             foreach ($data as $key => $value){
-                                if($value['anm_name'] == null && $value['translation'] == null && $value['languageid'] == null )
+                                if($value['phc_name'] == null && $value['translation'] == null && $value['languageid'] == null )
                                 {
                                     continue;
                                 }
-                                $arrayListPhc['phc_name'] = $value['anm_name'];
+                                $arrayListPhc['phc_name'] = $value['phc_name'];
                                 $arrayListPhc['phc_translation'] =   $value['translation'];
                                 $arrayListPhc['block_id'] = 1;
                                 $arrayListPhc['language_id'] = $value['languageid'];
