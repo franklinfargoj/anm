@@ -34,7 +34,6 @@ class WeblinkController extends Controller
 
         $lstAnmCategory = array();
 
-
         foreach ($anm_target_data as $value){
             if(array_key_exists($value['phc_name'],$phc_hindi)){
                 $value['phc_name'] = $phc_hindi[$value['phc_name']];
@@ -49,7 +48,7 @@ class WeblinkController extends Controller
                     if(array_key_exists($anm,$anm_detail)){
                         $anmName = $anm_detail[$anm];
                     }else{
-                        $anmName = $value['anm_name'];
+                        $anmName = $anm;
                     }
                     $anmArray[] = $anmName;
                 }
@@ -67,8 +66,61 @@ class WeblinkController extends Controller
 
         $scenario = $anm_target_data[0]['scenerio'];
         if($scenario == 1){
-            return view('scenerio/scenerio_1',compact('lstAnmCategory'));
+            $top_names = array();
+            $top =array();
+            $middle =array();
+            $bottom =array();
+            if(!empty($lstAnmCategory)) {
+                foreach ($lstAnmCategory as $key => $value){
+                    if($key == 'TOP'){
+                        foreach ($value as $v){
+                            $top[] = $v['anm_name'];
+                        }
+                        $top_names = implode(',',$top);
+                    }
+
+
+                    if($key == 'MIDDLE'){
+                        foreach ($value as $v){
+                            $middle[] = $v['anm_name'];
+                        }
+                        $middle_names = implode(',',$middle);
+                    }
+
+
+                    if($key == 'BOTTOM'){
+                        foreach ($value as $v){
+                            $bottom[] = $v['anm_name'];
+                        }
+                        $bottom_names = implode(',',$bottom);
+                    }
+
+                }
+            }
+            $count_top=count($top);
+            $count_middle=count($middle);
+            $count_bottom=count($bottom);
+
+            $top_names_last = end($top);
+            $top_names_except_last = rtrim($top_names,','.end($top));
+
+            $middle_names_last = end($middle);
+            $middle_names_except_last = rtrim($middle_names,','.end($middle));
+
+            $bottom_names_last = end($bottom);
+            $bottom_names_except_last = rtrim($bottom_names,','.end($bottom));
+
+            $data = [
+                'top_names_last'  => $top_names_last,
+                'top_names_except_last'   => $top_names_except_last,
+                'middle_names_last' => $middle_names_last,
+                'middle_names_except_last' => $middle_names_except_last,
+                'bottom_names_last' => $bottom_names_last,
+                'bottom_names_except_last' => $bottom_names_except_last
+            ];
+            return view('scenerio/scenerio_1',$data);
         }
+
         if($scenario == 2){
             return view('scenerio/scenerio_2',compact('lstAnmCategory'));
         }
