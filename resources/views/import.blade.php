@@ -41,10 +41,8 @@
                     <div class="form-group">
                         <label>State</label>
                         <select class="form-control">
-                            <option>Maharashtra</option>
-                            <option>Maharashtra</option>
-                            <option>Maharashtra</option>
-                            <option>Maharashtra</option>
+                            <option>Rajasthan</option>
+
                         </select>
                     </div>
                 </div>
@@ -53,46 +51,14 @@
                     <div class="form-group">
                         <label>District</label>
                         <select class="form-control">
-                            <option>Maharashtra</option>
-                            <option>Maharashtra</option>
-                            <option>Maharashtra</option>
-                            <option>Maharashtra</option>
+                            <option>Alwar</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="col-sm-3">
-
-
                         <label>Select File to Import:</label>
                         <input type="file" class="form-control" name="sample_file" >
-                            {{--
-                            <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group">
-                                    {!! Form::label('sample_file','Select File to Import:',['class'=>'col-md-3']) !!}
-                                    <div class="col-md-9">
-                                        {!! Form::file('sample_file', array('class' => 'form-control')) !!}
-                                        {!!  $errors->first('sample_file', '<p class="alert alert-danger">:message</p>') !!}
-                                        @if (session()->has('error'))
-                                            <p class="alert alert-danger">
-                                                {{ session()->get('error') }}<br>
-                                            </p>
-                                        @endif
-                                        @if(session()->has('success'))
-                                            <p class="alert alert-success">
-                                                {{ session()->get('success') }}
-                                            </p>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                                {!! Form::submit('Upload',['class'=>'btn btn-primary']) !!}
-                            </div>
-                            </div>
-                            --}}
-
                 </div>
 
                 <div class="col-sm-3">
