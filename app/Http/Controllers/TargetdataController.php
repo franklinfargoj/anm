@@ -73,8 +73,10 @@ class TargetdataController extends Controller
                     foreach ($data as $key => $value) {
 
                         if(!in_array($value["phc_name"],$web)){
+                            $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                            $str = substr(str_shuffle($chars),0,10);
                             $web[]= $value["phc_name"];
-                            $web[$value["phc_name"]] = "test".$key;
+                            $web[$value["phc_name"]] = $str;
                         }
 
                         $arr[] = [
