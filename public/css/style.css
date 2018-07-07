@@ -77,3 +77,87 @@ footer p {
 	color: #fff;
 	background-color: #999;
 }
+
+
+
+
+/*login css*/
+.login-lhs {
+	background:url(../images/login-bg.jpg) no-repeat;
+	background-size: cover;
+	height: 100vh;
+	padding: 85px;
+}
+.login-rhs {
+	height: 100vh;
+}
+.login-form-area {
+	width: 100%;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+}
+.login-form-area h1 {
+
+}
+.login-lhs .tagline {
+	font-size: 35px;
+	color: #ffffff;
+}
+.login-lhs .tagline span {
+	display: block;
+	font-size: 20px;
+}
+
+
+.checkbox-area {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 24px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.checkbox-area input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+.checkbox-area:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+.checkbox-area input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+.checkbox-area input:checked ~ .checkmark:after {
+  display: block;
+}
+.checkbox-area .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
