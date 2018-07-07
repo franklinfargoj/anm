@@ -86,7 +86,21 @@ footer p {
 	background:url(../images/login-bg.jpg) no-repeat;
 	background-size: cover;
 	height: 100vh;
-	padding: 85px;
+	padding: 120px;
+	position: relative;
+}
+.welcome-msg {
+	font-size: 40px;
+	color: #fff;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	margin:120px;
+}
+.welcome-msg span {
+	font-size: 14px;
+	color: rgba(255,255,255,0.5);
+	display: block;
 }
 .login-rhs {
 	height: 100vh;
@@ -96,9 +110,21 @@ footer p {
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
+	padding: 80px;
 }
 .login-form-area h1 {
 
+}
+.login-form-area h2 {
+	color: #3d83da;
+	font-size: 30px;
+}
+.login-form-area p {
+	color: #666666;
+	margin-bottom: 30px;
+}
+.login-form-area label {
+	color: #999999;
 }
 .login-lhs .tagline {
 	font-size: 35px;
@@ -108,12 +134,20 @@ footer p {
 	display: block;
 	font-size: 20px;
 }
-
-
+.login-form-area .form-control {
+	border-radius: 10px;
+}
+.btn {
+	padding: 7px 30px;
+	border-radius: 10px;
+}
+.row.form-group {
+	margin-top: 30px;
+}
 .checkbox-area {
   display: block;
   position: relative;
-  padding-left: 35px;
+  padding-left: 20px;
   margin-bottom: 12px;
   cursor: pointer;
   font-size: 12px;
@@ -130,11 +164,12 @@ footer p {
 }
 .checkmark {
   position: absolute;
-  top: 0;
+  top: 5px;
   left: 0;
-  height: 25px;
-  width: 25px;
+  height: 15px;
+  width: 15px;
   background-color: #eee;
+  border-radius: 50px;
 }
 .checkbox-area:hover input ~ .checkmark {
   background-color: #ccc;
@@ -151,8 +186,8 @@ footer p {
   display: block;
 }
 .checkbox-area .checkmark:after {
-  left: 9px;
-  top: 5px;
+  left: 6px;
+  top: 2px;
   width: 5px;
   height: 10px;
   border: solid white;
@@ -160,4 +195,16 @@ footer p {
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
+}
+.login-area .container-fluid {
+	padding-right: 0px;
+    padding-left: 0px;
+}
+.p-0 {
+	padding-right: 0px;
+    padding-left: 0px;
+}
+.m-0 {
+	margin-right: 0px;
+    margin-left: 0px;
 }
