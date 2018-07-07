@@ -33,10 +33,19 @@ class ProcessedFileController extends Controller
         $db = Datatables::of($processData);
         $db->addColumn('sr_no', function ($processData){ static $i = 0; $i++; return $i; }) ->rawColumns(['id']);
 
-        $db->addColumn('weblink', function ($processData){
-            return '<a href="'.route('weblink', $processData["weblink"]).'">'.config('app.url').'/weblink/'.$processData["weblink"].'</a>';
-        }) ->rawColumns(['weblink']);
 
+        $db->addColumn('weblink', function ($processData){
+            return config('app.url').'/weblink/'.$processData["weblink"];
+        })->rawColumns(['weblink']);
+
+
+        $db->addColumn('beneficiarycode', function ($processData){
+            return config('app.url').'/weblink/'.$processData["beneficiary_code"];
+        }) ->rawColumns(['beneficiarycode']);
+
+        $db->addColumn('moiccode', function ($processData){
+            return config('app.url').'/weblink/'.$processData["moic_code"];
+        }) ->rawColumns(['moiccode']);
 
 
         return $db->make(true);
