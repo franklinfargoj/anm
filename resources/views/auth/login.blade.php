@@ -1,69 +1,72 @@
 @extends('layouts.app')
-
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
 
-                <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('login') }}">
-                        {{ csrf_field() }}
+    <head>
+        <title>Dashboard</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+    </head>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+    <body>
+    <section class="login-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="login-lhs">
+                        <div class="tagline">Governance <span>Innovation Model</span></div>
+                    </div>
+                </div>
+                <div class="col-sm-4 login-rhs">
+                    <div class="login-form-area">
+                        <h2>Login</h2>
+                        <p>Login with your username & password</p>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+                        <form class="form-horizontal" method="POST" action="{{ route('login') }}">
 
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+                                {{ csrf_field() }}
+                                <div class="login-form">
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input id="email" type="email" class="form-control" name="email" class="form-control" required autofocus>
+                                        @if ($errors->has('email'))
+                                            <span class="help-block">
+                                   <strong>{{ $errors->first('email') }}</strong>
+                            </span>
+                                        @endif
+                                    </div>
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
+                                    <div class="form-group">
+                                        <label>Password</label>
+                                        <input id="password" type="password" class="form-control" name="password" required>
+                                        @if ($errors->has('password'))
+                                            <span class="help-block">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
-                                @endif
-                            </div>
-                        </div>
+                                        @endif
+                                    </div>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                                    </label>
+                                    <div class="row form-group">
+                                        <div class="col-sm-6">
+                                            <label class="checkbox-area">Remember me
+                                                <input type="checkbox" checked="checked">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+
+                                        <div class="col-sm-6 text-right">
+                                            <button class="btn btn-primary">Login</button>
+                                        </div>
+                                    </div>
+
                                 </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Login
-                                </button>
-
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Forgot Your Password?
-                                </a>
-                            </div>
-                        </div>
-                    </form>
+                            </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </section>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    </body>
 @endsection
