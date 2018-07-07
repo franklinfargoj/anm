@@ -21,7 +21,6 @@ Route::group(['middleware'=>'auth'], function (){
     // Route::get('/home', 'TargetdataController@homePage')->name('home');
     //Route::get('/home', 'HomeController@index')->name('home');
     //Route::post('register', 'Controller@importFile')->name('register');
-    //Route::get('login', 'LoginController@login')->name('login');
     // Route::get('/', function () { return view('fileupload'); });
 });
 

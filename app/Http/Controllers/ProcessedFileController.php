@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\AnmTargetDataModel;
 use DataTables;
+
 class ProcessedFileController extends Controller
 {
     /**
@@ -23,7 +24,7 @@ class ProcessedFileController extends Controller
                     ->where('id',$id)
                     ->first();
 
-        $processData = AnmTargetDataModel::select('id','block','phc_name','weblink','sms')
+        $processData = AnmTargetDataModel::select('id','block','phc_name','weblink','beneficiary_code','moic_code')
                                         ->where('status','Y')
                                         ->where('filename','LIKE',$file_name['filename'])
                                         ->get()
@@ -31,6 +32,21 @@ class ProcessedFileController extends Controller
 
         $db = Datatables::of($processData);
         $db->addColumn('sr_no', function ($processData){ static $i = 0; $i++; return $i; }) ->rawColumns(['id']);
+
+
+        $db->addColumn('weblink', function ($processData){
+            return config('app.url').'/weblink/'.$processData["weblink"];
+        })->rawColumns(['weblink']);
+
+
+        $db->addColumn('beneficiarycode', function ($processData){
+            return config('app.url').'/weblink/'.$processData["beneficiary_code"];
+        }) ->rawColumns(['beneficiarycode']);
+
+        $db->addColumn('moiccode', function ($processData){
+            return config('app.url').'/weblink/'.$processData["moic_code"];
+        }) ->rawColumns(['moiccode']);
+
 
         return $db->make(true);
     }
