@@ -1,3 +1,25 @@
+
+@font-face {
+	font-family: 'kruti_dev_010regular';
+	src: url('../fonts/kruti_dev_010-webfont.eot');
+	url('../fonts/kruti_dev_010-webfont.woff') format('woff'),
+	url('../fonts/kruti_dev_010-webfont.ttf') format('truetype'),
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'k010';
+	src: url('../fonts/k010.eot');
+	src: local('k010'), url('../fonts/k010.woff') format('woff'), url('../fonts/k010.ttf') format('truetype');
+}
+/* use this class to attach this font to any element i.e. <p class="fontsforweb_fontid_8705">Text with this font applied</p> */
+.fontsforweb_fontid_8705 {
+	font-family: 'k010' !important;
+}
+
+/* Font downloaded from FontsForWeb.com */
+
 body {
 	margin: 0;
 	padding: 0;

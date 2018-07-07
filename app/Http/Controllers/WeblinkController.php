@@ -8,6 +8,7 @@ use App\PhcTranslationModel;
 use App\DistrictModel;
 
 use App\AnmDetailsModel;
+use Illuminate\Support\Facades\DB;
 
 class WeblinkController extends Controller
 {
@@ -20,12 +21,63 @@ class WeblinkController extends Controller
                                                 ->get()
                                                 ->toArray();
 
-        $phc_hindi = PhcTranslationModel::where('phc_name',$anm_target_data[0]['phc_name'])
+
+        $month_details = DB::table('master_months')
+            ->pluck('month_translated', 'month_english')->toArray();
+
+        $current_month = date('F');
+
+        if(array_key_exists($current_month, $month_details))
+        {
+            $current_month = $month_details[$current_month];
+        }
+
+        $next_month = date('F',strtotime('first day of +1 month'));
+
+        if(array_key_exists($next_month, $month_details))
+        {
+            $next_month = $month_details[$next_month];
+        }
+
+        $targetDataVariable = array();
+        $anm_moic_code = array();
+        $anm_beneficiary_code = array();
+
+        $targetDataVariable = $anm_target_data;
+        $type = 'anm';
+
+        if(empty($anm_target_data) && empty($targetDataVariable))
+        {
+            $anm_moic_code = AnmTargetDataModel::select('district','phc_name','moic_name','moic_mobile_number','anm_name',
+                'anm_mobile_number','performer_category','scenerio')
+                ->where('moic_code',$id)
+                ->get()
+                ->toArray();
+
+            $type = 'moic';
+            $targetDataVariable = $anm_moic_code;
+        }
+        if(empty($anm_moic_code) && empty($targetDataVariable)){
+
+            $anm_beneficiary_code = AnmTargetDataModel::select('district','phc_name','moic_name','moic_mobile_number','anm_name',
+                'anm_mobile_number','performer_category','scenerio')
+                ->where('beneficiary_code',$id)
+                ->get()
+                ->toArray();
+            $type = 'beneficiary';
+            $targetDataVariable =  $anm_beneficiary_code;
+        }
+        if(empty($anm_beneficiary_code) && empty($targetDataVariable))
+        {
+            dd('No relevant data exists');
+        }
+
+        $phc_hindi = PhcTranslationModel::where('phc_name',$targetDataVariable[0]['phc_name'])
                                 ->pluck('phc_translation','phc_name')->toArray();
 
 
         $district_id = DistrictModel::select('id')
-                            ->where('district_name',$anm_target_data[0]['district'])
+                            ->where('district_name',$targetDataVariable[0]['district'])
                             ->get()
                             ->toArray();
 
@@ -34,7 +86,7 @@ class WeblinkController extends Controller
 
         $lstAnmCategory = array();
 
-        foreach ($anm_target_data as $value){
+        foreach ($targetDataVariable as $value){
             if(array_key_exists($value['phc_name'],$phc_hindi)){
                 $value['phc_name'] = $phc_hindi[$value['phc_name']];
             }else{
@@ -63,62 +115,59 @@ class WeblinkController extends Controller
             $lstAnmCategory[$value['performer_category']][] = $value;
         }
 
+//        dd($lstAnmCategory);
 
-        $scenario = $anm_target_data[0]['scenerio'];
+        $lstData = array();
+
+        $scenario = $targetDataVariable[0]['scenerio'];
         if($scenario == 1){
-            $top_names = array();
-            $top =array();
-            $middle =array();
-            $bottom =array();
-            if(!empty($lstAnmCategory)) {
-                foreach ($lstAnmCategory as $key => $value){
-                    if($key == 'TOP'){
-                        foreach ($value as $v){
-                            $top[] = $v['anm_name'];
+            $lstData['phc_name'] = $lstAnmCategory['TOP'][0]['phc_name'];
+            if($type == 'anm')
+            {
+                foreach($lstAnmCategory as $key => $value)
+                {
+                    foreach ($value as $anm => $details)
+                    {
+                        if(! next($value))
+                        {
+                            $lstData[$key]['end'] = $details['anm_name'];
                         }
-                        $top_names = implode(',',$top);
-                    }
-
-
-                    if($key == 'MIDDLE'){
-                        foreach ($value as $v){
-                            $middle[] = $v['anm_name'];
+                        else
+                        {
+                            $lstData[$key]['anm_name'][] = $details['anm_name'];
                         }
-                        $middle_names = implode(',',$middle);
                     }
-
-
-                    if($key == 'BOTTOM'){
-                        foreach ($value as $v){
-                            $bottom[] = $v['anm_name'];
-                        }
-                        $bottom_names = implode(',',$bottom);
-                    }
-
                 }
             }
-            $count_top=count($top);
-            $count_middle=count($middle);
-            $count_bottom=count($bottom);
 
-            $top_names_last = end($top);
-            $top_names_except_last = rtrim($top_names,','.end($top));
+            if($type == 'moic')
+            {
+                foreach($lstAnmCategory as $key => $value)
+                {
+                    foreach ($value as $anm => $details)
+                    {
+                        if(! next($value))
+                        {
+                            $lstData[$key]['end'] = $details['moic_name'];
+                        }
+                        else
+                        {
+                            $lstData[$key]['anm_name'][] = $details['moic_name'];
+                        }
+                    }
+                }
+            }
 
-            $middle_names_last = end($middle);
-            $middle_names_except_last = rtrim($middle_names,','.end($middle));
+            if($type == 'beneficiary')
+            {
+                $lstData['end'] = null;
 
-            $bottom_names_last = end($bottom);
-            $bottom_names_except_last = rtrim($bottom_names,','.end($bottom));
+                $lstData['anm_name'][] = null;
 
-            $data = [
-                'top_names_last'  => $top_names_last,
-                'top_names_except_last'   => $top_names_except_last,
-                'middle_names_last' => $middle_names_last,
-                'middle_names_except_last' => $middle_names_except_last,
-                'bottom_names_last' => $bottom_names_last,
-                'bottom_names_except_last' => $bottom_names_except_last
-            ];
-            return view('scenerio/scenerio_1',$data);
+            }
+
+//            dd($lstData);
+            return view('scenerio/scenerio_1', compact('lstData', 'type', 'current_month', 'next_month'));
         }
 
         if($scenario == 2){
