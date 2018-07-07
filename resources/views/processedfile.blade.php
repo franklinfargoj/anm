@@ -56,11 +56,50 @@
                     { "data": "sr_no" },
                     { "data": "block" },
                     { "data": "phc_name" },
-                    { "data": "weblink" },
-                    { "data": "beneficiary_code" },
-                    { "data": "moic_code" }
+
+                    { "data": "weblink",
+                        "render": function(data, type) {
+                            if (type === 'display') {
+                                data = '<a href="' + data + '">' + data + '</a>';
+                            }
+                            return data;
+                        }
+                    },
+
+                    { "data": "beneficiarycode",
+                        "render": function(data, type) {
+                            if (type === 'display') {
+                                data = '<a href="' + data + '">' + data + '</a>';
+                            }
+                            return data;
+                        }
+                    },
+
+                    { "data": "moiccode",
+                        "render": function(data, type) {
+                            if (type === 'display') {
+                                data = '<a href="' + data + '">' + data + '</a>';
+                            }
+                            return data;
+                        }
+                    }
+
                 ],
             });
         });
     </script>
 @endsection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
