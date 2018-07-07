@@ -179,6 +179,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        'Anam\PhantomMagick\ConverterServiceProvider'
 
     ],
 
@@ -233,6 +234,7 @@ return [
         'HTML'=> 'Illuminate\Html\HtmlFacade',
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+        'Converter' => 'Anam\PhantomMagick\Facades\Converter',
 
     ],
 
