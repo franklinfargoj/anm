@@ -17,6 +17,7 @@ use File;
 use DB;
 use DataTables;
 
+use Illuminate\Support\Facades\Auth;
 
 
 class TargetdataController extends Controller
@@ -67,6 +68,8 @@ class TargetdataController extends Controller
                 $day_time = Carbon::now()->toDateTimeString('Y-m-d');
                 $day = Carbon::now()->toDateString('Y-m-d');
                 $web = array();
+                $beneficiary = array();
+                $moic = array();
 
                 if (count($data)>0) {
 
@@ -77,6 +80,14 @@ class TargetdataController extends Controller
                             $str = substr(str_shuffle($chars),0,10);
                             $web[]= $value["phc_name"];
                             $web[$value["phc_name"]] = $str;
+
+                            $str1 = substr(str_shuffle($chars),0,10);
+                            $beneficiary[]=  $value["phc_name"];
+                            $beneficiary[$value["phc_name"]] = $str1;
+
+                            $str2 = substr(str_shuffle($chars),0,10);
+                            $moic[]=  $value["phc_name"];
+                            $moic[$value["phc_name"]] = $str2;
                         }
 
                         $arr[] = [
@@ -93,8 +104,11 @@ class TargetdataController extends Controller
                             'uploaded_on'=>$day,
                             'weblink'=>$web[$value["phc_name"]],
                             'filename'=>$file_name,
-                            'og_filename'=>$og_file_name
+                            'og_filename'=>$og_file_name,
+                            'beneficiary_code'=> $beneficiary[$value["phc_name"]],
+                            'moic_code'=>$moic[$value["phc_name"]]
                         ];
+
                     }
 
                     if (!empty($arr)) {
