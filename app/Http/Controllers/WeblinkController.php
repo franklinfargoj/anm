@@ -104,7 +104,7 @@ class WeblinkController extends Controller
                     }
                     $anmArray[] = $anmName;
                 }
-                $value['anm_name'] = implode(',',$anmArray);
+                $value['anm_name'] = implode('&#93;',$anmArray);
             }else{
                 if(array_key_exists($value['anm_name'],$anm_detail)){
                     $value['anm_name'] = $anm_detail[$value['anm_name']];

@@ -3,6 +3,7 @@
 <head>
     <title></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
     <style type="text/css">
         body {
             margin: 10px;
@@ -47,11 +48,11 @@
 
 {{--                        @if($type != 'beneficiary')--}}
                             @if(isset($lstData['TOP']['anm_name']) && count($lstData['TOP']['anm_name']) > 0)
-                                <span style="color: #ec1d25; font-size: 30px;" class="fontsforweb_fontid_8705"> {{ implode(',', $lstData['TOP']['anm_name']) }}<span>
+                                <span style="color: #ec1d25; font-size: 30px;" class="fontsforweb_fontid_8705"> {{ implode('&#93;', $lstData['TOP']['anm_name']) }}</span>
                                         और
-                                <span style="color: #ec1d25; font-size: 30px;"> {{ $lstData['TOP']['end'] }}<span>
+                                <span style="color: #ec1d25; font-size: 30px;" class="fontsforweb_fontid_8705"> {{ $lstData['TOP']['end'] }}</span>
                             @else
-                                <span style="color: #ec1d25; font-size: 30px;"> {{ $lstData['TOP']['end'] }}<span>
+                                <span style="color: #ec1d25; font-size: 30px;" class="fontsforweb_fontid_8705"> {{ $lstData['TOP']['end'] }}</span>
                             @endif
                         {{--@endif--}}
 
