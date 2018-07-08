@@ -30,6 +30,8 @@ class ProcessedFileController extends Controller
                                         ->get()
                                         ->toArray();
 
+
+
         $db = Datatables::of($processData);
         $db->addColumn('sr_no', function ($processData){ static $i = 0; $i++; return $i; }) ->rawColumns(['id']);
 
@@ -51,6 +53,57 @@ class ProcessedFileController extends Controller
         return $db->make(true);
     }
 
+
+
+   public function export($request)
+    {
+        // Subcenter Name	Target Full year	Target uptil May 2018
+        // Full Immunization(Target V/s Line List) - As per Line List
+        //	ANC Registration	ANC 4 case
+        $file = AnmTargetDataModel::select('filename')
+            ->where('id',$request)
+            ->first();
+        $file_name = $file['filename'];
+        $anm_target_data = AnmTargetDataModel::select('*')
+                                            ->where('status','Y')
+                                            ->where('filename','LIKE',$file_name)
+                                            ->get()
+                                            ->toArray();
+
+        \Excel::create('Target_data', function($excel) use($anm_target_data) {
+
+            $excel->sheet('user', function($sheet) use($anm_target_data) {
+                $excelData = [];
+                $excelData[] = [
+                    'District',
+                    'Block',
+                    'Phc Name',
+                    'MOIC Name',
+                    'MOIC Phone Number',
+                    'ANM Name',
+                    'ANM Phone Number',
+                    'Performer Category',
+                    'Scenario',
+                ];
+
+                foreach ($anm_target_data as $value) {
+                    $excelData[] = array(
+                        $value['district'],
+                        $value['block'],
+                        $value['phc_name'],
+                        $value['moic_name'],
+                        $value['moic_mobile_number'],
+                        $value['anm_name'],
+                        $value['anm_mobile_number'],
+                        $value['performer_category'],
+                        $value['scenerio']
+                    );
+                }
+                $sheet->fromArray($excelData, null, 'A1', true, false);
+            });
+        })->download('xlsx');
+
+    }
     /**
      * Show the form for creating a new resource.
      *
