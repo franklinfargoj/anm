@@ -170,7 +170,6 @@ return [
         /*
          * Package Service Providers...
          */
-
         /*
          * Application Service Providers...
          */
@@ -233,7 +232,6 @@ return [
         'HTML'=> 'Illuminate\Html\HtmlFacade',
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
-
     ],
 
 ];
