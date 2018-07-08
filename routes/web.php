@@ -27,4 +27,5 @@ Route::group(['middleware'=>'auth'], function (){
 });
 
 Route::get('weblink/{id}','WeblinkController@index')->name('weblink');
+Route::get('download-image','WeblinkController@downloadImage')->name('download-link');
 Auth::routes();
