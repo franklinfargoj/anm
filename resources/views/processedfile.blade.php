@@ -11,7 +11,7 @@
 
             <div class="row mb-1">
                 <div class="col-md-12 text-right">
-                    <a  class="btn btn-default" href="{{ url('/') }}">Export to excel</a>
+                    <a  class="btn btn-default" href="{{ route('excel_import',$id) }}">Export to excel</a>
                 </div>
             </div>
         </div>
@@ -65,7 +65,6 @@
                             return data;
                         }
                     },
-
                     { "data": "beneficiarycode",
                         "render": function(data, type) {
                             if (type === 'display') {
@@ -74,7 +73,6 @@
                             return data;
                         }
                     },
-
                     { "data": "moiccode",
                         "render": function(data, type) {
                             if (type === 'display') {
@@ -83,7 +81,6 @@
                             return data;
                         }
                     }
-
                 ],
             });
         });
