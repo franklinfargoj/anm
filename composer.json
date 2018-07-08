@@ -6,6 +6,8 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
+        "anam/phantomjs-linux-x86-binary": "^2.1",
+        "anam/phantommagick": "^2.0",
         "doctrine/dbal": "^2.5",
         "fideloper/proxy": "~3.3",
         "laravel/framework": "5.5.*",
