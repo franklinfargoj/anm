@@ -70,13 +70,11 @@
                             <span style="font-size:20px; color: #000; display: block;">हमारी</span>
 {{--                            @if($type != 'beneficiary')--}}
                                 @if(isset($lstData['MIDDLE']['anm_name']) && count($lstData['MIDDLE']['anm_name']) > 0)
-                                    {{ implode(',', $lstData['MIDDLE']['anm_name']) }}
-
+                                    <span class="fontsforweb_fontid_8705">{{ implode('&#93;', $lstData['MIDDLE']['anm_name']) }}</span>
                                     एवं
-
-                                   {{ $lstData['MIDDLE']['end'] }}
+                                   <span class="fontsforweb_fontid_8705">{{ $lstData['MIDDLE']['end'] }}</span>
                                 @else
-                                    {{ $lstData['MIDDLE']['end'] }}
+                                    <span class="fontsforweb_fontid_8705">{{ $lstData['MIDDLE']['end'] }}</span>
                                 @endif
                             {{--@endif--}}
                         <span>
@@ -98,13 +96,13 @@
 						<span style="color: #ec1d25; font-size: 30px;">
 {{--                            @if($type != 'beneficiary')--}}
                                 @if(isset($lstData['BOTTOM']['anm_name']) && count($lstData['BOTTOM']['anm_name']) > 1)
-                                    {{ implode(',', $lstData['BOTTOM']['anm_name']) }}
+                                    <span class="fontsforweb_fontid_8705">{{ implode('&#93;', $lstData['BOTTOM']['anm_name']) }}</span>
 
                                     एवं
 
-                                    {{ $lstData['BOTTOM']['end'] }}
+                                    <span class="fontsforweb_fontid_8705">{{ $lstData['BOTTOM']['end'] }}</span>
                                 @else
-                                    {{ $lstData['BOTTOM']['end'] }}
+                                    <span class="fontsforweb_fontid_8705">{{ $lstData['BOTTOM']['end'] }}</span>
                                 @endif
                             {{--@endif--}}
 

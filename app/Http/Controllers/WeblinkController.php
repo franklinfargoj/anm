@@ -119,77 +119,83 @@ class WeblinkController extends Controller
 
         $lstData = array();
 
+        if(!empty($lstAnmCategory['TOP'])){
+            $lstData['phc_name'] = $lstAnmCategory['TOP'][0]['phc_name'];
+        }
+        if(!empty($lstAnmCategory['MIDDLE'])){
+            $lstData['phc_name'] = $lstAnmCategory['MIDDLE'][0]['phc_name'];
+        }
+        if(!empty($lstAnmCategory['BOTTOM'])){
+            $lstData['phc_name'] = $lstAnmCategory['BOTTOM'][0]['phc_name'];
+        }
+
+        if($type == 'anm')
+        {
+            foreach($lstAnmCategory as $key => $value)
+            {
+                foreach ($value as $anm => $details)
+                {
+                    if(! next($value))
+                    {
+                        $lstData[$key]['end'] = $details['anm_name'];
+                    }
+                    else
+                    {
+                        $lstData[$key]['anm_name'][] = $details['anm_name'];
+                    }
+                }
+            }
+        }
+
+        if($type == 'moic')
+        {
+            foreach($lstAnmCategory as $key => $value)
+            {
+                foreach ($value as $anm => $details)
+                {
+                    if(! next($value))
+                    {
+                        $lstData[$key]['end'] = $details['moic_name'];
+                    }
+                    else
+                    {
+                        $lstData[$key]['anm_name'][] = $details['moic_name'];
+                    }
+                }
+            }
+        }
+
+        if($type == 'beneficiary')
+        {
+            $lstData['end'] = null;
+
+            $lstData['anm_name'][] = null;
+
+        }
         $scenario = $targetDataVariable[0]['scenerio'];
         if($scenario == 1){
-            $lstData['phc_name'] = $lstAnmCategory['TOP'][0]['phc_name'];
-            if($type == 'anm')
-            {
-                foreach($lstAnmCategory as $key => $value)
-                {
-                    foreach ($value as $anm => $details)
-                    {
-                        if(! next($value))
-                        {
-                            $lstData[$key]['end'] = $details['anm_name'];
-                        }
-                        else
-                        {
-                            $lstData[$key]['anm_name'][] = $details['anm_name'];
-                        }
-                    }
-                }
-            }
-
-            if($type == 'moic')
-            {
-                foreach($lstAnmCategory as $key => $value)
-                {
-                    foreach ($value as $anm => $details)
-                    {
-                        if(! next($value))
-                        {
-                            $lstData[$key]['end'] = $details['moic_name'];
-                        }
-                        else
-                        {
-                            $lstData[$key]['anm_name'][] = $details['moic_name'];
-                        }
-                    }
-                }
-            }
-
-            if($type == 'beneficiary')
-            {
-                $lstData['end'] = null;
-
-                $lstData['anm_name'][] = null;
-
-            }
-
-//            dd($lstData);
             return view('scenerio/scenerio_1', compact('lstData', 'type', 'current_month', 'next_month'));
         }
-
         if($scenario == 2){
-            return view('scenerio/scenerio_2',compact('lstAnmCategory'));
+            return view('scenerio/scenerio_2',compact('lstData', 'current_month', 'type', 'next_month'));
         }
         if($scenario == 3){
-            return view('scenerio/scenerio_3',compact('lstAnmCategory'));
+            return view('scenerio/scenerio_3',compact('current_month', 'lstData', 'type', 'next_month'));
         }
         if($scenario == 4){
-            return view('scenerio/scenerio_4',compact('lstAnmCategory'));
+            return view('scenerio/scenerio_4',compact('current_month', 'lstData', 'type', 'next_month'));
         }
         if($scenario == 5){
-            return view('scenerio/scenerio_5',compact('lstAnmCategory'));
+            return view('scenerio/scenerio_5',compact('current_month', 'lstData', 'type', 'next_month'));
         }
         if($scenario == 6){
-            return view('scenerio/scenerio_6',compact('lstAnmCategory'));
+            return view('scenerio/scenerio_6',compact('current_month', 'lstData', 'type', 'next_month'));
         }
         if($scenario == 7){
-            return view('scenerio/scenerio_7',compact('lstAnmCategory'));
+            return view('scenerio/scenerio_7',compact('current_month', 'lstData', 'type', 'next_month'));
         }
         if($scenario == 8){
-            return view('scenerio/scenerio_8',compact('lstAnmCategory'));
+            return view('scenerio/scenerio_8',compact('current_month', 'lstData', 'type', 'next_month'));
         }
 
     }
