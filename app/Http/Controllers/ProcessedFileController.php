@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\AnmTargetDataModel;
+use App\BeneficiaryModel;
+use App\DistrictModel;
+
 use DataTables;
 
 class ProcessedFileController extends Controller
@@ -30,14 +33,12 @@ class ProcessedFileController extends Controller
                                         ->get()
                                         ->toArray();
 
-
-
         $db = Datatables::of($processData);
         $db->addColumn('sr_no', function ($processData){ static $i = 0; $i++; return $i; }) ->rawColumns(['id']);
 
 
         $db->addColumn('weblink', function ($processData){
-            return config('app.url').'/weblink/'.$processData["weblink"];
+            return url('/weblink/'.$processData["weblink"]);
         })->rawColumns(['weblink']);
 
 
@@ -55,14 +56,11 @@ class ProcessedFileController extends Controller
 
 
 
-   public function export($request)
-    {
-        // Subcenter Name	Target Full year	Target uptil May 2018
-        // Full Immunization(Target V/s Line List) - As per Line List
-        //	ANC Registration	ANC 4 case
+   public function export($request){
+
         $file = AnmTargetDataModel::select('filename')
-            ->where('id',$request)
-            ->first();
+                    ->where('id',$request)
+                    ->first();
         $file_name = $file['filename'];
         $anm_target_data = AnmTargetDataModel::select('*')
                                             ->where('status','Y')
@@ -70,9 +68,21 @@ class ProcessedFileController extends Controller
                                             ->get()
                                             ->toArray();
 
-        \Excel::create('Target_data', function($excel) use($anm_target_data) {
+        $beneficiary = $anm_target_data[0]['block'];
+        $weblink = $anm_target_data[0]['weblink'];
+        $anm_custom_msg = $anm_target_data[0]['anm_custom_msg'];
+        $combination = $anm_custom_msg.$weblink;
+        $beneficiary =array($beneficiary,$weblink,$anm_custom_msg,$combination);
 
-            $excel->sheet('user', function($sheet) use($anm_target_data) {
+        $beneficiary_data = BeneficiaryModel::select('beneficary_details.*','master_district.district_name')
+                                            ->join('master_district','beneficary_details.district_id', '=', 'master_district.id')
+                                            ->where('beneficary_details.filename','LIKE',$file_name)
+                                            ->get()
+                                            ->toArray();
+
+        \Excel::create('Target_data', function($excel) use($anm_target_data,$beneficiary_data,$beneficiary) {
+
+            $excel->sheet('target_data', function($sheet) use($anm_target_data) {
                 $excelData = [];
                 $excelData[] = [
                     'District',
@@ -101,12 +111,39 @@ class ProcessedFileController extends Controller
                         $value['performer_category'],
                         $value['scenerio'],
                         $value['weblink'],
-                        $value['sms'],
-                        $value['sms'].$value['weblink']
+                        $value['anm_custom_msg'],
+                        $value['anm_custom_msg'].$value['weblink']
                     );
                 }
                 $sheet->fromArray($excelData, null, 'A1', true, false);
             });
+
+            $excel->sheet('beneficiary', function($sheet) use($beneficiary_data,$beneficiary) {
+                $excelData = [];
+                $excelData[] = [
+                    'District',
+                    'Block',
+                    'Phc Name',
+                    'Beneficiary Phone Number',
+                    'Weblink',
+                    'Text message',
+                    'Combination'
+                ];
+
+                foreach ($beneficiary_data as $value) {
+                    $excelData[] = array(
+                        $value['district_name'],
+                        $beneficiary[0],
+                        $value['phc_name'],
+                        $value['beneficary_mobile_number'],
+                        $beneficiary[1],
+                        $beneficiary[2],
+                        $beneficiary[3]
+                    );
+                }
+                $sheet->fromArray($excelData, null, 'A1', true, false);
+            });
+
         })->download('xlsx');
 
     }
