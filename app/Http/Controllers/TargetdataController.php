@@ -114,8 +114,8 @@ class TargetdataController extends Controller
                             'weblink'=>$web[$value["phc_name"]],
                             'filename'=>$file_name,
                             'og_filename'=>$og_file_name,
-                            'beneficiary_code'=> $beneficiary[$value["phc_name"]],
-                            'moic_code'=>$moic[$value["phc_name"]],
+                            /*'beneficiary_code'=> $beneficiary[$value["phc_name"]],
+                            'moic_code'=>$moic[$value["phc_name"]],*/
                             'month' => $request->get('month'),
                             'year' => $request->get('year'),
                             'anm_custom_msg' => rtrim($msg, ','),
