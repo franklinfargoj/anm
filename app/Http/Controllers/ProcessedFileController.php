@@ -84,6 +84,9 @@ class ProcessedFileController extends Controller
                     'ANM Phone Number',
                     'Performer Category',
                     'Scenario',
+                    'Weblink',
+                    'Anm cutomised message',
+                    'Combination'
                 ];
 
                 foreach ($anm_target_data as $value) {
@@ -96,7 +99,10 @@ class ProcessedFileController extends Controller
                         $value['anm_name'],
                         $value['anm_mobile_number'],
                         $value['performer_category'],
-                        $value['scenerio']
+                        $value['scenerio'],
+                        $value['weblink'],
+                        $value['sms'],
+                        $value['sms'].$value['weblink']
                     );
                 }
                 $sheet->fromArray($excelData, null, 'A1', true, false);
