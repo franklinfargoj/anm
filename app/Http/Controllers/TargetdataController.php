@@ -56,6 +56,10 @@ class TargetdataController extends Controller
 
     public function importFile(Request $request)
     {
+        $months = [];
+        for($m=1; $m<=12; $m++){
+            $months[$m] = date('F', mktime(0,0,0,$m, 1, date('Y')));
+        }
         $this->validate($request, array('sample_file' => 'required'));
         if ($request->hasFile('sample_file')) {
             $extension = File::extension($request->sample_file->getClientOriginalName(''));
@@ -89,7 +93,12 @@ class TargetdataController extends Controller
                             $moic[]=  $value["phc_name"];
                             $moic[$value["phc_name"]] = $str2;
                         }
-
+                        $msg = '';
+                        $separated = explode(',', $value['anm_name']);
+                        foreach($separated as $single){
+                            $msg .= $single.' जानना चाहते हैं की '.$months[$request->get('month')].' '.$request->get('year').' में '.$value['phc_name'].' पी.एच.सी के किस  ए.न.म् ने सबसे अच्छा काम किया ?
+जानने के लिए नीचे लिंक पर क्लिक करके देखिये: ,';
+                        }
                         $arr[] = [
                             'district' => $value["district"],
                             'block' => $value["block"],
@@ -106,7 +115,14 @@ class TargetdataController extends Controller
                             'filename'=>$file_name,
                             'og_filename'=>$og_file_name,
                             'beneficiary_code'=> $beneficiary[$value["phc_name"]],
-                            'moic_code'=>$moic[$value["phc_name"]]
+                            'moic_code'=>$moic[$value["phc_name"]],
+                            'month' => $request->get('month'),
+                            'year' => $request->get('year'),
+                            'anm_custom_msg' => rtrim($msg, ','),
+                            'moic_custom_msg' => $value['moic_name'].' जानना चाहते हैं की '.$months[$request->get('month')].' '.$request->get('year').' में  '.$value['phc_name'].' पी.एच.सी के किस  ए.न.म् ने सबसे अच्छा काम किया ?
+जानने के लिए नीचे लिंक पर क्लिक करके देखिये: ',
+                            'beneficiary_custom_msg' => 'जानना चाहते हैं की '.$months[$request->get('month')].' '.$request->get('year').' में  '.$value['phc_name'].' पी.एच.सी के किस  ए.न.म् ने सबसे अच्छा काम किया ?
+जानने के लिए नीचे लिंक पर क्लिक करके देखिये: '
                         ];
 
                     }

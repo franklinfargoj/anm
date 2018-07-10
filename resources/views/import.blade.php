@@ -46,12 +46,31 @@
                         </select>
                     </div>
                 </div>
-
                 <div class="col-sm-3">
                     <div class="form-group">
                         <label>District</label>
                         <select class="form-control">
                             <option>Alwar</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>Month</label>
+                        <select class="form-control" name="month">
+                            @for($m=1; $m<=12; $m++)
+                                <option value="{{$m}}">{{date('F', mktime(0,0,0,$m, 1, date('Y')))}}</option>
+                            @endfor
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>Month</label>
+                        <select class="form-control" name="year">
+                            @foreach (range(1950, date('Y')) as $key => $value) {
+                                <option>{{$value}}</option>;
+                            @endforeach
                         </select>
                     </div>
                 </div>
