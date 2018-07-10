@@ -28,8 +28,8 @@
                             <th>Block</th>
                             <th>PHC Name</th>
                             <th>Anm Link</th>
-                            <th>Beneficiary Link</th>
-                            <th>Moic Link</th>
+                            <!-- <th>Beneficiary Link</th>
+                            <th>Moic Link</th> -->
                         </tr>
                         </thead>
                     </table>
@@ -64,7 +64,7 @@
                             }
                             return data;
                         }
-                    },
+                    }/*,
                     { "data": "beneficiarycode",
                         "render": function(data, type) {
                             if (type === 'display') {
@@ -80,7 +80,7 @@
                             }
                             return data;
                         }
-                    }
+                    }*/
                 ],
             });
         });
