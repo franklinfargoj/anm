@@ -92,7 +92,12 @@ class ReadExcelCommand extends Command
                         })->get()->toArray();
 
                         if($sheet == "beneficiary_details") {
+
                             if(!empty($data)){
+
+
+
+
                             foreach ($data as $key => $mob) {
                                 foreach ($mob as $k => $v) {
                                     if ($k == "phc_name") {
@@ -103,12 +108,16 @@ class ReadExcelCommand extends Command
                                     $arrayList['district_id'] = $district_id;
                                     $arrayList['phc_name'] = $k;
                                     $arrayList['created_at'] = Carbon::now();
+                                    $arrayList['filename'] = $filename;
+
                                     $arrayData[] = $arrayList;
                                 }
 
                             }
                          }
                         BeneficiaryModel::insert($arrayData); //Inserting Data into Beneficiary Table
+
+
                         }
 
                         if($sheet == "anm_translations"){
