@@ -27,7 +27,10 @@
                             <th>Sr No</th>
                             <th>Block</th>
                             <th>PHC Name</th>
-                            <th>Anm Link</th>
+                            <th>Web Link</th>
+                            <th>ANM Customised Message</th>
+                            <th>MOIC Customised Message</th>
+                            <th>Beneficiary Customised Message</th>
                             <!-- <th>Beneficiary Link</th>
                             <th>Moic Link</th> -->
                         </tr>
@@ -56,7 +59,6 @@
                     { "data": "sr_no" },
                     { "data": "block" },
                     { "data": "phc_name" },
-
                     { "data": "weblink",
                         "render": function(data, type) {
                             if (type === 'display') {
@@ -64,7 +66,11 @@
                             }
                             return data;
                         }
-                    }/*,
+                    },
+                    {"data":"anm_custom_msg"},
+                    {"data":"moic_custom_msg"},
+                    {"data":"beneficiary_custom_msg"},
+                    /*,
                     { "data": "beneficiarycode",
                         "render": function(data, type) {
                             if (type === 'display') {

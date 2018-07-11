@@ -27,7 +27,7 @@ class ProcessedFileController extends Controller
                     ->where('id',$id)
                     ->first();
 
-        $processData = AnmTargetDataModel::select('id','block','phc_name','weblink','beneficiary_code','moic_code')
+        $processData = AnmTargetDataModel::select('id','block','phc_name','weblink','beneficiary_code','moic_code', 'anm_custom_msg', 'moic_custom_msg', 'beneficiary_custom_msg')
                                         ->where('status','Y')
                                         ->where('filename','LIKE',$file_name['filename'])
                                         ->get()
