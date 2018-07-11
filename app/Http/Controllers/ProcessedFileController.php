@@ -96,6 +96,7 @@ class ProcessedFileController extends Controller
                     'Scenario',
                     'Weblink',
                     'Anm cutomised message',
+                    'MOIC cutomised message',
                     'Combination'
                 ];
 
@@ -112,6 +113,7 @@ class ProcessedFileController extends Controller
                         $value['scenerio'],
                         $value['weblink'],
                         $value['anm_custom_msg'],
+                        $value['moic_custom_msg'],
                         $value['anm_custom_msg'].$value['weblink']
                     );
                 }
