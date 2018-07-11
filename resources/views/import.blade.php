@@ -37,7 +37,7 @@
     <section>
         <div class="container">
             <div class="row">
-                <div class="col-sm-3">
+                <!-- <div class="col-sm-3">
                     <div class="form-group">
                         <label>State</label>
                         <select class="form-control">
@@ -45,11 +45,17 @@
 
                         </select>
                     </div>
-                </div>
+                </div> -->
                 <div class="col-sm-3">
                     <div class="form-group">
                         <label>District</label>
-                        <select class="form-control">
+                        {!! Form::select('district', $district, '',['class' => 'form-control' ,'id'=>"district"])!!}
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>Block</label>
+                        <select class="form-control" name="block" id="block">
                             <option>Alwar</option>
                         </select>
                     </div>

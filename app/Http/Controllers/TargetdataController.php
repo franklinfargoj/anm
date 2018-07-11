@@ -18,7 +18,7 @@ use DB;
 use DataTables;
 
 use Illuminate\Support\Facades\Auth;
-
+use App\District;
 
 class TargetdataController extends Controller
 {
@@ -32,7 +32,8 @@ class TargetdataController extends Controller
 
     public function index()
     {
-        return view('import');
+        $district = District::pluck('district_name', 'id');
+        return view('import', compact('district'));
     }
 
     public function fetchTargetData()
