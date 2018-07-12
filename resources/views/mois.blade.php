@@ -82,26 +82,26 @@
         </div>
     </section>
     {!! Form::close() !!}
-    <!-- <section>
+    <section>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h3>Uploaded File Details</h3>
-                            <table id="uploadData" class="table table-bordered table-striped">
-                                <thead>
-                                <tr>
-                                    <th>Sr. No.</th>
-                                    <th>File Name</th>
-                                    <th>Uploaded On</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-                            </table>
+                    <h3>Uploaded Rankings Details</h3>
+                        <table id="moic_rankings" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>Sr. No.</th>
+                                <th>Block</th>
+                                <th>PHC Name</th>
+                                <th>Rankings</th>
+                                <!-- <th>SMS</th> -->
+                            </tr>
+                            </thead>
+                        </table>
                 </div>
             </div>
         </div>
-    </section> -->
+    </section>
 
 @endsection
 
@@ -109,24 +109,19 @@
     <script>
         $(function () {
             $('.alert').fadeOut(1500);
-            $('#uploadData').dataTable({
+            $('#moic_rankings').dataTable({
                 "processing": true,
                 "serverSide": true,
                 "ordering": false,
                 "info": true,
-                "ajax": "<?php echo url('/get-anm-target-data');?>",
+                "ajax": "{{url('/ajax/moic')}}",
                 "columns": [
-
-                    { "data": "sr_no" },
-                    { "data": "filenames" },
-                    { "data": "uploaded_on" },
-                    { "data": "status" },
-                    { "data": "actions" },
-                ],
-                /* rowCallback: function (row, data,index){
-                     var html = $.map(data['tag'], function(array){ return array['title']});
-                     $("td:eq(0)", row).html(html.join(","));
-                 }*/
+                    { "data": "id" },
+                    { "data": "block" },
+                    { "data": "phc" },
+                    { "data": "pdf_url" },
+                    //{ "data": "sms" }
+                ]
             });
         });
     </script>
