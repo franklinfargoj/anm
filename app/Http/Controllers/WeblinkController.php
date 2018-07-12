@@ -199,4 +199,13 @@ class WeblinkController extends Controller
         }
 
     }
+
+    public function downloadImage()
+    {
+        $url = URL::previous();
+
+        Converter::make($url)
+            ->toJpg()
+            ->download('anm.jpg');
+    }
 }
