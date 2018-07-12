@@ -9,6 +9,8 @@ use App\DistrictModel;
 
 use App\AnmDetailsModel;
 use Illuminate\Support\Facades\DB;
+use Anam\PhantomMagick\Converter;
+use Illuminate\Support\Facades\URL;
 
 class WeblinkController extends Controller
 {
