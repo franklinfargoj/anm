@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\AnmTargetDataModel;
 use App\BeneficiaryModel;
 use App\DistrictModel;
+use App\Block;
 
 use DataTables;
 
@@ -62,21 +63,30 @@ class ProcessedFileController extends Controller
                     ->where('id',$request)
                     ->first();
         $file_name = $file['filename'];
+
         $anm_target_data = AnmTargetDataModel::with(['district', 'block'])->select('*')
                                             ->where('status','Y')
-                                            ->where('filename','LIKE',$file_name)
+                                            ->where('filename','=',$file_name)
                                             ->get()
                                             ->toArray();
 
-        $block = $anm_target_data[0]['block'];
+       $weblink = AnmTargetDataModel::where('filename','=',$file_name)
+                                ->pluck('weblink','phc_name')
+                                ->toArray();
        
-        $beneficiary_data = BeneficiaryModel::select('beneficary_details.*','master_district.district_name')
-                                             ->join('master_district','beneficary_details.district_id', '=', 'master_district.id')
-                                             ->where('beneficary_details.filename','=',$file_name)
-                                             ->get()
-                                             ->toArray();
+       $block=AnmTargetDataModel::select('block')->where('filename',$file_name)->first();
+       $block_id = $block['block'];
+       $block_n = Block::select('block_name')->where('id',$block_id)->first();
+       $block_name = $block_n['block_name'];
 
-        \Excel::create('Target_data', function($excel) use($anm_target_data,$beneficiary_data,$block) {
+
+        $beneficiary_data = BeneficiaryModel::select('beneficary_mobile_number','district_id','phc_name','master_district.district_name')
+                                              ->join('master_district','beneficary_details.district_id', '=', 'master_district.id')
+                                              ->where('filename','=',$file_name)
+                                              ->get()
+                                              ->toArray();
+
+        \Excel::create('Target_data', function($excel) use($anm_target_data,$beneficiary_data,$block_name,$weblink) {
 
             $excel->sheet('target_data', function($sheet) use($anm_target_data) {
                 $excelData = [];
@@ -116,7 +126,7 @@ class ProcessedFileController extends Controller
                 $sheet->fromArray($excelData, null, 'A1', true, false);
             });
 
-            $excel->sheet('beneficiary', function($sheet) use($beneficiary_data,$block) {
+            $excel->sheet('beneficiary', function($sheet) use($beneficiary_data,$block_name,$weblink) {
                 $excelData = [];
                 $excelData[] = [
                     'District',
@@ -129,12 +139,19 @@ class ProcessedFileController extends Controller
                 ];
 
                 foreach ($beneficiary_data as $value) {
+
+                    if(array_key_exists($value['phc_name'],$weblink)){
+                        $weblink_text = $weblink[$value['phc_name']];
+                    }else{
+                        $weblink_text = null;
+                    }
+
                     $excelData[] = array(
                         $value['district_name'],
-                        $block,
+                        $block_name,
                         $value['phc_name'],
                         $value['beneficary_mobile_number'],
-                        "weblink",
+                        $weblink_text,
                         "message",
                         "combination"
                     );
