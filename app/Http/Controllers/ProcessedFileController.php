@@ -72,15 +72,16 @@ class ProcessedFileController extends Controller
 
        $weblink_message = AnmTargetDataModel::where('filename','=',$file_name)
                                 ->select('weblink','phc_name','beneficiary_custom_msg')
+                                ->distinct('phc_name')
                                 ->get()
                                 ->toArray();
        $weblink = array();
        $message = array();
+
        foreach($weblink_message as $msglink){
           $weblink[$msglink['phc_name']] = $msglink['weblink'];
            $message[$msglink['phc_name']] = $msglink['beneficiary_custom_msg'];
       }
-
 
        $block=AnmTargetDataModel::select('block')->where('filename',$file_name)->first();
        $block_id = $block['block'];
@@ -126,11 +127,11 @@ class ProcessedFileController extends Controller
                         $value['anm_mobile_number'],
                         $value['performer_category'],
                         $value['scenerio'],
-                        $value['weblink'],
+                        url('/weblink/'.$value['weblink']),
                         $value['anm_custom_msg'],
                         $value['moic_custom_msg'],
-                        $value['anm_custom_msg'].$value['weblink'],
-                        $value['moic_custom_msg'].$value['weblink']
+                        $value['anm_custom_msg'].url('/weblink/'.$value['weblink']),
+                        $value['moic_custom_msg'].url('/weblink/'.$value['weblink'])
                     );
                 }
                 $sheet->fromArray($excelData, null, 'A1', true, false);
@@ -138,6 +139,7 @@ class ProcessedFileController extends Controller
 
             $excel->sheet('beneficiary', function($sheet) use($beneficiary_data,$block_name,$weblink,$message) {
                 $excelData = [];
+
                 $excelData[] = [
                     'District',
                     'Block',
@@ -156,6 +158,12 @@ class ProcessedFileController extends Controller
                         $weblink_text = null;
                     }
 
+                    if($weblink_text != null){
+                        $link_weblink_text = url('/weblink',$weblink_text);
+                    }else{
+                        $link_weblink_text = null;
+                    }
+
                     if(array_key_exists($value['phc_name'],$message)){
                         $message_text = $message[$value['phc_name']];
                     }else{
@@ -167,9 +175,10 @@ class ProcessedFileController extends Controller
                         $block_name,
                         $value['phc_name'],
                         $value['beneficary_mobile_number'],
-                        $weblink_text,
+                        $link_weblink_text,
                         $message_text,
-                        $message_text.$weblink_text
+                        $message_text.$link_weblink_text,
+
                     );
                 }
                 $sheet->fromArray($excelData, null, 'A1', true, false);
