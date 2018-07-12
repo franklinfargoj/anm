@@ -26,22 +26,29 @@ body {
 	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 header {
-	background-color: #666666;
+	background: rgba(29,70,126,1);
+	background: -moz-linear-gradient(left, rgba(29,70,126,1) 0%, rgba(32,105,159,1) 46%, rgba(30,112,165,1) 51%, rgba(21,128,178,1) 71%, rgba(0,150,198,1) 100%);
+	background: -webkit-gradient(left top, right top, color-stop(0%, rgba(29,70,126,1)), color-stop(46%, rgba(32,105,159,1)), color-stop(51%, rgba(30,112,165,1)), color-stop(71%, rgba(21,128,178,1)), color-stop(100%, rgba(0,150,198,1)));
+	background: -webkit-linear-gradient(left, rgba(29,70,126,1) 0%, rgba(32,105,159,1) 46%, rgba(30,112,165,1) 51%, rgba(21,128,178,1) 71%, rgba(0,150,198,1) 100%);
+	background: -o-linear-gradient(left, rgba(29,70,126,1) 0%, rgba(32,105,159,1) 46%, rgba(30,112,165,1) 51%, rgba(21,128,178,1) 71%, rgba(0,150,198,1) 100%);
+	background: -ms-linear-gradient(left, rgba(29,70,126,1) 0%, rgba(32,105,159,1) 46%, rgba(30,112,165,1) 51%, rgba(21,128,178,1) 71%, rgba(0,150,198,1) 100%);
+	background: linear-gradient(to right, rgba(29,70,126,1) 0%, rgba(32,105,159,1) 46%, rgba(30,112,165,1) 51%, rgba(21,128,178,1) 71%, rgba(0,150,198,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1d467e', endColorstr='#0096c6', GradientType=1 );
 	color: #ffffff;
 	padding: 30px 0;
 }
 
 h1 {
-	font-size: 24px;
-	border-bottom: solid 1px #ccc;
-	background-color: #ccc;
-	padding: 15px;
-	margin: 30px 0;
+	    font-size: 25px;
+    padding: 15px 0px;
+    margin: 20px 0;
+    font-weight: bold;
+    color: #7f7a7a;
 }
 h3 {
 	font-size: 18px;
 	text-transform: uppercase;
-	padding: 30px 0;
+	padding: 20px 0;
 	margin: 0;
 }
 .btn-area .btn {
@@ -52,7 +59,7 @@ table.dataTable {
 	border: solid 1px #d7d7d7 !important;
 }
 table.dataTable thead {
-	background-color: #cccccc;
+	background-color: transparent;
 }
 table.dataTable thead th, table.dataTable thead td {
 	border-bottom: none;
@@ -161,7 +168,8 @@ footer p {
 }
 .btn {
 	padding: 7px 30px;
-	border-radius: 10px;
+	border-radius: 3px;
+	font-weight: bold;
 }
 .row.form-group {
 	margin-top: 30px;
@@ -229,4 +237,10 @@ footer p {
 .m-0 {
 	margin-right: 0px;
     margin-left: 0px;
+}
+.form-control{
+	border-radius: 1px;
+}
+table thead tr th, table tbody tr td{
+	border: 0px !important;
 }
