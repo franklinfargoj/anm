@@ -10,7 +10,7 @@ use App\Http\Requests\ImportMosRankingRequest;
 use App\MoicRanking;
 use Excel;
 use Carbon\Carbon;
-
+use DataTables;
 
 class MosController extends Controller
 {
@@ -64,5 +64,20 @@ class MosController extends Controller
             Session::flash('error', 'Please select valid data file.');
             return back();
         }
+    }
+
+
+    public function ajaxMoic()
+    {
+    	$moic = MoicRanking::select('id', 'block', 'ranking_pdf', 'sms', 'phc_hin')
+            ->orderBy('created_at', 'DESC')
+            ->get();
+        $db = Datatables::of($moic);
+        $db->addColumn('pdf_url', function($moic){
+        	return '<a href="'.url('/moic/rankings/'.$moic->ranking_pdf).'" target="_blank">View</a>';
+        })->addColumn('phc', function($moic){
+        	return '<span class="fontsforweb_fontid_8705">'.$moic->phc_hin.'</span>';
+        })->rawColumns(['pdf_url', 'phc']);
+    	return $db->make(true);
     }
 }
