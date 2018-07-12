@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\AnmTargetDataModel;
 use App\BeneficiaryModel;
 use App\DistrictModel;
+use App\Block;
 
 use DataTables;
 
@@ -62,25 +63,39 @@ class ProcessedFileController extends Controller
                     ->where('id',$request)
                     ->first();
         $file_name = $file['filename'];
+
         $anm_target_data = AnmTargetDataModel::with(['district', 'block'])->select('*')
                                             ->where('status','Y')
-                                            ->where('filename','LIKE',$file_name)
+                                            ->where('filename','=',$file_name)
                                             ->get()
                                             ->toArray();
 
-        $beneficiary = $anm_target_data[0]['block']['block_name'];
-        $weblink = $anm_target_data[0]['weblink'];
-        $anm_custom_msg = $anm_target_data[0]['anm_custom_msg'];
-        $combination = $anm_custom_msg.$weblink;
-        $beneficiary =array($beneficiary,$weblink,$anm_custom_msg,$combination);
+       $weblink_message = AnmTargetDataModel::where('filename','=',$file_name)
+                                ->select('weblink','phc_name','beneficiary_custom_msg')
+                                ->distinct('phc_name')
+                                ->get()
+                                ->toArray();
+       $weblink = array();
+       $message = array();
 
-        $beneficiary_data = BeneficiaryModel::select('beneficary_details.*','master_district.district_name')
-                                            ->join('master_district','beneficary_details.district_id', '=', 'master_district.id')
-                                            ->where('beneficary_details.filename','LIKE',$file_name)
-                                            ->get()
-                                            ->toArray();
+       foreach($weblink_message as $msglink){
+          $weblink[$msglink['phc_name']] = $msglink['weblink'];
+           $message[$msglink['phc_name']] = $msglink['beneficiary_custom_msg'];
+      }
 
-        \Excel::create('Target_data', function($excel) use($anm_target_data,$beneficiary_data,$beneficiary) {
+       $block=AnmTargetDataModel::select('block')->where('filename',$file_name)->first();
+       $block_id = $block['block'];
+       $block_n = Block::select('block_name')->where('id',$block_id)->first();
+       $block_name = $block_n['block_name'];
+
+
+        $beneficiary_data = BeneficiaryModel::select('beneficary_mobile_number','district_id','phc_name','master_district.district_name')
+                                              ->join('master_district','beneficary_details.district_id', '=', 'master_district.id')
+                                              ->where('filename','=',$file_name)
+                                              ->get()
+                                              ->toArray();
+
+        \Excel::create('Target_data', function($excel) use($anm_target_data,$beneficiary_data,$block_name,$weblink,$message) {
 
             $excel->sheet('target_data', function($sheet) use($anm_target_data) {
                 $excelData = [];
@@ -97,7 +112,8 @@ class ProcessedFileController extends Controller
                     'Weblink',
                     'Anm cutomised message',
                     'MOIC cutomised message',
-                    'Combination'
+                    'Anm Combination',
+                    'MOIC Combination'
                 ];
 
                 foreach ($anm_target_data as $value) {
@@ -111,36 +127,58 @@ class ProcessedFileController extends Controller
                         $value['anm_mobile_number'],
                         $value['performer_category'],
                         $value['scenerio'],
-                        $value['weblink'],
+                        url('/weblink/'.$value['weblink']),
                         $value['anm_custom_msg'],
                         $value['moic_custom_msg'],
-                        $value['anm_custom_msg'].$value['weblink']
+                        $value['anm_custom_msg'].url('/weblink/'.$value['weblink']),
+                        $value['moic_custom_msg'].url('/weblink/'.$value['weblink'])
                     );
                 }
                 $sheet->fromArray($excelData, null, 'A1', true, false);
             });
 
-            $excel->sheet('beneficiary', function($sheet) use($beneficiary_data,$beneficiary) {
+            $excel->sheet('beneficiary', function($sheet) use($beneficiary_data,$block_name,$weblink,$message) {
                 $excelData = [];
+
                 $excelData[] = [
                     'District',
                     'Block',
                     'Phc Name',
                     'Beneficiary Phone Number',
                     'Weblink',
-                    'Text message',
+                    'Beneficiary message',
                     'Combination'
                 ];
 
                 foreach ($beneficiary_data as $value) {
+
+                    if(array_key_exists($value['phc_name'],$weblink)){
+                        $weblink_text = $weblink[$value['phc_name']];
+                    }else{
+                        $weblink_text = null;
+                    }
+
+                    if($weblink_text != null){
+                        $link_weblink_text = url('/weblink',$weblink_text);
+                    }else{
+                        $link_weblink_text = null;
+                    }
+
+                    if(array_key_exists($value['phc_name'],$message)){
+                        $message_text = $message[$value['phc_name']];
+                    }else{
+                        $message_text = null;
+                    }
+
                     $excelData[] = array(
                         $value['district_name'],
-                        $beneficiary[0],
+                        $block_name,
                         $value['phc_name'],
                         $value['beneficary_mobile_number'],
-                        $beneficiary[1],
-                        $beneficiary[2],
-                        $beneficiary[3]
+                        $link_weblink_text,
+                        $message_text,
+                        $message_text.$link_weblink_text,
+
                     );
                 }
                 $sheet->fromArray($excelData, null, 'A1', true, false);
