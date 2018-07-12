@@ -9,6 +9,8 @@ use App\DistrictModel;
 
 use App\AnmDetailsModel;
 use Illuminate\Support\Facades\DB;
+use Anam\PhantomMagick\Converter;
+use Illuminate\Support\Facades\URL;
 
 class WeblinkController extends Controller
 {
@@ -198,5 +200,14 @@ class WeblinkController extends Controller
             return view('scenerio/scenerio_8',compact('current_month', 'lstData', 'type', 'next_month'));
         }
 
+    }
+
+    public function downloadImage()
+    {
+        $url = URL::previous();
+
+        Converter::make($url)
+            ->toJpg()
+            ->download('anm.jpg');
     }
 }
