@@ -141,7 +141,7 @@
             $("#district").on('change', function(){
                 var district = $(this).val();
                 $.ajax({
-                    url:"/ajax/"+district,
+                    url:"{{url('/ajax')}}"+'/'+district,
                     success:function(response){
                         console.log(response);
                         if(response.data.length > 0){
