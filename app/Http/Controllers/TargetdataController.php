@@ -43,16 +43,14 @@ class TargetdataController extends Controller
 
     public function fetchTargetData()
     {
-        $target_data = AnmTargetDataModel::select('id', 'og_filename as filenames', 'uploaded_on', 'status')
+        $target_data = AnmTargetDataModel::select('id', 'og_filename as filenames', 'uploaded_on', 'status','created_at')
             ->selectRaw("(CASE WHEN status='N' THEN 'Pending' WHEN status='Y' THEN 'Successful' END) as status")
             ->groupBy('filename')
+            ->orderBy('created_at', 'DESC')
             ->get();
 
         $db = Datatables::of($target_data);
         $db->addColumn('sr_no', function ($target_data){ static $i = 0; $i++; return $i; }) ->rawColumns(['id']);
-
-
-
         $db->addColumn('actions', function ($target_data) {
             return '<a href="'.route('processedfile',$target_data['id']).'">View details</a>';
         })

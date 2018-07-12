@@ -137,7 +137,7 @@ class ReadExcelCommand extends Command
                                 $lstAnm[] = $arrayListAnm;
                             }
                             }
-                            AnmDetailsModel::insert($lstAnm);
+                            AnmDetailsModel::insert($lstAnm);  //Inserting data into anm_details table
                         }
 
 
@@ -158,7 +158,7 @@ class ReadExcelCommand extends Command
                                 $phc[] = $arrayListPhc;
                             }
                             }
-                            PhcTranslationModel::insert($phc);
+                            PhcTranslationModel::insert($phc);  //Inserting data into phc table
                         }
                     }
 
