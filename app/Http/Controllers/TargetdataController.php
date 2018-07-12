@@ -106,7 +106,7 @@ class TargetdataController extends Controller
                         $arr[] = [
                             'district' => $request->get("district"),
                             'block' => $request->get("block"),
-                            'phc_name' =>$value["phc_name"],
+                            'phc_name' =>strtolower($value["phc_name"]),
                             'moic_name' =>$value["moic_name"],
                             'moic_mobile_number' =>$value["moic_phone_number"],
                             'anm_name' =>$value["anm_name"],
