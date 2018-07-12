@@ -65,11 +65,11 @@ class ReadExcelCommand extends Command
 
 
                 if($counter > 1) {
-                    $district_name = AnmTargetDataModel::where('filename', $filename)->pluck('district')->first();
+                    $district_id = AnmTargetDataModel::where('filename', $filename)->pluck('district')->first();
 
-                    $district_name = trim(strtolower($district_name));
+                    //$district_name = trim(strtolower($district_name));
 
-                    $district_id = DistrictModel::where('district_name', 'LIKE', $district_name)->pluck('id')->first();
+                    //$district_id = DistrictModel::where('district_name', 'LIKE', $district_name)->pluck('id')->first();
 
                     $arrayList = array();
                     $arrayData = array();

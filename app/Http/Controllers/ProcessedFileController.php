@@ -27,7 +27,7 @@ class ProcessedFileController extends Controller
                     ->where('id',$id)
                     ->first();
 
-        $processData = AnmTargetDataModel::select('id','block','phc_name','weblink','beneficiary_code','moic_code', 'anm_custom_msg', 'moic_custom_msg', 'beneficiary_custom_msg')
+        $processData = AnmTargetDataModel::with('block')->select('id','block','phc_name','weblink','beneficiary_code','moic_code', 'anm_custom_msg', 'moic_custom_msg', 'beneficiary_custom_msg')
                                         ->where('status','Y')
                                         ->where('filename','LIKE',$file_name['filename'])
                                         ->get()
@@ -62,14 +62,14 @@ class ProcessedFileController extends Controller
                     ->where('id',$request)
                     ->first();
         $file_name = $file['filename'];
-        $anm_target_data = AnmTargetDataModel::select('*')
+        $anm_target_data = AnmTargetDataModel::with(['district', 'block'])->select('*')
                                             ->where('status','Y')
                                             ->where('filename','LIKE',$file_name)
                                             ->get()
                                             ->toArray();
 
         $block = $anm_target_data[0]['block'];
-
+       
         $beneficiary_data = BeneficiaryModel::select('beneficary_details.*','master_district.district_name')
                                              ->join('master_district','beneficary_details.district_id', '=', 'master_district.id')
                                              ->where('beneficary_details.filename','=',$file_name)
@@ -98,8 +98,8 @@ class ProcessedFileController extends Controller
 
                 foreach ($anm_target_data as $value) {
                     $excelData[] = array(
-                        $value['district'],
-                        $value['block'],
+                        $value['district']['district_name'],
+                        $value['block']['block_name'],
                         $value['phc_name'],
                         $value['moic_name'],
                         $value['moic_mobile_number'],

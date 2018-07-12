@@ -57,7 +57,7 @@
                 "ajax": "<?php echo url('/fetch-process-data/'.$id);?>",
                 "columns": [
                     { "data": "sr_no" },
-                    { "data": "block" },
+                    { "data": "block.block_name" },
                     { "data": "phc_name" },
                     { "data": "weblink",
                         "render": function(data, type) {

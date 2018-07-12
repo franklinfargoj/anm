@@ -9,6 +9,8 @@ use App\DistrictModel;
 
 use App\AnmDetailsModel;
 use Illuminate\Support\Facades\DB;
+use Anam\PhantomMagick\Converter;
+use Illuminate\Support\Facades\URL;
 
 class WeblinkController extends Controller
 {
@@ -76,12 +78,12 @@ class WeblinkController extends Controller
                                 ->pluck('phc_translation','phc_name')->toArray();
 
 
-        $district_id = DistrictModel::select('id')
+        /*$district_id = DistrictModel::select('id')
                             ->where('district_name',$targetDataVariable[0]['district'])
                             ->get()
-                            ->toArray();
+                            ->toArray();*/
 
-        $anm_detail =  AnmDetailsModel::where('district_id',$district_id[0]['id'])
+        $anm_detail =  AnmDetailsModel::where('district_id',$targetDataVariable[0]['district'])
                             ->pluck('anm_translation','anm_name')->toArray();
 
         $lstAnmCategory = array();
@@ -198,5 +200,14 @@ class WeblinkController extends Controller
             return view('scenerio/scenerio_8',compact('current_month', 'lstData', 'type', 'next_month'));
         }
 
+    }
+
+    public function downloadImage()
+    {
+        $url = URL::previous();
+
+        Converter::make($url)
+            ->toJpg()
+            ->download('anm.jpg');
     }
 }
