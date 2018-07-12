@@ -68,19 +68,15 @@ class ProcessedFileController extends Controller
                                             ->get()
                                             ->toArray();
 
-        $beneficiary = $anm_target_data[0]['block'];
-        $weblink = $anm_target_data[0]['weblink'];
-        $anm_custom_msg = $anm_target_data[0]['anm_custom_msg'];
-        $combination = $anm_custom_msg.$weblink;
-        $beneficiary =array($beneficiary,$weblink,$anm_custom_msg,$combination);
+        $block = $anm_target_data[0]['block'];
 
         $beneficiary_data = BeneficiaryModel::select('beneficary_details.*','master_district.district_name')
-                                            ->join('master_district','beneficary_details.district_id', '=', 'master_district.id')
-                                            ->where('beneficary_details.filename','LIKE',$file_name)
-                                            ->get()
-                                            ->toArray();
+                                             ->join('master_district','beneficary_details.district_id', '=', 'master_district.id')
+                                             ->where('beneficary_details.filename','=',$file_name)
+                                             ->get()
+                                             ->toArray();
 
-        \Excel::create('Target_data', function($excel) use($anm_target_data,$beneficiary_data,$beneficiary) {
+        \Excel::create('Target_data', function($excel) use($anm_target_data,$beneficiary_data,$block) {
 
             $excel->sheet('target_data', function($sheet) use($anm_target_data) {
                 $excelData = [];
@@ -120,7 +116,7 @@ class ProcessedFileController extends Controller
                 $sheet->fromArray($excelData, null, 'A1', true, false);
             });
 
-            $excel->sheet('beneficiary', function($sheet) use($beneficiary_data,$beneficiary) {
+            $excel->sheet('beneficiary', function($sheet) use($beneficiary_data,$block) {
                 $excelData = [];
                 $excelData[] = [
                     'District',
@@ -135,12 +131,12 @@ class ProcessedFileController extends Controller
                 foreach ($beneficiary_data as $value) {
                     $excelData[] = array(
                         $value['district_name'],
-                        $beneficiary[0],
+                        $block,
                         $value['phc_name'],
                         $value['beneficary_mobile_number'],
-                        $beneficiary[1],
-                        $beneficiary[2],
-                        $beneficiary[3]
+                        "weblink",
+                        "message",
+                        "combination"
                     );
                 }
                 $sheet->fromArray($excelData, null, 'A1', true, false);
