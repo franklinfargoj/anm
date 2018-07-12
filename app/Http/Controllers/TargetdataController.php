@@ -18,7 +18,8 @@ use DB;
 use DataTables;
 
 use Illuminate\Support\Facades\Auth;
-
+use App\District;
+use App\Block;
 
 class TargetdataController extends Controller
 {
@@ -32,7 +33,12 @@ class TargetdataController extends Controller
 
     public function index()
     {
-        return view('import');
+        $district = District::pluck('district_name', 'id');
+        $first_district = $district->first();
+        $block = Block::whereHas('district', function($query) use($first_district){
+            $query->where('district_name', $first_district);
+        })->pluck('block_name', 'id');
+        return view('import', compact('district', 'block'));
     }
 
     public function fetchTargetData()
@@ -100,8 +106,8 @@ class TargetdataController extends Controller
 जानने के लिए नीचे लिंक पर क्लिक करके देखिये: ,';
                         }
                         $arr[] = [
-                            'district' => $value["district"],
-                            'block' => $value["block"],
+                            'district' => $request->get("district"),
+                            'block' => $request->get("block"),
                             'phc_name' =>$value["phc_name"],
                             'moic_name' =>$value["moic_name"],
                             'moic_mobile_number' =>$value["moic_phone_number"],
@@ -217,5 +223,13 @@ class TargetdataController extends Controller
     }
 
 
+    public function getBlocks(District $district)
+    {
+        try{
+            return ['status' => 200, 'data' => $district->blocks];
+        }catch(Exception $ex){
+            return ['status' => 404 ,'message' => 'not found', 'data' => ''];
+        }
+    }
 
 }

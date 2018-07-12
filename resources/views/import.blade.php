@@ -37,7 +37,7 @@
     <section>
         <div class="container">
             <div class="row">
-                <div class="col-sm-3">
+                <!-- <div class="col-sm-3">
                     <div class="form-group">
                         <label>State</label>
                         <select class="form-control">
@@ -45,13 +45,17 @@
 
                         </select>
                     </div>
-                </div>
+                </div> -->
                 <div class="col-sm-3">
                     <div class="form-group">
                         <label>District</label>
-                        <select class="form-control">
-                            <option>Alwar</option>
-                        </select>
+                        {!! Form::select('district', $district, '',['class' => 'form-control' ,'id'=>"district"])!!}
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>Block</label>
+                        {!! Form::select('block', $block, '',['class' => 'form-control' ,'id'=>"block"])!!}
                     </div>
                 </div>
                 <div class="col-sm-3">
@@ -68,7 +72,7 @@
                     <div class="form-group">
                         <label>Month</label>
                         <select class="form-control" name="year">
-                            @foreach (range(1950, date('Y')) as $key => $value) {
+                            @foreach (range(date('Y'), 2025) as $key => $value) {
                                 <option>{{$value}}</option>;
                             @endforeach
                         </select>
@@ -133,6 +137,25 @@
                      var html = $.map(data['tag'], function(array){ return array['title']});
                      $("td:eq(0)", row).html(html.join(","));
                  }*/
+            });
+            $("#district").on('change', function(){
+                var district = $(this).val();
+                $.ajax({
+                    url:"{{url('/ajax')}}"+'/'+district,
+                    success:function(response){
+                        console.log(response);
+                        if(response.data.length > 0){
+                            var html = '';
+                            $.each(response.data, function(index){
+                                html += '<option value="'+response.data[index].id+'">'+response.data[index].block_name+'</option>';
+                            });
+                            $("#block").html(html);
+                        }else{
+                            alert('No blocks found, choose another');
+                            $("#block").html('');
+                        }
+                    }
+                })
             });
         });
     </script>
