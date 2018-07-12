@@ -62,13 +62,13 @@ class ProcessedFileController extends Controller
                     ->where('id',$request)
                     ->first();
         $file_name = $file['filename'];
-        $anm_target_data = AnmTargetDataModel::select('*')
+        $anm_target_data = AnmTargetDataModel::with(['district', 'block'])->select('*')
                                             ->where('status','Y')
                                             ->where('filename','LIKE',$file_name)
                                             ->get()
                                             ->toArray();
 
-        $beneficiary = $anm_target_data[0]['block'];
+        $beneficiary = $anm_target_data[0]['block']['block_name'];
         $weblink = $anm_target_data[0]['weblink'];
         $anm_custom_msg = $anm_target_data[0]['anm_custom_msg'];
         $combination = $anm_custom_msg.$weblink;
@@ -102,8 +102,8 @@ class ProcessedFileController extends Controller
 
                 foreach ($anm_target_data as $value) {
                     $excelData[] = array(
-                        $value['district'],
-                        $value['block'],
+                        $value['district']['district_name'],
+                        $value['block']['block_name'],
                         $value['phc_name'],
                         $value['moic_name'],
                         $value['moic_mobile_number'],

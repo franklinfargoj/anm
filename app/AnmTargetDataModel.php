@@ -13,4 +13,9 @@ class AnmTargetDataModel extends Model
     public function block(){
     	return $this->hasOne('App\Block', 'id', 'block');
     }
+
+    public function district()
+    {
+    	return $this->hasOne('App\District', 'id', 'district');
+    }
 }

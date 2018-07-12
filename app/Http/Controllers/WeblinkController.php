@@ -78,12 +78,12 @@ class WeblinkController extends Controller
                                 ->pluck('phc_translation','phc_name')->toArray();
 
 
-        $district_id = DistrictModel::select('id')
+        /*$district_id = DistrictModel::select('id')
                             ->where('district_name',$targetDataVariable[0]['district'])
                             ->get()
-                            ->toArray();
+                            ->toArray();*/
 
-        $anm_detail =  AnmDetailsModel::where('district_id',$district_id[0]['id'])
+        $anm_detail =  AnmDetailsModel::where('district_id',$targetDataVariable[0]['district'])
                             ->pluck('anm_translation','anm_name')->toArray();
 
         $lstAnmCategory = array();
