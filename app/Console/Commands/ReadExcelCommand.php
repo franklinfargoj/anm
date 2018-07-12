@@ -95,9 +95,6 @@ class ReadExcelCommand extends Command
 
                             if(!empty($data)){
 
-
-
-
                             foreach ($data as $key => $mob) {
                                 foreach ($mob as $k => $v) {
                                     if ($k == "phc_name") {
@@ -127,7 +124,7 @@ class ReadExcelCommand extends Command
                                 {
                                     continue;
                                 }
-                                $arrayListAnm['anm_name'] = $value['anm_name'];
+                                $arrayListAnm['anm_name'] = strtolower($value['anm_name']);
                                 $arrayListAnm['anm_mobile_number'] = 9999999999;
                                 $arrayListAnm['anm_translation'] = $value['translation'];
                                 $arrayListAnm['district_id'] = $district_id;
@@ -149,7 +146,7 @@ class ReadExcelCommand extends Command
                                 {
                                     continue;
                                 }
-                                $arrayListPhc['phc_name'] = $value['phc_name'];
+                                $arrayListPhc['phc_name'] = strtolower($value['phc_name']);
                                 $arrayListPhc['phc_translation'] =   $value['translation'];
                                 $arrayListPhc['block_id'] = 1;
                                 $arrayListPhc['language_id'] = $value['languageid'];
