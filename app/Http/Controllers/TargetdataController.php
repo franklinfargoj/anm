@@ -45,7 +45,6 @@ class TargetdataController extends Controller
 
         $db = Datatables::of($target_data);
         $db->addColumn('sr_no', function ($target_data){ static $i = 0; $i++; return $i; }) ->rawColumns(['id']);
-        
         $db->addColumn('actions', function ($target_data) {
             return '<a href="'.route('processedfile',$target_data['id']).'">View details</a>';
         })
