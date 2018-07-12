@@ -94,7 +94,7 @@
                                 <th>Block</th>
                                 <th>PHC Name</th>
                                 <th>Rankings</th>
-                                <!-- <th>SMS</th> -->
+                                <th>SMS</th>
                             </tr>
                             </thead>
                         </table>
@@ -118,9 +118,9 @@
                 "columns": [
                     { "data": "id" },
                     { "data": "block" },
-                    { "data": "phc" },
+                    { "data": "phc_en" },
                     { "data": "pdf_url" },
-                    //{ "data": "sms" }
+                    { "data": "sms_span" }
                 ]
             });
         });

@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\ReadExcelCommand::class,
+        Commands\MoicSMSGeneration::class,
     ];
 
     /**
@@ -25,6 +26,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('custom:command')->everyFiveMinutes();
+        $schedule->command('moic:sms_create')->everyFiveMinutes();
     }
 
     /**

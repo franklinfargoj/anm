@@ -16,6 +16,7 @@ class CreateTableMosRankingTable extends Migration
         Schema::create('moic_ranking', function (Blueprint $table) {
             $table->increments('id');
             $table->string('block');
+            $table->string('block_hin');
             $table->string('phc_en');
             $table->string('phc_hin');
             $table->string('dr_name_en');

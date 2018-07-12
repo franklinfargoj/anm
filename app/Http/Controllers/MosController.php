@@ -36,6 +36,7 @@ class MosController extends Controller
             foreach ($data as $key => $value) {
                 $arr[] = [
                     'block' => $value["block"],
+                    'block_hin' => $value["block_name_in_hindi"],
                     'phc_en' =>$value["phc"],
                     'phc_hin' =>$value["phc_name_in_hindi"],
                     'dr_name_en' =>$value["name_of_incharge"],
@@ -69,15 +70,15 @@ class MosController extends Controller
 
     public function ajaxMoic()
     {
-    	$moic = MoicRanking::select('id', 'block', 'ranking_pdf', 'sms', 'phc_hin')
+    	$moic = MoicRanking::select('id', 'block', 'ranking_pdf', 'sms', 'phc_en')
             ->orderBy('created_at', 'DESC')
             ->get();
         $db = Datatables::of($moic);
         $db->addColumn('pdf_url', function($moic){
         	return '<a href="'.url('/moic/rankings/'.$moic->ranking_pdf).'" target="_blank">View</a>';
-        })->addColumn('phc', function($moic){
-        	return '<span class="fontsforweb_fontid_8705">'.$moic->phc_hin.'</span>';
-        })->rawColumns(['pdf_url', 'phc']);
+        })->addColumn('sms_span', function($moic){
+        	return '<span class="fontsforweb_fontid_8705">'.$moic->sms.'</span>';
+        })->rawColumns(['pdf_url', 'sms_span', 'block_span']);
     	return $db->make(true);
     }
 }
