@@ -70,10 +70,18 @@ class ProcessedFileController extends Controller
                                             ->get()
                                             ->toArray();
 
-       $weblink = AnmTargetDataModel::where('filename','=',$file_name)
-                                ->pluck('weblink','phc_name')
+       $weblink_message = AnmTargetDataModel::where('filename','=',$file_name)
+                                ->select('weblink','phc_name','beneficiary_custom_msg')
+                                ->get()
                                 ->toArray();
-       
+       $weblink = array();
+       $message = array();
+       foreach($weblink_message as $msglink){
+          $weblink[$msglink['phc_name']] = $msglink['weblink'];
+           $message[$msglink['phc_name']] = $msglink['beneficiary_custom_msg'];
+      }
+
+
        $block=AnmTargetDataModel::select('block')->where('filename',$file_name)->first();
        $block_id = $block['block'];
        $block_n = Block::select('block_name')->where('id',$block_id)->first();
@@ -86,7 +94,7 @@ class ProcessedFileController extends Controller
                                               ->get()
                                               ->toArray();
 
-        \Excel::create('Target_data', function($excel) use($anm_target_data,$beneficiary_data,$block_name,$weblink) {
+        \Excel::create('Target_data', function($excel) use($anm_target_data,$beneficiary_data,$block_name,$weblink,$message) {
 
             $excel->sheet('target_data', function($sheet) use($anm_target_data) {
                 $excelData = [];
@@ -103,7 +111,8 @@ class ProcessedFileController extends Controller
                     'Weblink',
                     'Anm cutomised message',
                     'MOIC cutomised message',
-                    'Combination'
+                    'Anm Combination',
+                    'MOIC Combination'
                 ];
 
                 foreach ($anm_target_data as $value) {
@@ -120,13 +129,14 @@ class ProcessedFileController extends Controller
                         $value['weblink'],
                         $value['anm_custom_msg'],
                         $value['moic_custom_msg'],
-                        $value['anm_custom_msg'].$value['weblink']
+                        $value['anm_custom_msg'].$value['weblink'],
+                        $value['moic_custom_msg'].$value['weblink']
                     );
                 }
                 $sheet->fromArray($excelData, null, 'A1', true, false);
             });
 
-            $excel->sheet('beneficiary', function($sheet) use($beneficiary_data,$block_name,$weblink) {
+            $excel->sheet('beneficiary', function($sheet) use($beneficiary_data,$block_name,$weblink,$message) {
                 $excelData = [];
                 $excelData[] = [
                     'District',
@@ -134,7 +144,7 @@ class ProcessedFileController extends Controller
                     'Phc Name',
                     'Beneficiary Phone Number',
                     'Weblink',
-                    'Text message',
+                    'Beneficiary message',
                     'Combination'
                 ];
 
@@ -146,14 +156,20 @@ class ProcessedFileController extends Controller
                         $weblink_text = null;
                     }
 
+                    if(array_key_exists($value['phc_name'],$message)){
+                        $message_text = $message[$value['phc_name']];
+                    }else{
+                        $message_text = null;
+                    }
+
                     $excelData[] = array(
                         $value['district_name'],
                         $block_name,
                         $value['phc_name'],
                         $value['beneficary_mobile_number'],
                         $weblink_text,
-                        "message",
-                        "combination"
+                        $message_text,
+                        $message_text.$weblink_text
                     );
                 }
                 $sheet->fromArray($excelData, null, 'A1', true, false);
