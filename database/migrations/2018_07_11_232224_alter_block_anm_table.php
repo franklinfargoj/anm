@@ -14,6 +14,7 @@ class AlterBlockAnmTable extends Migration
     public function up()
     {
         Schema::table('anm_target_data', function (Blueprint $table) {
+            $table->integer('district')->nullable()->change();
             $table->integer('block')->nullable()->change();
         });
     }
@@ -26,6 +27,7 @@ class AlterBlockAnmTable extends Migration
     public function down()
     {
         Schema::table('anm_target_data', function (Blueprint $table) {
+            $table->string('district')->change();
             $table->string('block')->change();
         });
     }

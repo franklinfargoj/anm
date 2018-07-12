@@ -19,7 +19,7 @@ Route::group(['middleware'=>'auth'], function (){
     Route::get('processedfile/{id}','ProcessedFileController@index')->name('processedfile');
 
     Route::get('excelimport/{id}', 'ProcessedFileController@export')->name('excel_import');
-
+    Route::get('/ajax/{district}', 'TargetdataController@getBlocks');
     // Route::get('/home', 'TargetdataController@homePage')->name('home');
     //Route::get('/home', 'HomeController@index')->name('home');
     //Route::post('register', 'Controller@importFile')->name('register');
