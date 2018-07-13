@@ -31,8 +31,6 @@
                             <th>ANM Customised Message</th>
                             <th>MOIC Customised Message</th>
                             <th>Beneficiary Customised Message</th>
-                            <!-- <th>Beneficiary Link</th>
-                            <th>Moic Link</th> -->
                         </tr>
                         </thead>
                     </table>
@@ -57,7 +55,7 @@
                 "ajax": "<?php echo url('/fetch-process-data/'.$id);?>",
                 "columns": [
                     { "data": "sr_no" },
-                    { "data": "block.block_name" },
+                    { "data": "block" },
                     { "data": "phc_name" },
                     { "data": "weblink",
                         "render": function(data, type) {
@@ -67,26 +65,9 @@
                             return data;
                         }
                     },
-                    {"data":"anm_custom_msg"},
-                    {"data":"moic_custom_msg"},
-                    {"data":"beneficiary_custom_msg"},
-                    /*,
-                    { "data": "beneficiarycode",
-                        "render": function(data, type) {
-                            if (type === 'display') {
-                                data = '<a href="' + data + '">' + data + '</a>';
-                            }
-                            return data;
-                        }
-                    },
-                    { "data": "moiccode",
-                        "render": function(data, type) {
-                            if (type === 'display') {
-                                data = '<a href="' + data + '">' + data + '</a>';
-                            }
-                            return data;
-                        }
-                    }*/
+                    {"data":"anm_sms_span"},
+                    {"data":"moic_sms_span"},
+                    {"data":"benef_sms_span"},
                 ],
             });
         });

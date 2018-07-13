@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1>Dashboard</h1>
+                    <h1>MOIC Rankings Import</h1>
                 </div>
             </div>
         </div>
@@ -56,7 +56,7 @@
                 </div>
                 <div class="col-sm-3">
                     <div class="form-group">
-                        <label>Month</label>
+                        <label>Year</label>
                         <select class="form-control" name="year">
                             @foreach (range(date('Y'), 2025) as $key => $value) {
                                 <option>{{$value}}</option>;

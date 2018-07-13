@@ -28,7 +28,7 @@ class ProcessedFileController extends Controller
                     ->where('id',$id)
                     ->first();
 
-        $processData = AnmTargetDataModel::with('block')->select('id','block','phc_name','weblink','beneficiary_code','moic_code', 'anm_custom_msg', 'moic_custom_msg', 'beneficiary_custom_msg')
+        $processData = AnmTargetDataModel::select('id','block','phc_name','weblink','beneficiary_code','moic_code', 'anm_custom_msg', 'moic_custom_msg', 'beneficiary_custom_msg')
                                         ->where('status','Y')
                                         ->where('filename','LIKE',$file_name['filename'])
                                         ->get()
@@ -36,20 +36,15 @@ class ProcessedFileController extends Controller
 
         $db = Datatables::of($processData);
         $db->addColumn('sr_no', function ($processData){ static $i = 0; $i++; return $i; }) ->rawColumns(['id']);
-
-
         $db->addColumn('weblink', function ($processData){
             return url('/weblink/'.$processData["weblink"]);
-        })->rawColumns(['weblink']);
-
-
-        $db->addColumn('beneficiarycode', function ($processData){
-            return config('app.url').'/weblink/'.$processData["beneficiary_code"];
-        }) ->rawColumns(['beneficiarycode']);
-
-        $db->addColumn('moiccode', function ($processData){
-            return config('app.url').'/weblink/'.$processData["moic_code"];
-        }) ->rawColumns(['moiccode']);
+        })->addColumn('anm_sms_span', function ($processData){
+            return '<span class="fontsforweb_fontid_8705">'.$processData['anm_custom_msg'].'</span>';
+        })->addColumn('moic_sms_span', function ($processData){
+            return '<span class="fontsforweb_fontid_8705">'.$processData['moic_custom_msg'].'</span>';
+        })->addColumn('benef_sms_span', function ($processData){
+            return '<span class="fontsforweb_fontid_8705">'.$processData['beneficiary_custom_msg'].'</span>';
+        })->rawColumns(['weblink', 'anm_sms_span', 'moic_sms_span', 'benef_sms_span']);
 
 
         return $db->make(true);
@@ -64,7 +59,7 @@ class ProcessedFileController extends Controller
                     ->first();
         $file_name = $file['filename'];
 
-        $anm_target_data = AnmTargetDataModel::with(['district', 'block'])->select('*')
+        $anm_target_data = AnmTargetDataModel::with(['district'])->select('*')
                                             ->where('status','Y')
                                             ->where('filename','=',$file_name)
                                             ->get()
@@ -94,8 +89,8 @@ class ProcessedFileController extends Controller
                                               ->where('filename','=',$file_name)
                                               ->get()
                                               ->toArray();
-
-        \Excel::create('Target_data', function($excel) use($anm_target_data,$beneficiary_data,$block_name,$weblink,$message) {
+        $filename = 'Target_data_'.time();
+        \Excel::create($filename, function($excel) use($anm_target_data,$beneficiary_data,$block_name,$weblink,$message) {
 
             $excel->sheet('target_data', function($sheet) use($anm_target_data) {
                 $excelData = [];
@@ -119,7 +114,7 @@ class ProcessedFileController extends Controller
                 foreach ($anm_target_data as $value) {
                     $excelData[] = array(
                         $value['district']['district_name'],
-                        $value['block']['block_name'],
+                        $value['block'],
                         $value['phc_name'],
                         $value['moic_name'],
                         $value['moic_mobile_number'],
