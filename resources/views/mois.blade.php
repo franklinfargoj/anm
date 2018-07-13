@@ -34,7 +34,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h3>Upload Target File</h3>
+                    <h3>Upload Moic ranking & Phc scope-card File</h3>
                 </div>
             </div>
         </div>
@@ -56,7 +56,7 @@
                 </div>
                 <div class="col-sm-3">
                     <div class="form-group">
-                        <label>Month</label>
+                        <label>Year</label>
                         <select class="form-control" name="year">
                             @foreach (range(date('Y'), 2025) as $key => $value) {
                                 <option>{{$value}}</option>;
@@ -93,14 +93,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h3>Uploaded Rankings Details</h3>
+                    <h3>Uploaded Moic files</h3>
                         <table id="moic_rankings" class="table table-bordered table-striped">
                             <thead>
                             <tr>
                                 <th>Sr. No.</th>
                                 <th>Block</th>
                                 <th>PHC Name</th>
-                                <!-- <th>Rankings</th> -->
                                 <th>SMS</th>
                             </tr>
                             </thead>
@@ -126,7 +125,6 @@
                     { "data": "id" },
                     { "data": "block" },
                     { "data": "phc_en" },
-                    /*{ "data": "pdf_url" },*/
                     { "data": "sms_span" }
                 ]
             });
