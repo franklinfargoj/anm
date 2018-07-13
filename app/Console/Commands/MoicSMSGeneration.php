@@ -56,7 +56,7 @@ class MoicSMSGeneration extends Command
                 });
 
                 $topphctext = Helpers::renderHindi(array_column($tops, 'phc_hin'), 'पीएचसी');
-                $topdoctext = Helpers::renderHindi(array_column($tops, 'dr_name_hin'), ' डॉ.');
+                $topdoctext = Helpers::renderHindi(array_column($tops, 'dr_name_hin'), '');
                 $middlephc = Helpers::renderHindi(array_column($middle, 'phc_hin'), 'पीएचसी');
                 $bottomphc = Helpers::renderHindi(array_column($bottom, 'phc_hin'), 'पीएचसी');
 
