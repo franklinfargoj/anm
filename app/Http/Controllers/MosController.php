@@ -51,15 +51,21 @@ class MosController extends Controller
         $file = MoicRanking::select('uploaded_file')->where('id',$id)->get()->toArray();
         $file_name = $file[0]['uploaded_file'];
 
-               $moic = MoicRanking::select('id', 'block', 'ranking_pdf', 'sms AS sms_span', 'phc_en')
-                                    ->orderBy('created_at', 'DESC')
-                                    ->where('uploaded_file',$file_name)
-                                    ->get()->toArray();
+        $moic = MoicRanking::select('id', 'block', 'ranking_pdf', 'sms', 'phc_en')
+                            ->orderBy('created_at', 'DESC')
+                            ->where('uploaded_file',$file_name)
+                            ->get()->toArray();
 
-               $db = Datatables::of($moic);
+        $db = Datatables::of($moic);
 
-               $db->addColumn('sr_no', function ($moic){ static $i = 0; $i++; return $i; }) ->rawColumns(['id']);
-               return $db->make(true);
+        $db->addColumn('sr_no', function ($moic){
+            static $i = 0; $i++; return $i;
+        })->addColumn('sms_span', function($moic){
+            $modifyed = str_replace('(', '<span class="unicode">', $moic['sms']);
+            $modifyed = str_replace(')', '</span>', $modifyed);
+            return '<span class="fontsforweb_fontid_8705">'.$modifyed.'</span>';
+        })->rawColumns(['id', 'sms_span']);
+        return $db->make(true);
         //   dd($moic);
     }
 
