@@ -8,12 +8,17 @@ class Helpers{
 		$topphctext = '';
 		$cnt = count($phc);
 	    $last = $phc[$cnt-1];
-	    for($i = 0; $i < $cnt; $i++){
-	        if($last == $phc[$i]){
-	            $topphctext .= ' तथा  '.$type.' '.$phc[$i];
-	        }else{
-	            $topphctext .= $type.' '.$phc[$i].'&#93; ';
-	        }
+	    if($cnt == 1){
+	    	$topphctext .= $type.' '.$phc[0];
+	    }
+	    else{
+		    for($i = 0; $i < $cnt; $i++){
+		        if($last == $phc[$i]){
+		            $topphctext .= rtrim($topphctext, '&#93; ').' तथा  '.$type.' '.$phc[$i];
+		        }else{
+		            $topphctext .= $type.' '.$phc[$i].'&#93; ';
+		        }
+		    }
 	    }
 	    return $topphctext;
 	}
