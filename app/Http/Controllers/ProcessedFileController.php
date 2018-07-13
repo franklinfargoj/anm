@@ -95,7 +95,7 @@ class ProcessedFileController extends Controller
                                               ->get()
                                               ->toArray();
 
-        \Excel::create('Target_data', function($excel) use($anm_target_data,$beneficiary_data,$block_name,$weblink,$message) {
+        \Excel::create('target_data'.time(), function($excel) use($anm_target_data,$beneficiary_data,$block_name,$weblink,$message) {
 
             $excel->sheet('target_data', function($sheet) use($anm_target_data) {
                 $excelData = [];
@@ -110,10 +110,10 @@ class ProcessedFileController extends Controller
                     'Performer Category',
                     'Scenario',
                     'Weblink',
-                    'Anm cutomised message',
-                    'MOIC cutomised message',
-                    'Anm Combination',
-                    'MOIC Combination'
+                    'Anm customised text message',
+                    'MOIC customised text message',
+                    'Final Anm sms',
+                    'Final Moic sms'
                 ];
 
                 foreach ($anm_target_data as $value) {
@@ -137,6 +137,8 @@ class ProcessedFileController extends Controller
                 $sheet->fromArray($excelData, null, 'A1', true, false);
             });
 
+
+
             $excel->sheet('beneficiary', function($sheet) use($beneficiary_data,$block_name,$weblink,$message) {
                 $excelData = [];
 
@@ -147,7 +149,7 @@ class ProcessedFileController extends Controller
                     'Beneficiary Phone Number',
                     'Weblink',
                     'Beneficiary message',
-                    'Combination'
+                    'Final sms'
                 ];
 
                 foreach ($beneficiary_data as $value) {
