@@ -37,15 +37,7 @@
     <section>
         <div class="container">
             <div class="row">
-                <!-- <div class="col-sm-3">
-                    <div class="form-group">
-                        <label>State</label>
-                        <select class="form-control">
-                            <option>Rajasthan</option>
 
-                        </select>
-                    </div>
-                </div> -->
                 <div class="col-sm-3">
                     <div class="form-group">
                         <label>District</label>
