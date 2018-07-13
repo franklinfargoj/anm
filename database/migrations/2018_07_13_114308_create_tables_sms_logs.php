@@ -16,10 +16,11 @@ class CreateTablesSmsLogs extends Migration
         Schema::table('moic_ranking', function(Blueprint $table){
             $table->tinyInteger('sms_sent_initiated')->after('sms')->default(0);
         });
-        Schema::create('mois_sms_logs', function (Blueprint $table) {
+        Schema::create('mois_anm_sms_logs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('filename');
-            $table->string('dr_name', 50);
+            $table->string('dr_name', 50)->nullable();
+            $table->string('anm_name', 50)->nullable();
             $table->bigInteger('mobile');
             $table->tinyInteger('is_sent')->default(0);
             $table->string('sms', 1000);
@@ -38,6 +39,6 @@ class CreateTablesSmsLogs extends Migration
         Schema::table('moic_ranking', function(Blueprint $table){
             $table->dropColumn('sms_sent_initiated');
         });
-        Schema::dropIfExists('mois_sms_logs');
+        Schema::dropIfExists('mois_anm_sms_logs');
     }
 }
