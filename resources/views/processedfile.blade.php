@@ -27,6 +27,8 @@
                             <th>Sr No</th>
                             <th>Block</th>
                             <th>PHC Name</th>
+                            <th>Subcenter</th>
+
                             <th>Web Link</th>
                             <th>ANM Customised Message</th>
                             <th>MOIC Customised Message</th>
@@ -59,6 +61,7 @@
                     { "data": "sr_no" },
                     { "data": "block.block_name" },
                     { "data": "phc_name" },
+                    { "data": ""  },
                     { "data": "weblink",
                         "render": function(data, type) {
                             if (type === 'display') {
