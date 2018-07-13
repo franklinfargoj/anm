@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\ReadExcelCommand::class,
         Commands\MoicSMSGeneration::class,
+        Commands\MoicSmsDispatch::class,
     ];
 
     /**

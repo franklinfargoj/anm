@@ -17,5 +17,11 @@ class Helpers{
 	    }
 	    return $topphctext;
 	}
+
+
+	public static function sendSms($sms, $mobile)
+	{
+		return ["status" => true, "message" => "sms sent successfully"];
+	}
 }
 ?>
