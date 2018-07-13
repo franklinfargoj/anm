@@ -59,7 +59,7 @@ class ProcessedFileController extends Controller
                     ->first();
         $file_name = $file['filename'];
 
-        $anm_target_data = AnmTargetDataModel::with(['district', 'block'])->select('*')
+        $anm_target_data = AnmTargetDataModel::with(['district'])->select('*')
                                             ->where('status','Y')
                                             ->where('filename','=',$file_name)
                                             ->get()
