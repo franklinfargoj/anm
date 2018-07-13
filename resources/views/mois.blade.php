@@ -78,6 +78,13 @@
                         <button type="submit" class="btn btn-primary">Upload File</button>
                     </div>
                 </div>
+
+                <div class="row mb-1">
+                    <div class="col-md-12 text-left">
+                        <a  class="btn btn-primary"  href="{{ route('export_mos') }} ">Export to excel</a>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
