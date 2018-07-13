@@ -11,7 +11,7 @@
 
             <div class="row mb-1">
                 <div class="col-md-12 text-right">
-                    <a  class="btn btn-default" href="{{ route('excel_import',$id) }}">Export to excel</a>
+                    <a  class="btn btn-primary" id="export-btn" href="{{ route('excel_import',$id) }}">Export to excel</a>
                 </div>
             </div>
         </div>
