@@ -92,7 +92,7 @@
                             <tr>
                                 <th>Sr. No.</th>
                                 <th>Block</th>
-                                <!-- <th>PHC Name</th> -->
+                                <th>PHC Name</th>
                                 <th>Rankings</th>
                                 <th>SMS</th>
                             </tr>
@@ -119,7 +119,7 @@
                     { "data": "id" },
                     { "data": "block" },
                     { "data": "phc_en" },
-                    /*{ "data": "pdf_url" },*/
+                    { "data": "pdf_url" },
                     { "data": "sms_span" }
                 ]
             });
