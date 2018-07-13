@@ -81,4 +81,100 @@ class MosController extends Controller
         })->rawColumns(['pdf_url', 'sms_span', 'block_span']);
     	return $db->make(true);
     }
+
+
+    public function export_mos(){
+
+        $moic_data = MoicRanking::select('block','phc_en','dr_name_en','mobile','email','ranking_pdf','sms')
+                              ->get()
+                              ->toArray();
+        \Excel::create('moic_ranking'.time(), function($excel) use($moic_data) {
+
+            $excel->sheet('moic', function ($sheet) use ($moic_data) {
+                $excelData = [];
+                $excelData[] = [
+                    'Block',
+                    'Phc Name',
+                    'Doctor name',
+                    'Phone Number',
+                    'Email',
+                    'Pdf Url',
+                    'Sms'
+                ];
+
+                foreach ($moic_data as $value) {
+                    $excelData[] = array(
+                        $value['block'],
+                        $value['phc_en'],
+                        $value['dr_name_en'],
+                        $value['mobile'],
+                        $value['email'],
+                        $value['ranking_pdf'],
+                        $value['sms']
+                    );
+                }
+                $sheet->fromArray($excelData, null, 'A1', true, false);
+            });
+
+        })->download('xlsx');
+
+    }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
