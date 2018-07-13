@@ -59,95 +59,93 @@ class TargetdataController extends Controller
     }
 
     public function importFile(Request $request)
-    {
-        $months = [];
-        for($m=1; $m<=12; $m++){
-            $months[$m] = date('F', mktime(0,0,0,$m, 1, date('Y')));
-        }
-        $this->validate($request, array('sample_file' => 'required'));
-        if ($request->hasFile('sample_file')) {
-            $extension = File::extension($request->sample_file->getClientOriginalName(''));
+        {
+            $this->validate($request, array('sample_file' => 'required'));
+            if ($request->hasFile('sample_file')) {
+                $extension = File::extension($request->sample_file->getClientOriginalName(''));
+                $months = DB::table('master_months')->pluck('month_translated', 'id');
+                if ($extension == "xlsx" || $extension == "xls") {
+                    $path = $request->file('sample_file')->getRealPath();
+                    $data = \Excel::selectSheets('target_data')->load($path)->get()->toArray();
+                    $file_name = time() .$request->sample_file->getClientOriginalName();
+                    $og_file_name =$request->sample_file->getClientOriginalName();
+                    $day_time = Carbon::now()->toDateTimeString('Y-m-d');
+                    $day = Carbon::now()->toDateString('Y-m-d');
+                    $web = array();
+                    $beneficiary = array();
+                    $moic = array();
 
-            if ($extension == "xlsx" || $extension == "xls") {
-                $path = $request->file('sample_file')->getRealPath();
-                $data = \Excel::selectSheets('target_data')->load($path)->get()->toArray();
-                $file_name = time() .$request->sample_file->getClientOriginalName();
-                $og_file_name =$request->sample_file->getClientOriginalName();
-                $day_time = Carbon::now()->toDateTimeString('Y-m-d');
-                $day = Carbon::now()->toDateString('Y-m-d');
-                $web = array();
-                $beneficiary = array();
-                $moic = array();
+                    if (count($data)>0) {
 
-                if (count($data)>0) {
+                        foreach ($data as $key => $value) {
+                            if(!in_array($value["phc_name"],$web)){
+                                $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                                $str = substr(str_shuffle($chars),0,10);
+                                $web[]= $value["phc_name"];
+                                $web[$value["phc_name"]] = $str;
 
-                    foreach ($data as $key => $value) {
+                                $str1 = substr(str_shuffle($chars),0,10);
+                                $beneficiary[]=  $value["phc_name"];
+                                $beneficiary[$value["phc_name"]] = $str1;
 
-                        if(!in_array($value["phc_name"],$web)){
-                            $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-                            $str = substr(str_shuffle($chars),0,10);
-                            $web[]= $value["phc_name"];
-                            $web[$value["phc_name"]] = $str;
-
-                            $str1 = substr(str_shuffle($chars),0,10);
-                            $beneficiary[]=  $value["phc_name"];
-                            $beneficiary[$value["phc_name"]] = $str1;
-
-                            $str2 = substr(str_shuffle($chars),0,10);
-                            $moic[]=  $value["phc_name"];
-                            $moic[$value["phc_name"]] = $str2;
+                                $str2 = substr(str_shuffle($chars),0,10);
+                                $moic[]=  $value["phc_name"];
+                                $moic[$value["phc_name"]] = $str2;
+                            }
+                            $msg = '';
+                            $separated = explode(',', $value['anm_name_hindi']);
+                            foreach($separated as $single){
+                                $msg .= $single.' जानना चाहते हैं की '.$months[$request->get('month')].' '.$request->get('year').' में '.$value['phc_name_hindi'].' पीएचसी के किस  एनम् ने सबसे अच्छा काम किया &#92;
+    जानने के लिए नीचे लिंक पर क्लिक करके देखिये &#037; ,';
+                            }
+                            $arr[] = [
+                                'district' => $request->get("district"),
+                                'block' => $value["block"],
+                                'subcenter' => $value["phcsc"],
+                                'phc_name' =>strtolower($value["phc_name"]),
+                                'phc_hin' =>$value["phc_name_hindi"],
+                                'moic_name' =>$value["moic_name"],
+                                'moic_hin' =>$value["moic_name_hindi"],
+                                'moic_mobile_number' =>$value["moic_phone_number"],
+                                'anm_name' =>$value["anm_name"],
+                                'anm_hin' =>$value["anm_name_hindi"],
+                                'anm_mobile_number' =>$value["anm_phone_number"],
+                                'performer_category' =>$value["performer_category"],
+                                'scenerio' =>$value["scenario"],
+                                'created_at'=> $day_time,
+                                'uploaded_on'=>$day,
+                                'weblink'=>$web[$value["phc_name"]],
+                                'filename'=>$file_name,
+                                'og_filename'=>$og_file_name,
+                                /*'beneficiary_code'=> $beneficiary[$value["phc_name"]],
+                                'moic_code'=>$moic[$value["phc_name"]],*/
+                                'month' => $request->get('month'),
+                                'year' => $request->get('year'),
+                                'anm_custom_msg' => rtrim($msg, ','),
+                                'moic_custom_msg' => $value['moic_name_hindi'].' जानना चाहते हैं की '.$months[$request->get('month')].' '.$request->get('year').' में  '.$value['phc_name_hindi'].' पीएचसी के किस  एनम् ने सबसे अच्छा काम किया &#92;
+    जानने के लिए नीचे लिंक पर क्लिक करके देखिये &#037; ',
+                                'beneficiary_custom_msg' => 'जानना चाहते हैं की '.$months[$request->get('month')].' '.$request->get('year').' में  '.$value['phc_name_hindi'].' पीएचसी के किस  एनम् ने सबसे अच्छा काम किया &#92;
+    जानने के लिए नीचे लिंक पर क्लिक करके देखिये &#037; '
+                            ];
                         }
-                        $msg = '';
-                        $separated = explode(',', $value['anm_name']);
-                        foreach($separated as $single){
-                            $msg .= $single.' जानना चाहते हैं की '.$months[$request->get('month')].' '.$request->get('year').' में '.$value['phc_name'].' पी.एच.सी के किस  ए.न.म् ने सबसे अच्छा काम किया ?
-जानने के लिए नीचे लिंक पर क्लिक करके देखिये: ,';
-                        }
-                        $arr[] = [
-                            'district' => $request->get("district"),
-                            'block' => $request->get("block"),
-                            'phc_name' =>strtolower($value["phc_name"]),
-                            'moic_name' =>$value["moic_name"],
-                            'moic_mobile_number' =>$value["moic_phone_number"],
-                            'anm_name' =>$value["anm_name"],
-                            'anm_mobile_number' =>$value["anm_phone_number"],
-                            'performer_category' =>$value["performer_category"],
-                            'scenerio' =>$value["scenario"],
-                            'created_at'=> $day_time,
-                            'uploaded_on'=>$day,
-                            'weblink'=>$web[$value["phc_name"]],
-                            'filename'=>$file_name,
-                            'og_filename'=>$og_file_name,
-                            /*'beneficiary_code'=> $beneficiary[$value["phc_name"]],
-                            'moic_code'=>$moic[$value["phc_name"]],*/
-                            'month' => $request->get('month'),
-                            'year' => $request->get('year'),
-                            'anm_custom_msg' => rtrim($msg, ','),
-                            'moic_custom_msg' => $value['moic_name'].' जानना चाहते हैं की '.$months[$request->get('month')].' '.$request->get('year').' में  '.$value['phc_name'].' पी.एच.सी के किस  ए.न.म् ने सबसे अच्छा काम किया ?
-जानने के लिए नीचे लिंक पर क्लिक करके देखिये: ',
-                            'beneficiary_custom_msg' => 'जानना चाहते हैं की '.$months[$request->get('month')].' '.$request->get('year').' में  '.$value['phc_name'].' पी.एच.सी के किस  ए.न.म् ने सबसे अच्छा काम किया ?
-जानने के लिए नीचे लिंक पर क्लिक करके देखिये: '
-                        ];
 
+                        if (!empty($arr)) {
+                            $inserted = DB::table('anm_target_data')->insert($arr);
+                            if($inserted){
+                                Session::flash('success', 'File Uploaded successfully!');
+                                Storage::putFileAs('FileUpload',$request->file('sample_file'), $file_name);
+                            }
+                        }
+                    }else {
+                        Session::flash('error', 'Please select valid data file.');
+                        return back();
                     }
-
-                    if (!empty($arr)) {
-                        $inserted = DB::table('anm_target_data')->insert($arr);
-                        if($inserted){
-                            Session::flash('success', 'File Uploaded successfully!');
-                            Storage::putFileAs('FileUpload',$request->file('sample_file'), $file_name);
-                        }
-                    }
-                }else {
-                    Session::flash('error', 'Please select valid data file.');
+                } else {
+                    Session::flash('error', 'File is a ' . $extension . ' file.!! Please upload a valid xls/xlsx file..!!');
                     return back();
                 }
-            } else {
-                Session::flash('error', 'File is a ' . $extension . ' file.!! Please upload a valid xls/xlsx file..!!');
-                return back();
-            }
-        }  return back();
-    }
+            }  return back();
+        }
 
 /*    public function homePage()
     {

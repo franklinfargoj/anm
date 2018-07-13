@@ -59,7 +59,7 @@
                     { "data": "sr_no" },
                     { "data": "block" },
                     { "data": "phc_name" },
-                    { "data": ""  },
+                    { "data": "subcenter"  },
                     { "data": "weblink",
                         "render": function(data, type) {
                             if (type === 'display') {

@@ -30,11 +30,11 @@
 					</td>
 				</tr>
 
-				<tr>
+				<!-- <tr>
 					<td align="center" colspan="2" style="padding: 20px 0;">
                         <a style="font-size:16px; background-color: #ec1d25; color: #ffffff; text-decoration: none; outline: none; border:none; padding: 8px 15px;" target="_blank" href="{{ route('download-link') }}">Download</a>
                     </td>
-				</tr>
+				</tr> -->
 			</table>
 		</td>
 	</tr>

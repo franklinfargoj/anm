@@ -74,5 +74,7 @@ class MoicSmsDispatch extends Command
         }
 
         //Attempt to send failed sms again
+        $failed = DB::table('mois_anm_sms_logs')->where('is_sent', 0)->get();
+        print_r($failed);
     }
 }
