@@ -113,7 +113,7 @@ class MosController extends Controller
                         $value['dr_name_en'],
                         $value['mobile'],
                         $value['email'],
-                        $value['ranking_pdf'],
+                        url('/moic/rankings/'.$value['ranking_pdf']),
                         $value['sms']
                     );
                 }
