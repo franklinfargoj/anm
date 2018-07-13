@@ -11,6 +11,7 @@ use App\MoicRanking;
 use Excel;
 use Carbon\Carbon;
 use DataTables;
+use Illuminate\Support\Facades\Storage;
 
 class MosController extends Controller
 {
@@ -56,8 +57,10 @@ class MosController extends Controller
             	$dir = 'moic/imports'; $pdfdir = 'moic/rankings';
                 $inserted = MoicRanking::insert($arr);
                 if($inserted){
-                    $request->file('sample_file')->move($dir, $file_name);
-                    $request->file('rankings')->move($pdfdir, $pdfname);
+                    /*$request->file('sample_file')->move($dir, $file_name);
+                    $request->file('rankings')->move($pdfdir, $pdfname);*/
+                    Storage::putFileAs($dir, $request->file('sample_file'), $file_name);
+                    Storage::putFileAs($pdfdir, $request->file('rankings'), $pdfname);
                     return redirect('mos')->with(['success' => 'Files uploaded successfully']);
                 }
             }

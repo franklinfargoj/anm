@@ -99,8 +99,8 @@
                             <tr>
                                 <th>Sr. No.</th>
                                 <th>Block</th>
-                                <!-- <th>PHC Name</th> -->
-                                <th>Rankings</th>
+                                <th>PHC Name</th>
+                                <!-- <th>Rankings</th> -->
                                 <th>SMS</th>
                             </tr>
                             </thead>
