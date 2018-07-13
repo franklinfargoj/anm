@@ -34,7 +34,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h3>Upload Moic ranking & Phc scope-card File</h3>
+                    <h3>Moic ranking details</h3>
                 </div>
             </div>
         </div>
@@ -44,43 +44,9 @@
     <section>
         <div class="container">
             <div class="row">
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        <label>Month</label>
-                        <select class="form-control" name="month">
-                            @for($m=1; $m<=12; $m++)
-                                <option value="{{$m}}">{{date('F', mktime(0,0,0,$m, 1, date('Y')))}}</option>
-                            @endfor
-                        </select>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        <label>Year</label>
-                        <select class="form-control" name="year">
-                            @foreach (range(date('Y'), 2025) as $key => $value) {
-                            <option>{{$value}}</option>;
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-sm-3">
-                    <label>Select File to Import:</label>
-                    {!! Form::file('sample_file', ['class' => 'form-control']) !!}
-                </div>
-                <div class="col-sm-3">
-                    <label>Select Ranking to Import:</label>
-                    {!! Form::file('rankings', ['class' => 'form-control']) !!}
-                </div>
-                <div class="col-sm-3">
-                    <div class="form-group btn-area">
-                        <button type="submit" class="btn btn-primary">Upload File</button>
-                    </div>
-                </div>
 
                 <div class="row mb-1">
-                    <div class="col-md-12 text-left">
+                    <div class="col-md-12 text-right">
                         <a  class="btn btn-primary"  href="{{ route('export_mos') }} ">Export to excel</a>
                     </div>
                 </div>
@@ -120,7 +86,7 @@
                 "serverSide": true,
                 "ordering": false,
                 "info": true,
-                "ajax": "{{url('/ajax/moic')}}",
+                "ajax": "<?php echo url('/rank/'.$id);?>",
                 "columns": [
                     { "data": "id" },
                     { "data": "block" },

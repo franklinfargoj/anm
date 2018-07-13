@@ -34,7 +34,11 @@ class TargetdataController extends Controller
     public function index()
     {
         $district = District::pluck('district_name', 'id');
-        return view('import', compact('district'));
+        $first_district = $district->first();
+        $block = Block::whereHas('district', function($query) use($first_district){
+            $query->where('district_name', $first_district);
+        })->pluck('block_name', 'id');
+        return view('import', compact('district', 'block'));
     }
 
     public function fetchTargetData()
@@ -56,10 +60,14 @@ class TargetdataController extends Controller
 
     public function importFile(Request $request)
     {
+        $months = [];
+        for($m=1; $m<=12; $m++){
+            $months[$m] = date('F', mktime(0,0,0,$m, 1, date('Y')));
+        }
         $this->validate($request, array('sample_file' => 'required'));
         if ($request->hasFile('sample_file')) {
             $extension = File::extension($request->sample_file->getClientOriginalName(''));
-            $months = DB::table('master_months')->pluck('month_translated', 'id');
+
             if ($extension == "xlsx" || $extension == "xls") {
                 $path = $request->file('sample_file')->getRealPath();
                 $data = \Excel::selectSheets('target_data')->load($path)->get()->toArray();
@@ -74,6 +82,7 @@ class TargetdataController extends Controller
                 if (count($data)>0) {
 
                     foreach ($data as $key => $value) {
+
                         if(!in_array($value["phc_name"],$web)){
                             $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
                             $str = substr(str_shuffle($chars),0,10);
@@ -89,22 +98,18 @@ class TargetdataController extends Controller
                             $moic[$value["phc_name"]] = $str2;
                         }
                         $msg = '';
-                        $separated = explode(',', $value['anm_name_hindi']);
+                        $separated = explode(',', $value['anm_name']);
                         foreach($separated as $single){
-                            $msg .= $single.' जानना चाहते हैं की '.$months[$request->get('month')].' '.$request->get('year').' में '.$value['phc_name_hindi'].' पीएचसी के किस  एनम् ने सबसे अच्छा काम किया &#92;
-जानने के लिए नीचे लिंक पर क्लिक करके देखिये &#037; ,';
+                            $msg .= $single.' जानना चाहते हैं की '.$months[$request->get('month')].' '.$request->get('year').' में '.$value['phc_name'].' पी.एच.सी के किस  ए.न.म् ने सबसे अच्छा काम किया ?
+जानने के लिए नीचे लिंक पर क्लिक करके देखिये: ,';
                         }
                         $arr[] = [
                             'district' => $request->get("district"),
-                            'block' => $value["block"],
-                            'subcenter' => $value["phcsc"],
+                            'block' => $request->get("block"),
                             'phc_name' =>strtolower($value["phc_name"]),
-                            'phc_hin' =>$value["phc_name_hindi"],
                             'moic_name' =>$value["moic_name"],
-                            'moic_hin' =>$value["moic_name_hindi"],
                             'moic_mobile_number' =>$value["moic_phone_number"],
                             'anm_name' =>$value["anm_name"],
-                            'anm_hin' =>$value["anm_name_hindi"],
                             'anm_mobile_number' =>$value["anm_phone_number"],
                             'performer_category' =>$value["performer_category"],
                             'scenerio' =>$value["scenario"],
@@ -118,11 +123,12 @@ class TargetdataController extends Controller
                             'month' => $request->get('month'),
                             'year' => $request->get('year'),
                             'anm_custom_msg' => rtrim($msg, ','),
-                            'moic_custom_msg' => $value['moic_name_hindi'].' जानना चाहते हैं की '.$months[$request->get('month')].' '.$request->get('year').' में  '.$value['phc_name_hindi'].' पीएचसी के किस  एनम् ने सबसे अच्छा काम किया &#92;
-जानने के लिए नीचे लिंक पर क्लिक करके देखिये &#037; ',
-                            'beneficiary_custom_msg' => 'जानना चाहते हैं की '.$months[$request->get('month')].' '.$request->get('year').' में  '.$value['phc_name_hindi'].' पीएचसी के किस  एनम् ने सबसे अच्छा काम किया &#92;
-जानने के लिए नीचे लिंक पर क्लिक करके देखिये &#037; '
+                            'moic_custom_msg' => $value['moic_name'].' जानना चाहते हैं की '.$months[$request->get('month')].' '.$request->get('year').' में  '.$value['phc_name'].' पी.एच.सी के किस  ए.न.म् ने सबसे अच्छा काम किया ?
+जानने के लिए नीचे लिंक पर क्लिक करके देखिये: ',
+                            'beneficiary_custom_msg' => 'जानना चाहते हैं की '.$months[$request->get('month')].' '.$request->get('year').' में  '.$value['phc_name'].' पी.एच.सी के किस  ए.न.म् ने सबसे अच्छा काम किया ?
+जानने के लिए नीचे लिंक पर क्लिक करके देखिये: '
                         ];
+
                     }
 
                     if (!empty($arr)) {

@@ -29,28 +29,40 @@ class MosController extends Controller
             ->orderBy('created_at', 'DESC')
             ->get()
             ->toArray();
+
         $db = Datatables::of($moic);
-        $db->addColumn('sr_no', function ($target_data){ static $i = 0; $i++; return $i; }) ->rawColumns(['id']);
-        $db->addColumn('actions', function ($target_data) {
-            return '<a href="'.route('processedfile',$target_data['id']).'">View details</a>';
+        $db->addColumn('sr_no', function ($moic){ static $i = 0; $i++; return $i; }) ->rawColumns(['id']);
+        $db->addColumn('actions', function ($moic) {
+            return '<a href="'.route('rankingdetails',$moic['id']).'">View details</a>';
         })->rawColumns(['actions']);
 
         return $db->make(true);
     }
 
-    public function ajaxMoic()
+
+    public function ajaxMoic($id)
     {
-        $moic = MoicRanking::select('id', 'block', 'ranking_pdf', 'sms', 'phc_en')
-            ->orderBy('created_at', 'DESC')
-            ->get();
-        $db = Datatables::of($moic);
-        $db->addColumn('pdf_url', function($moic){
-            return '<a href="'.url('/moic/rankings/'.$moic->ranking_pdf).'" target="_blank">View</a>';
-        })->addColumn('sms_span', function($moic){
-            return '<span class="fontsforweb_fontid_8705">'.$moic->sms.'</span>';
-        })->rawColumns(['pdf_url', 'sms_span', 'block_span']);
-        return $db->make(true);
+       return view('moic_detail',compact('id'));
     }
+
+
+    public function rank_details($id)
+    {
+        $file = MoicRanking::select('uploaded_file')->where('id',$id)->get()->toArray();
+        $file_name = $file[0]['uploaded_file'];
+
+               $moic = MoicRanking::select('id', 'block', 'ranking_pdf', 'sms AS sms_span', 'phc_en')
+                                    ->orderBy('created_at', 'DESC')
+                                    ->where('uploaded_file',$file_name)
+                                    ->get()->toArray();
+
+               $db = Datatables::of($moic);
+
+               $db->addColumn('sr_no', function ($moic){ static $i = 0; $i++; return $i; }) ->rawColumns(['id']);
+               return $db->make(true);
+        //   dd($moic);
+    }
+
 
 
     public function importRankings(ImportMosRankingRequest $request)
@@ -89,7 +101,6 @@ class MosController extends Controller
                 ];
             }
 
-
             if (!empty($arr)) {
             	$dir = 'moic/imports'; $pdfdir = 'moic/rankings';
                 $inserted = MoicRanking::insert($arr);
@@ -104,9 +115,6 @@ class MosController extends Controller
             return back();
         }
     }
-
-
-
 
 
     public function export_mos(){
