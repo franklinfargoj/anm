@@ -18,9 +18,20 @@ Route::group(['middleware'=>'auth'], function (){
     Route::get('/fetch-process-data/{id}', 'ProcessedFileController@fetchProcessData');
     Route::get('processedfile/{id}','ProcessedFileController@index')->name('processedfile');
 
-    Route::get('mos', 'MosController@index');
-    Route::post('mos', 'MosController@importRankings');
-    Route::get('ajax/moic', 'MosController@ajaxMoic');
+
+
+
+    Route::get('get-mos', 'MosController@index');
+    Route::post('mos','MosController@importRankings')->name('mos');
+
+
+    Route::get('ajax-moic', 'MosController@fetchRankingData');
+  //  Route::get('ajax/moic', 'MosController@ajaxMoic');
+
+
+
+
+
 
     Route::get('excelimport/{id}', 'ProcessedFileController@export')->name('excel_import');
     Route::get('/ajax/{district}', 'TargetdataController@getBlocks');
