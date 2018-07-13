@@ -22,12 +22,45 @@ class MosController extends Controller
         return view('mois');
     }
 
+    public function fetchRankingData(){
+
+        $moic = MoicRanking::select('id','og_moic_filename AS filenames' ,'created_at as uploaded_on')
+            ->groupBy('uploaded_file')
+            ->orderBy('created_at', 'DESC')
+            ->get()
+            ->toArray();
+        $db = Datatables::of($moic);
+        $db->addColumn('sr_no', function ($target_data){ static $i = 0; $i++; return $i; }) ->rawColumns(['id']);
+        $db->addColumn('actions', function ($target_data) {
+            return '<a href="'.route('processedfile',$target_data['id']).'">View details</a>';
+        })->rawColumns(['actions']);
+
+        return $db->make(true);
+    }
+
+    public function ajaxMoic()
+    {
+        $moic = MoicRanking::select('id', 'block', 'ranking_pdf', 'sms', 'phc_en')
+            ->orderBy('created_at', 'DESC')
+            ->get();
+        $db = Datatables::of($moic);
+        $db->addColumn('pdf_url', function($moic){
+            return '<a href="'.url('/moic/rankings/'.$moic->ranking_pdf).'" target="_blank">View</a>';
+        })->addColumn('sms_span', function($moic){
+            return '<span class="fontsforweb_fontid_8705">'.$moic->sms.'</span>';
+        })->rawColumns(['pdf_url', 'sms_span', 'block_span']);
+        return $db->make(true);
+    }
+
+
     public function importRankings(ImportMosRankingRequest $request)
     {
     	$path = $request->file('sample_file')->getRealPath();
         $data = \Excel::selectSheets('MOIC_Ranking_SMS')->load($path)->get()->toArray();
         $file_name = time() .$request->sample_file->getClientOriginalName();
-        $og_file_name =$request->sample_file->getClientOriginalName();
+
+        $moic_filename = $request->sample_file->getClientOriginalName();
+
         $pdfname = time().$request->rankings->getClientOriginalName();
         $day_time = Carbon::now()->toDateTimeString('Y-m-d');
         $day = Carbon::now()->toDateString('Y-m-d');
@@ -46,6 +79,7 @@ class MosController extends Controller
                     'mobile' =>$value["mobile_no"],
                     'email' =>$value["email_id"],
                     'scenerio' =>$value["performance"],
+                    'og_moic_filename'=> $moic_filename,
                     'uploaded_file' => $file_name,
                     'ranking_pdf' => $pdfname,
                     'month' => $request->get('month'),
@@ -54,15 +88,15 @@ class MosController extends Controller
                     'updated_at'=> Carbon::now(),
                 ];
             }
+
+
             if (!empty($arr)) {
             	$dir = 'moic/imports'; $pdfdir = 'moic/rankings';
                 $inserted = MoicRanking::insert($arr);
                 if($inserted){
-                    /*$request->file('sample_file')->move($dir, $file_name);
-                    $request->file('rankings')->move($pdfdir, $pdfname);*/
                     Storage::putFileAs($dir, $request->file('sample_file'), $file_name);
                     Storage::putFileAs($pdfdir, $request->file('rankings'), $pdfname);
-                    return redirect('mos')->with(['success' => 'Files uploaded successfully']);
+                    return redirect('get-mos')->with(['success' => 'Files uploaded successfully']);
                 }
             }
         }else {
@@ -72,19 +106,7 @@ class MosController extends Controller
     }
 
 
-    public function ajaxMoic()
-    {
-    	$moic = MoicRanking::select('id', 'block', 'ranking_pdf', 'sms', 'phc_en')
-            ->orderBy('created_at', 'DESC')
-            ->get();
-        $db = Datatables::of($moic);
-        $db->addColumn('pdf_url', function($moic){
-        	return '<a href="'.url('/moic/rankings/'.$moic->ranking_pdf).'" target="_blank">View</a>';
-        })->addColumn('sms_span', function($moic){
-        	return '<span class="fontsforweb_fontid_8705">'.$moic->sms.'</span>';
-        })->rawColumns(['pdf_url', 'sms_span', 'block_span']);
-    	return $db->make(true);
-    }
+
 
 
     public function export_mos(){
