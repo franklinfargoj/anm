@@ -40,7 +40,8 @@
         </div>
     </section>
 
-    {!!  Form::open(array('method'=>'POST','files'=>'true','enctype'=>"multipart/form-data")) !!}
+    {!!  Form::open(array('route' => 'mos','method'=>'POST','files'=>'true','enctype'=>"multipart/form-data")) !!}
+
     <section>
         <div class="container">
             <div class="row">
@@ -59,7 +60,7 @@
                         <label>Year</label>
                         <select class="form-control" name="year">
                             @foreach (range(date('Y'), 2025) as $key => $value) {
-                                <option>{{$value}}</option>;
+                            <option>{{$value}}</option>;
                             @endforeach
                         </select>
                     </div>
@@ -79,55 +80,49 @@
                     </div>
                 </div>
 
-                <div class="row mb-1">
-                    <div class="col-md-12 text-left">
-                        <a  class="btn btn-primary"  href="{{ route('export_mos') }} ">Export to excel</a>
-                    </div>
-                </div>
-
             </div>
         </div>
     </section>
     {!! Form::close() !!}
+
     <section>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <h3>Uploaded Moic files</h3>
-                        <table id="moic_rankings" class="table table-bordered table-striped">
-                            <thead>
-                            <tr>
-                                <th>Sr. No.</th>
-                                <th>Block</th>
-                                <th>PHC Name</th>
-                                <th>SMS</th>
-                            </tr>
-                            </thead>
-                        </table>
+                    <table id="moic_ranking" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>Sr. No.</th>
+                            <th>File Name</th>
+                            <th>Uploaded On</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                    </table>
                 </div>
             </div>
         </div>
     </section>
-
 @endsection
 
 @section('js')
     <script>
         $(function () {
-            $('.alert').fadeOut(1500);
-            $('#moic_rankings').dataTable({
+            $('#moic_ranking').dataTable({
                 "processing": true,
                 "serverSide": true,
                 "ordering": false,
                 "info": true,
-                "ajax": "{{url('/ajax/moic')}}",
+                "ajax": "<?php echo url('ajax-moic');?>",
                 "columns": [
-                    { "data": "id" },
-                    { "data": "block" },
-                    { "data": "phc_en" },
-                    { "data": "sms_span" }
-                ]
+                    { "data": "sr_no" },
+                    { "data": "filenames" },
+                    { "data": "uploaded_on" },
+                    { "data": "actions" },
+                ],
             });
+
         });
     </script>
 @endsection
