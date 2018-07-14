@@ -64,7 +64,9 @@ class MosController extends Controller
             $modifyed = str_replace('(', '<span class="unicode">', $moic['sms']);
             $modifyed = str_replace(')', '</span>', $modifyed);
             return '<span class="fontsforweb_fontid_8705">'.$modifyed.'</span>';
-        })->rawColumns(['id', 'sms_span']);
+        })->addColumn('link', function($moic){
+            return '<a href="'.url('/').'/moic/rankings/'.$moic['ranking_pdf'].'" target="_blank">View</a>';
+        })->rawColumns(['id', 'sms_span', 'link']);
         return $db->make(true);
         //   dd($moic);
     }

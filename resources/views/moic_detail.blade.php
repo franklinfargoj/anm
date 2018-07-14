@@ -66,6 +66,7 @@
                             <th>Sr. No.</th>
                             <th>Block</th>
                             <th>PHC Name</th>
+                            <th>View</th>
                             <th>SMS</th>
                         </tr>
                         </thead>
@@ -91,6 +92,7 @@
                     { "data": "id" },
                     { "data": "block" },
                     { "data": "phc_en" },
+                    { "data": "link" },
                     { "data": "sms_span" }
                 ]
             });
