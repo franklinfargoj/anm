@@ -59,8 +59,8 @@ class MoicSmsDispatch extends Command
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()
                 ];
-                $sms = Helpers::sendSms($combined_sms, $sms->mobile);
-                if($sms['status']){
+                $status = Helpers::sendSms($combined_sms, $sms->mobile);
+                if($status['status']){
                     $temp['is_sent'] = 1;
                     $temp['sent_at'] = Carbon::now();
                 }
@@ -74,7 +74,23 @@ class MoicSmsDispatch extends Command
         }
 
         //Attempt to send failed sms again
-        $failed = DB::table('mois_anm_sms_logs')->where('is_sent', 0)->get();
-        print_r($failed);
+        $fails = DB::table('mois_anm_sms_logs')->where('is_sent', 0)->whereNUll('sent_at')->get();
+        $count = count($fails);
+        if($count > 0){
+            $ids = $fails->pluck('id');
+            $insert = [];
+            echo $count.' failed requests found'.PHP_EOL;
+            foreach($fails as $sms){
+                $status = Helpers::sendSms($sms->sms, $sms->mobile);
+                if($status['status']){
+                    $temp['is_sent'] = 1;
+                    $temp['sent_at'] = Carbon::now();
+                }
+                DB::table('mois_anm_sms_logs')->where('id', $sms->id)->update($temp);
+            }
+            echo "Done!!".PHP_EOL;
+        }else{
+            echo "All failed sms requests are done".PHP_EOL;
+        }
     }
 }
