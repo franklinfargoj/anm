@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use DataTables;
 use Illuminate\Support\Facades\Storage;
 use Faker\Provider\File;
+use App\Classes\ConvertToUnicode;
 
 class MosController extends Controller
 {
@@ -61,9 +62,9 @@ class MosController extends Controller
         $db->addColumn('sr_no', function ($moic){
             static $i = 0; $i++; return $i;
         })->addColumn('sms_span', function($moic){
-            $modifyed = str_replace('(', '<span class="unicode">', $moic['sms']);
+            $modifyed = str_replace('(', '<span class="">', $moic['sms']);
             $modifyed = str_replace(')', '</span>', $modifyed);
-            return '<span class="fontsforweb_fontid_8705">'.$modifyed.'</span>';
+            return '<span class="">'.$modifyed.'</span>';
         })->addColumn('link', function($moic){
             return '<a href="'.url('/').'/moic/rankings/'.$moic['ranking_pdf'].'" target="_blank">View</a>';
         })->rawColumns(['id', 'sms_span', 'link']);
@@ -75,6 +76,7 @@ class MosController extends Controller
 
     public function importRankings(ImportMosRankingRequest $request)
     {
+        $obj = new ConvertToUnicode();
     	$path = $request->file('sample_file')->getRealPath();
         $data = \Excel::selectSheets('MOIC_Ranking_SMS')->load($path)->get()->toArray();
         $file_name = time() .$request->sample_file->getClientOriginalName();
@@ -88,14 +90,23 @@ class MosController extends Controller
         $beneficiary = array();
         $moic = array();
         if (count($data)>0) {
+
+            $phcNameInHindi = "";
+            $doctorNameInHindi = "";
+            $blockNameInHindi = "";
             foreach ($data as $key => $value) {
+
+                $phcNameInHindi = $obj->convert_to_unicode2($value["phc_name_in_hindi"]);
+                $doctorNameInHindi = $obj->convert_to_unicode2($value["doctor_name_in_hindi"]);
+                $blockNameInHindi = $obj->convert_to_unicode2($value["block_name_in_hindi"]);
+
                 $arr[] = [
                     'block' => $value["block"],
-                    'block_hin' => $value["block_name_in_hindi"],
+                    'block_hin' => $blockNameInHindi,
                     'phc_en' =>$value["phc"],
-                    'phc_hin' =>$value["phc_name_in_hindi"],
+                    'phc_hin' => $phcNameInHindi,
                     'dr_name_en' =>$value["name_of_incharge"],
-                    'dr_name_hin' =>$value["doctor_name_in_hindi"],
+                    'dr_name_hin' =>$doctorNameInHindi,
                     'mobile' =>$value["mobile_no"],
                     'email' =>$value["email_id"],
                     'scenerio' =>$value["performance"],

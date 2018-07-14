@@ -39,11 +39,11 @@ class ProcessedFileController extends Controller
         $db->addColumn('weblink', function ($processData){
             return url('/weblink/'.$processData["weblink"]);
         })->addColumn('anm_sms_span', function ($processData){
-            return '<span class="fontsforweb_fontid_8705">'.$processData['anm_custom_msg'].'</span>';
+            return '<span class="">'.$processData['anm_custom_msg'].'</span>';
         })->addColumn('moic_sms_span', function ($processData){
-            return '<span class="fontsforweb_fontid_8705">'.$processData['moic_custom_msg'].'</span>';
+            return '<span class="">'.$processData['moic_custom_msg'].'</span>';
         })->addColumn('benef_sms_span', function ($processData){
-            return '<span class="fontsforweb_fontid_8705">'.$processData['beneficiary_custom_msg'].'</span>';
+            return '<span class="">'.$processData['beneficiary_custom_msg'].'</span>';
         })->rawColumns(['weblink', 'anm_sms_span', 'moic_sms_span', 'benef_sms_span']);
 
 

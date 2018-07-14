@@ -16,6 +16,7 @@ use Excel;
 use File;
 use DB;
 use DataTables;
+use App\Classes\ConvertToUnicode;
 
 use Illuminate\Support\Facades\Auth;
 use App\District;
@@ -60,6 +61,7 @@ class TargetdataController extends Controller
 
     public function importFile(Request $request)
         {
+            $obj = new ConvertToUnicode();
             $this->validate($request, array('sample_file' => 'required'));
             if ($request->hasFile('sample_file')) {
                 $extension = File::extension($request->sample_file->getClientOriginalName(''));
@@ -76,7 +78,9 @@ class TargetdataController extends Controller
                     $moic = array();
 
                     if (count($data)>0) {
-
+                        $phcNameInHindi = "";
+                        $moicNameInHindi = "";
+                        $anmNameInHindi = "";
                         foreach ($data as $key => $value) {
                             if(!in_array($value["phc_name"],$web)){
                                 $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -93,22 +97,30 @@ class TargetdataController extends Controller
                                 $moic[$value["phc_name"]] = $str2;
                             }
                             $msg = '';
-                            $separated = explode(',', $value['anm_name_hindi']);
+                            $separated = explode(',', $obj->convert_to_unicode2($value['anm_name_hindi']));
                             foreach($separated as $single){
-                                $msg .= $single.' जानना चाहते हैं की '.$months[$request->get('month')].' '.$request->get('year').' में '.$value['phc_name_hindi'].' पीएचसी के किस  एनम् ने सबसे अच्छा काम किया &#92;
-    जानने के लिए नीचे लिंक पर क्लिक करके देखिये &#037; ,';
+                                $msg .= $single.' जानना चाहते हैं की '.$months[$request->get('month')].' '.$request->get('year').' में '.$obj->convert_to_unicode2($value['phc_name_hindi']).' पीएचसी के किस  एनम् ने सबसे अच्छा काम किया?
+                                जानने के लिए नीचे लिंक पर क्लिक करके देखिये:,';
                             }
+
+//                            dd($value['phc_name_hindi']);
+                            $phcNameInHindi = $obj->convert_to_unicode2($value["phc_name_hindi"]);
+                            $moicNameInHindi = $obj->convert_to_unicode2($value["moic_name_hindi"]);
+                            $anmNameInHindi = $obj->convert_to_unicode2($value["anm_name_hindi"]);
+
+
+
                             $arr[] = [
                                 'district' => $request->get("district"),
                                 'block' => $value["block"],
                                 'subcenter' => $value["phcsc"],
                                 'phc_name' =>strtolower($value["phc_name"]),
-                                'phc_hin' =>$value["phc_name_hindi"],
+                                'phc_hin' =>$phcNameInHindi,
                                 'moic_name' =>$value["moic_name"],
-                                'moic_hin' =>$value["moic_name_hindi"],
+                                'moic_hin' =>$moicNameInHindi,
                                 'moic_mobile_number' =>$value["moic_phone_number"],
                                 'anm_name' =>$value["anm_name"],
-                                'anm_hin' =>$value["anm_name_hindi"],
+                                'anm_hin' =>$anmNameInHindi,
                                 'anm_mobile_number' =>$value["anm_phone_number"],
                                 'performer_category' =>$value["performer_category"],
                                 'scenerio' =>$value["scenario"],
@@ -122,10 +134,10 @@ class TargetdataController extends Controller
                                 'month' => $request->get('month'),
                                 'year' => $request->get('year'),
                                 'anm_custom_msg' => rtrim($msg, ','),
-                                'moic_custom_msg' => $value['moic_name_hindi'].' जानना चाहते हैं की '.$months[$request->get('month')].' '.$request->get('year').' में  '.$value['phc_name_hindi'].' पीएचसी के किस  एनम् ने सबसे अच्छा काम किया &#92;
-    जानने के लिए नीचे लिंक पर क्लिक करके देखिये &#037; ',
-                                'beneficiary_custom_msg' => 'जानना चाहते हैं की '.$months[$request->get('month')].' '.$request->get('year').' में  '.$value['phc_name_hindi'].' पीएचसी के किस  एनम् ने सबसे अच्छा काम किया &#92;
-    जानने के लिए नीचे लिंक पर क्लिक करके देखिये &#037; '
+                                'moic_custom_msg' => $obj->convert_to_unicode2($value['moic_name_hindi']).' जानना चाहते हैं की '.$months[$request->get('month')].' '.$request->get('year').' में  '.$obj->convert_to_unicode2($value['phc_name_hindi']).' पीएचसी के किस  एनम् ने सबसे अच्छा काम किया?
+    जानने के लिए नीचे लिंक पर क्लिक करके देखिये:',
+                                'beneficiary_custom_msg' => 'जानना चाहते हैं की '.$months[$request->get('month')].' '.$request->get('year').' में  '.$obj->convert_to_unicode2($value['phc_name_hindi']).' पीएचसी के किस  एनम् ने सबसे अच्छा काम किया?
+    जानने के लिए नीचे लिंक पर क्लिक करके देखिये:'
                             ];
                         }
 

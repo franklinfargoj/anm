@@ -61,10 +61,10 @@ class MoicSMSGeneration extends Command
                 $bottomphc = Helpers::renderHindi(array_column($bottom, 'phc_hin'), 'पीएचसी');
 
                 foreach($moics as $single){
-                    $sms = '('.$single['dr_name_hin'].') &#93; क्या आप जानना चाहते हैं की  ('.$single['block_hin'].') ब्लॉक की किस पीएचसी ने किया '.$months[$single['month']].' ('.$single['year']. ') के महीने में बेहतरीन प्रदर्शन &#92; <br>';
+                    $sms = '('.$single['dr_name_hin'].'), क्या आप जानना चाहते हैं की  ('.$single['block_hin'].') ब्लॉक की किस पीएचसी ने किया '.$months[$single['month']].' ('.$single['year']. ') के महीने में बेहतरीन प्रदर्शन? <br>';
                     $sms .= '('.$single['block_hin'].') ब्लॉक में '.rtrim($topphctext, ', ').' अव्वल रहीं और इन् पीएचसीस के डॉक्टर - '.rtrim($topdoctext, ', ').'  ने सराहनीये कार्य किया। ';
                     $sms .= $middlephc.'  के भी डॉक्टरों ने भी अच्छा कार्य किया। '.$bottomphc.'  में बेहतर परिणामों के लिए सुद्धारण की आवश्यकता है। ';
-                    $sms .= ' रॅंक को कैसे सुद्धारा जाये - जानने के लिए पीएचसी स्कोरकार्ड का प्रयोग करें। पीएचसी स्कोरकार्ड देखने के लिए यहाँ क्लिक करें &#037; ';
+                    $sms .= ' रॅंक को कैसे सुद्धारा जाये - जानने के लिए पीएचसी स्कोरकार्ड का प्रयोग करें। पीएचसी स्कोरकार्ड देखने के लिए यहाँ क्लिक करें:';
 
                     $indiv_moic = MoicRanking::find($single['id']);
                     $indiv_moic->sms = $sms;

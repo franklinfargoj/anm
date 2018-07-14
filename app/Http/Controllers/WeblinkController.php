@@ -17,7 +17,7 @@ class WeblinkController extends Controller
 
     public function index($id)
     {
-        $anm_target_data = AnmTargetDataModel::select('district','phc_name','moic_name','moic_mobile_number','anm_name',
+        $anm_target_data = AnmTargetDataModel::select('district','phc_name','phc_hin','moic_name','moic_hin','moic_mobile_number','anm_name','anm_hin',
                                                 'anm_mobile_number','performer_category','scenerio')
                                                 ->where('weblink',$id)
                                                 ->get()
@@ -48,72 +48,31 @@ class WeblinkController extends Controller
         $targetDataVariable = $anm_target_data;
         $type = 'anm';
 
-        if(empty($anm_target_data) && empty($targetDataVariable))
-        {
-            $anm_moic_code = AnmTargetDataModel::select('district','phc_name','moic_name','moic_mobile_number','anm_name',
-                'anm_mobile_number','performer_category','scenerio')
-                ->where('moic_code',$id)
-                ->get()
-                ->toArray();
-
-            $type = 'moic';
-            $targetDataVariable = $anm_moic_code;
-        }
-        if(empty($anm_moic_code) && empty($targetDataVariable)){
-
-            $anm_beneficiary_code = AnmTargetDataModel::select('district','phc_name','moic_name','moic_mobile_number','anm_name',
-                'anm_mobile_number','performer_category','scenerio')
-                ->where('beneficiary_code',$id)
-                ->get()
-                ->toArray();
-            $type = 'beneficiary';
-            $targetDataVariable =  $anm_beneficiary_code;
-        }
-        if(empty($anm_beneficiary_code) && empty($targetDataVariable))
-        {
-            dd('No relevant data exists');
-        }
-
-        $phc_hindi = PhcTranslationModel::where('phc_name',$targetDataVariable[0]['phc_name'])
-                                ->pluck('phc_translation','phc_name')->toArray();
-
-
-        /*$district_id = DistrictModel::select('id')
-                            ->where('district_name',$targetDataVariable[0]['district'])
-                            ->get()
-                            ->toArray();*/
-
-        $anm_detail =  AnmDetailsModel::where('district_id',$targetDataVariable[0]['district'])
-                            ->pluck('anm_translation','anm_name')->toArray();
 
         $lstAnmCategory = array();
-
+//        dd($targetDataVariable);
         foreach ($targetDataVariable as $value){
-            if(array_key_exists($value['phc_name'],$phc_hindi)){
-                $value['phc_name'] = $phc_hindi[$value['phc_name']];
-            }else{
-                $value['phc_name'] = 'test';
-            }
 
-            if( strpos($value['anm_name'], ',') !== false ) {
-                $multipleAnms = explode(',',$value['anm_name']);
-                $anmArray = array();
-                foreach($multipleAnms as $anm){
-                    if(array_key_exists($anm,$anm_detail)){
-                        $anmName = $anm_detail[$anm];
-                    }else{
-                        $anmName = $anm;
-                    }
-                    $anmArray[] = $anmName;
-                }
-                $value['anm_name'] = implode('&#93;',$anmArray);
-            }else{
-                if(array_key_exists($value['anm_name'],$anm_detail)){
-                    $value['anm_name'] = $anm_detail[$value['anm_name']];
-                }else{
-                    $value['anm_name'] = 'test1';
-                }
-            }
+//            if( strpos($value['anm_hin'], ',') !== false ) {
+//                $multipleAnms = explode(',',$value['anm_hin']);
+//                $anmArray = array();
+//                foreach($multipleAnms as $anm){
+//                    if(array_key_exists($anm,$anm_detail)){
+//                        $anmName = $anm_detail[$anm];
+//                    }else{
+//                        $anmName = $anm;
+//                    }
+//                    $anmArray[] = $anmName;
+//                }
+//                $value['anm_name'] = implode('&#93;',$anmArray);
+//            }else{
+//                if(array_key_exists($value['anm_name'],$anm_detail)){
+//                    $value['anm_name'] = $anm_detail[$value['anm_name']];
+//                }else{
+//                    $value['anm_name'] = 'test1';
+//                }
+//            }
+
             $lstAnmCategory[$value['performer_category']][] = $value;
         }
 
@@ -122,13 +81,13 @@ class WeblinkController extends Controller
         $lstData = array();
 
         if(!empty($lstAnmCategory['TOP'])){
-            $lstData['phc_name'] = $lstAnmCategory['TOP'][0]['phc_name'];
+            $lstData['phc_name'] = $lstAnmCategory['TOP'][0]['phc_hin'];
         }
         if(!empty($lstAnmCategory['MIDDLE'])){
-            $lstData['phc_name'] = $lstAnmCategory['MIDDLE'][0]['phc_name'];
+            $lstData['phc_name'] = $lstAnmCategory['MIDDLE'][0]['phc_hin'];
         }
         if(!empty($lstAnmCategory['BOTTOM'])){
-            $lstData['phc_name'] = $lstAnmCategory['BOTTOM'][0]['phc_name'];
+            $lstData['phc_name'] = $lstAnmCategory['BOTTOM'][0]['phc_hin'];
         }
 
         if($type == 'anm')
@@ -139,41 +98,17 @@ class WeblinkController extends Controller
                 {
                     if(! next($value))
                     {
-                        $lstData[$key]['end'] = $details['anm_name'];
+                        $lstData[$key]['end'] = $details['anm_hin'];
                     }
                     else
                     {
-                        $lstData[$key]['anm_name'][] = $details['anm_name'];
+                        $lstData[$key]['anm_name'][] = $details['anm_hin'];
                     }
                 }
             }
         }
 
-        if($type == 'moic')
-        {
-            foreach($lstAnmCategory as $key => $value)
-            {
-                foreach ($value as $anm => $details)
-                {
-                    if(! next($value))
-                    {
-                        $lstData[$key]['end'] = $details['moic_name'];
-                    }
-                    else
-                    {
-                        $lstData[$key]['anm_name'][] = $details['moic_name'];
-                    }
-                }
-            }
-        }
 
-        if($type == 'beneficiary')
-        {
-            $lstData['end'] = null;
-
-            $lstData['anm_name'][] = null;
-
-        }
         $scenario = $targetDataVariable[0]['scenerio'];
         if($scenario == 1){
             return view('scenerio/scenerio_1', compact('lstData', 'type', 'current_month', 'next_month'));

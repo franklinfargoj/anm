@@ -25,11 +25,11 @@
 			<td align="center" style="font-weight: bold;">
 				<span style="color: #ec1d25; font-size: 30px;">
 					@if(isset($lstData['TOP']['anm_name']) && count($lstData['TOP']['anm_name']) > 0)
-                        <span class="fontsforweb_fontid_8705"> {{ implode('&#93;', $lstData['TOP']['anm_name']) }}</span>
+                        <span class=""> {{ implode(',', $lstData['TOP']['anm_name']) }}</span>
                                 और
-                        <span class="fontsforweb_fontid_8705"> {{ $lstData['TOP']['end'] }}</span>
+                        <span class=""> {{ $lstData['TOP']['end'] }}</span>
                     @else
-                        <span class="fontsforweb_fontid_8705"> {{ $lstData['TOP']['end'] }}</span>
+                        <span class=""> {{ $lstData['TOP']['end'] }}</span>
                     @endif
 				<span>
 				<p style="color: #000; font-size: 18px; line-height: 30px; margin:0;">आपने {{$current_month}} में अव्वल दर्जे का काम कर दिखाया! आप में से कुछ <span style="color: #ec1d25; font-size: 24px;">{{ strtoupper($type) }}s</span> ने 80% बच्चो का टीकाकरण पूरा कर दिखाया तथा कुछ ने 30% गर्भवती महिलाओ का चौथा ANC चैकप भी पूरा किया!</p>
@@ -42,11 +42,11 @@
 			<td align="center" style="font-weight: bold;">
 				<span style="color: #ec1d25; font-size: 30px;"><span style="font-size:20px; color: #000; display: block;">हमारी</span>
 					@if(isset($lstData['MIDDLE']['anm_name']) && count($lstData['MIDDLE']['anm_name']) > 0)
-                        <span style="color: #ec1d25; font-size: 30px;" class="fontsforweb_fontid_8705"> {{ implode('&#93;', $lstData['MIDDLE']['anm_name']) }}</span>
+                        <span style="color: #ec1d25; font-size: 30px;" class=""> {{ implode(',', $lstData['MIDDLE']['anm_name']) }}</span>
                                 और
-                        <span style="color: #ec1d25; font-size: 30px;" class="fontsforweb_fontid_8705"> {{ $lstData['MIDDLE']['end'] }}</span>
+                        <span style="color: #ec1d25; font-size: 30px;" class=""> {{ $lstData['MIDDLE']['end'] }}</span>
                     @else
-                        <span style="color: #ec1d25; font-size: 30px;" class="fontsforweb_fontid_8705"> {{ $lstData['MIDDLE']['end'] }}</span>
+                        <span style="color: #ec1d25; font-size: 30px;" class=""> {{ $lstData['MIDDLE']['end'] }}</span>
                     @endif
 				<span>
 				<p style="color: #000; font-size: 18px; line-height: 30px; margin:0;">दीदी ने भी अच्छा करने प्रयास किया 30% - 80% बच्चो का टीकाकरण कर दिखाया साथ ही साथ 10% - 30% गर्भवती महिलाओ का चौथा ANC चैकप भी पूरा किया!</p>
