@@ -175,26 +175,27 @@ class WeblinkController extends Controller
 
         }
         $scenario = $targetDataVariable[0]['scenerio'];
+        $scenes = 'scenario_'.$scenario;
         if($scenario == 1){
-            return view('scenerio/scenerio_1', compact('lstData', 'type', 'current_month', 'next_month'));
+            return view('scenerio/scenerio_1', compact('lstData', 'type', 'current_month', 'next_month', 'scenes'));
         }
         if($scenario == 2){
-            return view('scenerio/scenerio_2',compact('lstData', 'current_month', 'type', 'next_month'));
+            return view('scenerio/scenerio_2',compact('lstData', 'current_month', 'type', 'next_month', 'scenes'));
         }
         if($scenario == 3){
-            return view('scenerio/scenerio_3',compact('current_month', 'lstData', 'type', 'next_month'));
+            return view('scenerio/scenerio_3',compact('current_month', 'lstData', 'type', 'next_month', 'scenes'));
         }
         if($scenario == 4){
-            return view('scenerio/scenerio_4',compact('current_month', 'lstData', 'type', 'next_month'));
+            return view('scenerio/scenerio_4',compact('current_month', 'lstData', 'type', 'next_month', 'scenes'));
         }
         if($scenario == 5){
-            return view('scenerio/scenerio_5',compact('current_month', 'lstData', 'type', 'next_month'));
+            return view('scenerio/scenerio_5',compact('current_month', 'lstData', 'type', 'next_month', 'scenes'));
         }
         if($scenario == 6){
-            return view('scenerio/scenerio_6',compact('current_month', 'lstData', 'type', 'next_month'));
+            return view('scenerio/scenerio_6',compact('current_month', 'lstData', 'type', 'next_month', 'scenes'));
         }
         if($scenario == 7){
-            return view('scenerio/scenerio_7',compact('current_month', 'lstData', 'type', 'next_month'));
+            return view('scenerio/scenerio_7',compact('current_month', 'lstData', 'type', 'next_month', 'scenes'));
         }
         if($scenario == 8){
             return view('scenerio/scenerio_8',compact('current_month', 'lstData', 'type', 'next_month'));
