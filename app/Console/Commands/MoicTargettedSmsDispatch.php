@@ -3,27 +3,27 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\MoicRanking;
+use App\AnmTargetDataModel;
 use DB;
 use App\Classes\Helpers;
 use Carbon\Carbon;
 
 
-class MoicSmsDispatch extends Command
+class MoicTargettedSmsDispatch extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'moic:sms_dispatch';
+    protected $signature = 'moic:targetted_sms';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command to send sms to respected moic rankings\'s ';
+    protected $description = 'Send sms to moic from targetted data';
 
     /**
      * Create a new command instance.
@@ -42,39 +42,39 @@ class MoicSmsDispatch extends Command
      */
     public function handle()
     {
-        //To check any new sms request
-        $new_sms = MoicRanking::where('sms_sent_initiated', 0)->get();
-        $count = count($new_sms);
-        if($count > 0){
-            $ids = $new_sms->pluck('id');
+        $newsms = AnmTargetDataModel::where('moic_sms_initiated', 0)->get();
+        $cnt = count($newsms);
+        if($cnt > 0){
+            echo $cnt." new moic sms requests found".PHP_EOL;
+            $ids = $newsms->pluck('id');
             $insert = [];
-            echo $count.' new requests found'.PHP_EOL;
-            foreach($new_sms as $sms){
-                $combined_sms = $sms->sms.' '.url('/').'/moic/rankings/'.$sms->ranking_pdf;
+            foreach ($newsms as $sms){
+                $combined_sms = $sms->moic_custom_msg.' '.url('weblink/'.$sms->weblink);
                 $temp = [
-                    'filename' => $sms->uploaded_file,
-                    'dr_name' => $sms->dr_name_en,
-                    'mobile' => $sms->mobile,
+                    'filename' => $sms->filename,
+                    'name' => $sms->moic_name,
+                    'mobile' => $sms->moic_mobile_number,
+                    'type' => 'moic',
                     'sms' => $combined_sms,
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()
                 ];
-                $status = Helpers::sendSms($combined_sms, $sms->mobile);
+                $status = Helpers::sendSms($combined_sms, $sms->moic_mobile_number);
                 if($status['status']){
                     $temp['is_sent'] = 1;
                     $temp['sent_at'] = Carbon::now();
                 }
                 $insert[] = $temp;
             }
-            MoicRanking::whereIn('id',$ids)->update(['sms_sent_initiated' => 1]);
-            DB::table('mois_anm_sms_logs')->insert($insert);
-            echo "Done!!".PHP_EOL;
+            AnmTargetDataModel::whereIn('id', $ids)->update(['moic_sms_initiated' => 1]);
+            DB::table('anm_mos_smslogs')->insert($insert);
+            echo "Dispatched!!".PHP_EOL;
         }else{
-            echo "All sms requests are done".PHP_EOL;
+            echo "All new moic sms requests are dispatched".PHP_EOL;
         }
 
         //Attempt to send failed sms again
-        $fails = DB::table('mois_anm_sms_logs')->where('is_sent', 0)->whereNUll('sent_at')->get();
+        $fails = DB::table('anm_mos_smslogs')->where('is_sent', 0)->whereNUll('sent_at')->get();
         $count = count($fails);
         if($count > 0){
             $ids = $fails->pluck('id');
@@ -86,9 +86,9 @@ class MoicSmsDispatch extends Command
                     $temp['is_sent'] = 1;
                     $temp['sent_at'] = Carbon::now();
                 }
-                DB::table('mois_anm_sms_logs')->where('id', $sms->id)->update($temp);
+                DB::table('anm_mos_smslogs')->where('id', $sms->id)->update($temp);
             }
-            echo "Done!!".PHP_EOL;
+            echo "Dispatched!!".PHP_EOL;
         }else{
             echo "All failed sms requests are done".PHP_EOL;
         }

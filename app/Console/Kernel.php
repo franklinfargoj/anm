@@ -16,6 +16,8 @@ class Kernel extends ConsoleKernel
         Commands\ReadExcelCommand::class,
         Commands\MoicSMSGeneration::class,
         Commands\MoicSmsDispatch::class,
+        Commands\MoicTargettedSmsDispatch::class,
+        Commands\BeneficiarySmsDispatch::class,
     ];
 
     /**
@@ -29,6 +31,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('custom:command')->everyFiveMinutes();
         $schedule->command('moic:sms_create')->everyFiveMinutes();
         //$schedule->command('moic:sms_dispatch')->hourly();
+        //$schedule->command('moic:targetted_sms')->hourly();
+        //$schedule->command('beneficiary:sms_dispatch')->hourly();
     }
 
     /**
