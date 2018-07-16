@@ -178,7 +178,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        'Anam\PhantomMagick\ConverterServiceProvider'
+        'Anam\PhantomMagick\ConverterServiceProvider',
+        Chumper\Zipper\ZipperServiceProvider::class
 
     ],
 
@@ -234,7 +235,7 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'Converter' => 'Anam\PhantomMagick\Facades\Converter',
-
+        'Zipper' => Chumper\Zipper\Zipper::class,
 
     ],
 

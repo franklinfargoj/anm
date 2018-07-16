@@ -66,6 +66,7 @@
                             <th>Sr. No.</th>
                             <th>Block</th>
                             <th>PHC Name</th>
+                            <th>Dr. Name</th>
                             <th>View</th>
                             <th>SMS</th>
                         </tr>
@@ -92,6 +93,7 @@
                     { "data": "sr_no" },
                     { "data": "block" },
                     { "data": "phc_en" },
+                    { "data": "dr_name_en" },
                     { "data": "link" },
                     { "data": "sms_span" }
                 ]

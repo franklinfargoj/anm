@@ -27,7 +27,7 @@ class ImportMosRankingRequest extends FormRequest
             'month' => 'required',
             'year' => 'required',
             'sample_file' => 'required',
-            'rankings' => 'required|mimes:pdf'
+            'rankings' => 'required|mimes:zip'
         ];
     }
 
@@ -39,7 +39,7 @@ class ImportMosRankingRequest extends FormRequest
             'sample_file.required' => 'Please upload excel',
             'sample_file.mimes' => 'Please upload valid excel',
             'rankings.required' => 'Please upload ranking pdf',
-            'rankings.mimes' => 'Please upload valid pdf'
+            'rankings.mimes' => 'Please upload valid zip'
         ];
     }
 }

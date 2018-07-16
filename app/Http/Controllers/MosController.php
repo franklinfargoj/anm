@@ -14,6 +14,8 @@ use DataTables;
 use Illuminate\Support\Facades\Storage;
 use Faker\Provider\File;
 use App\Classes\ConvertToUnicode;
+use Chumper\Zipper\Zipper;
+use App\RankingZip;
 
 class MosController extends Controller
 {
@@ -53,23 +55,26 @@ class MosController extends Controller
         $file = MoicRanking::select('uploaded_file')->where('id',$id)->get()->toArray();
         $file_name = $file[0]['uploaded_file'];
 
-        $moic = MoicRanking::select('id', 'block', 'ranking_pdf', 'sms', 'phc_en')
+        $moic = MoicRanking::select('id', 'block', 'ranking_pdf', 'sms', 'phc_en', 'dr_name_en', 'pdf_path')
                             ->orderBy('created_at', 'DESC')
                             ->where('uploaded_file',$file_name)
                             ->get()->toArray();
 
         $db = Datatables::of($moic);
 
-        $db->addColumn('sr_no', function ($moic){ static $i = 0; $i++; return $i;})
-            ->addColumn('sms_span', function($moic){
+        $db->addColumn('sr_no', function ($moic){
+            static $i = 0; $i++; return $i;
+        })->addColumn('sms_span', function($moic){
             $modifyed = str_replace('(', '<span class="">', $moic['sms']);
             $modifyed = str_replace(')', '</span>', $modifyed);
-            return '<span class="">'.$modifyed.'</span>';})
-            ->addColumn('link', function($moic){
-            return '<a href="'.url('/').'/moic/rankings/'.$moic['ranking_pdf'].'" target="_blank">View</a>';
+            return '<span class="">'.$modifyed.'</span>';
+        })->addColumn('link', function($moic){
+            if($moic['pdf_path'] != ''){
+                return '<a href="'.url('/').$moic['pdf_path'].$moic['ranking_pdf'].'" target="_blank">View</a>';
+            }
+            return "Processing";
         })->rawColumns(['id', 'sms_span', 'link']);
         return $db->make(true);
-        //   dd($moic);
     }
 
 
@@ -90,16 +95,24 @@ class MosController extends Controller
         $beneficiary = array();
         $moic = array();
         if (count($data)>0) {
-
+            $path = 'moic/rankings/zips';
+            if(!is_dir($path)){
+                mkdir($path, 0777, true);
+            }
+            Storage::putFileAs($path, $request->file('rankings'), $request->file('rankings')->getClientOriginalName());
             $phcNameInHindi = "";
             $doctorNameInHindi = "";
             $blockNameInHindi = "";
-            foreach ($data as $key => $value) {
 
+            $zip_id = new RankingZip;
+            $zip_id->month = $request->get('month');
+            $zip_id->year = $request->get('year');
+            $zip_id->zip_file = $path.'/'.$request->file('rankings')->getClientOriginalName();
+            $zip_id->save();
+            foreach ($data as $key => $value) {
                 $phcNameInHindi = $obj->convert_to_unicode2($value["phc_name_in_hindi"]);
                 $doctorNameInHindi = $obj->convert_to_unicode2($value["doctor_name_in_hindi"]);
                 $blockNameInHindi = $obj->convert_to_unicode2($value["block_name_in_hindi"]);
-
                 $arr[] = [
                     'block' => $value["block"],
                     'block_hin' => $blockNameInHindi,
@@ -112,20 +125,20 @@ class MosController extends Controller
                     'scenerio' =>$value["performance"],
                     'og_moic_filename'=> $moic_filename,
                     'uploaded_file' => $file_name,
-                    'ranking_pdf' => $pdfname,
+                    'ranking_pdf' => $value['ranking_pdf'],
+                    'pdf_path' => '',
                     'month' => $request->get('month'),
                     'year' => $request->get('year'),
                     'created_at'=> Carbon::now(),
                     'updated_at'=> Carbon::now(),
+                    'zip_id'=> $zip_id->id,
                 ];
             }
-
             if (!empty($arr)) {
             	$dir = 'moic/imports'; $pdfdir = 'moic/rankings';
                 $inserted = MoicRanking::insert($arr);
                 if($inserted){
                     Storage::putFileAs($dir, $request->file('sample_file'), $file_name);
-                    Storage::putFileAs($pdfdir, $request->file('rankings'), $pdfname);
                     return redirect('get-mos')->with(['success' => 'Files uploaded successfully']);
                 }
             }
@@ -171,6 +184,27 @@ class MosController extends Controller
 
         })->download('xlsx');
 
+    }
+
+
+    public function testZip($value='')
+    {
+        $zipper = new Zipper;
+        $file = public_path().'/moic/rankings/ranking_pdf.zip';
+        $zipper->make($file)->folder('rankings')->add(public_path().'/moic/rankings/1531460592PHC_Scorecard.pdf');
+        $zipper->zip($file)->folder('rankings')->add(public_path().'/moic/rankings/1531495739PHC_Scorecard.pdf');
+        $zipper->zip($file)->folder('rankings')->add(public_path().'/moic/rankings/1531719521PHC_Scorecard.pdf');
+        $zipper->close();
+        return ['status' => 'Done'];
+    }
+
+
+    public function unzip()
+    {
+        $zipper = new Zipper;
+        $path = public_path().'/moic/rankings/ranking_pdf.zip';
+        $zipper->make($path)->folder('rankings')->extractTo(public_path().'/moic/zip');
+        return ['status' => 'Done'];
     }
 
 
