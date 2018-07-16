@@ -14,9 +14,9 @@ class Helpers{
 	    else{
 		    for($i = 0; $i < $cnt; $i++){
 		        if($last == $phc[$i]){
-		            $topphctext .= rtrim($topphctext, ',').' तथा  '.$type.'  ('.$phc[$i].')';
+		            $topphctext .= rtrim($topphctext, ',').' तथा  '.$type.'  '.$phc[$i].'';
 		        }else{
-		            $topphctext .= $type.'  ('.$phc[$i].'), ';
+		            $topphctext .= $type.'  '.$phc[$i].', ';
 		        }
 		    }
 	    }
