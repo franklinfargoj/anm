@@ -89,7 +89,7 @@
                 "info": true,
                 "ajax": "<?php echo url('/rank/'.$id);?>",
                 "columns": [
-                    { "data": "id" },
+                    { "data": "sr_no" },
                     { "data": "block" },
                     { "data": "phc_en" },
                     { "data": "link" },
