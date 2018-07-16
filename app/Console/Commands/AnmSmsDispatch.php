@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\BeneficiaryModel;
 use App\AnmTargetDataModel;
 use DB;
 use App\Classes\Helpers;
@@ -11,14 +10,14 @@ use Carbon\Carbon;
 
 
 
-class BeneficiarySmsDispatch extends Command
+class AnmSmsDispatch extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'beneficiary:sms_dispatch';
+    protected $signature = 'anm:sms_dispatch';
 
     /**
      * The console command description.
@@ -44,30 +43,29 @@ class BeneficiarySmsDispatch extends Command
      */
     public function handle()
     {
-        $newsms = BeneficiaryModel::where('benef_sms_initiated', 0)->get();
+        $newsms = AnmTargetDataModel::where('anm_sms_initiated', 0)->get();
         $cnt = count($newsms);
         if($cnt > 0){
-            $benef_sms = AnmTargetDataModel::select('beneficiary_custom_msg', 'phc_name', 'weblink')->groupBy('phc_name')->get()->toArray();
-            echo $cnt." new beneficiary sms requests found".PHP_EOL;
+            echo $cnt." new anm sms requests found".PHP_EOL;
+            $ids = $newsms->pluck('id');
             $insert = [];
             foreach ($newsms as $sms){
-                $found = array_filter($benef_sms, function($index) use($sms){
-                    return $sms->phc_name == $index['phc_name'];
-                });
-                if(!empty($found)){
-                    $ids[] = $sms->id;
-                    $array = reset($found);
-                    $combined_sms = $array['beneficiary_custom_msg'].' '.url('weblink/'.$array['weblink']);
+                $separated_msg = explode(',', $sms->anm_custom_msg);
+                $separated_num = explode(',', $sms->anm_mobile_number);
+                $separated_anm = explode(',', $sms->anm_name);
+                $cnt = count($separated_num);
+                for($i=0; $i<$cnt; $i++){
+                    $combined_sms = $separated_msg[$i].' '.url('weblink/'.$sms->weblink);
                     $temp = [
                         'filename' => $sms->filename,
-                        'name' => $sms->phc_name,
-                        'mobile' => $sms->beneficary_mobile_number,
-                        'type' => 'beneficiary',
+                        'name' => $separated_anm[$i],
+                        'mobile' => $separated_num[$i],
+                        'type' => 'anm',
                         'sms' => $combined_sms,
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now()
                     ];
-                    $status = Helpers::sendSms($combined_sms, $sms->beneficary_mobile_number);
+                    $status = Helpers::sendSms($combined_sms, $sms->moic_mobile_number);
                     if($status['status']){
                         $temp['is_sent'] = 1;
                         $temp['sent_at'] = Carbon::now();
@@ -77,17 +75,18 @@ class BeneficiarySmsDispatch extends Command
             }
             if(!empty($insert)){
                 DB::table('anm_mos_smslogs')->insert($insert);
-                BeneficiaryModel::whereIn('id', $ids)->update(['benef_sms_initiated' => 1]);
+                AnmTargetDataModel::whereIn('id', $ids)->update(['anm_sms_initiated' => 1]);
             }
             echo "Dispatched!!".PHP_EOL;
         }else{
-            echo "All new beneficiary sms requests are dispatched".PHP_EOL;
+            echo "All new anm sms requests are dispatched".PHP_EOL;
         }
 
         //Attempt to send failed sms again
         $fails = DB::table('anm_mos_smslogs')->where('is_sent', 0)->whereNUll('sent_at')->get();
         $count = count($fails);
         if($count > 0){
+            $ids = $fails->pluck('id');
             $insert = [];
             echo $count.' failed requests found'.PHP_EOL;
             foreach($fails as $sms){

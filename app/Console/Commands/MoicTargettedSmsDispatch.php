@@ -66,8 +66,10 @@ class MoicTargettedSmsDispatch extends Command
                 }
                 $insert[] = $temp;
             }
-            AnmTargetDataModel::whereIn('id', $ids)->update(['moic_sms_initiated' => 1]);
-            DB::table('anm_mos_smslogs')->insert($insert);
+            if(!emprt($inser)){
+                DB::table('anm_mos_smslogs')->insert($insert);
+                AnmTargetDataModel::whereIn('id', $ids)->update(['moic_sms_initiated' => 1]);
+            }
             echo "Dispatched!!".PHP_EOL;
         }else{
             echo "All new moic sms requests are dispatched".PHP_EOL;

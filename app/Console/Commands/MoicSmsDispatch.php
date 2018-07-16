@@ -66,8 +66,10 @@ class MoicSmsDispatch extends Command
                 }
                 $insert[] = $temp;
             }
-            MoicRanking::whereIn('id',$ids)->update(['sms_sent_initiated' => 1]);
-            DB::table('mois_anm_sms_logs')->insert($insert);
+            if(!empty($insert)){
+                DB::table('mois_anm_sms_logs')->insert($insert);
+                MoicRanking::whereIn('id',$ids)->update(['sms_sent_initiated' => 1]);
+            }
             echo "Done!!".PHP_EOL;
         }else{
             echo "All sms requests are done".PHP_EOL;
