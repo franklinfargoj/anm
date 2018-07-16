@@ -26,11 +26,11 @@
 
                 {{--@if($type != 'beneficiary')--}}
                     @if(isset($lstData['TOP']['anm_name']) && count($lstData['TOP']['anm_name']) > 0)
-                        <span style="color: #ec1d25; font-size: 30px;" class="fontsforweb_fontid_8705"> {{ implode('&#93;', $lstData['TOP']['anm_name']) }}</span>
+                        <span style="color: #ec1d25; font-size: 30px;" class=""> {{ implode(',', $lstData['TOP']['anm_name']) }}</span>
                                 और
-                        <span style="color: #ec1d25; font-size: 30px;" class="fontsforweb_fontid_8705"> {{ $lstData['TOP']['end'] }}</span>
+                        <span style="color: #ec1d25; font-size: 30px;" class=""> {{ $lstData['TOP']['end'] }}</span>
                     @else
-                        <span style="color: #ec1d25; font-size: 30px;" class="fontsforweb_fontid_8705"> {{ $lstData['TOP']['end'] }}</span>
+                        <span style="color: #ec1d25; font-size: 30px;" class=""> {{ $lstData['TOP']['end'] }}</span>
                     @endif
                 {{--@endif--}}
 
@@ -45,11 +45,11 @@
                     <span style="font-size:20px; color: #000; display: block;">हमारी</span>
                     {{--@if($type != 'beneficiary')--}}
                         @if(isset($lstData['MIDDLE']['anm_name']) && count($lstData['MIDDLE']['anm_name']) > 0)
-                            <span class="fontsforweb_fontid_8705">{{ implode('&#93;', $lstData['MIDDLE']['anm_name']) }}</span>
+                            <span class="">{{ implode(',', $lstData['MIDDLE']['anm_name']) }}</span>
                             एवं
-                           <span class="fontsforweb_fontid_8705">{{ $lstData['MIDDLE']['end'] }}</span>
+                           <span class="">{{ $lstData['MIDDLE']['end'] }}</span>
                         @else
-                            <span class="fontsforweb_fontid_8705">{{ $lstData['MIDDLE']['end'] }}</span>
+                            <span class="">{{ $lstData['MIDDLE']['end'] }}</span>
                         @endif
                     {{--@endif--}}
                 <span>
@@ -69,13 +69,13 @@
 				<span style="color: #ec1d25; font-size: 30px;">
                     {{--@if($type != 'beneficiary')--}}
                         @if(isset($lstData['BOTTOM']['anm_name']) && count($lstData['BOTTOM']['anm_name']) > 1)
-                            <span class="fontsforweb_fontid_8705">{{ implode('&#93;', $lstData['BOTTOM']['anm_name']) }}</span>
+                            <span class="">{{ implode(',', $lstData['BOTTOM']['anm_name']) }}</span>
 
                             एवं
 
-                            <span class="fontsforweb_fontid_8705">{{ $lstData['BOTTOM']['end'] }}</span>
+                            <span class="">{{ $lstData['BOTTOM']['end'] }}</span>
                         @else
-                            <span class="fontsforweb_fontid_8705">{{ $lstData['BOTTOM']['end'] }}</span>
+                            <span class="">{{ $lstData['BOTTOM']['end'] }}</span>
                         @endif
                     {{--@endif--}}
 

@@ -27,13 +27,13 @@
             <td align="left" valign="middle"><img src="{{ asset('images/newsletter-img/pic1-left.jpg') }}" alt="" alt=""></td>
             <td align="center" style="font-weight: bold;">
                 @if(isset($lstData['TOP']['anm_name']) && count($lstData['TOP']['anm_name']) > 0)
-                    <span style="color: #ec1d25; font-size: 30px;" class="fontsforweb_fontid_8705"> {{ implode(',', $lstData['TOP']['anm_name']) }}<span>
+                    <span style="color: #ec1d25; font-size: 30px;" class=""> {{ implode(',', $lstData['TOP']['anm_name']) }}<span>
                                 और
-                        <span style="color: #ec1d25; font-size: 30px;" class="fontsforweb_fontid_8705"> {{ $lstData['TOP']['end'] }}<span>
+                        <span style="color: #ec1d25; font-size: 30px;" class=""> {{ $lstData['TOP']['end'] }}<span>
                     @else
                                     <span style="color: #ec1d25; font-size: 30px;"> {{ $lstData['TOP']['end'] }}<span>
                     @endif
-				<p style="color: #000; font-size: 18px; line-height: 30px; margin:0;" class="fontsforweb_fontid_8705">आपने {{$current_month}} में अव्वल दर्जे का काम कर दिखाया! आप में से कुछ <span style="color: #ec1d25; font-size: 24px;">{{ strtoupper($type) }}s</span> ने 80% बच्चो का टीकाकरण पूरा कर दिखाया तथा कुछ ने 30% गर्भवती महिलाओ का चौथा ANC चैकप भी पूरा किया!</p>
+				<p style="color: #000; font-size: 18px; line-height: 30px; margin:0;" class="">आपने {{$current_month}} में अव्वल दर्जे का काम कर दिखाया! आप में से कुछ <span style="color: #ec1d25; font-size: 24px;">{{ strtoupper($type) }}s</span> ने 80% बच्चो का टीकाकरण पूरा कर दिखाया तथा कुछ ने 30% गर्भवती महिलाओ का चौथा ANC चैकप भी पूरा किया!</p>
             </td>
         </tr>
     </table>
@@ -43,13 +43,13 @@
             <td align="center" style="font-weight: bold;">
 				<span style="color: #ec1d25; font-size: 30px;">
                     @if(isset($lstData['BOTTOM']['anm_name']) && count($lstData['BOTTOM']['anm_name']) > 1)
-                        <span class="fontsforweb_fontid_8705">{{ implode(',', $lstData['BOTTOM']['anm_name']) }}</span>
+                        <span class="">{{ implode(',', $lstData['BOTTOM']['anm_name']) }}</span>
 
                         एवं
 
-                        <span class="fontsforweb_fontid_8705">{{ $lstData['BOTTOM']['end'] }}</span>
+                        <span class="">{{ $lstData['BOTTOM']['end'] }}</span>
                     @else
-                        <span class="fontsforweb_fontid_8705">{{ $lstData['BOTTOM']['end'] }}</span>
+                        <span class="">{{ $lstData['BOTTOM']['end'] }}</span>
                     @endif
                 <span>
 				<p style="color: #000; font-size: 18px; line-height: 30px; margin:0;">आपको भी 80% बच्चो का टीकाकरण एवं 30% से भी अधिक गर्भवती महिलाओ का चौथा ANC करके दिखाना है| थोड़ी और तैयारी करो| </p>

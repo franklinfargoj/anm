@@ -28,13 +28,13 @@
 			<td align="center" style="padding: 20px 30px;">
 				<span style="color: #ec1d25; font-size: 36px; font-weight: bold;">
 					@if(isset($lstData['BOTTOM']['anm_name']) && count($lstData['BOTTOM']['anm_name']) > 1)
-					    <span class="fontsforweb_fontid_8705">{{ implode('&#93;', $lstData['BOTTOM']['anm_name']) }}</span>
+					    <span class="">{{ implode(',', $lstData['BOTTOM']['anm_name']) }}</span>
 
 					    एवं
 
-					    <span class="fontsforweb_fontid_8705">{{ $lstData['BOTTOM']['end'] }}</span>
+					    <span class="">{{ $lstData['BOTTOM']['end'] }}</span>
 					@else
-					    <span class="fontsforweb_fontid_8705">{{ $lstData['BOTTOM']['end'] }}</span>
+					    <span class="">{{ $lstData['BOTTOM']['end'] }}</span>
 					@endif
 				</span>
 				<p style="color: #000; font-size: 24px; line-height: 38px; margin:0;">ने इस बार ठान लिया है, कि वे जून के महीने में <span style="font-weight: bold;">80%</span> बच्चो का टीकाकरण तथा <span style="font-weight: bold;">30%</span> से भी अधिक गर्भवती महिलाओ का चौथा <span style="font-weight: bold;">ANC</span> चैकप भी पूरा करके दिखाएंगी!</p>

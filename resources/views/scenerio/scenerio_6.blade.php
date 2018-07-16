@@ -29,13 +29,13 @@
 				<span style="color: #ec1d25; font-size: 30px;">
 					<span style="font-size:20px; color: #000; display: block;">हमारी</span>
 					@if(isset($lstData['MIDDLE']['anm_name']) && count($lstData['MIDDLE']['anm_name']) > 1)
-					    <span class="fontsforweb_fontid_8705">{{ implode('&#93;', $lstData['MIDDLE']['anm_name']) }}</span>
+					    <span class="">{{ implode(',', $lstData['MIDDLE']['anm_name']) }}</span>
 
 					    एवं
 
-					    <span class="fontsforweb_fontid_8705">{{ $lstData['MIDDLE']['end'] }}</span>
+					    <span class="">{{ $lstData['MIDDLE']['end'] }}</span>
 					@else
-					    <span class="fontsforweb_fontid_8705">{{ $lstData['MIDDLE']['end'] }}</span>
+					    <span class="">{{ $lstData['MIDDLE']['end'] }}</span>
 					@endif
 				<span>
 				<p style="color: #000; font-size: 18px; line-height: 30px; margin:0;">दीदी ने भी अच्छा करने प्रयास किया 30% - 80% बच्चो का टीकाकरण कर दिखाया साथ ही साथ 10% - 30% गर्भवती महिलाओ का चौथा ANC चैकप भी पूरा किया!</p>
