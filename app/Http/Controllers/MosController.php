@@ -25,11 +25,12 @@ class MosController extends Controller
 
     public function fetchRankingData(){
 
-        $moic = MoicRanking::select('id','og_moic_filename AS filenames' ,'created_at as uploaded_on')
-            ->groupBy('uploaded_file')
-            ->orderBy('created_at', 'DESC')
-            ->get()
-            ->toArray();
+        $moic = MoicRanking::select('id','og_moic_filename AS filenames')
+                                ->selectRaw("DATE(created_at) as uploaded_on" )
+                                ->groupBy('uploaded_file')
+                                ->orderBy('created_at', 'DESC')
+                                ->get()
+                                ->toArray();
 
         $db = Datatables::of($moic);
         $db->addColumn('sr_no', function ($moic){ static $i = 0; $i++; return $i; }) ->rawColumns(['id']);
@@ -59,13 +60,12 @@ class MosController extends Controller
 
         $db = Datatables::of($moic);
 
-        $db->addColumn('sr_no', function ($moic){
-            static $i = 0; $i++; return $i;
-        })->addColumn('sms_span', function($moic){
+        $db->addColumn('sr_no', function ($moic){ static $i = 0; $i++; return $i;})
+            ->addColumn('sms_span', function($moic){
             $modifyed = str_replace('(', '<span class="">', $moic['sms']);
             $modifyed = str_replace(')', '</span>', $modifyed);
-            return '<span class="">'.$modifyed.'</span>';
-        })->addColumn('link', function($moic){
+            return '<span class="">'.$modifyed.'</span>';})
+            ->addColumn('link', function($moic){
             return '<a href="'.url('/').'/moic/rankings/'.$moic['ranking_pdf'].'" target="_blank">View</a>';
         })->rawColumns(['id', 'sms_span', 'link']);
         return $db->make(true);
