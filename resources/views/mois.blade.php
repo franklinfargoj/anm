@@ -109,6 +109,7 @@
 @section('js')
     <script>
         $(function () {
+            $(".alert").fadeOut(1500);
             $('#moic_ranking').dataTable({
                 "processing": true,
                 "serverSide": true,
