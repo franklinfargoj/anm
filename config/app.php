@@ -236,6 +236,7 @@ return [
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'Converter' => 'Anam\PhantomMagick\Facades\Converter',
         'Zipper' => Chumper\Zipper\Zipper::class,
+        'Helpers' => App\Classes\Helpers::class,
 
     ],
 

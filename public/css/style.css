@@ -1,12 +1,74 @@
+@font-face {
+    font-family: 'Gotham-Bold';
+    src: url('../fonts/gotham/Gotham-Bold.woff2') format('woff2'),
+        url('../fonts/gotham/Gotham-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
 
-/*@font-face {*/
-	/*font-family: 'kruti_dev_010regular';*/
-	/*src: url('../fonts/kruti_dev_010-webfont.eot');*/
-	/*url('../fonts/kruti_dev_010-webfont.woff') format('woff'),*/
-	/*url('../fonts/kruti_dev_010-webfont.ttf') format('truetype'),*/
-	/*font-weight: normal;*/
-	/*font-style: normal;*/
-/*}*/
+@font-face {
+    font-family: 'Gotham-Medium';
+    src: url('../fonts/gotham/Gotham-Medium.woff2') format('woff2'),
+        url('../fonts/gotham/Gotham-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'HelveticaLTStd-Light';
+    src: url('../fonts/helvetica/HelveticaLTStd-Light.woff2') format('woff2'),
+        url('../fonts/helvetica/HelveticaLTStd-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'HelveticaLTStd-Roman';
+    src: url('../fonts/helvetica/HelveticaLTStd-Roman.woff2') format('woff2'),
+        url('../fonts/helvetica/HelveticaLTStd-Roman.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto-Bold';
+    src: url('../fonts/roboto/Roboto-Bold.woff2') format('woff2'),
+        url('../fonts/roboto/Roboto-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto-Regular';
+    src: url('../fonts/roboto/Roboto-Regular.woff2') format('woff2'),
+        url('../fonts/roboto/Roboto-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto-Medium';
+    src: url('../fonts/roboto/Roboto-Medium.woff2') format('woff2'),
+        url('../fonts/roboto/Roboto-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto-Thin';
+    src: url('../fonts/roboto/Roboto-Thin.woff2') format('woff2'),
+        url('../fonts/roboto/Roboto-Thin.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto-Light';
+    src: url('../fonts/roboto/Roboto-Light.woff2') format('woff2'),
+        url('../fonts/roboto/Roboto-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
 
 @font-face {
 	font-family: 'k010';
@@ -38,7 +100,7 @@ header {
 	background: linear-gradient(to right, rgba(29,70,126,1) 0%, rgba(32,105,159,1) 46%, rgba(30,112,165,1) 51%, rgba(21,128,178,1) 71%, rgba(0,150,198,1) 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1d467e', endColorstr='#0096c6', GradientType=1 );
 	color: #ffffff;
-	padding: 20px 0;
+	padding: 30px 0;
 }
 
 h1 {
@@ -351,4 +413,153 @@ a {
 	color: #fff;
     background-color: #337ab7;
     border-color: #2e6da4;
+}
+
+
+/*Report page css*/
+h5 {
+	font-family: 'Roboto-Bold';
+	font-size: 18px;
+	line-height: 66px;
+	background-color: #d7f1fd;
+	color: #000000;
+	margin: 0;
+}
+.internal-page {
+	background-color: #f1f1f1;
+}
+.internal-header {
+	min-height: 200px;
+	background: #11427d; /* Old browsers */
+	background: -moz-linear-gradient(-45deg, #11427d 0%, #2a9dd0 100%); 
+	background: -webkit-linear-gradient(-45deg, #11427d 0%,#2a9dd0 100%); 
+	background: linear-gradient(135deg, #11427d 0%,#2a9dd0 100%); 
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#11427d', endColorstr='#2a9dd0',GradientType=1 );
+	z-index: 10000;
+}
+.internal-header h4 {
+	font-size: 38px;
+	font-family: 'Roboto-Bold';
+}
+.internal-header h4 span {
+	display: block;
+	text-transform: uppercase;
+	font-size: 21px;
+	margin-top: 10px;
+}
+.phc-ranking-title {
+	font-family: 'Roboto-Bold';
+	font-size: 30px;
+	color: #11427d;
+	line-height: 130px;
+}
+.phc-ranking-content {
+	font-family: 'Roboto-Bold';
+	font-size: 28px;
+	color: #11427d;
+	line-height: 130px;
+}
+.phc-ranking-content span {
+	font-family: 'Roboto-Regular';
+}
+.box-area {
+	-webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.4);
+	-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.4);
+	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.4);
+    border-radius: 20px;
+    background-color: #ffffff;
+}
+.pull-up {
+	margin-top: -50px;
+}
+.phc-ranking-title img {
+	margin-right: 20px;
+}
+
+.reports-area {
+	padding-top: 315px;
+}
+.col-md-4.text-center:first-child h5 {
+	border-top-left-radius: 20px;
+}
+.col-md-4.text-center:last-child h5 {
+	border-top-right-radius: 20px;
+}
+.reports-area .row {
+	margin-right: -2px;
+    margin-left: -2px;
+}
+.reports-area .col-md-4.text-center {
+	padding-right: 2px;
+    padding-left: 2px;
+}
+.reports-area .col-md-4.text-center div {
+	
+}
+.reports-area .col-md-4.text-center ul {
+	margin:0;
+	padding: 0;
+	display: table;
+    table-layout: fixed;
+    width: 100%;
+}
+.reports-area .col-md-4.text-center li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-family: 'Roboto-Bold';
+	font-size: 17px;
+	color: #484848;
+	display: table-cell;
+    table-layout: fixed;
+    padding: 15px;
+}
+
+.internal-table-area {
+	padding-top: 460px;
+}
+
+.table {
+	    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.4);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.4);
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.4);
+    border-radius: 20px;
+    background-color: #ffffff;
+}
+
+.table>tbody>tr>td {
+	min-width: 100px;
+	font-family: 'Roboto-Regular';
+    font-size: 17px;
+    padding: 15px !important;
+    text-align: left;
+    border-top: 0;
+}
+.table>tbody>tr>td:first-child {
+	text-align: left;
+}
+.table>tbody>tr>th {
+	width: 15%;
+	font-family: 'Roboto-Bold';
+	color: #ffffff;
+	font-size: 17px;
+	background: #11427d; /* Old browsers */
+	background: -moz-linear-gradient(45deg, #11427d 0%, #2a9dd0 100%); 
+	background: -webkit-linear-gradient(45deg, #11427d 0%,#2a9dd0 100%); 
+	background: linear-gradient(45deg, #11427d 0%,#2a9dd0 100%); 
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#11427d', endColorstr='#2a9dd0',GradientType=1 ); 
+	border-top-left-radius: 20px;
+	border-bottom-left-radius: 20px;
+	text-align: center;
+	vertical-align: middle;
+}
+.reports-area {
+	transition: all 0.5s ease;
+}
+.darkHeader {
+	background-color: rgba(241,241,241,0.8);
+	padding-bottom: 25px;
+}
+.mt-1 {
+    margin-top: 15px;
 }

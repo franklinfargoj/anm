@@ -23,7 +23,7 @@ Route::group(['middleware'=>'auth'], function (){
     Route::get('rankingdetails/{id}', 'MosController@ajaxMoic')->name('rankingdetails'); //okay
     Route::get('export_mos','MosController@export_mos')->name('export_mos'); //okay
     Route::get('ajax-moic', 'MosController@fetchRankingData'); //okay
-
+    Route::get('/moic/report/{link}', 'MosController@showReport')->name('moic_report');
 
     Route::get('rank/{id}', 'MosController@rank_details')->name('rank');
 
