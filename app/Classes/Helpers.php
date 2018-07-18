@@ -38,5 +38,16 @@ class Helpers{
 	        return $number. $ends[$number % 10];
 	    }
 	}
+
+	
+	public static function convertToPercent($number){
+
+	    if($number > 0){
+	        $percentNumber = $number*100;
+	        return $percentNumber;
+        }else{
+	        return 0;
+        }
+    }
 }
 ?>
