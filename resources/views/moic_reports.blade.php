@@ -25,10 +25,10 @@
 					PHC Ranking:
 				</div>
 				<div class="col-md-4 text-center phc-ranking-content">
-					{{\Helpers::ordinal($report->phc_rank_in_block)}} <span>in block (of 8)</span>
+					{{Helpers::ordinal($report->phc_rank_in_block)}} <span>in block (of 8)</span>
 				</div>
 				<div class="col-md-4 text-center phc-ranking-content">
-					{{\Helpers::ordinal($report->phc_rank_in_district)}} <span>in district (of 80)</span>
+					{{Helpers::ordinal($report->phc_rank_in_district)}} <span>in district (of 80)</span>
 				</div>
 			</div>
 		</div>
@@ -74,19 +74,19 @@
 					<tr>
 						<th rowspan="2" valign="middle">Utilization</th>
 						<td>OPDs/day (>40)</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
+						<td>{{ $report->opd_target }}</td>
+						<td>{{ $report->opd_performance }}</td>
+						<td>{{ $report->opd_block }}</td>
+						<td>{{ $report->opd_district }}</td>
+						<td>{{ $report->opd_state }}</td>
 					</tr>
 					<tr>
 						<td>Proportion of <br/> Institutional Delivery</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
+						<td>{{ $report->pid_target }}</td>
+						<td>{{ $report->pid_performance }}</td>
+						<td>{{ $report->pid_block }}</td>
+						<td>{{ $report->pid_district }}</td>
+						<td>{{ $report->pid_state }}</td>
 					</tr>
 				</table>
 
@@ -94,67 +94,67 @@
 					<tr>
 						<th rowspan="8" valign="middle">RMNCH + A</th>
 						<td>Full Immunization Coverage</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
+						<td>{{ $report->fic_target }}</td>
+						<td>{{ $report->fic_performance }}</td>
+						<td>{{ $report->fic_block }}</td>
+						<td>{{ $report->fic_district }}</td>
+						<td>{{ $report->fic_state }}</td>
 					</tr>
 					<tr>
 						<td>ANC 3 Coverage</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
+						<td>{{ $report->anc3_target }}</td>
+						<td>{{ $report->anc3_performance }}</td>
+						<td>{{ $report->anc3_block }}</td>
+						<td>{{ $report->anc3_district }}</td>
+						<td>{{ $report->anc3_state }}</td>
 					</tr>
 					<tr>
 						<td>ANC 4 Coverage</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
+						<td>{{ $report->anc4_target }}</td>
+						<td>{{ $report->anc4_performance }}</td>
+						<td>{{ $report->anc4_block }}</td>
+						<td>{{ $report->anc4_district }}</td>
+						<td>{{ $report->anc4_state }}</td>
 					</tr>
 					<tr>
 						<td>ANC Registration (within 12 weeks)</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
+						<td>{{ $report->anc12_target }}</td>
+						<td>{{ $report->anc12_performance }}</td>
+						<td>{{ $report->anc12_block }}</td>
+						<td>{{ $report->anc12_district }}</td>
+						<td>{{ $report->anc12_state }}</td>
 					</tr>
 					<tr>
 						<td>Proportion of LBW among new born</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
+						<td>{{ $report->plb_target }}</td>
+						<td>{{ $report->plb_performance }}</td>
+						<td>{{ $report->plb_block }}</td>
+						<td>{{ $report->plb_district }}</td>
+						<td>{{ $report->plb_state }}</td>
 					</tr>
 					<tr>
 						<td>FP - IUCD Insertion %</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
+						<td>{{ $report->fpiucd_target }}</td>
+						<td>{{ $report->fpiucd_target }}</td>
+						<td>{{ $report->fpiucd_block }}</td>
+						<td>{{ $report->fpiucd_district }}</td>
+						<td>{{ $report->fpiucd_state }}</td>
 					</tr>
 					<tr>
 						<td>FP - PPIUCD Insertion %</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
+						<td>{{ $report->ppiucd_target }}</td>
+						<td>{{ $report->ppiucd_performance }}</td>
+						<td>{{ $report->ppiucd_block }}</td>
+						<td>{{ $report->ppiucd_district }}</td>
+						<td>{{ $report->ppiucd_state }}</td>
 					</tr>
 					<tr>
 						<td>FP - Sterilization %</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
+						<td>{{ $report->fp_sterilization_target }}</td>
+						<td>{{ $report->fp_sterilization_performance }}</td>
+						<td>{{ $report->fp_sterilization_block }}</td>
+						<td>{{ $report->fp_sterilization_district }}</td>
+						<td>{{ $report->fp_sterilization_state }}</td>
 					</tr>
 				</table>
 
@@ -162,27 +162,27 @@
 					<tr>
 						<th rowspan="3" valign="middle">CDs</th>
 						<td>Pneumonia prevalence</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
+						<td>{{ $report->pneumonia_target }}</td>
+						<td>{{ $report->pneumonia_performance }}</td>
+						<td>{{ $report->pneumonia_block }}</td>
+						<td>{{ $report->pneumonia_district }}</td>
+						<td>{{ $report->pneumonia_state }}</td>
 					</tr>
 					<tr>
 						<td>Malaria slides collected</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
+						<td>{{ $report->malaria_target }}</td>
+						<td>{{ $report->malaria_performance }}</td>
+						<td>{{ $report->malaria_block }}</td>
+						<td>{{ $report->malaria_district }}</td>
+						<td>{{ $report->malaria_state }}</td>
 					</tr>
 					<tr>
 						<td>Diarrhea prevalence</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
-						<td>00</td>
+						<td>{{ $report->diarrhea_target }}</td>
+						<td>{{ $report->diarrhea_performance }}</td>
+						<td>{{ $report->diarrhea_block}}</td>
+						<td>{{ $report->diarrhea_district }}</td>
+						<td>{{ $report->diarrhea_state }}</td>
 					</tr>
 				</table>
 
