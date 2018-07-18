@@ -135,7 +135,7 @@
 					<tr>
 						<td>FP - IUCD Insertion %</td>
 						<td>{{ Helpers::convertToPercent($report->fpiucd_target) }}%</td>
-						<td>{{ Helpers::convertToPercent($report->fpiucd_target) }}%</td>
+						<td>{{ Helpers::convertToPercent($report->fpiucd_performance) }}%</td>
 						<td>{{ $report->fpiucd_block }}</td>
 						<td>{{ $report->fpiucd_district }}</td>
 						<td>{{ $report->fpiucd_state }}</td>
