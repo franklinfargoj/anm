@@ -50,7 +50,7 @@ class MoicSmsDispatch extends Command
             $insert = [];
             echo $count.' new requests found'.PHP_EOL;
             foreach($new_sms as $sms){
-                $combined_sms = $sms->sms.' '.url('/').'/moic/rankings/'.$sms->ranking_pdf;
+                $combined_sms = $sms->sms.' '.url('/moic/report/'.md5($sms->id));
                 $temp = [
                     'filename' => $sms->uploaded_file,
                     'dr_name' => $sms->dr_name_en,

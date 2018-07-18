@@ -26,8 +26,7 @@ class ImportMosRankingRequest extends FormRequest
         return [
             'month' => 'required',
             'year' => 'required',
-            'sample_file' => 'required',
-            'rankings' => 'required|mimes:zip'
+            'sample_file' => 'required'
         ];
     }
 

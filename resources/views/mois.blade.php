@@ -70,10 +70,10 @@
                     <label>Select File to Import:</label>
                     {!! Form::file('sample_file', ['class' => 'form-control']) !!}
                 </div>
-                <div class="col-sm-3">
+                <!-- <div class="col-sm-3">
                     <label>Select Ranking to Import:</label>
                     {!! Form::file('rankings', ['class' => 'form-control']) !!}
-                </div>
+                </div> -->
                 <div class="col-sm-3">
                     <div class="form-group btn-area">
                         <button type="submit" class="btn btn-primary">Upload File</button>

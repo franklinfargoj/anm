@@ -52,6 +52,7 @@ class MosController extends Controller
 
     public function rank_details($id)
     {
+        $links = \DB::table('moic_ranking_reports')->pluck('dr_weblink')->toArray();
         $file = MoicRanking::select('uploaded_file')->where('id',$id)->get()->toArray();
         $file_name = $file[0]['uploaded_file'];
 
@@ -68,10 +69,10 @@ class MosController extends Controller
             $modifyed = str_replace('(', '<span class="">', $moic['sms']);
             $modifyed = str_replace(')', '</span>', $modifyed);
             return '<span class="">'.$modifyed.'</span>';
-        })->addColumn('link', function($moic){
-            if($moic['pdf_path'] != ''){
-                return '<a href="'.url('/').$moic['pdf_path'].$moic['ranking_pdf'].'" target="_blank">View</a>';
-            }
+        })->addColumn('link', function($moic) use($links){
+            /*if(in_array(md5($moic['id']), $links)){
+                return '<a href="'.url('/moic/report/'.md5($moic['id'])).'" target="_blank">View</a>';
+            }*/
             return "Processing";
         })->rawColumns(['id', 'sms_span', 'link']);
         return $db->make(true);
@@ -87,28 +88,12 @@ class MosController extends Controller
         $file_name = time() .$request->sample_file->getClientOriginalName();
 
         $moic_filename = $request->sample_file->getClientOriginalName();
-
-        $pdfname = time().$request->rankings->getClientOriginalName();
         $day_time = Carbon::now()->toDateTimeString('Y-m-d');
         $day = Carbon::now()->toDateString('Y-m-d');
         $web = array();
         $beneficiary = array();
         $moic = array();
         if (count($data)>0) {
-            $path = 'moic/rankings/zips';
-            if(!is_dir($path)){
-                mkdir($path, 0777, true);
-            }
-            Storage::putFileAs($path, $request->file('rankings'), $request->file('rankings')->getClientOriginalName());
-            $phcNameInHindi = "";
-            $doctorNameInHindi = "";
-            $blockNameInHindi = "";
-
-            $zip_id = new RankingZip;
-            $zip_id->month = $request->get('month');
-            $zip_id->year = $request->get('year');
-            $zip_id->zip_file = $path.'/'.$request->file('rankings')->getClientOriginalName();
-            $zip_id->save();
             foreach ($data as $key => $value) {
                 $phcNameInHindi = $obj->convert_to_unicode2($value["phc_name_in_hindi"]);
                 $doctorNameInHindi = $obj->convert_to_unicode2($value["doctor_name_in_hindi"]);
@@ -130,8 +115,7 @@ class MosController extends Controller
                     'month' => $request->get('month'),
                     'year' => $request->get('year'),
                     'created_at'=> Carbon::now(),
-                    'updated_at'=> Carbon::now(),
-                    'zip_id'=> $zip_id->id,
+                    'updated_at'=> Carbon::now()
                 ];
             }
             if (!empty($arr)) {

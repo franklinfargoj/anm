@@ -19,7 +19,6 @@ class Kernel extends ConsoleKernel
         Commands\MoicTargettedSmsDispatch::class,
         Commands\BeneficiarySmsDispatch::class,
         Commands\AnmSmsDispatch::class,
-        Commands\ExtractRankingZips::class,
     ];
 
     /**
@@ -36,7 +35,6 @@ class Kernel extends ConsoleKernel
         //$schedule->command('moic:targetted_sms')->everyThirtyMinutes();
         //$schedule->command('beneficiary:sms_dispatch')->everyThirtyMinutes();
         //$schedule->command('anm:sms_dispatch')->everyThirtyMinutes();
-        $schedule->command('moic:extract_zip')->everyThirtyMinutes();
     }
 
     /**
