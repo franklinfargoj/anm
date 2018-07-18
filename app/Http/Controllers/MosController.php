@@ -70,9 +70,9 @@ class MosController extends Controller
             $modifyed = str_replace(')', '</span>', $modifyed);
             return '<span class="">'.$modifyed.'</span>';
         })->addColumn('link', function($moic) use($links){
-            /*if(in_array(md5($moic['id']), $links)){
+            if(in_array(md5($moic['id']), $links)){
                 return '<a href="'.url('/moic/report/'.md5($moic['id'])).'" target="_blank">View</a>';
-            }*/
+            }
             return "Processing";
         })->rawColumns(['id', 'sms_span', 'link']);
         return $db->make(true);
@@ -198,6 +198,7 @@ class MosController extends Controller
         $months = \DB::table('master_months')->pluck('month_english', 'id')->toArray();
         $report = \DB::table('moic_ranking_reports')->where('dr_weblink', $link)->get()->toArray();
         $report = $report[0];
+
         return view('moic_reports', compact('report', 'months'));
     }
 
