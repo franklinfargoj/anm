@@ -41,6 +41,7 @@ class MoicRankingsPDF extends Command
      */
     public function handle()
     {
+        if (!issset($_SERVER["SCRIPT_FILENAME"])) $_SERVER["SCRIPT_FILENAME"] = "";
         $not_genrated_pdf = MoicRanking::where('status', 'Y')->where('ranking_pdf', '')->where('zip_path', '')->select('id', 'uploaded_file', 'block', 'month', 'year', 'phc_en')->get();
         $cnt = count($not_genrated_pdf);
         if($cnt > 0){
