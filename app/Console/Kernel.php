@@ -19,6 +19,8 @@ class Kernel extends ConsoleKernel
         Commands\MoicTargettedSmsDispatch::class,
         Commands\BeneficiarySmsDispatch::class,
         Commands\AnmSmsDispatch::class,
+        Commands\ExportRankingReports::class,
+        Commands\MoicRankingsPDF::class,
     ];
 
     /**
@@ -30,11 +32,17 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('custom:command')->everyFiveMinutes();
+
+        //****sms scheduler starts***********
         $schedule->command('moic:sms_create')->everyFiveMinutes();
         //$schedule->command('moic:sms_dispatch')->everyThirtyMinutes();
         //$schedule->command('moic:targetted_sms')->everyThirtyMinutes();
         //$schedule->command('beneficiary:sms_dispatch')->everyThirtyMinutes();
         //$schedule->command('anm:sms_dispatch')->everyThirtyMinutes();
+        //****sms scheduler ends**************
+
+        $schedule->command('moic:ranking_report')->everyFiveMinutes();
+        $schedule->command('moic:save_pdf')->everyFiveMinutes();
     }
 
     /**

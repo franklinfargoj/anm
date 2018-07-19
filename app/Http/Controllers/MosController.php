@@ -110,7 +110,7 @@ class MosController extends Controller
                     'scenerio' =>$value["performance"],
                     'og_moic_filename'=> $moic_filename,
                     'uploaded_file' => $file_name,
-                    'ranking_pdf' => $value['ranking_pdf'],
+                    'ranking_pdf' => '',
                     'pdf_path' => '',
                     'month' => $request->get('month'),
                     'year' => $request->get('year'),
@@ -201,62 +201,4 @@ class MosController extends Controller
 
         return view('moic_reports', compact('report', 'months'));
     }
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

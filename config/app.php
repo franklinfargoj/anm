@@ -179,7 +179,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         'Anam\PhantomMagick\ConverterServiceProvider',
-        Chumper\Zipper\ZipperServiceProvider::class
+        Chumper\Zipper\ZipperServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -237,6 +238,7 @@ return [
         'Converter' => 'Anam\PhantomMagick\Facades\Converter',
         'Zipper' => Chumper\Zipper\Zipper::class,
         'Helpers' => App\Classes\Helpers::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 
