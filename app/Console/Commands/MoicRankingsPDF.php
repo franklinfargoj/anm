@@ -41,7 +41,7 @@ class MoicRankingsPDF extends Command
      */
     public function handle()
     {
-        $not_genrated_pdf = MoicRanking::where('status', 'Y')->where('ranking_pdf', '')->where('pdf_path', '')->select('id', 'uploaded_file', 'block', 'month', 'year', 'phc_en')->get();
+        $not_genrated_pdf = MoicRanking::where('status', 'Y')->where('ranking_pdf', '')->where('zip_path', '')->select('id', 'uploaded_file', 'block', 'month', 'year', 'phc_en')->get();
         $cnt = count($not_genrated_pdf);
         if($cnt > 0){
             $months = \DB::table('master_months')->pluck('month_english', 'id')->toArray();

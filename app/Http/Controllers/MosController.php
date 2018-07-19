@@ -30,7 +30,7 @@ class MosController extends Controller
 
     public function fetchRankingData(){
 
-        $moic = MoicRanking::select('id','og_moic_filename AS filenames')
+        $moic = MoicRanking::select('id','og_moic_filename AS filenames', 'zip_path', 'uploaded_file')
                                 ->selectRaw("DATE(created_at) as uploaded_on" )
                                 ->groupBy('uploaded_file')
                                 ->orderBy('created_at', 'DESC')
@@ -41,7 +41,13 @@ class MosController extends Controller
         $db->addColumn('sr_no', function ($moic){ static $i = 0; $i++; return $i; }) ->rawColumns(['id']);
         $db->addColumn('actions', function ($moic) {
             return '<a href="'.route('rankingdetails',$moic['id']).'">View details</a>';
-        })->rawColumns(['actions']);
+        })->addColumn('download_zip', function($moic){
+            if($moic['zip_path'] != ''){
+                $folder = explode('.', $moic['uploaded_file']);
+                return '<a href="'.url('/download/moic_zip/'.$folder[0]).'" target="_blank">Download Zip</a>';
+            }
+            return "Processing";
+        })->rawColumns(['actions', 'download_zip']);
 
         return $db->make(true);
     }
@@ -59,7 +65,7 @@ class MosController extends Controller
         $file = MoicRanking::select('uploaded_file')->where('id',$id)->get()->toArray();
         $file_name = $file[0]['uploaded_file'];
 
-        $moic = MoicRanking::select('id', 'block', 'ranking_pdf', 'sms', 'phc_en', 'dr_name_en', 'pdf_path')
+        $moic = MoicRanking::select('id', 'block', 'ranking_pdf', 'sms', 'phc_en', 'dr_name_en')
                             ->orderBy('created_at', 'DESC')
                             ->where('uploaded_file',$file_name)
                             ->get()->toArray();
@@ -137,14 +143,12 @@ class MosController extends Controller
                     Session::flash('error', 'Please select valid data file.');
                     return back();
                 }
-
             }
             else
             {
                 Session::flash('error','Please upload a valid xls/xlsx file only.');
                 return back();
             }
-
         }
     }
 
@@ -216,5 +220,11 @@ class MosController extends Controller
         $report = $report[0];
 
         return view('moic_reports', compact('report', 'months'));
+    }
+
+    public function downloadZip($path)
+    {
+        $path = public_path().'/moic/rankings/zips/'.$path.'/'.$path.'.zip';
+        return response()->download($path);
     }
 }
