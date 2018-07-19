@@ -117,7 +117,7 @@ class MosController extends Controller
                     'og_moic_filename'=> $moic_filename,
                     'uploaded_file' => $file_name,
                     'ranking_pdf' => '',
-                    'pdf_path' => '',
+                    'zip_path' => '',
                     'month' => $request->get('month'),
                     'year' => $request->get('year'),
                     'created_at'=> Carbon::now(),
