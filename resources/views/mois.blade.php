@@ -96,7 +96,8 @@
                             <th>Sr. No.</th>
                             <th>File Name</th>
                             <th>Uploaded On</th>
-                            <th>Action</th>
+                            <th>View</th>
+                            <th>Download Zip</th>
                         </tr>
                         </thead>
                     </table>
@@ -121,6 +122,7 @@
                     { "data": "filenames" },
                     { "data": "uploaded_on" },
                     { "data": "actions" },
+                    { "data": "download_zip" },
                 ],
             });
 

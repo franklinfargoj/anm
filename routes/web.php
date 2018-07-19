@@ -23,15 +23,16 @@ Route::group(['middleware'=>'auth'], function (){
     Route::get('rankingdetails/{id}', 'MosController@ajaxMoic')->name('rankingdetails'); //okay
     Route::get('export_mos','MosController@export_mos')->name('export_mos'); //okay
     Route::get('ajax-moic', 'MosController@fetchRankingData'); //okay
-    Route::get('/moic/report/{link}', 'MosController@showReport')->name('moic_report');
 
     Route::get('rank/{id}', 'MosController@rank_details')->name('rank');
 
     Route::get('excelimport/{id}', 'ProcessedFileController@export')->name('excel_import');
     Route::get('/ajax/{district}', 'TargetdataController@getBlocks');
+    Route::get('/download/moic_zip/{name}', 'MosController@downloadZip');
 
 });
 
+Route::get('/moic/report/{link}', 'MosController@showReport')->name('moic_report');
 Route::get('weblink/{id}','WeblinkController@index')->name('weblink');
 Route::get('download-image','WeblinkController@downloadImage')->name('download-link');
 Auth::routes();
