@@ -28,6 +28,7 @@ Route::group(['middleware'=>'auth'], function (){
 
     Route::get('excelimport/{id}', 'ProcessedFileController@export')->name('excel_import');
     Route::get('/ajax/{district}', 'TargetdataController@getBlocks');
+    Route::get('/download/moic_zip/{name}', 'MosController@downloadZip');
 
 });
 
