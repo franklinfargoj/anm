@@ -106,6 +106,7 @@ class MosController extends Controller
             $web = array();
             $beneficiary = array();
             $moic = array();
+
                 if (count($data)>0) {
                     foreach ($data as $key => $value) {
                         $phcNameInHindi = $obj->convert_to_unicode2($value["phc_name_in_hindi"]);
@@ -124,7 +125,7 @@ class MosController extends Controller
                             'og_moic_filename'=> $moic_filename,
                             'uploaded_file' => $file_name,
                             'ranking_pdf' => '',
-                            'pdf_path' => '',
+                            'zip_path' => '',
                             'month' => $request->get('month'),
                             'year' => $request->get('year'),
                             'created_at'=> Carbon::now(),
