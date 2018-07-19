@@ -148,7 +148,7 @@ class MosController extends Controller
                     'Doctor name',
                     'Phone Number',
                     'Email',
-                    'Pdf Url',
+                    'Weblink',
                     'Sms'
                 ];
 
