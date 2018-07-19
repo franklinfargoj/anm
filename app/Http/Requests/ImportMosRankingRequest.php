@@ -27,6 +27,7 @@ class ImportMosRankingRequest extends FormRequest
             'month' => 'required',
             'year' => 'required',
             'sample_file' => 'required'
+//            'sample_file' => 'required|mimes:application/vnd.ms-excel'
         ];
     }
 
@@ -35,10 +36,8 @@ class ImportMosRankingRequest extends FormRequest
         return [
             'month.required' => 'Select month',
             'year.required' => 'Select year',
-            'sample_file.required' => 'Please upload excel',
-            'sample_file.mimes' => 'Please upload valid excel',
-            'rankings.required' => 'Please upload ranking pdf',
-            'rankings.mimes' => 'Please upload valid zip'
+            'sample_file.required' => 'Please upload excel file',
+//            'sample_file.mimes' => 'Please upload valid excel'
         ];
     }
 }
