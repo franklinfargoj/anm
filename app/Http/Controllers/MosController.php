@@ -9,13 +9,16 @@ use App\District;
 use App\Http\Requests\ImportMosRankingRequest;
 use App\MoicRanking;
 use Excel;
+use File;
 use Carbon\Carbon;
 use DataTables;
 use Illuminate\Support\Facades\Storage;
-use Faker\Provider\File;
 use App\Classes\ConvertToUnicode;
 use Chumper\Zipper\Zipper;
 use App\RankingZip;
+use Session;
+
+
 
 class MosController extends Controller
 {
@@ -83,52 +86,65 @@ class MosController extends Controller
     public function importRankings(ImportMosRankingRequest $request)
     {
         $obj = new ConvertToUnicode();
-    	$path = $request->file('sample_file')->getRealPath();
-        $data = \Excel::selectSheets('MOIC_Ranking_SMS')->load($path)->get()->toArray();
-        $file_name = time() .$request->sample_file->getClientOriginalName();
+        if($request->hasFile('sample_file')){
+        $extension = File::extension($request->sample_file->getClientOriginalName(''));
 
-        $moic_filename = $request->sample_file->getClientOriginalName();
-        $day_time = Carbon::now()->toDateTimeString('Y-m-d');
-        $day = Carbon::now()->toDateString('Y-m-d');
-        $web = array();
-        $beneficiary = array();
-        $moic = array();
-        if (count($data)>0) {
-            foreach ($data as $key => $value) {
-                $phcNameInHindi = $obj->convert_to_unicode2($value["phc_name_in_hindi"]);
-                $doctorNameInHindi = $obj->convert_to_unicode2($value["doctor_name_in_hindi"]);
-                $blockNameInHindi = $obj->convert_to_unicode2($value["block_name_in_hindi"]);
-                $arr[] = [
-                    'block' => $value["block"],
-                    'block_hin' => $blockNameInHindi,
-                    'phc_en' =>$value["phc"],
-                    'phc_hin' => $phcNameInHindi,
-                    'dr_name_en' =>$value["name_of_incharge"],
-                    'dr_name_hin' =>$doctorNameInHindi,
-                    'mobile' =>$value["mobile_no"],
-                    'email' =>$value["email_id"],
-                    'scenerio' =>$value["performance"],
-                    'og_moic_filename'=> $moic_filename,
-                    'uploaded_file' => $file_name,
-                    'ranking_pdf' => '',
-                    'pdf_path' => '',
-                    'month' => $request->get('month'),
-                    'year' => $request->get('year'),
-                    'created_at'=> Carbon::now(),
-                    'updated_at'=> Carbon::now()
-                ];
-            }
-            if (!empty($arr)) {
-            	$dir = 'moic/imports'; $pdfdir = 'moic/rankings';
-                $inserted = MoicRanking::insert($arr);
-                if($inserted){
-                    Storage::putFileAs($dir, $request->file('sample_file'), $file_name);
-                    return redirect('get-mos')->with(['success' => 'Files uploaded successfully']);
+            if ($extension == "xlsx" || $extension == "xls") {
+            $path = $request->file('sample_file')->getRealPath();
+            $data = \Excel::selectSheets('MOIC_Ranking_SMS')->load($path)->get()->toArray();
+            $file_name = time() .$request->sample_file->getClientOriginalName();
+
+            $moic_filename = $request->sample_file->getClientOriginalName();
+            $day_time = Carbon::now()->toDateTimeString('Y-m-d');
+            $day = Carbon::now()->toDateString('Y-m-d');
+            $web = array();
+            $beneficiary = array();
+            $moic = array();
+                if (count($data)>0) {
+                    foreach ($data as $key => $value) {
+                        $phcNameInHindi = $obj->convert_to_unicode2($value["phc_name_in_hindi"]);
+                        $doctorNameInHindi = $obj->convert_to_unicode2($value["doctor_name_in_hindi"]);
+                        $blockNameInHindi = $obj->convert_to_unicode2($value["block_name_in_hindi"]);
+                        $arr[] = [
+                            'block' => $value["block"],
+                            'block_hin' => $blockNameInHindi,
+                            'phc_en' =>$value["phc"],
+                            'phc_hin' => $phcNameInHindi,
+                            'dr_name_en' =>$value["name_of_incharge"],
+                            'dr_name_hin' =>$doctorNameInHindi,
+                            'mobile' =>$value["mobile_no"],
+                            'email' =>$value["email_id"],
+                            'scenerio' =>$value["performance"],
+                            'og_moic_filename'=> $moic_filename,
+                            'uploaded_file' => $file_name,
+                            'ranking_pdf' => '',
+                            'pdf_path' => '',
+                            'month' => $request->get('month'),
+                            'year' => $request->get('year'),
+                            'created_at'=> Carbon::now(),
+                            'updated_at'=> Carbon::now()
+                        ];
+                    }
+                    if (!empty($arr)) {
+                        $dir = 'moic/imports'; $pdfdir = 'moic/rankings';
+                        $inserted = MoicRanking::insert($arr);
+                        if($inserted){
+                            Storage::putFileAs($dir, $request->file('sample_file'), $file_name);
+                            return redirect('get-mos')->with(['success' => 'Files uploaded successfully']);
+                        }
+                    }
+                }else {
+                    Session::flash('error', 'Please select valid data file.');
+                    return back();
                 }
+
             }
-        }else {
-            Session::flash('error', 'Please select valid data file.');
-            return back();
+            else
+            {
+                Session::flash('error','Please upload a valid xls/xlsx file only.');
+                return back();
+            }
+
         }
     }
 

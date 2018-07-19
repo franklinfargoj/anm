@@ -17,6 +17,13 @@
             {{ session()->get('error') }}<br>
         </p>
     @endif
+    @if($errors->any())
+        <p class="alert alert-danger">
+            @foreach($errors->all() as $error)
+                {{$error}}<br>
+            @endforeach
+        </p>
+    @endif
     @if(session()->has('success'))
         <p class="alert alert-success">
             {{ session()->get('success') }}
