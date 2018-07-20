@@ -3,6 +3,11 @@ namespace App\Classes;
 
 class Helpers{
 
+	/**
+	 *Render hindi text for storing purpose
+	 *@param string $phc, string $type
+	 *@return string
+	 */
 	public static function renderHindi($phc, $type)
 	{
 		$topphctext = '';
@@ -24,11 +29,36 @@ class Helpers{
 	}
 
 
+	/**
+	 *Send a sms
+	 *@param string $sms, string $mobile //maybe comma separated
+	 *@return JSON
+	 */
 	public static function sendSms($sms, $mobile)
 	{
 		return ["status" => true, "message" => "sms sent successfully"];
+		$username = env('SMS_USERNAME');
+		$senderid = env('SMS_SENDERID');
+		$deptSecureKey = env('SMS_SECURE_KEY');
+		$key = hash('sha512',trim($username).trim($senderid).trim($sms).trim($deptSecureKey));
+		$url = env('SMS_URL');
+		$data = array(
+		    "username" => trim($username),
+		    "password" => trim($encryp_password),
+		    "senderid" => trim($senderid),
+		    "content" => trim($sms),
+		    "smsservicetype" =>"singlemsg",
+		    "mobileno" =>trim($mobile),
+		    "key" => trim($key)
+		);
+		return self::postCurl($url, $data);
 	}
 
+	/**
+	 *Genarate number with suffix for e.g 1 => 1st, 2 => 2nd
+	 *@param int $number
+	 *@return string
+	 */
 	public static function ordinal($number) {
 	    $ends = array('th','st','nd','rd','th','th','th','th','th','th');
 	    if ((($number % 100) >= 11) && (($number%100) <= 13)){
@@ -39,7 +69,11 @@ class Helpers{
 	    }
 	}
 
-	
+	/**
+	 *Genarate number with suffix for e.g 1 => 1st, 2 => 2nd
+	 *@param int $number
+	 *@return int
+	 */
 	public static function convertToPercent($number){
 
 	    if($number > 0){
@@ -49,5 +83,37 @@ class Helpers{
 	        return 0;
         }
     }
+
+
+    /**
+	 *POST data to url using cURL
+	 *@param int $number
+	 *@return string
+	 */
+    public function postCurl($url, $data)
+    {
+		$fields = '';
+		foreach($data as $key => $value) {
+		    $fields .= $key . '=' . urlencode($value) . '&';
+		}
+		rtrim($fields, '&');
+
+		$post = curl_init();
+		//curl_setopt($post, CURLOPT_SSLVERSION, 5); // uncomment for systems supporting TLSv1.1 only
+		curl_setopt($post, CURLOPT_SSLVERSION, 6); // use for systems supporting TLSv1.2 or comment the line
+		curl_setopt($post,CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($post, CURLOPT_URL, $url);
+		curl_setopt($post, CURLOPT_POST, count($data));
+		curl_setopt($post, CURLOPT_POSTFIELDS, $fields);
+		curl_setopt($post, CURLOPT_HTTPHEADER, array("Content-Type:application/x-www-form-urlencoded"));
+		curl_setopt($post, CURLOPT_HTTPHEADER, array("Content-length:"
+		    . strlen($fields) ));
+		curl_setopt($post, CURLOPT_HTTPHEADER, array("User-Agent:Mozilla/4.0 (compatible; MSIE 5.0; Windows 98; DigExt)"));
+		curl_setopt($post, CURLOPT_RETURNTRANSFER, 1);
+		$result = curl_exec($post); //result from mobile seva server
+		curl_close($post);
+		return $result;
+    }
+
 }
 ?>
