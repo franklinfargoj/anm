@@ -1,5 +1,6 @@
 <?php
 namespace App\Classes;
+use setasign\Fpdi;
 
 class Helpers{
 
@@ -113,6 +114,18 @@ class Helpers{
 		$result = curl_exec($post); //result from mobile seva server
 		curl_close($post);
 		return $result;
+    }
+
+    public static function testPDF($fname)
+    {
+    	$months = \DB::table('master_months')->pluck('month_english', 'id')->toArray();
+	    $array = \DB::table('moic_ranking_reports')->first();
+	    $i = 5;
+	    $i++;
+	    libxml_use_internal_errors(true);
+	    $pdf = \PDF::setPaper('A4');
+	    $pdf = \PDF::loadView('pdfv2',['report' => $array, 'months' => $months])->save('/home/webwerk/Desktop/anm/'.$fname.'.pdf');
+	    echo $fname;
     }
 
 }
