@@ -74,8 +74,8 @@
 					<tr>
 						<th rowspan="2" valign="middle">Utilization</th>
 						<td>OPDs/day (>40)</td>
-						<td>{{ Helpers::convertToPercent($report->opd_target) }}%</td>
-						<td>{{ Helpers::convertToPercent($report->opd_performance) }}%</td>
+						<td>{{ $report->opd_target }}%</td>
+						<td>{{ $report->opd_performance }}%</td>
 						<td>{{ $report->opd_block }}</td>
 						<td>{{ $report->opd_district }}</td>
 						<td>{{ $report->opd_state }}</td>
@@ -170,8 +170,8 @@
 					</tr>
 					<tr>
 						<td>Malaria slides collected</td>
-						<td>{{ Helpers::convertToPercent($report->malaria_target) }}%</td>
-						<td>{{ Helpers::convertToPercent($report->malaria_performance) }}%</td>
+						<td>{{ $report->malaria_target }}%</td>
+						<td>{{ $report->malaria_performance }}%</td>
 						<td>{{ $report->malaria_block }}</td>
 						<td>{{ $report->malaria_district }}</td>
 						<td>{{ $report->malaria_state }}</td>
