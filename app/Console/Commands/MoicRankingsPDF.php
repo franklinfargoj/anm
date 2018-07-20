@@ -64,6 +64,8 @@ class MoicRankingsPDF extends Command
                     }
                     $fname = time().snake_case($array->phc_name).'.pdf';
                     libxml_use_internal_errors(true);
+                    libxml_use_internal_errors(true);
+                    $pdf = PDF::setPaper('A4');
                     $pdf = PDF::loadView('moic_reports', ['report' => $array, 'months' => $months])->save(public_path().$path.'/'.$fname);
                     echo 'File '.$fname.' is saved in moic/rankings/zips/'.$folder[0].'/'.$single['block'];
 
