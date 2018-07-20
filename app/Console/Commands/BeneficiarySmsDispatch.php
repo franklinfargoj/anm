@@ -67,7 +67,7 @@ class BeneficiarySmsDispatch extends Command
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now()
                     ];
-                    $status = Helpers::sendSms($combined_sms, $sms->beneficary_mobile_number);
+                    $status = Helpers::sendSmsUnicode($combined_sms, $sms->beneficary_mobile_number);
                     if($status['status']){
                         $temp['is_sent'] = 1;
                         $temp['sent_at'] = Carbon::now();
