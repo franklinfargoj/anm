@@ -126,6 +126,7 @@ class MosController extends Controller
                             'uploaded_file' => $file_name,
                             'ranking_pdf' => '',
                             'zip_path' => '',
+                            'schedule_at'=>  $request->get("schedule_at"),
                             'month' => $request->get('month'),
                             'year' => $request->get('year'),
                             'created_at'=> Carbon::now(),

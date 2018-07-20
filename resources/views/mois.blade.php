@@ -66,6 +66,14 @@
                     </div>
                 </div>
 
+
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label>SMS schedule</label>
+                        <input type="text" id="schedule_at" name="schedule_at" placeholder="Selct date and time">
+                    </div>
+                </div>
+
                 <div class="col-sm-3">
                     <label>Select File to Import:</label>
                     {!! Form::file('sample_file', ['class' => 'form-control']) !!}
@@ -127,5 +135,6 @@
             });
 
         });
+        $("#schedule_at").datetimepicker({format: 'yyyy-mm-dd hh:ii'});
     </script>
 @endsection

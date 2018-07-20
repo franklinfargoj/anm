@@ -45,14 +45,14 @@
         <div class="container">
             <div class="row">
 
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <div class="form-group">
                         <label>District</label>
                         {!! Form::select('district', $district, '',['class' => 'form-control' ,'id'=>"district"])!!}
                     </div>
                 </div>
 
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <div class="form-group">
                         <label>Month</label>
                         <select class="form-control" name="month">
@@ -62,7 +62,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <div class="form-group">
                         <label>Year</label>
                         <select class="form-control" name="year">
@@ -73,16 +73,24 @@
                     </div>
                 </div>
 
-                <div class="col-sm-3">
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label>SMS schedule</label>
+                        <input type="text" id="schedule_at" name="schedule_at" placeholder="Selct date and time">
+                    </div>
+                </div>
+
+                <div class="col-sm-2">
                         <label>Select File to Import:</label>
                         <input type="file" class="form-control" name="sample_file" >
                 </div>
 
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <div class="form-group btn-area">
                         <button type="submit" class="btn btn-primary">Upload File</button>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -110,8 +118,11 @@
 
 @endsection
 
+
+
 @section('js')
     <script>
+
         $(function () {
             $('#uploadData').dataTable({
                 "processing": true,
@@ -132,6 +143,9 @@
                      $("td:eq(0)", row).html(html.join(","));
                  }*/
             });
-        });
+        } );
+
+        $("#schedule_at").datetimepicker({format: 'yyyy-mm-dd hh:ii'});
     </script>
+
 @endsection

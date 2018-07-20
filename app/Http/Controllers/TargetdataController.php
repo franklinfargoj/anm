@@ -117,7 +117,6 @@ class TargetdataController extends Controller
                         $moicNameInHindi = $obj->convert_to_unicode2($value["moic_name_hindi"]);
                         $anmNameInHindi = $obj->convert_to_unicode2($value["anm_name_hindi"]);
 
-
                         $arr[] = [
                             'district' => $request->get("district"),
                             'block' => $value["block"],
@@ -135,6 +134,7 @@ class TargetdataController extends Controller
                             'created_at' => $day_time,
                             'uploaded_on' => $day,
                             'weblink' => $web[$value["phc_name"]],
+                            'schedule_at'=>  $request->get("schedule_at"),
                             'filename' => $file_name,
                             'og_filename' => $og_file_name,
                             /*'beneficiary_code'=> $beneficiary[$value["phc_name"]],
