@@ -56,6 +56,8 @@ class AnmSmsDispatch extends Command
                 $cnt = count($separated_num);
                 for($i=0; $i<$cnt; $i++){
                     $combined_sms = $separated_msg[$i].' '.url('weblink/'.$sms->weblink);
+//                    $combined_sms = 'test from wrong side'.' '.url('weblink/'.$sms->weblink);
+//                    $combined_sms = 'मोबाइलसेवामेंआपकास्वागतहै';
                     $temp = [
                         'filename' => $sms->filename,
                         'name' => $separated_anm[$i],
@@ -65,7 +67,9 @@ class AnmSmsDispatch extends Command
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now()
                     ];
-                    $status = Helpers::sendSms($combined_sms, $sms->moic_mobile_number);
+
+                    $status = Helpers::sendSmsUnicode($combined_sms, $sms->moic_mobile_number);
+
                     if($status['status']){
                         $temp['is_sent'] = 1;
                         $temp['sent_at'] = Carbon::now();

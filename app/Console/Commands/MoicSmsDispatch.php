@@ -59,7 +59,7 @@ class MoicSmsDispatch extends Command
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()
                 ];
-                $status = Helpers::sendSms($combined_sms, $sms->mobile);
+                $status = Helpers::sendSmsUnicode($combined_sms, $sms->mobile);
                 if($status['status']){
                     $temp['is_sent'] = 1;
                     $temp['sent_at'] = Carbon::now();

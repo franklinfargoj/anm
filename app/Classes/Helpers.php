@@ -1,6 +1,5 @@
 <?php
 namespace App\Classes;
-use setasign\Fpdi;
 
 class Helpers{
 
@@ -37,12 +36,16 @@ class Helpers{
 	 */
 	public static function sendSms($sms, $mobile)
 	{
-		return ["status" => true, "message" => "sms sent successfully"];
-		$username = env('SMS_USERNAME');
-		$senderid = env('SMS_SENDERID');
-		$deptSecureKey = env('SMS_SECURE_KEY');
+		//return ["status" => true, "message" => "sms sent successfully"];
+        //print_r($sms);
+        //exit;
+		$username = "";
+		$password = "";
+		$senderid = "RAJSMS";
+		$deptSecureKey = "";
 		$key = hash('sha512',trim($username).trim($senderid).trim($sms).trim($deptSecureKey));
-		$url = env('SMS_URL');
+		$url = "https://msdgweb.mgov.gov.in/esms/sendsmsrequest";
+        $encryp_password = sha1(trim($password));
 		$data = array(
 		    "username" => trim($username),
 		    "password" => trim($encryp_password),
@@ -54,6 +57,28 @@ class Helpers{
 		);
 		return self::postCurl($url, $data);
 	}
+
+    public static function sendSmsUnicode($sms, $mobile)
+    {
+        $finalmessage=self::string_to_finalmessage(trim($sms));
+        $username = "";
+        $password = "";
+        $senderid = "RAJSMS";
+        $deptSecureKey = "";
+        $key = hash('sha512',trim($username).trim($senderid).trim($finalmessage).trim($deptSecureKey));
+        $url = "https://msdgweb.mgov.gov.in/esms/sendsmsrequest";
+        $encryp_password = sha1(trim($password));
+        $data = array(
+            "username" => trim($username),
+            "password" => trim($encryp_password),
+            "senderid" => trim($senderid),
+            "content" => trim($finalmessage),
+            "smsservicetype" =>"unicodemsg",
+            "mobileno" =>trim($mobile),
+            "key" => trim($key)
+        );
+        return self::post_to_url_unicode($url, $data);
+    }
 
 	/**
 	 *Genarate number with suffix for e.g 1 => 1st, 2 => 2nd
@@ -86,12 +111,45 @@ class Helpers{
     }
 
 
+    public static function string_to_finalmessage($message){
+        $finalmessage="";
+        $sss = "";
+        for($i=0;$i<mb_strlen($message,"UTF-8");$i++) {
+            $sss=mb_substr($message,$i,1,"utf-8");
+            $a=0;
+            $abc="&#".self::ordutf8($sss,$a).";";
+            $finalmessage.=$abc;
+        }
+        return $finalmessage;
+    }
+
+    public static function ordutf8($string, &$offset){
+        $code=ord(substr($string, $offset,1));
+        if ($code >= 128)
+        { //otherwise 0xxxxxxx
+            if ($code < 224) $bytesnumber = 2;//110xxxxx
+            else if ($code < 240) $bytesnumber = 3; //1110xxxx
+            else if ($code < 248) $bytesnumber = 4; //11110xxx
+            $codetemp = $code - 192 - ($bytesnumber > 2 ? 32 : 0) -
+                ($bytesnumber > 3 ? 16 : 0);
+            for ($i = 2; $i <= $bytesnumber; $i++) {
+                $offset ++;
+                $code2 = ord(substr($string, $offset, 1)) - 128;//10xxxxxx
+                $codetemp = $codetemp*64 + $code2;
+            }
+            $code = $codetemp;
+
+        }
+        return $code;
+    }
+
+
     /**
 	 *POST data to url using cURL
 	 *@param int $number
 	 *@return string
 	 */
-    public function postCurl($url, $data)
+    public static function postCurl($url, $data)
     {
 		$fields = '';
 		foreach($data as $key => $value) {
@@ -116,16 +174,27 @@ class Helpers{
 		return $result;
     }
 
-    public static function testPDF($fname)
-    {
-    	$months = \DB::table('master_months')->pluck('month_english', 'id')->toArray();
-	    $array = \DB::table('moic_ranking_reports')->first();
-	    $i = 5;
-	    $i++;
-	    libxml_use_internal_errors(true);
-	    $pdf = \PDF::setPaper('A4');
-	    $pdf = \PDF::loadView('pdfv2',['report' => $array, 'months' => $months])->save('/home/webwerk/Desktop/anm/'.$fname.'.pdf');
-	    echo $fname;
+    public static function post_to_url_unicode($url, $data) {
+        $fields = '';
+        foreach($data as $key => $value) {
+            $fields .= $key . '=' . urlencode($value) . '&';
+        }
+        rtrim($fields, '&');
+
+        $post = curl_init();
+        //curl_setopt($post, CURLOPT_SSLVERSION, 5); // uncomment for systems supporting TLSv1.1 only
+        curl_setopt($post, CURLOPT_SSLVERSION, 6); // use for systems supporting TLSv1.2 or comment the line
+        curl_setopt($post,CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($post, CURLOPT_URL, $url);
+        curl_setopt($post, CURLOPT_POST, count($data));
+        curl_setopt($post, CURLOPT_POSTFIELDS, $fields);
+        curl_setopt($post, CURLOPT_HTTPHEADER, array("Content-Type:application/x-www-form-urlencoded"));
+        curl_setopt($post, CURLOPT_HTTPHEADER, array("Content-length:"
+            . strlen($fields) ));
+        curl_setopt($post, CURLOPT_HTTPHEADER, array("User-Agent:Mozilla/4.0 (compatible; MSIE 5.0; Windows 98; DigExt)"));
+        curl_setopt($post, CURLOPT_RETURNTRANSFER, 1);
+        echo $result = curl_exec($post); //result from mobile seva server
+        curl_close($post);
     }
 
 }

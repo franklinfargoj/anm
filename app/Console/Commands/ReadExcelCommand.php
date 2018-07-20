@@ -117,7 +117,7 @@ class ReadExcelCommand extends Command
 
                         }
 
-                        if($sheet == "anm_translations"){
+                     /*   if($sheet == "anm_translations"){
                             if(!empty($data)){
                             foreach ($data as $key => $value){
                                 if($value['anm_name'] == null && $value['translation'] == null && $value['languageid'] == null )
@@ -135,10 +135,10 @@ class ReadExcelCommand extends Command
                             }
                             }
                             AnmDetailsModel::insert($lstAnm);  //Inserting data into anm_details table
-                        }
+                        }*/
 
 
-                        if($sheet == "phc_translations"){
+                   /*     if($sheet == "phc_translations"){
 
                             if(!empty($data)){
                             foreach ($data as $key => $value){
@@ -156,7 +156,7 @@ class ReadExcelCommand extends Command
                             }
                             }
                             PhcTranslationModel::insert($phc);  //Inserting data into phc table
-                        }
+                        }*/
                     }
 
                     //update status flag as Y
