@@ -61,12 +61,12 @@ class Helpers{
     public static function sendSmsUnicode($sms, $mobile)
     {
         $finalmessage=self::string_to_finalmessage(trim($sms));
-        $username = "";
-        $password = "";
-        $senderid = "RAJSMS";
-        $deptSecureKey = "";
+        $username = env('SMS_USERNAME');
+        $password = env('SMS_PASS');
+        $senderid = env('SMS_SENDERID');
+        $deptSecureKey = env('SMS_SECURE_KEY');
         $key = hash('sha512',trim($username).trim($senderid).trim($finalmessage).trim($deptSecureKey));
-        $url = "https://msdgweb.mgov.gov.in/esms/sendsmsrequest";
+        $url = env('SMS_URL');
         $encryp_password = sha1(trim($password));
         $data = array(
             "username" => trim($username),
@@ -180,7 +180,6 @@ class Helpers{
             $fields .= $key . '=' . urlencode($value) . '&';
         }
         rtrim($fields, '&');
-
         $post = curl_init();
         //curl_setopt($post, CURLOPT_SSLVERSION, 5); // uncomment for systems supporting TLSv1.1 only
         curl_setopt($post, CURLOPT_SSLVERSION, 6); // use for systems supporting TLSv1.2 or comment the line
@@ -193,8 +192,10 @@ class Helpers{
             . strlen($fields) ));
         curl_setopt($post, CURLOPT_HTTPHEADER, array("User-Agent:Mozilla/4.0 (compatible; MSIE 5.0; Windows 98; DigExt)"));
         curl_setopt($post, CURLOPT_RETURNTRANSFER, 1);
-        echo $result = curl_exec($post); //result from mobile seva server
+        $result = curl_exec($post); //result from mobile seva server
+        $httpcode = curl_getinfo($post, CURLINFO_HTTP_CODE);
         curl_close($post);
+        return ["status" => $httpcode, "response" => $result];
     }
 
 }

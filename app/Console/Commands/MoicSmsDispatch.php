@@ -43,7 +43,7 @@ class MoicSmsDispatch extends Command
     public function handle()
     {
         //To check any new sms request
-        $new_sms = MoicRanking::where('sms_sent_initiated', 0)->get();
+        $new_sms = MoicRanking::where('sms_sent_initiated', 0)->where('schedule_at', '<=', Carbon::now())->get();
         $count = count($new_sms);
         if($count > 0){
             $ids = $new_sms->pluck('id');
@@ -60,7 +60,7 @@ class MoicSmsDispatch extends Command
                     'updated_at' => Carbon::now()
                 ];
                 $status = Helpers::sendSmsUnicode($combined_sms, $sms->mobile);
-                if($status['status']){
+                if($status['status'] == 200 && (str_contains($status['response'], '402') == true)){
                     $temp['is_sent'] = 1;
                     $temp['sent_at'] = Carbon::now();
                 }

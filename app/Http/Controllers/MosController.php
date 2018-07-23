@@ -219,9 +219,12 @@ class MosController extends Controller
     {
         $months = \DB::table('master_months')->pluck('month_english', 'id')->toArray();
         $report = \DB::table('moic_ranking_reports')->where('dr_weblink', $link)->get()->toArray();
-        $report = $report[0];
-
-        return view('moic_reports', compact('report', 'months'));
+        if(!empty($report)){
+            $report = $report[0];
+            return view('moic_reports', compact('report', 'months'));
+        }else{
+            return redirect('/get-mos');
+        }
     }
 
     public function downloadZip($path)
