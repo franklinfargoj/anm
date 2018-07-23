@@ -83,7 +83,6 @@ class ProcessedFileController extends Controller
        $block_n = Block::select('block_name')->where('id',$block_id)->first();
        $block_name = $block_n['block_name'];
 
-
         $beneficiary_data = BeneficiaryModel::select('beneficary_mobile_number','district_id','phc_name','master_district.district_name')
                                               ->join('master_district','beneficary_details.district_id', '=', 'master_district.id')
                                               ->where('filename','=',$file_name)
@@ -167,8 +166,8 @@ class ProcessedFileController extends Controller
 
                     $excelData[] = array(
                         $value['district_name'],
-                        $block_name,
-                        $value['phc_name'],
+                        ucwords($block_name),
+                        ucwords($value['phc_name']),
                         $value['beneficary_mobile_number'],
                         $link_weblink_text,
                         $message_text,
