@@ -332,13 +332,10 @@ table thead tr th, table tbody tr td{
 	border: 0px !important;
 	padding: 10px !important;
 }
-table thead tr {
-	background-color: #347ab7;
-}
-table thead tr th {
+table thead tr th{
 	font-weight: bold !important;
-	color: #ffffff;
-	font-size: 14px;
+    color: #4c4a4a;
+    font-size: 14px;
 }
 
 #uploadData{
@@ -386,12 +383,12 @@ a {
 #processfile{
 	padding-top: 25px;
 }
-/*#processfile thead tr{*/
-	/*background-color: #ccc;*/
-/*}*/
+#processfile thead tr{
+	background-color: #ccc;
+}
 
 
-header .tagline{
+/*header .tagline{
 	font-size: 30px;
 	color: #ffffff;
 	font-weight: 100;
@@ -401,7 +398,7 @@ header .tagline{
 header .tagline span {
 	display: block;
 	font-size: 15px;
-}
+}*/
 
 .logout-btn{
 	font-size: 20px;
@@ -538,7 +535,10 @@ h5 {
 }
 
 .table {
-
+	-webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.4);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.4);
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.4);
+    border-radius: 20px;
     background-color: #ffffff;
 }
 
