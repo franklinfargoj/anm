@@ -5,12 +5,12 @@
 <meta charset="UTF-8">
 <title>ANM</title>
 <style type="text/css" media="screen">
-        @media all {
+        /*@media all {
             .page-break{display:none;}
         }
         @media print {
             .page-break{display:block; page-break-before:always;}
-        }
+        }*/
     </style>
 </head>
 
@@ -40,7 +40,8 @@
     </div>
     <!-- Main Header -->
 
-
+    <br>
+    <br>
     <div style="background-color: #fff;">
         <div style="width:95%; margin: 0 auto;">
             <!-- Table Header -->
@@ -159,7 +160,6 @@
                     </ul>
                 </div>
             </div>
-            <div class="page-break"></div>
 
             <!--CDs div-->
             <div style="display: table; table-layout: fixed; padding: 0px; width: 100%;  border: 1px solid #d1d1d1; margin-bottom: 20px;">
@@ -226,7 +226,7 @@
                     </ul>
                 </div>
             </div>
-
+            <div style="display:block; page-break-before:always;"></div>
 
             <!--Gevernance div -->
             <div style="display: table; table-layout: fixed; padding: 0px; width: 100%;  border: 1px solid #d1d1d1; margin-bottom: 20px;">
@@ -292,10 +292,9 @@
                     </ul>
                 </div>
             </div>
-            <div class="page-break"></div>
 
             <!--Reporting div-->
-            <!--<div style="display: table; table-layout: fixed; padding: 0px; width: 100%;  border: 1px solid #d1d1d1; margin-bottom: 20px;">
+            <div style="display: table; table-layout: fixed; padding: 0px; width: 100%;  border: 1px solid #d1d1d1; margin-bottom: 20px;">
                 <div style="display: table-cell; width: 15%; font-size:0.7em; font-weight:bold;  padding:5px 20px;  margin:0px; text-align: center; vertical-align: middle; color: #fff; background:#2a9dd0">
                     <p>Reporting</p>
                 </div>
@@ -333,7 +332,7 @@
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->fi_state }}</li>
                     </ul>
                 </div>
-            </div>-->
+            </div>
         </div>
     </div>
 
