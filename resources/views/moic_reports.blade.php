@@ -74,8 +74,8 @@
 					<tr>
 						<th rowspan="2" valign="middle">Utilization</th>
 						<td>OPDs/day (>40)</td>
-						<td>{{ $report->opd_target }}%</td>
-						<td>{{ $report->opd_performance }}%</td>
+						<td>{{ $report->opd_target }}</td>
+						<td>{{ $report->opd_performance }}</td>
 						<td>{{ $report->opd_block }}</td>
 						<td>{{ $report->opd_district }}</td>
 						<td>{{ $report->opd_state }}</td>
@@ -162,24 +162,24 @@
 					<tr>
 						<th rowspan="3" valign="middle">CDs</th>
 						<td>Pneumonia prevalence</td>
-						<td>{{ Helpers::convertToPercent($report->pneumonia_target) }}%</td>
-						<td>{{ Helpers::convertToPercent($report->pneumonia_performance) }}%</td>
+						<td>{{ $report->pneumonia_target }}</td>
+						<td>{{ $report->pneumonia_performance }}</td>
 						<td>{{ $report->pneumonia_block }}</td>
 						<td>{{ $report->pneumonia_district }}</td>
 						<td>{{ $report->pneumonia_state }}</td>
 					</tr>
 					<tr>
 						<td>Malaria slides collected</td>
-						<td>{{ $report->malaria_target }}%</td>
-						<td>{{ $report->malaria_performance }}%</td>
+						<td>{{ Helpers::convertToPercent($report->malaria_target) }}%</td>
+						<td>{{ Helpers::convertToPercent($report->malaria_performance) }}%</td>
 						<td>{{ $report->malaria_block }}</td>
 						<td>{{ $report->malaria_district }}</td>
 						<td>{{ $report->malaria_state }}</td>
 					</tr>
 					<tr>
 						<td>Diarrhea prevalence</td>
-						<td>{{ $report->diarrhea_target }}%</td>
-						<td>{{ $report->diarrhea_performance }}%</td>
+						<td>{{ $report->diarrhea_target }}</td>
+						<td>{{ $report->diarrhea_performance }}</td>
 						<td>{{ $report->diarrhea_block}}</td>
 						<td>{{ $report->diarrhea_district }}</td>
 						<td>{{ $report->diarrhea_state }}</td>
@@ -219,8 +219,8 @@
 					<tr>
 						<th rowspan="6" valign="middle">Governance</th>
 						<td># Days patient vouchers were updated this month </td>
-						<td>{{ $report->days_patient_voucher_target }}%</td>
-						<td>{{ $report->days_patient_voucher_performance }}%</td>
+						<td>{{ $report->days_patient_voucher_target }}</td>
+						<td>{{ $report->days_patient_voucher_performance }}</td>
 						<td>{{ $report->days_patient_voucher_block }}</td>
 						<td>{{ $report->days_patient_voucher_district }}</td>
 						<td>{{ $report->days_patient_voucher_state }}</td>
