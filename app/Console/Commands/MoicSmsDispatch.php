@@ -83,12 +83,12 @@ class MoicSmsDispatch extends Command
             $insert = [];
             echo $count.' failed requests found'.PHP_EOL;
             foreach($fails as $sms){
-                $status = Helpers::sendSms($sms->sms, $sms->mobile);
-                if($status['status']){
+                $status = Helpers::sendSmsUnicode($sms->sms, $sms->mobile);
+                if($status['status'] == 200 && (str_contains($status['response'], '402') == true)){
                     $temp['is_sent'] = 1;
                     $temp['sent_at'] = Carbon::now();
+                    DB::table('mois_anm_sms_logs')->where('id', $sms->id)->update($temp);
                 }
-                DB::table('mois_anm_sms_logs')->where('id', $sms->id)->update($temp);
             }
             echo "Done!!".PHP_EOL;
         }else{
