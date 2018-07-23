@@ -237,11 +237,11 @@ footer p {
 .login-form-area label {
 	color: #999999;
 }
-.login-lhs .tagline {
+.login-lhs .tagline{
 	font-size: 35px;
 	color: #ffffff;
 }
-.login-lhs .tagline span {
+.login-lhs .tagline span{
 	display: block;
 	font-size: 20px;
 }
@@ -332,11 +332,15 @@ table thead tr th, table tbody tr td{
 	border: 0px !important;
 	padding: 10px !important;
 }
-table thead tr th{
-	font-weight: bold !important;
-    color: #4c4a4a;
-    font-size: 14px;
+table thead tr {
+	background-color: #347ab7;
 }
+table thead tr th {
+	font-weight: bold !important;
+	color: #ffffff;
+	font-size: 14px;
+}
+
 #uploadData{
 	padding-top: 25px;
 }
@@ -382,9 +386,23 @@ a {
 #processfile{
 	padding-top: 25px;
 }
-#processfile thead tr{
-	background-color: #ccc;
+/*#processfile thead tr{*/
+	/*background-color: #ccc;*/
+/*}*/
+
+
+header .tagline{
+	font-size: 30px;
+	color: #ffffff;
+	font-weight: 100;
+	opacity: 0.4;
+	line-height: 24px;
 }
+header .tagline span {
+	display: block;
+	font-size: 15px;
+}
+
 .logout-btn{
 	font-size: 20px;
     font-weight: bold;
@@ -520,10 +538,7 @@ h5 {
 }
 
 .table {
-	    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.4);
-    -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.4);
-    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.4);
-    border-radius: 20px;
+
     background-color: #ffffff;
 }
 
