@@ -79,9 +79,7 @@ class ProcessedFileController extends Controller
       }
 
        $block=AnmTargetDataModel::select('block')->where('filename',$file_name)->first();
-       $block_id = $block['block'];
-       $block_n = Block::select('block_name')->where('id',$block_id)->first();
-       $block_name = $block_n['block_name'];
+       $block_name = $block['block'];
 
         $beneficiary_data = BeneficiaryModel::select('beneficary_mobile_number','district_id','phc_name','master_district.district_name')
                                               ->join('master_district','beneficary_details.district_id', '=', 'master_district.id')
@@ -114,7 +112,7 @@ class ProcessedFileController extends Controller
                     $excelData[] = array(
                         $value['district']['district_name'],
                         $value['block'],
-                        $value['phc_name'],
+                        ucwords($value['phc_name']),
                         $value['moic_name'],
                         $value['moic_mobile_number'],
                         $value['anm_name'],
