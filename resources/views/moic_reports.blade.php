@@ -178,8 +178,8 @@
 					</tr>
 					<tr>
 						<td>Diarrhea prevalence</td>
-						<td>{{ Helpers::convertToPercent($report->diarrhea_target) }}%</td>
-						<td>{{ Helpers::convertToPercent($report->diarrhea_performance) }}%</td>
+						<td>{{ $report->diarrhea_target }}%</td>
+						<td>{{ $report->diarrhea_performance }}%</td>
 						<td>{{ $report->diarrhea_block}}</td>
 						<td>{{ $report->diarrhea_district }}</td>
 						<td>{{ $report->diarrhea_state }}</td>
@@ -219,8 +219,8 @@
 					<tr>
 						<th rowspan="6" valign="middle">Governance</th>
 						<td># Days patient vouchers were updated this month </td>
-						<td>{{ Helpers::convertToPercent($report->days_patient_voucher_target) }}%</td>
-						<td>{{ Helpers::convertToPercent($report->days_patient_voucher_performance) }}%</td>
+						<td>{{ $report->days_patient_voucher_target }}%</td>
+						<td>{{ $report->days_patient_voucher_performance }}%</td>
 						<td>{{ $report->days_patient_voucher_block }}</td>
 						<td>{{ $report->days_patient_voucher_district }}</td>
 						<td>{{ $report->days_patient_voucher_state }}</td>
