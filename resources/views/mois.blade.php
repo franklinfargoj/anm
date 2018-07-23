@@ -135,6 +135,14 @@
             });
 
         });
-        $("#schedule_at").datetimepicker({format: 'yyyy-mm-dd hh:ii'});
+
+        var d1 = new Date();
+        var d2 = new Date();
+        d1.setHours(+d2.getHours()+2);
+
+        $("#schedule_at").datetimepicker({
+                format: 'yyyy-mm-dd hh:ii',
+                startDate: d1
+        });
     </script>
 @endsection
