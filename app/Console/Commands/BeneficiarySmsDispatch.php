@@ -91,12 +91,12 @@ class BeneficiarySmsDispatch extends Command
             $insert = [];
             echo $count.' failed requests found'.PHP_EOL;
             foreach($fails as $sms){
-                $status = Helpers::sendSms($sms->sms, $sms->mobile);
+                $status = Helpers::sendSmsUnicode($sms->sms, $sms->mobile);
                 if($status['status']){
                     $temp['is_sent'] = 1;
                     $temp['sent_at'] = Carbon::now();
+                    DB::table('anm_mos_smslogs')->where('id', $sms->id)->update($temp);
                 }
-                DB::table('anm_mos_smslogs')->where('id', $sms->id)->update($temp);
             }
             echo "Dispatched!!".PHP_EOL;
         }else{

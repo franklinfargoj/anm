@@ -69,8 +69,7 @@ class AnmSmsDispatch extends Command
                     ];
 
                     $status = Helpers::sendSmsUnicode($combined_sms, $sms->moic_mobile_number);
-
-                    if($status['status']){
+                    if($status['status'] == 200 && (str_contains($status['response'], '402') == true)){
                         $temp['is_sent'] = 1;
                         $temp['sent_at'] = Carbon::now();
                     }
@@ -94,12 +93,12 @@ class AnmSmsDispatch extends Command
             $insert = [];
             echo $count.' failed requests found'.PHP_EOL;
             foreach($fails as $sms){
-                $status = Helpers::sendSms($sms->sms, $sms->mobile);
-                if($status['status']){
+                $status = Helpers::sendSmsUnicode($sms->sms, $sms->mobile);
+                if($status['status'] == 200 && (str_contains($status['response'], '402') == true)){
                     $temp['is_sent'] = 1;
                     $temp['sent_at'] = Carbon::now();
+                    DB::table('anm_mos_smslogs')->where('id', $sms->id)->update($temp);
                 }
-                DB::table('anm_mos_smslogs')->where('id', $sms->id)->update($temp);
             }
             echo "Dispatched!!".PHP_EOL;
         }else{
