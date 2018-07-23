@@ -70,8 +70,8 @@
                 <div style="display: table-cell; width: 85%;">
                     <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0; width: 100%;">
                         <li style="font-size: 0.6em; color: #000; display: table-cell; padding:5px 20px;  margin:0px; text-align: center; width: 25%">OPDs/day (>40)</li>
-                        <li style="font-size: 0.6em; color: #000; display: table-cell; padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->opd_target) }}%</li>
-                        <li style="font-size: 0.6em; color: #000; display: table-cell; padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->opd_performance) }}%</li>
+                        <li style="font-size: 0.6em; color: #000; display: table-cell; padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->opd_target }}</li>
+                        <li style="font-size: 0.6em; color: #000; display: table-cell; padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->opd_performance }}</li>
                         <li style="font-size: 0.6em; color: #000; display: table-cell; padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->opd_block }}</li>
                         <li style="font-size: 0.6em; color: #000; display: table-cell; padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->opd_district }}</li>
                         <li style="font-size: 0.6em; color: #000; display: table-cell; padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->opd_state }}</li>
@@ -169,8 +169,8 @@
                 <div style="display: table-cell; width: 85%;">
                     <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0px; width: 100%;">
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 25%">Pneumonia prevalence</li>
-                        <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->pneumonia_target) }}%</li>
-                        <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->pneumonia_performance) }}%</li>
+                        <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->pneumonia_target }}</li>
+                        <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->pneumonia_performance }}</li>
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->pneumonia_block }}</li>
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->pneumonia_district }}</li>
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->pneumonia_state }}</li>
@@ -185,8 +185,8 @@
                     </ul>
                     <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0px; width: 100%;">
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 25%">Diarrhea prevalence</li>
-                        <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->diarrhea_target) }}%</li>
-                        <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->diarrhea_performance) }}%</li>
+                        <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->diarrhea_target }}</li>
+                        <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->diarrhea_performance }}</li>
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->diarrhea_block}}</li>
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->diarrhea_district }}</li>
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->diarrhea_state }}</li>
@@ -236,8 +236,8 @@
                 <div style="display: table-cell; width: 85%;">
                     <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0px; width: 100%;">
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 25%"># Days patient vouchers were updated this month </li>
-                        <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->days_patient_voucher_target) }}%</li>
-                        <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->days_patient_voucher_performance) }}%</li>
+                        <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->days_patient_voucher_target }}</li>
+                        <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->days_patient_voucher_performance }}</li>
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->days_patient_voucher_block }}</li>
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->days_patient_voucher_district }}</li>
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->days_patient_voucher_state }}</li>
