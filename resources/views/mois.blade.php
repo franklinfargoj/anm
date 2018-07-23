@@ -141,6 +141,7 @@
         d1.setHours(+d2.getHours()+2);
 
         $("#schedule_at").datetimepicker({
+                autoclose: true,
                 format: 'yyyy-mm-dd hh:ii',
                 startDate: d1
         });
