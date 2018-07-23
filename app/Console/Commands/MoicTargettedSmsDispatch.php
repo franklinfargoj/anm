@@ -42,7 +42,7 @@ class MoicTargettedSmsDispatch extends Command
      */
     public function handle()
     {
-        $newsms = AnmTargetDataModel::where('moic_sms_initiated', 0)->get();
+        $newsms = AnmTargetDataModel::where('moic_sms_initiated', 0)->where('schedule_at', '<', Carbon::now())->get();
         $cnt = count($newsms);
         if($cnt > 0){
             echo $cnt." new moic sms requests found".PHP_EOL;
@@ -59,8 +59,8 @@ class MoicTargettedSmsDispatch extends Command
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()
                 ];
-                $status = Helpers::sendSms($combined_sms, $sms->moic_mobile_number);
-                if($status['status']){
+                $status = Helpers::sendSmsUnicode($combined_sms, $sms->moic_mobile_number);
+                if($status['status'] == 200 && (str_contains($status['response'], '402') == true)){
                     $temp['is_sent'] = 1;
                     $temp['sent_at'] = Carbon::now();
                 }
