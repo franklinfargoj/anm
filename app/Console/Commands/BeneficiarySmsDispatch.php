@@ -47,7 +47,7 @@ class BeneficiarySmsDispatch extends Command
         $newsms = BeneficiaryModel::where('benef_sms_initiated', 0)->get();
         $cnt = count($newsms);
         if($cnt > 0){
-            $benef_sms = AnmTargetDataModel::select('beneficiary_custom_msg', 'phc_name', 'weblink')->groupBy('phc_name')->get()->toArray();
+            $benef_sms = AnmTargetDataModel::select('beneficiary_custom_msg', 'phc_name', 'weblink')->where('schedule_at', '<=', Carbon::now())->groupBy('phc_name')->get()->toArray();
             echo $cnt." new beneficiary sms requests found".PHP_EOL;
             $insert = [];
             foreach ($newsms as $sms){
@@ -60,15 +60,15 @@ class BeneficiarySmsDispatch extends Command
                     $combined_sms = $array['beneficiary_custom_msg'].' '.url('weblink/'.$array['weblink']);
                     $temp = [
                         'filename' => $sms->filename,
-                        'name' => $sms->phc_name,
-                        'mobile' => $sms->beneficary_mobile_number,
+                        'name' => ($sms->phc_name != '')?$sms->phc_name:'',
+                        'mobile' => ($sms->beneficary_mobile_number != '')?$sms->beneficary_mobile_number:0,
                         'type' => 'beneficiary',
                         'sms' => $combined_sms,
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now()
                     ];
                     $status = Helpers::sendSmsUnicode($combined_sms, $sms->beneficary_mobile_number);
-                    if($status['status']){
+                    if($status['status'] == 200 && (str_contains($status['response'], '402') == true)){
                         $temp['is_sent'] = 1;
                         $temp['sent_at'] = Carbon::now();
                     }

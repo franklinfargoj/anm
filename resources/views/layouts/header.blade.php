@@ -2,7 +2,15 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <img src="{{ asset('images/logo.png') }}" alt="" class="img-responsive">
+                <div class="row">
+                    <div class="col-md-3">
+                        <img src="{{ asset('images/logo.png') }}" alt="" class="img-responsive">
+                    </div>
+                    <div class="col-md-9">
+                        <div class="tagline">Governance <span>Innovation Model</span></div>
+                    </div>
+                </div>
+
             </div>
             <div class="col-md-6 text-right header-links">
 
