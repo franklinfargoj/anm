@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1>MOIC Rankings Import</h1>
+                    <h1 class="page-title">MOIC Rankings Import</h1>
                 </div>
             </div>
         </div>
@@ -45,7 +45,7 @@
     <section>
         <div class="container">
             <div class="row">
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <div class="form-group">
                         <label>Month</label>
                         <select class="form-control" name="month">
@@ -55,7 +55,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <div class="form-group">
                         <label>Year</label>
                         <select class="form-control" name="year">

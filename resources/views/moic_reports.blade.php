@@ -37,30 +37,24 @@
 
 <section class="reports-area navbar-fixed-top">
 	<div class="container">
-		<div class="box-area">
-			<div class="row">
-				<div class="col-md-4 text-center">
-					<h5>May 2018 Report Card</h5>
-					<ul>
-						<li>Program</li>
-						<li>Metric</li>
-					</ul>
-				</div>
-				<div class="col-md-4 text-center">
-					<h5>MOIC Name:</h5>
-					<ul>
-						<li>Target</li>
-						<li>May'18 Performance</li>
-					</ul>
-				</div>
-				<div class="col-md-4 text-center">
-					<h5>Best Performing PHC</h5>
-					<ul>
-						<li>In the block</li>
-						<li>In Alwar</li>
-						<li>In Rajasthan</li>
-					</ul>
-				</div>
+		<div class="row">
+			<div class="col-md-12">
+				<table width="100%" class="table report-card-table fancy-table">
+					<tr>
+						<td colspan="2">May 2018 Report Card</td>
+						<td colspan="2">MOIC Name:</td>
+						<td colspan="3">Best Performing PHC</td>
+					</tr>
+					<tr>
+						<td width="15%">Program</td>
+						<td width="25%" class="text-left" align="left">Metric</td>
+						<td width="12%">Target</td>
+						<td width="12%">May'18 Performance</td>
+						<td width="12%">In the block</td>
+						<td width="12%">In Alwar</td>
+						<td width="12%">In Rajasthan</td>
+					</tr>
+				</table>
 			</div>
 		</div>
 	</div>
@@ -70,15 +64,15 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<table width="100%" class="table">
+				<table width="100%" class="table fancy-table">
 					<tr>
-						<th rowspan="2" valign="middle">Utilization</th>
-						<td>OPDs/day (>40)</td>
-						<td>{{ $report->opd_target }}</td>
-						<td>{{ $report->opd_performance }}</td>
-						<td>{{ $report->opd_block }}</td>
-						<td>{{ $report->opd_district }}</td>
-						<td>{{ $report->opd_state }}</td>
+						<th width="15%" rowspan="2" valign="middle">Utilization</th>
+						<td width="25%">OPDs/day (>40)</td>
+						<td width="12%">{{ $report->opd_target }}</td>
+						<td width="12%">{{ $report->opd_performance }}</td>
+						<td width="12%">{{ $report->opd_block }}</td>
+						<td width="12%">{{ $report->opd_district }}</td>
+						<td width="12%">{{ $report->opd_state }}</td>
 					</tr>
 					<tr>
 						<td>Proportion of <br/> Institutional Delivery</td>
@@ -90,15 +84,15 @@
 					</tr>
 				</table>
 
-				<table width="100%" class="table">
+				<table width="100%" class="table fancy-table">
 					<tr>
-						<th rowspan="8" valign="middle">RMNCH + A</th>
-						<td>Full Immunization Coverage</td>
-						<td>{{ Helpers::convertToPercent($report->fic_target) }}%</td>
-						<td>{{ Helpers::convertToPercent($report->fic_performance) }}%</td>
-						<td>{{ $report->fic_block }}</td>
-						<td>{{ $report->fic_district }}</td>
-						<td>{{ $report->fic_state }}</td>
+						<th width="15%" rowspan="8" valign="middle">RMNCH + A</th>
+						<td width="25%">Full Immunization Coverage</td>
+						<td width="12%">{{ Helpers::convertToPercent($report->fic_target) }}%</td>
+						<td width="12%">{{ Helpers::convertToPercent($report->fic_performance) }}%</td>
+						<td width="12%">{{ $report->fic_block }}</td>
+						<td width="12%">{{ $report->fic_district }}</td>
+						<td width="12%">{{ $report->fic_state }}</td>
 					</tr>
 					<tr>
 						<td>ANC 3 Coverage</td>
@@ -158,15 +152,15 @@
 					</tr>
 				</table>
 
-				<table width="100%" class="table">
+				<table width="100%" class="table fancy-table">
 					<tr>
-						<th rowspan="3" valign="middle">CDs</th>
-						<td>Pneumonia prevalence</td>
-						<td>{{ $report->pneumonia_target }}</td>
-						<td>{{ $report->pneumonia_performance }}</td>
-						<td>{{ $report->pneumonia_block }}</td>
-						<td>{{ $report->pneumonia_district }}</td>
-						<td>{{ $report->pneumonia_state }}</td>
+						<th width="15%" rowspan="3" valign="middle">CDs</th>
+						<td width="25%">Pneumonia prevalence</td>
+						<td width="12%">{{ $report->pneumonia_target }}</td>
+						<td width="12%">{{ $report->pneumonia_performance }}</td>
+						<td width="12%">{{ $report->pneumonia_block }}</td>
+						<td width="12%">{{ $report->pneumonia_district }}</td>
+						<td width="12%">{{ $report->pneumonia_state }}</td>
 					</tr>
 					<tr>
 						<td>Malaria slides collected</td>
@@ -187,15 +181,15 @@
 				</table>
 
 
-				<table width="100%" class="table">
+				<table width="100%" class="table fancy-table">
 					<tr>
-						<th rowspan="3" valign="middle">NCDs</th>
-						<td>prevalence (old and new cases) %Hypertension </td>
-						<td>{{ Helpers::convertToPercent($report->hp_target) }}%</td>
-						<td>{{ Helpers::convertToPercent($report->hp_performance) }}%</td>
-						<td>{{ $report->hp_block}}</td>
-						<td>{{ $report->hp_district }}</td>
-						<td>{{ $report->hp_state }}</td>
+						<th width="15%" rowspan="3" valign="middle">NCDs</th>
+						<td width="25%">prevalence (old and new cases) %Hypertension </td>
+						<td width="12%">{{ Helpers::convertToPercent($report->hp_target) }}%</td>
+						<td width="12%">{{ Helpers::convertToPercent($report->hp_performance) }}%</td>
+						<td width="12%">{{ $report->hp_block}}</td>
+						<td width="12%">{{ $report->hp_district }}</td>
+						<td width="12%">{{ $report->hp_state }}</td>
 					</tr>
 					<tr>
 						<td>Diabetes prevalence (old and new cases) %</td>
@@ -215,15 +209,15 @@
 					</tr>
 				</table>
 
-				<table width="100%" class="table">
+				<table width="100%" class="table fancy-table">
 					<tr>
-						<th rowspan="6" valign="middle">Governance</th>
-						<td># Days patient vouchers were updated this month </td>
-						<td>{{ $report->days_patient_voucher_target }}</td>
-						<td>{{ $report->days_patient_voucher_performance }}</td>
-						<td>{{ $report->days_patient_voucher_block }}</td>
-						<td>{{ $report->days_patient_voucher_district }}</td>
-						<td>{{ $report->days_patient_voucher_state }}</td>
+						<th width="15%" rowspan="6" valign="middle">Governance</th>
+						<td width="25%"># Days patient vouchers were updated this month </td>
+						<td width="12%">{{ $report->days_patient_voucher_target }}</td>
+						<td width="12%">{{ $report->days_patient_voucher_performance }}</td>
+						<td width="12%">{{ $report->days_patient_voucher_block }}</td>
+						<td width="12%">{{ $report->days_patient_voucher_district }}</td>
+						<td width="12%">{{ $report->days_patient_voucher_state }}</td>
 					</tr>
 					<tr>
 						<td>% Patient Vouchers recorded vs OPD for the month</td>
@@ -267,15 +261,15 @@
 					</tr>
 				</table>
 
-				<table width="100%" class="table">
+				<table width="100%" class="table fancy-table">
 					<tr>
-						<th rowspan="4" valign="middle">Reporting</th>
-						<td>Pregnant Women registered on PCTS - line list vs. expected PW </td>
-						<td>{{ Helpers::convertToPercent($report->linelist_vs_expected_target) }}%</td>
-						<td>{{ Helpers::convertToPercent($report->linelist_vs_expected_performance) }}%</td>
-						<td>{{ $report->linelist_vs_expected_block }}</td>
-						<td>{{ $report->linelist_vs_expected_district }}</td>
-						<td>{{ $report->linelist_vs_expected_state }}</td>
+						<th width="15%" rowspan="4" valign="middle">Reporting</th>
+						<td width="25%">Pregnant Women registered on PCTS - line list vs. expected PW </td>
+						<td width="12%">{{ Helpers::convertToPercent($report->linelist_vs_expected_target) }}%</td>
+						<td width="12%">{{ Helpers::convertToPercent($report->linelist_vs_expected_performance) }}%</td>
+						<td width="12%">{{ $report->linelist_vs_expected_block }}</td>
+						<td width="12%">{{ $report->linelist_vs_expected_district }}</td>
+						<td width="12%">{{ $report->linelist_vs_expected_state }}</td>
 					</tr>
 					<tr>
 						<td>Live births registered on PCTS vs. expected </td>
