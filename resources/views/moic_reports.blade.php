@@ -41,8 +41,8 @@
 			<div class="col-md-12">
 				<table width="100%" class="table report-card-table fancy-table">
 					<tr>
-						<td colspan="2">May 2018 Report Card</td>
-						<td colspan="2">MOIC Name:</td>
+						<td colspan="2">{{$months[$report->month]}} 2018 Report Card</td>
+						<td colspan="2">MOIC Name: {{$report->moic_name}}</td>
 						<td colspan="3">Best Performing PHC</td>
 					</tr>
 					<tr>

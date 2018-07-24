@@ -68,6 +68,7 @@ class ExportRankingReports extends Command
                                     'dr_weblink' => $weblink,
                                     'block' => $ranking['block_name'],
                                     'phc_name' => $ranking['phc_name'],
+                                    'moic_name' => $ranking['moic_name'],
                                     'month' => $month,
                                     'year' => $year,
                                     'moic' => $ranking['moic_name'],

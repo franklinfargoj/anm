@@ -47,7 +47,7 @@
             <!-- Table Header -->
             <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0px; width: 100%;">
                <li style="background-color: #d7f1fd; font-size:0.8em; color: #000; display: table-cell; padding: 10px 20px; text-align: center; width: 40%;">{{$months[$report->month]}} {{$report->year}} Report Card</li>
-               <li style="background-color: #d7f1fd; font-size:0.8em; color: #000; display: table-cell; padding: 10px 20px; text-align: center; width: 24%;">MOIC Name:</li>
+               <li style="background-color: #d7f1fd; font-size:0.8em; color: #000; display: table-cell; padding: 10px 20px; text-align: center; width: 24%;">MOIC Name: {{$report->moic_name}}</li>
                <li style="background-color: #d7f1fd; font-size:0.8em; color: #000; display: table-cell; padding: 10px 20px; text-align: center; width: 36%;">Best Performing PHC</li>
             </ul>
             <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0px; width:100%;">
