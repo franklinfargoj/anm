@@ -21,7 +21,7 @@ Route::group(['middleware'=>'auth'], function (){
     Route::get('get-mos', 'MosController@index'); //okay
     Route::post('mos','MosController@importRankings')->name('mos'); //okay
     Route::get('rankingdetails/{id}', 'MosController@ajaxMoic')->name('rankingdetails'); //okay
-    Route::get('export_mos','MosController@export_mos')->name('export_mos'); //okay
+    Route::get('export_mos/{id}','MosController@export_mos')->name('export_mos'); //okay
     Route::get('ajax-moic', 'MosController@fetchRankingData'); //okay
 
     Route::get('rank/{id}', 'MosController@rank_details')->name('rank');

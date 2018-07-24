@@ -55,7 +55,7 @@ class MosController extends Controller
 
     public function ajaxMoic($id)
     {
-       return view('moic_detail',compact('id'));
+        return view('moic_detail',compact('id'));
     }
 
 
@@ -155,11 +155,17 @@ class MosController extends Controller
     }
 
 
-    public function export_mos(){
+    public function export_mos($id){
+        $file = MoicRanking::select('uploaded_file')
+                                        ->where('id',$id)
+                                        ->first()->toArray();
+        $file_name = $file['uploaded_file'];
 
         $moic_data = MoicRanking::select('block','phc_en','dr_name_en','mobile','email','ranking_pdf','sms')
-                              ->get()
-                              ->toArray();
+                                        ->where('uploaded_file',$file_name)
+                                        ->get()
+                                        ->toArray();
+
         \Excel::create('moic_ranking'.time(), function($excel) use($moic_data) {
 
             $excel->sheet('moic', function ($sheet) use ($moic_data) {
