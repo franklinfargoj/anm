@@ -34,7 +34,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h3>Upload Moic ranking & Phc scope-card File</h3>
+                    <!-- <h3>Upload Moic ranking & Phc scope-card File</h3> -->
                 </div>
             </div>
         </div>
