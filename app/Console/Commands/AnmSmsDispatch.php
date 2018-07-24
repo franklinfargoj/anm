@@ -68,7 +68,7 @@ class AnmSmsDispatch extends Command
                         'updated_at' => Carbon::now()
                     ];
 
-                    $status = Helpers::sendSmsUnicode($combined_sms, $sms->moic_mobile_number);
+                    $status = Helpers::sendSmsUnicode($combined_sms, $separated_num[$i]);
                     if($status['status'] == 200 && (str_contains($status['response'], '402') == true)){
                         $temp['is_sent'] = 1;
                         $temp['sent_at'] = Carbon::now();
