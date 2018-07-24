@@ -47,7 +47,7 @@
 
                 <div class="row mb-1">
                     <div class="col-md-12 text-right">
-                        <a  class="btn btn-primary"  href="{{ route('export_mos') }} ">Export to excel</a>
+                        <a  class="btn btn-primary"  href="{{ route('export_mos',$id) }} ">Export to excel</a>
                     </div>
                 </div>
 
