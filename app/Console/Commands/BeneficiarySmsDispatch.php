@@ -44,7 +44,7 @@ class BeneficiarySmsDispatch extends Command
      */
     public function handle()
     {
-        $newsms = BeneficiaryModel::where('benef_sms_initiated', 0)->get();
+        $newsms = BeneficiaryModel::where('benef_sms_initiated', 0)->where('schedule_at', '<', Carbon::now())->get();
         $cnt = count($newsms);
         if($cnt > 0){
             $benef_sms = AnmTargetDataModel::select('beneficiary_custom_msg', 'phc_name', 'weblink')->where('schedule_at', '<=', Carbon::now())->groupBy('phc_name')->get()->toArray();
