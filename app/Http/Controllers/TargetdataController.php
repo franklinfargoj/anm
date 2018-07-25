@@ -110,17 +110,27 @@ class TargetdataController extends Controller
                             $moic[] = $value["phc_name"];
                             $moic[$value["phc_name"]] = $str2;
                         }
+                        //$separated = explode(',', $obj->convert_to_unicode2($value['anm_name_hindi']));
                         $msg = '';
-                        $separated = explode(',', $obj->convert_to_unicode2($value['anm_name_hindi']));
-                        foreach ($separated as $single) {
-                            $msg .= $single . ' जानना चाहते हैं की ' . $months[$request->get('month')] . ' ' . $request->get('year') . ' में ' . $obj->convert_to_unicode2($value['phc_name_hindi']) . ' पीएचसी के किस  एनम् ने सबसे अच्छा काम किया?
-                                जानने के लिए नीचे लिंक पर क्लिक करके देखिये:,';
+                        $separated = $value['anm_name_hindi'];
+                        $anmNameInHindi = $obj->convert_to_unicode2($value['anm_name_hindi']);
+                        if(str_contains($value['anm_name_hindi'], ',')){
+                            $separated = [];
+                            $exploded = explode(',', $value['anm_name_hindi']);
+                            foreach ($exploded as $single) {
+                                $separated[] = $obj->convert_to_unicode2($single);
+                            }
+                            $anmNameInHindi = implode(',', $separated);
+                            foreach ($separated as $single) {
+                                $msg .= $single . ' जानना चाहते हैं की ' . $months[$request->get('month')] . ' ' . $request->get('year') . ' में ' . $obj->convert_to_unicode2($value['phc_name_hindi']) . ' पीएचसी के किस  एनम् ने सबसे अच्छा काम किया?
+                                    जानने के लिए नीचे लिंक पर क्लिक करके देखिये:,';
+                            }
+                        }else{
+                            $msg = $obj->convert_to_unicode2($value['anm_name_hindi']).' जानना चाहते हैं की ' . $months[$request->get('month')] . ' ' . $request->get('year') . ' में ' . $obj->convert_to_unicode2($value['phc_name_hindi']) . ' पीएचसी के किस  एनम् ने सबसे अच्छा काम किया?
+                                    जानने के लिए नीचे लिंक पर क्लिक करके देखिये:,';
                         }
-
-//                            dd($value['phc_name_hindi']);
                         $phcNameInHindi = $obj->convert_to_unicode2($value["phc_name_hindi"]);
                         $moicNameInHindi = $obj->convert_to_unicode2($value["moic_name_hindi"]);
-                        $anmNameInHindi = $obj->convert_to_unicode2($value["anm_name_hindi"]);
 
                         $arr[] = [
                             'district' => $request->get("district"),
@@ -153,7 +163,6 @@ class TargetdataController extends Controller
     जानने के लिए नीचे लिंक पर क्लिक करके देखिये:'
                         ];
                     }
-
                     if (!empty($arr)) {
                         $inserted = DB::table('anm_target_data')->insert($arr);
                         if ($inserted) {
