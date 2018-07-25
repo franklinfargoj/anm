@@ -556,6 +556,7 @@ h5 {
     border-top: 0;
     vertical-align: bottom;
 }
+
 .table.fancy-table>tbody>tr>td.text-left{
 	text-align:left;
 }
@@ -598,10 +599,10 @@ h5 {
 .table.report-card-table>tbody>tr:first-child>td {
 	font-family: 'Roboto-Bold';
     font-size: 14px;
-    background: #d7f1fd;
-    color: #000000;
+    background: #69b0e1;
+    color: #ffffff;
     margin: 0;
-    border-right: solid 4px #ffffff;
+    border-right: solid 4px #ffffff !important;
 }
 .table.report-card-table>tbody>tr:last-child>td {
 	font-family: 'Roboto-Bold';
@@ -609,7 +610,7 @@ h5 {
     color: #484848;
 }
 .table.report-card-table>tbody>tr:first-child>td:last-child {
-	border-right: none;
+	border-right: none !important;
 }
 .table.report-card-table>tbody>tr>td:first-child {
 	text-align: center;
@@ -622,4 +623,27 @@ h5 {
 }
 .table.report-card-table>tbody>tr:first-child>td:last-child {
     border-top-right-radius: 20px;
+}
+
+.velvet-color {
+	color: #670f31 !important;
+}
+.blue {
+	color: #025fad !important;
+}
+.dark-blue {
+	color: #025fad !important;
+}
+.dark-green {
+	color: #03522d !important;
+}
+.blue-bg {
+	background-color: #3d9bd8 !important;
+}
+.grey-bg {
+	color: #2e3558 !important;
+	background: #a6a6a6 !important;
+}
+.mt-2 {
+	margin-top: 20px;
 }

@@ -70,7 +70,7 @@
                 <div class="col-sm-2">
                     <div class="form-group">
                         <label>SMS schedule</label>
-                        <input type="text" id="schedule_at" name="schedule_at" placeholder="Selct date and time" class="form-control">
+                        <input type="text" id="schedule_at" name="schedule_at" placeholder="Select date and time" class="form-control">
                     </div>
                 </div>
 
