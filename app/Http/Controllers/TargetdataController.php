@@ -48,7 +48,7 @@ class TargetdataController extends Controller
 
     public function fetchTargetData()
     {
-        $target_data = AnmTargetDataModel::select('id', 'og_filename as filenames', 'uploaded_on', 'status', 'created_at')
+        $target_data = AnmTargetDataModel::select('id', 'og_filename as filenames','filename', 'uploaded_on','schedule_at', 'status', 'created_at',\DB::raw('group_concat(anm_sms_initiated) as anm_sent'))
             ->selectRaw("(CASE WHEN status='N' THEN 'Pending' WHEN status='Y' THEN 'Successful' END) as status")
             ->groupBy('filename')
             ->orderBy('created_at', 'DESC')
@@ -62,8 +62,13 @@ class TargetdataController extends Controller
         })->rawColumns(['id']);
         $db->addColumn('actions', function ($target_data) {
             return '<a href="' . route('processedfile', $target_data['id']) . '">View details</a>';
-        })
-            ->rawColumns(['actions']);
+        })->addColumn('reschedule', function($target_data){
+            return '
+<input type="hidden" id="'.$target_data['filename'].'" value="'.$target_data['filename'].'">
+<input type="text" class="re_schedule" name="re_schedule" class="form-control">';
+        })->rawColumns(['actions','reschedule']);
+
+
         return $db->make(true);
     }
 
@@ -260,4 +265,13 @@ class TargetdataController extends Controller
         }
     }
 
+
+    public function update_sms_schedule(Request $request)
+    {
+        $data = $request->toArray();
+        $file_name =$data['file_name'];
+        $date_time=$data['date_time'];
+        $result = AnmTargetDataModel::where('filename',$file_name)->update(array('schedule_at'=>$date_time));
+        return;
+    }
 }

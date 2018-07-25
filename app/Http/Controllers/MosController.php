@@ -30,12 +30,12 @@ class MosController extends Controller
 
     public function fetchRankingData(){
 
-        $moic = MoicRanking::select('id','og_moic_filename AS filenames', 'zip_path', 'uploaded_file')
-                                ->selectRaw("DATE(created_at) as uploaded_on" )
-                                ->groupBy('uploaded_file')
-                                ->orderBy('created_at', 'DESC')
-                                ->get()
-                                ->toArray();
+        $moic = MoicRanking::select('id','og_moic_filename AS filenames', 'zip_path', 'schedule_at','uploaded_file', \DB::raw('group_concat(distinct sms_sent_initiated) as sms_sent_initiateds'))
+            ->selectRaw("DATE(created_at) as uploaded_on" )
+            ->groupBy('uploaded_file')
+            ->orderBy('created_at', 'DESC')
+            ->get()
+            ->toArray();
 
         $db = Datatables::of($moic);
         $db->addColumn('sr_no', function ($moic){ static $i = 0; $i++; return $i; }) ->rawColumns(['id']);
@@ -47,11 +47,22 @@ class MosController extends Controller
                 return '<a href="'.url('/download/moic_zip/'.$folder[0]).'" target="_blank">Download Zip</a>';
             }
             return "Processing";
-        })->rawColumns(['actions', 'download_zip']);
+        })->addColumn('reschedule', function($moic){
+            $arr = explode(',', $moic['sms_sent_initiateds']);
+
+            // $is_all_sms_sent =  $arr[0];  $arr[1];
+            $is_all_sms_sent = array_reduce($arr, function($a, $b){  return $a & $b; });
+
+            if($is_all_sms_sent == 0){
+                return '<input type="hidden" id="'.$moic['uploaded_file'].'" value="'.$moic['id'].'">
+                        <input type="text" class="re_schedule" name="re_schedule" class="form-control">
+                        ';
+            }
+            return 'SMS\'s for this are already sent';
+        })->rawColumns(['actions', 'download_zip', 'reschedule']);
 
         return $db->make(true);
     }
-
 
     public function ajaxMoic($id)
     {
@@ -86,8 +97,6 @@ class MosController extends Controller
         })->rawColumns(['id', 'sms_span', 'link']);
         return $db->make(true);
     }
-
-
 
     public function importRankings(ImportMosRankingRequest $request)
     {
@@ -238,4 +247,19 @@ class MosController extends Controller
         $path = public_path().'/moic/rankings/zips/'.$path.'/'.$path.'.zip';
         return response()->download($path);
     }
+
+    public function update_sms_schedule(Request $request)
+    {
+        $data = $request->toArray();
+
+        $file_name =$data['file_name'];
+        $date_time=$data['date_time'];
+
+        $result = MoicRanking::where('uploaded_file',$file_name)->update(array('schedule_at'=>$date_time));
+
+        return;
+    }
+
+
+
 }
