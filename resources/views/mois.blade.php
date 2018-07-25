@@ -106,6 +106,8 @@
                             <th>Uploaded On</th>
                             <th>View</th>
                             <th>Download Zip</th>
+                            <th>SMS On</th>
+                            <th>Reschedule</th>
                         </tr>
                         </thead>
                     </table>
@@ -131,19 +133,43 @@
                     { "data": "uploaded_on" },
                     { "data": "actions" },
                     { "data": "download_zip" },
+                    { "data": "schedule_at" },
+                    { "data": "reschedule" }
                 ],
             });
-
         });
 
         var d1 = new Date();
         var d2 = new Date();
         d1.setHours(+d2.getHours()+2);
 
-        $("#schedule_at").datetimepicker({
+        $("#schedule_at ").datetimepicker({
                 autoclose: true,
                 format: 'yyyy-mm-dd hh:ii',
                 startDate: d1
+        });
+
+        $(document).on('click','.re_schedule',function (){
+            $(this).datetimepicker({
+                autoclose: true,
+                format: 'yyyy-mm-dd hh:ii',
+                startDate: d1
+            }).datetimepicker("show").on('change', function() {
+                var file = $(this).prev().attr('id');
+                var time = $(this).val();
+                $.ajax({
+                    url: '{{  url('sms_update') }}',
+                    type: "POST",
+                    data: {
+                           file_name : file,
+                           date_time:time,
+                           "_token": '{{  csrf_token()}}'
+                    },
+                    success: function(result){
+                        location.reload();
+                    }
+                });
+            });
         });
     </script>
 @endsection
