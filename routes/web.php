@@ -15,6 +15,9 @@ Route::group(['middleware'=>'auth'], function (){
     Route::get('/', 'TargetdataController@index')->name('dashboard');
     Route::post('import-file', 'TargetdataController@importFile')->name('import.file');
     Route::get('/get-anm-target-data', 'TargetdataController@fetchTargetData');
+    Route::post('anm_sms_update', 'TargetdataController@update_sms_schedule')->name('anm_sms_update');
+
+
     Route::get('/fetch-process-data/{id}', 'ProcessedFileController@fetchProcessData');
     Route::get('processedfile/{id}','ProcessedFileController@index')->name('processedfile');
 
@@ -23,6 +26,7 @@ Route::group(['middleware'=>'auth'], function (){
     Route::get('rankingdetails/{id}', 'MosController@ajaxMoic')->name('rankingdetails'); //okay
     Route::get('export_mos/{id}','MosController@export_mos')->name('export_mos'); //okay
     Route::get('ajax-moic', 'MosController@fetchRankingData'); //okay
+    Route::post('sms_update','MosController@update_sms_schedule')->name('sms_update');
 
     Route::get('rank/{id}', 'MosController@rank_details')->name('rank');
 
