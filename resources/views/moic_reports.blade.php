@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/responsive.css') }}">
 </head>
 <body class="internal-page">
 <header class="internal-header navbar-fixed-top">
@@ -42,17 +43,19 @@
 				<table width="100%" class="table report-card-table fancy-table">
 					<tr>
 						<td colspan="2" class="blue-bg">{{$months[$report->month]}} 2018 Report Card</td>
-						<td colspan="2">MOIC Name: {{$report->moic_name}}</td>
+						<td colspan="4">MOIC Name: {{$report->moic_name}}</td>
 						<td colspan="3" class="grey-bg">Best Performing PHC</td>
 					</tr>
 					<tr>
 						<td width="15%" class="dark-blue">Program</td>
 						<td width="25%" class="text-left dark-blue" align="left">Metric</td>
-						<td width="12%" class="velvet-color">Target</td>
-						<td width="12%" class="blue">May'18 Performance</td>
-						<td width="12%" class="dark-green">In the block</td>
-						<td width="12%" class="dark-green">In Alwar</td>
-						<td width="12%" class="dark-green">In Rajasthan</td>
+						<td width="10%" class="velvet-color">Max scene that can be achieved</td>
+						<td width="10%" class="velvet-color">Scene achieved</td>
+						<td width="8%" class="velvet-color">Target</td>
+						<td width="8%" class="blue">May'18 Performance</td>
+						<td width="8%" class="dark-green">In the block</td>
+						<td width="8%" class="dark-green">In Alwar</td>
+						<td width="8%" class="dark-green">In Rajasthan</td>
 					</tr>
 				</table>
 			</div>
@@ -68,14 +71,18 @@
 					<tr>
 						<th width="15%" rowspan="2" valign="middle">Utilization</th>
 						<td width="25%">OPDs/day (>40)</td>
-						<td width="12%" class="velvet-color">{{ $report->opd_target }}</td>
-						<td width="12%" class="blue">{{ $report->opd_performance }}</td>
-						<td width="12%" class="dark-green">{{ $report->opd_block }}</td>
-						<td width="12%" class="dark-green">{{ $report->opd_district }}</td>
-						<td width="12%" class="dark-green">{{ $report->opd_state }}</td>
+						<td width="10%" class="velvet-color">0</td>
+						<td width="10%" class="velvet-color">0</td>
+						<td width="8%" class="velvet-color">{{ $report->opd_target }}</td>
+						<td width="8%" class="blue">{{ $report->opd_performance }}</td>
+						<td width="8%" class="dark-green">{{ $report->opd_block }}</td>
+						<td width="8%" class="dark-green">{{ $report->opd_district }}</td>
+						<td width="8%" class="dark-green">{{ $report->opd_state }}</td>
 					</tr>
 					<tr>
 						<td>Proportion of <br/> Institutional Delivery</td>
+						<td class="velvet-color">0</td>
+						<td class="velvet-color">0</td>
 						<td class="velvet-color">{{ Helpers::convertToPercent($report->pid_target) }}%</td>
 						<td class="blue">{{ Helpers::convertToPercent($report->pid_performance) }}%</td>
 						<td class="dark-green">{{ $report->pid_block }}</td>
@@ -87,15 +94,19 @@
 				<table width="100%" class="table fancy-table">
 					<tr>
 						<th width="15%" rowspan="8" valign="middle">RMNCH + A</th>
-						<td width="25%">Full Immunization Coverage</td>
-						<td width="12%" class="velvet-color">{{ Helpers::convertToPercent($report->fic_target) }}%</td>
-						<td width="12%" class="blue">{{ Helpers::convertToPercent($report->fic_performance) }}%</td>
-						<td width="12%" class="dark-green">{{ $report->fic_block }}</td>
-						<td width="12%" class="dark-green">{{ $report->fic_district }}</td>
-						<td width="12%" class="dark-green">{{ $report->fic_state }}</td>
+						<td width="25%">Full Immunization Coverage * </td>
+						<td width="10%" class="velvet-color">0</td>
+						<td width="10%" class="velvet-color">0</td>
+						<td width="8%" class="velvet-color">{{ Helpers::convertToPercent($report->fic_target) }}%</td>
+						<td width="8%" class="blue">{{ Helpers::convertToPercent($report->fic_performance) }}%</td>
+						<td width="8%" class="dark-green">{{ $report->fic_block }}</td>
+						<td width="8%" class="dark-green">{{ $report->fic_district }}</td>
+						<td width="8%" class="dark-green">{{ $report->fic_state }}</td>
 					</tr>
 					<tr>
-						<td>ANC 3 Coverage</td>
+						<td>ANC 3 Coverage * </td>
+						<td class="velvet-color">0</td>
+						<td class="velvet-color">0</td>
 						<td class="velvet-color">{{ Helpers::convertToPercent($report->anc3_target) }}%</td>
 						<td class="blue">{{ Helpers::convertToPercent($report->anc3_performance) }}%</td>
 						<td class="dark-green">{{ $report->anc3_block }}</td>
@@ -103,7 +114,9 @@
 						<td class="dark-green">{{ $report->anc3_state }}</td>
 					</tr>
 					<tr>
-						<td>ANC 4 Coverage</td>
+						<td>ANC 4 Coverage * </td>
+						<td class="velvet-color">0</td>
+						<td class="velvet-color">0</td>
 						<td class="velvet-color">{{ Helpers::convertToPercent($report->anc4_target) }}%</td>
 						<td class="blue">{{ Helpers::convertToPercent($report->anc4_performance) }}%</td>
 						<td class="dark-green">{{ $report->anc4_block }}</td>
@@ -111,7 +124,9 @@
 						<td class="dark-green">{{ $report->anc4_state }}</td>
 					</tr>
 					<tr>
-						<td>ANC Registration (within 12 weeks)</td>
+						<td>ANC Registration (within 12 weeks) * </td>
+						<td class="velvet-color">0</td>
+						<td class="velvet-color">0</td>
 						<td class="velvet-color">{{ Helpers::convertToPercent($report->anc12_target) }}%</td>
 						<td class="blue">{{ Helpers::convertToPercent($report->anc12_performance) }}%</td>
 						<td class="dark-green">{{ $report->anc12_block }}</td>
@@ -120,6 +135,8 @@
 					</tr>
 					<tr>
 						<td>Proportion of LBW among new born</td>
+						<td class="velvet-color">0</td>
+						<td class="velvet-color">0</td>
 						<td class="velvet-color">{{ Helpers::convertToPercent($report->plb_target) }}%</td>
 						<td class="blue">{{ Helpers::convertToPercent($report->plb_performance) }}%</td>
 						<td class="dark-green">{{ $report->plb_block }}</td>
@@ -128,6 +145,8 @@
 					</tr>
 					<tr>
 						<td>FP - IUCD Insertion %</td>
+						<td class="velvet-color">0</td>
+						<td class="velvet-color">0</td>
 						<td class="velvet-color">{{ Helpers::convertToPercent($report->fpiucd_target) }}%</td>
 						<td class="blue">{{ Helpers::convertToPercent($report->fpiucd_performance) }}%</td>
 						<td class="dark-green">{{ $report->fpiucd_block }}</td>
@@ -136,6 +155,8 @@
 					</tr>
 					<tr>
 						<td>FP - PPIUCD Insertion %</td>
+						<td class="velvet-color">0</td>
+						<td class="velvet-color">0</td>
 						<td class="velvet-color">{{ Helpers::convertToPercent($report->ppiucd_target) }}%</td>
 						<td class="blue">{{ Helpers::convertToPercent($report->ppiucd_performance) }}%</td>
 						<td class="dark-green">{{ $report->ppiucd_block }}</td>
@@ -144,6 +165,8 @@
 					</tr>
 					<tr>
 						<td>FP - Sterilization %</td>
+						<td class="velvet-color">0</td>
+						<td class="velvet-color">0</td>
 						<td class="velvet-color">{{ Helpers::convertToPercent($report->fp_sterilization_target) }}%</td>
 						<td class="blue">{{ Helpers::convertToPercent($report->fp_sterilization_performance) }}%</td>
 						<td class="dark-green">{{ $report->fp_sterilization_block }}</td>
@@ -156,14 +179,18 @@
 					<tr>
 						<th width="15%" rowspan="3" valign="middle">CDs</th>
 						<td width="25%">Pneumonia prevalence</td>
-						<td width="12%" class="velvet-color">{{ $report->pneumonia_target }}</td>
-						<td width="12%" class="blue">{{ $report->pneumonia_performance }}</td>
-						<td width="12%" class="dark-green">{{ $report->pneumonia_block }}</td>
-						<td width="12%" class="dark-green">{{ $report->pneumonia_district }}</td>
-						<td width="12%" class="dark-green">{{ $report->pneumonia_state }}</td>
+						<td width="10%" class="velvet-color">0</td>
+						<td width="10%" class="velvet-color">0</td>
+						<td width="8%" class="velvet-color">{{ $report->pneumonia_target }}</td>
+						<td width="8%" class="blue">{{ $report->pneumonia_performance }}</td>
+						<td width="8%" class="dark-green">{{ $report->pneumonia_block }}</td>
+						<td width="8%" class="dark-green">{{ $report->pneumonia_district }}</td>
+						<td width="8%" class="dark-green">{{ $report->pneumonia_state }}</td>
 					</tr>
 					<tr>
 						<td>Malaria slides collected</td>
+						<td class="velvet-color">0</td>
+						<td class="velvet-color">0</td>
 						<td class="velvet-color">{{ Helpers::convertToPercent($report->malaria_target) }}%</td>
 						<td class="blue">{{ Helpers::convertToPercent($report->malaria_performance) }}%</td>
 						<td class="dark-green">{{ $report->malaria_block }}</td>
@@ -172,6 +199,8 @@
 					</tr>
 					<tr>
 						<td>Diarrhea prevalence</td>
+						<td class="velvet-color">0</td>
+						<td class="velvet-color">0</td>
 						<td class="velvet-color">{{ $report->diarrhea_target }}</td>
 						<td class="blue">{{ $report->diarrhea_performance }}</td>
 						<td class="dark-green">{{ $report->diarrhea_block}}</td>
@@ -272,7 +301,7 @@
 						<td width="12%" class="dark-green">{{ $report->linelist_vs_expected_state }}</td>
 					</tr>
 					<tr>
-						<td>Live births registered on PCTS vs. expected </td>
+						<td>Live births registered on PCTS vs. expected * </td>
 						<td class="velvet-color">{{ Helpers::convertToPercent($report->pcts_vs_expected_target) }}%</td>
 						<td class="blue">{{ Helpers::convertToPercent($report->pcts_vs_expected_performance) }}%</td>
 						<td class="dark-green">{{ $report->pcts_vs_expected_block }}</td>
@@ -280,7 +309,7 @@
 						<td class="dark-green">{{ $report->pcts_vs_expected_state }}</td>
 					</tr>
 					<tr>
-						<td>Institutional Deliveries (Summary(Form6,7) - LL)</td>
+						<td>Institutional Deliveries (Summary(Form6,7) - LL) * </td>
 						<td class="velvet-color">{{ Helpers::convertToPercent($report->id_target) }}%</td>
 						<td class="blue">{{ Helpers::convertToPercent($report->id_performance) }}%</td>
 						<td class="dark-green">{{ $report->id_block }}</td>
@@ -303,7 +332,7 @@
 
 <script type="text/javascript" src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
 <script type="text/javascript">
-	$(window).scroll(function() {    
+	$(window).scroll(function() {
     var scroll = $(window).scrollTop();
 
     if (scroll >= 100) {

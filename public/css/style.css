@@ -537,7 +537,7 @@ h5 {
 }
 
 .internal-table-area {
-	padding-top: 310px;
+	padding-top: 335px;
 }
 
 .table.fancy-table {
@@ -549,8 +549,8 @@ h5 {
 }
 
 .table.fancy-table>tbody>tr>td {	
-	font-family: 'Roboto-Regular';
-    font-size: 14px;
+	font-family: 'Roboto-Bold';
+    font-size: 16px;
     padding: 10px;
     text-align: center;
     border-top: 0;
@@ -565,6 +565,10 @@ h5 {
 }
 .table.fancy-table>tbody>tr>th+td {
 	text-align: left;
+	font-family: 'Roboto-Regular';
+}
+.table.fancy-table>tbody>tr td:first-child {
+    font-family: 'Roboto-Regular';
 }
 .table.fancy-table>tbody>tr>th {
 	font-family: 'Roboto-Bold';
@@ -598,7 +602,7 @@ h5 {
 }
 .table.report-card-table>tbody>tr:first-child>td {
 	font-family: 'Roboto-Bold';
-    font-size: 14px;
+    font-size: 15px;
     background: #69b0e1;
     color: #ffffff;
     margin: 0;
@@ -606,7 +610,7 @@ h5 {
 }
 .table.report-card-table>tbody>tr:last-child>td {
 	font-family: 'Roboto-Bold';
-    font-size: 13px;
+    font-size: 15px;
     color: #484848;
 }
 .table.report-card-table>tbody>tr:first-child>td:last-child {
@@ -642,7 +646,7 @@ h5 {
 }
 .grey-bg {
 	color: #2e3558 !important;
-	background: #a6a6a6 !important;
+	background: #c7c7c7 !important;
 }
 .mt-2 {
 	margin-top: 20px;
