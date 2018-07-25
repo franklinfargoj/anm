@@ -108,6 +108,8 @@
                                     <th>Uploaded On</th>
                                     <th>Status</th>
                                     <th>Action</th>
+                                    <th>SMS On</th>
+                                    <th>Reschedule</th>
                                 </tr>
                                 </thead>
                             </table>
@@ -137,6 +139,8 @@
                     { "data": "uploaded_on" },
                     { "data": "status" },
                     { "data": "actions" },
+                    { "data": "schedule_at" },
+                    { "data": "reschedule" }
                 ],
                 /* rowCallback: function (row, data,index){
                      var html = $.map(data['tag'], function(array){ return array['title']});
@@ -144,7 +148,6 @@
                  }*/
             });
         } );
-
 
         var d1 = new Date();
         var d2 = new Date();
@@ -154,6 +157,32 @@
             autoclose: true,
             format: 'yyyy-mm-dd hh:ii',
             startDate: d1
+        });
+
+        $(document).on('click','.re_schedule',function (){
+            $(this).datetimepicker({
+                autoclose: true,
+                format: 'yyyy-mm-dd hh:ii',
+                startDate: d1
+            }).datetimepicker("show").on('change', function() {
+
+                var file = $(this).prev().attr('id');
+                var dat_time = $(this).val();
+
+                $.ajax({
+                    url: '{{  url('anm_sms_update') }}',
+                    type: "POST",
+                    data: {
+                        file_name : file,
+                        date_time:  dat_time,
+                        "_token": '{{  csrf_token()}}'
+                    },
+                    success: function(result){
+                        location.reload();
+                    }
+                });
+
+            });
         });
     </script>
 
