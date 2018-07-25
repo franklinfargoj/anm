@@ -41,18 +41,18 @@
 			<div class="col-md-12">
 				<table width="100%" class="table report-card-table fancy-table">
 					<tr>
-						<td colspan="2">{{$months[$report->month]}} 2018 Report Card</td>
+						<td colspan="2" class="blue-bg">{{$months[$report->month]}} 2018 Report Card</td>
 						<td colspan="2">MOIC Name: {{$report->moic_name}}</td>
-						<td colspan="3">Best Performing PHC</td>
+						<td colspan="3" class="grey-bg">Best Performing PHC</td>
 					</tr>
 					<tr>
-						<td width="15%">Program</td>
-						<td width="25%" class="text-left" align="left">Metric</td>
-						<td width="12%">Target</td>
-						<td width="12%">May'18 Performance</td>
-						<td width="12%">In the block</td>
-						<td width="12%">In Alwar</td>
-						<td width="12%">In Rajasthan</td>
+						<td width="15%" class="dark-blue">Program</td>
+						<td width="25%" class="text-left dark-blue" align="left">Metric</td>
+						<td width="12%" class="velvet-color">Target</td>
+						<td width="12%" class="blue">May'18 Performance</td>
+						<td width="12%" class="dark-green">In the block</td>
+						<td width="12%" class="dark-green">In Alwar</td>
+						<td width="12%" class="dark-green">In Rajasthan</td>
 					</tr>
 				</table>
 			</div>
@@ -68,19 +68,19 @@
 					<tr>
 						<th width="15%" rowspan="2" valign="middle">Utilization</th>
 						<td width="25%">OPDs/day (>40)</td>
-						<td width="12%">{{ $report->opd_target }}</td>
-						<td width="12%">{{ $report->opd_performance }}</td>
-						<td width="12%">{{ $report->opd_block }}</td>
-						<td width="12%">{{ $report->opd_district }}</td>
-						<td width="12%">{{ $report->opd_state }}</td>
+						<td width="12%" class="velvet-color">{{ $report->opd_target }}</td>
+						<td width="12%" class="blue">{{ $report->opd_performance }}</td>
+						<td width="12%" class="dark-green">{{ $report->opd_block }}</td>
+						<td width="12%" class="dark-green">{{ $report->opd_district }}</td>
+						<td width="12%" class="dark-green">{{ $report->opd_state }}</td>
 					</tr>
 					<tr>
 						<td>Proportion of <br/> Institutional Delivery</td>
-						<td>{{ Helpers::convertToPercent($report->pid_target) }}%</td>
-						<td>{{ Helpers::convertToPercent($report->pid_performance) }}%</td>
-						<td>{{ $report->pid_block }}</td>
-						<td>{{ $report->pid_district }}</td>
-						<td>{{ $report->pid_state }}</td>
+						<td class="velvet-color">{{ Helpers::convertToPercent($report->pid_target) }}%</td>
+						<td class="blue">{{ Helpers::convertToPercent($report->pid_performance) }}%</td>
+						<td class="dark-green">{{ $report->pid_block }}</td>
+						<td class="dark-green">{{ $report->pid_district }}</td>
+						<td class="dark-green">{{ $report->pid_state }}</td>
 					</tr>
 				</table>
 
@@ -88,67 +88,67 @@
 					<tr>
 						<th width="15%" rowspan="8" valign="middle">RMNCH + A</th>
 						<td width="25%">Full Immunization Coverage</td>
-						<td width="12%">{{ Helpers::convertToPercent($report->fic_target) }}%</td>
-						<td width="12%">{{ Helpers::convertToPercent($report->fic_performance) }}%</td>
-						<td width="12%">{{ $report->fic_block }}</td>
-						<td width="12%">{{ $report->fic_district }}</td>
-						<td width="12%">{{ $report->fic_state }}</td>
+						<td width="12%" class="velvet-color">{{ Helpers::convertToPercent($report->fic_target) }}%</td>
+						<td width="12%" class="blue">{{ Helpers::convertToPercent($report->fic_performance) }}%</td>
+						<td width="12%" class="dark-green">{{ $report->fic_block }}</td>
+						<td width="12%" class="dark-green">{{ $report->fic_district }}</td>
+						<td width="12%" class="dark-green">{{ $report->fic_state }}</td>
 					</tr>
 					<tr>
 						<td>ANC 3 Coverage</td>
-						<td>{{ Helpers::convertToPercent($report->anc3_target) }}%</td>
-						<td>{{ Helpers::convertToPercent($report->anc3_performance) }}%</td>
-						<td>{{ $report->anc3_block }}</td>
-						<td>{{ $report->anc3_district }}</td>
-						<td>{{ $report->anc3_state }}</td>
+						<td class="velvet-color">{{ Helpers::convertToPercent($report->anc3_target) }}%</td>
+						<td class="blue">{{ Helpers::convertToPercent($report->anc3_performance) }}%</td>
+						<td class="dark-green">{{ $report->anc3_block }}</td>
+						<td class="dark-green">{{ $report->anc3_district }}</td>
+						<td class="dark-green">{{ $report->anc3_state }}</td>
 					</tr>
 					<tr>
 						<td>ANC 4 Coverage</td>
-						<td>{{ Helpers::convertToPercent($report->anc4_target) }}%</td>
-						<td>{{ Helpers::convertToPercent($report->anc4_performance) }}%</td>
-						<td>{{ $report->anc4_block }}</td>
-						<td>{{ $report->anc4_district }}</td>
-						<td>{{ $report->anc4_state }}</td>
+						<td class="velvet-color">{{ Helpers::convertToPercent($report->anc4_target) }}%</td>
+						<td class="blue">{{ Helpers::convertToPercent($report->anc4_performance) }}%</td>
+						<td class="dark-green">{{ $report->anc4_block }}</td>
+						<td class="dark-green">{{ $report->anc4_district }}</td>
+						<td class="dark-green">{{ $report->anc4_state }}</td>
 					</tr>
 					<tr>
 						<td>ANC Registration (within 12 weeks)</td>
-						<td>{{ Helpers::convertToPercent($report->anc12_target) }}%</td>
-						<td>{{ Helpers::convertToPercent($report->anc12_performance) }}%</td>
-						<td>{{ $report->anc12_block }}</td>
-						<td>{{ $report->anc12_district }}</td>
-						<td>{{ $report->anc12_state }}</td>
+						<td class="velvet-color">{{ Helpers::convertToPercent($report->anc12_target) }}%</td>
+						<td class="blue">{{ Helpers::convertToPercent($report->anc12_performance) }}%</td>
+						<td class="dark-green">{{ $report->anc12_block }}</td>
+						<td class="dark-green">{{ $report->anc12_district }}</td>
+						<td class="dark-green">{{ $report->anc12_state }}</td>
 					</tr>
 					<tr>
 						<td>Proportion of LBW among new born</td>
-						<td>{{ Helpers::convertToPercent($report->plb_target) }}%</td>
-						<td>{{ Helpers::convertToPercent($report->plb_performance) }}%</td>
-						<td>{{ $report->plb_block }}</td>
-						<td>{{ $report->plb_district }}</td>
-						<td>{{ $report->plb_state }}</td>
+						<td class="velvet-color">{{ Helpers::convertToPercent($report->plb_target) }}%</td>
+						<td class="blue">{{ Helpers::convertToPercent($report->plb_performance) }}%</td>
+						<td class="dark-green">{{ $report->plb_block }}</td>
+						<td class="dark-green">{{ $report->plb_district }}</td>
+						<td class="dark-green">{{ $report->plb_state }}</td>
 					</tr>
 					<tr>
 						<td>FP - IUCD Insertion %</td>
-						<td>{{ Helpers::convertToPercent($report->fpiucd_target) }}%</td>
-						<td>{{ Helpers::convertToPercent($report->fpiucd_performance) }}%</td>
-						<td>{{ $report->fpiucd_block }}</td>
-						<td>{{ $report->fpiucd_district }}</td>
-						<td>{{ $report->fpiucd_state }}</td>
+						<td class="velvet-color">{{ Helpers::convertToPercent($report->fpiucd_target) }}%</td>
+						<td class="blue">{{ Helpers::convertToPercent($report->fpiucd_performance) }}%</td>
+						<td class="dark-green">{{ $report->fpiucd_block }}</td>
+						<td class="dark-green">{{ $report->fpiucd_district }}</td>
+						<td class="dark-green">{{ $report->fpiucd_state }}</td>
 					</tr>
 					<tr>
 						<td>FP - PPIUCD Insertion %</td>
-						<td>{{ Helpers::convertToPercent($report->ppiucd_target) }}%</td>
-						<td>{{ Helpers::convertToPercent($report->ppiucd_performance) }}%</td>
-						<td>{{ $report->ppiucd_block }}</td>
-						<td>{{ $report->ppiucd_district }}</td>
-						<td>{{ $report->ppiucd_state }}</td>
+						<td class="velvet-color">{{ Helpers::convertToPercent($report->ppiucd_target) }}%</td>
+						<td class="blue">{{ Helpers::convertToPercent($report->ppiucd_performance) }}%</td>
+						<td class="dark-green">{{ $report->ppiucd_block }}</td>
+						<td class="dark-green">{{ $report->ppiucd_district }}</td>
+						<td class="dark-green">{{ $report->ppiucd_state }}</td>
 					</tr>
 					<tr>
 						<td>FP - Sterilization %</td>
-						<td>{{ Helpers::convertToPercent($report->fp_sterilization_target) }}%</td>
-						<td>{{ Helpers::convertToPercent($report->fp_sterilization_performance) }}%</td>
-						<td>{{ $report->fp_sterilization_block }}</td>
-						<td>{{ $report->fp_sterilization_district }}</td>
-						<td>{{ $report->fp_sterilization_state }}</td>
+						<td class="velvet-color">{{ Helpers::convertToPercent($report->fp_sterilization_target) }}%</td>
+						<td class="blue">{{ Helpers::convertToPercent($report->fp_sterilization_performance) }}%</td>
+						<td class="dark-green">{{ $report->fp_sterilization_block }}</td>
+						<td class="dark-green">{{ $report->fp_sterilization_district }}</td>
+						<td class="dark-green">{{ $report->fp_sterilization_state }}</td>
 					</tr>
 				</table>
 
@@ -156,27 +156,27 @@
 					<tr>
 						<th width="15%" rowspan="3" valign="middle">CDs</th>
 						<td width="25%">Pneumonia prevalence</td>
-						<td width="12%">{{ $report->pneumonia_target }}</td>
-						<td width="12%">{{ $report->pneumonia_performance }}</td>
-						<td width="12%">{{ $report->pneumonia_block }}</td>
-						<td width="12%">{{ $report->pneumonia_district }}</td>
-						<td width="12%">{{ $report->pneumonia_state }}</td>
+						<td width="12%" class="velvet-color">{{ $report->pneumonia_target }}</td>
+						<td width="12%" class="blue">{{ $report->pneumonia_performance }}</td>
+						<td width="12%" class="dark-green">{{ $report->pneumonia_block }}</td>
+						<td width="12%" class="dark-green">{{ $report->pneumonia_district }}</td>
+						<td width="12%" class="dark-green">{{ $report->pneumonia_state }}</td>
 					</tr>
 					<tr>
 						<td>Malaria slides collected</td>
-						<td>{{ Helpers::convertToPercent($report->malaria_target) }}%</td>
-						<td>{{ Helpers::convertToPercent($report->malaria_performance) }}%</td>
-						<td>{{ $report->malaria_block }}</td>
-						<td>{{ $report->malaria_district }}</td>
-						<td>{{ $report->malaria_state }}</td>
+						<td class="velvet-color">{{ Helpers::convertToPercent($report->malaria_target) }}%</td>
+						<td class="blue">{{ Helpers::convertToPercent($report->malaria_performance) }}%</td>
+						<td class="dark-green">{{ $report->malaria_block }}</td>
+						<td class="dark-green">{{ $report->malaria_district }}</td>
+						<td class="dark-green">{{ $report->malaria_state }}</td>
 					</tr>
 					<tr>
 						<td>Diarrhea prevalence</td>
-						<td>{{ $report->diarrhea_target }}</td>
-						<td>{{ $report->diarrhea_performance }}</td>
-						<td>{{ $report->diarrhea_block}}</td>
-						<td>{{ $report->diarrhea_district }}</td>
-						<td>{{ $report->diarrhea_state }}</td>
+						<td class="velvet-color">{{ $report->diarrhea_target }}</td>
+						<td class="blue">{{ $report->diarrhea_performance }}</td>
+						<td class="dark-green">{{ $report->diarrhea_block}}</td>
+						<td class="dark-green">{{ $report->diarrhea_district }}</td>
+						<td class="dark-green">{{ $report->diarrhea_state }}</td>
 					</tr>
 				</table>
 
@@ -185,27 +185,27 @@
 					<tr>
 						<th width="15%" rowspan="3" valign="middle">NCDs</th>
 						<td width="25%">prevalence (old and new cases) %Hypertension </td>
-						<td width="12%">{{ Helpers::convertToPercent($report->hp_target) }}%</td>
-						<td width="12%">{{ Helpers::convertToPercent($report->hp_performance) }}%</td>
-						<td width="12%">{{ $report->hp_block}}</td>
-						<td width="12%">{{ $report->hp_district }}</td>
-						<td width="12%">{{ $report->hp_state }}</td>
+						<td width="12%" class="velvet-color">{{ Helpers::convertToPercent($report->hp_target) }}%</td>
+						<td width="12%" class="blue">{{ Helpers::convertToPercent($report->hp_performance) }}%</td>
+						<td width="12%" class="dark-green">{{ $report->hp_block}}</td>
+						<td width="12%" class="dark-green">{{ $report->hp_district }}</td>
+						<td width="12%" class="dark-green">{{ $report->hp_state }}</td>
 					</tr>
 					<tr>
 						<td>Diabetes prevalence (old and new cases) %</td>
-						<td>{{ Helpers::convertToPercent($report->diabetes_target) }}%</td>
-						<td>{{ Helpers::convertToPercent($report->diabetes_performance) }}%</td>
-						<td>{{ $report->diabetes_block }}</td>
-						<td>{{ $report->diabetes_district }}</td>
-						<td>{{ $report->diabetes_state }}</td>
+						<td class="velvet-color">{{ Helpers::convertToPercent($report->diabetes_target) }}%</td>
+						<td class="blue">{{ Helpers::convertToPercent($report->diabetes_performance) }}%</td>
+						<td class="dark-green">{{ $report->diabetes_block }}</td>
+						<td class="dark-green">{{ $report->diabetes_district }}</td>
+						<td class="dark-green">{{ $report->diabetes_state }}</td>
 					</tr>
 					<tr>
 						<td>CVD diagnosis (old and new cases) %</td>
-						<td>{{ Helpers::convertToPercent($report->cvd_target) }}%</td>
-						<td>{{ Helpers::convertToPercent($report->cvd_performance) }}%</td>
-						<td>{{ $report->cvd_block }}</td>
-						<td>{{ $report->cvd_district }}</td>
-						<td>{{ $report->cvd_state }}</td>
+						<td class="velvet-color">{{ Helpers::convertToPercent($report->cvd_target) }}%</td>
+						<td class="blue">{{ Helpers::convertToPercent($report->cvd_performance) }}%</td>
+						<td class="dark-green">{{ $report->cvd_block }}</td>
+						<td class="dark-green">{{ $report->cvd_district }}</td>
+						<td class="dark-green">{{ $report->cvd_state }}</td>
 					</tr>
 				</table>
 
@@ -213,51 +213,51 @@
 					<tr>
 						<th width="15%" rowspan="6" valign="middle">Governance</th>
 						<td width="25%"># Days patient vouchers were updated this month </td>
-						<td width="12%">{{ $report->days_patient_voucher_target }}</td>
-						<td width="12%">{{ $report->days_patient_voucher_performance }}</td>
-						<td width="12%">{{ $report->days_patient_voucher_block }}</td>
-						<td width="12%">{{ $report->days_patient_voucher_district }}</td>
-						<td width="12%">{{ $report->days_patient_voucher_state }}</td>
+						<td width="12%" class="velvet-color">{{ $report->days_patient_voucher_target }}</td>
+						<td width="12%" class="blue">{{ $report->days_patient_voucher_performance }}</td>
+						<td width="12%" class="dark-green">{{ $report->days_patient_voucher_block }}</td>
+						<td width="12%" class="dark-green">{{ $report->days_patient_voucher_district }}</td>
+						<td width="12%" class="dark-green">{{ $report->days_patient_voucher_state }}</td>
 					</tr>
 					<tr>
 						<td>% Patient Vouchers recorded vs OPD for the month</td>
-						<td>{{ Helpers::convertToPercent($report->patient_vouchers_target) }}%</td>
-						<td>{{ Helpers::convertToPercent($report->patient_vouchers_performance) }}%</td>
-						<td>{{ $report->patient_vouchers_block }}</td>
-						<td>{{ $report->patient_vouchers_district }}</td>
-						<td>{{ $report->patient_vouchers_state }}</td>
+						<td class="velvet-color">{{ Helpers::convertToPercent($report->patient_vouchers_target) }}%</td>
+						<td class="blue">{{ Helpers::convertToPercent($report->patient_vouchers_performance) }}%</td>
+						<td class="dark-green">{{ $report->patient_vouchers_block }}</td>
+						<td class="dark-green">{{ $report->patient_vouchers_district }}</td>
+						<td class="dark-green">{{ $report->patient_vouchers_state }}</td>
 					</tr>
 					<tr>
 						<td>Med Availability >80% &verified by Patient Feedback</td>
-						<td>{{ Helpers::convertToPercent($report->med_avail_feedback_target) }}%</td>
-						<td>{{ Helpers::convertToPercent($report->med_avail_feedback_performance) }}%</td>
-						<td>{{ $report->med_avail_feedback_block }}</td>
-						<td>{{ $report->med_avail_feedback_district }}</td>
-						<td>{{ $report->med_avail_feedback_state }}</td>
+						<td class="velvet-color">{{ Helpers::convertToPercent($report->med_avail_feedback_target) }}%</td>
+						<td class="blue">{{ Helpers::convertToPercent($report->med_avail_feedback_performance) }}%</td>
+						<td class="dark-green">{{ $report->med_avail_feedback_block }}</td>
+						<td class="dark-green">{{ $report->med_avail_feedback_district }}</td>
+						<td class="dark-green">{{ $report->med_avail_feedback_state }}</td>
 					</tr>
 					<tr>
 						<td>Test Availability >80% & verified by Patient Feedback </td>
-						<td>{{ Helpers::convertToPercent($report->test_avail_target) }}%</td>
-						<td>{{ Helpers::convertToPercent($report->test_avail_performance) }}%</td>
-						<td>{{ $report->test_avail_block }}</td>
+						<td class="velvet-color">{{ Helpers::convertToPercent($report->test_avail_target) }}%</td>
+						<td class="blue">{{ Helpers::convertToPercent($report->test_avail_performance) }}%</td>
+						<td class="dark-green">{{ $report->test_avail_block }}</td>
 						<td>{{ $report->test_avail_district }}</td>
 						<td>{{ $report->test_avail_state}}</td>
 					</tr>
 					<tr>
 						<td>Doctor Attendance >80% & verified by Patient Feedback</td>
-						<td>{{ Helpers::convertToPercent($report->doc_avail_target) }}%</td>
-						<td>{{ Helpers::convertToPercent($report->doc_avail_performance) }}%</td>
-						<td>{{ $report->doc_avail_block }}</td>
-						<td>{{ $report->doc_avail_district }}</td>
-						<td>{{ $report->doc_avail_state }}</td>
+						<td class="velvet-color">{{ Helpers::convertToPercent($report->doc_avail_target) }}%</td>
+						<td class="blue">{{ Helpers::convertToPercent($report->doc_avail_performance) }}%</td>
+						<td class="dark-green">{{ $report->doc_avail_block }}</td>
+						<td class="dark-green">{{ $report->doc_avail_district }}</td>
+						<td class="dark-green">{{ $report->doc_avail_state }}</td>
 					</tr>
 					<tr>
 						<td>Rajdhara: % Fill Rate</td>
-						<td>{{ Helpers::convertToPercent($report->rajdhara_target) }}%</td>
-						<td>{{ Helpers::convertToPercent($report->rajdhara_performance) }}%</td>
-						<td>{{ $report->rajdhara_block }}</td>
-						<td>{{ $report->rajdhara_district }}</td>
-						<td>{{ $report->rajdhara_state }}</td>
+						<td class="velvet-color">{{ Helpers::convertToPercent($report->rajdhara_target) }}%</td>
+						<td class="blue">{{ Helpers::convertToPercent($report->rajdhara_performance) }}%</td>
+						<td class="dark-green">{{ $report->rajdhara_block }}</td>
+						<td class="dark-green">{{ $report->rajdhara_district }}</td>
+						<td class="dark-green">{{ $report->rajdhara_state }}</td>
 					</tr>
 				</table>
 
@@ -265,35 +265,35 @@
 					<tr>
 						<th width="15%" rowspan="4" valign="middle">Reporting</th>
 						<td width="25%">Pregnant Women registered on PCTS - line list vs. expected PW </td>
-						<td width="12%">{{ Helpers::convertToPercent($report->linelist_vs_expected_target) }}%</td>
-						<td width="12%">{{ Helpers::convertToPercent($report->linelist_vs_expected_performance) }}%</td>
-						<td width="12%">{{ $report->linelist_vs_expected_block }}</td>
-						<td width="12%">{{ $report->linelist_vs_expected_district }}</td>
-						<td width="12%">{{ $report->linelist_vs_expected_state }}</td>
+						<td width="12%" class="velvet-color">{{ Helpers::convertToPercent($report->linelist_vs_expected_target) }}%</td>
+						<td width="12%" class="blue">{{ Helpers::convertToPercent($report->linelist_vs_expected_performance) }}%</td>
+						<td width="12%" class="dark-green">{{ $report->linelist_vs_expected_block }}</td>
+						<td width="12%" class="dark-green">{{ $report->linelist_vs_expected_district }}</td>
+						<td width="12%" class="dark-green">{{ $report->linelist_vs_expected_state }}</td>
 					</tr>
 					<tr>
 						<td>Live births registered on PCTS vs. expected </td>
-						<td>{{ Helpers::convertToPercent($report->pcts_vs_expected_target) }}%</td>
-						<td>{{ Helpers::convertToPercent($report->pcts_vs_expected_performance) }}%</td>
-						<td>{{ $report->pcts_vs_expected_block }}</td>
-						<td>{{ $report->pcts_vs_expected_district }}</td>
-						<td>{{ $report->pcts_vs_expected_state }}</td>
+						<td class="velvet-color">{{ Helpers::convertToPercent($report->pcts_vs_expected_target) }}%</td>
+						<td class="blue">{{ Helpers::convertToPercent($report->pcts_vs_expected_performance) }}%</td>
+						<td class="dark-green">{{ $report->pcts_vs_expected_block }}</td>
+						<td class="dark-green">{{ $report->pcts_vs_expected_district }}</td>
+						<td class="dark-green">{{ $report->pcts_vs_expected_state }}</td>
 					</tr>
 					<tr>
 						<td>Institutional Deliveries (Summary(Form6,7) - LL)</td>
-						<td>{{ Helpers::convertToPercent($report->id_target) }}%</td>
-						<td>{{ Helpers::convertToPercent($report->id_performance) }}%</td>
-						<td>{{ $report->id_block }}</td>
-						<td>{{ $report->id_district }}</td>
-						<td>{{ $report->id_state }}</td>
+						<td class="velvet-color">{{ Helpers::convertToPercent($report->id_target) }}%</td>
+						<td class="blue">{{ Helpers::convertToPercent($report->id_performance) }}%</td>
+						<td class="dark-green">{{ $report->id_block }}</td>
+						<td class="dark-green">{{ $report->id_district }}</td>
+						<td class="dark-green">{{ $report->id_state }}</td>
 					</tr>
 					<tr>
 						<td>Full Immunization (Summary – Line List) </td>
-						<td>{{ Helpers::convertToPercent($report->fi_target) }}%</td>
-						<td>{{ Helpers::convertToPercent($report->fi_performance) }}%</td>
-						<td>{{ $report->fi_block }}</td>
-						<td>{{ $report->fi_district }}</td>
-						<td>{{ $report->fi_state }}</td>
+						<td class="velvet-color">{{ Helpers::convertToPercent($report->fi_target) }}%</td>
+						<td class="blue">{{ Helpers::convertToPercent($report->fi_performance) }}%</td>
+						<td class="dark-green">{{ $report->fi_block }}</td>
+						<td class="dark-green">{{ $report->fi_district }}</td>
+						<td class="dark-green">{{ $report->fi_state }}</td>
 					</tr>
 				</table>
 			</div>
