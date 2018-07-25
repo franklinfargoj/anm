@@ -90,7 +90,7 @@ Class ConvertToUnicode {
 
             $position_of_i = mb_strpos($modified_substring,"fa",0,"utf-8");
             while ($position_of_i) {
-                $charecter_next_to_ip2 = mb_substr($stringtoconvert,$position_of_i + 2,1,"utf-8");
+                $charecter_next_to_ip2 = mb_substr($modified_substring,$position_of_i + 2,1,"utf-8");
 
                 $charecter_to_be_replaced = "fa" . $charecter_next_to_ip2;
                 $modified_substring = $this->stringReplace($modified_substring,$charecter_to_be_replaced, $charecter_next_to_ip2 . "िं");
@@ -99,10 +99,10 @@ Class ConvertToUnicode {
             $modified_substring = $this->stringReplace($modified_substring,"/Ê/g", "ीZ");
             $position_of_wrong_ee = mb_strpos($modified_substring,"ि्",0,"utf-8");
             while ($position_of_wrong_ee ) {
-                $consonent_next_to_wrong_ee = mb_substr($stringtoconvert,$position_of_wrong_ee + 2,1,"utf-8");
+                $consonent_next_to_wrong_ee = mb_substr($modified_substring,$position_of_wrong_ee + 2,1,"utf-8");
                 $charecter_to_be_replaced = "ि्" . $consonent_next_to_wrong_ee;
                 $modified_substring = $this->stringReplace($modified_substring,$charecter_to_be_replaced, "्" . $consonent_next_to_wrong_ee . "ि");
-                $position_of_wrong_ee = $this->stringReplace($modified_substring,"/ि्/", $position_of_wrong_ee . 2);
+                $position_of_wrong_ee = mb_strpos($modified_substring,"/ि्/", $position_of_wrong_ee + 2,'utf-8');
             }
 
             $set_of_matras = "अ आ इ ई उ ऊ ए ऐ ओ औ ा ि ी ु ू ृ े ै ो ौ ं : ँ ॅ";
