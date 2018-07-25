@@ -50,10 +50,7 @@ class MosController extends Controller
         })->addColumn('reschedule', function($moic){
             $arr = explode(',', $moic['sms_sent_initiateds']);
 
-            // $is_all_sms_sent =  $arr[0];  $arr[1];
-            $is_all_sms_sent = array_reduce($arr, function($a, $b){  return $a & $b; });
-
-            if($is_all_sms_sent == 0){
+            if(empty ($arr[1])){
                 return '<input type="hidden" id="'.$moic['uploaded_file'].'" value="'.$moic['id'].'">
                         <input type="text" class="re_schedule" name="re_schedule" class="form-control">
                         ';
