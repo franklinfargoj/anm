@@ -121,7 +121,7 @@
     	width: 100%;
 	}
 	.inner-area {
-		min-width: 600px;
+		min-width: 900px;
 		padding: 5px;
 	}
 	.table.report-card-table>tbody>tr:first-child>td {
@@ -140,7 +140,17 @@
 		font-size: 14px;
 	}
 	.internal-table-area {
-	    padding-top: 175px;
+	    padding-top: 10px;
+	}
+	.reports-area.navbar-fixed-top {
+		margin-bottom: 20px;
+		position: relative;
+		padding-top: 0px;
+	}
+	
+	.reports-area.navbar-fixed-top .container {
+		padding-right: 0px;
+    	padding-left: 0px;
 	}
 	.darkHeader {
 		padding-top: 0;
