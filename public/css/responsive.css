@@ -1,0 +1,172 @@
+@media (min-width: 768px) and (max-width: 992px) {
+	.login-form-area {
+		padding: 50px;
+	}
+	.performance-review-area {
+	    padding: 0 30px;
+	}
+	.phc-ranking-title {
+		font-size: 22px;
+	}
+	.phc-ranking-content {
+		font-size: 20px;
+	}
+	.internal-table-area {
+	    padding-top: 345px;
+	}
+	.table.report-card-table>tbody>tr:last-child>td {
+		font-size: 13px;
+	}
+	.table.fancy-table>tbody>tr>th+td, .table.fancy-table>tbody>tr td:first-child {
+		font-size: 13px;
+	}
+	.table.fancy-table>tbody>tr>th {
+		font-size: 13px;
+	}
+	.table.report-card-table>tbody>tr:first-child>td {
+		font-size: 13px;
+	}
+	.table.fancy-table>tbody>tr>td {
+		font-size: 14px;
+	}
+}
+@media (min-width: 569px) and (max-width: 767px) {
+	.dashboard-form .col-sm-3 {
+		width: 50%;
+		float: left;
+	}
+
+	.phc-ranking-title img {
+		max-width: 30px;
+	}
+	.phc-ranking-title {
+		font-size: 18px;
+		text-align: center;
+	}
+	.phc-ranking-content {
+	    font-size: 14px;
+	    line-height: 24px;
+	    margin: 7px 7px 0;
+	}
+	.performance-review-area {
+		padding: 20px 50px;
+	}
+	.internal-header.navbar-fixed-top {
+		position: relative;
+	}
+	.outer-area {
+		overflow: scroll;
+    	width: 100%;
+	}
+	.inner-area {
+		min-width: 600px;
+		padding: 5px;
+	}
+	.darkHeader {
+		padding-top: 0;
+		z-index: 1000;
+	}
+	.internal-table-area {
+	    padding-top: 220px;
+	}
+}
+
+@media (min-width: 320px) and (max-width: 568px) {
+	.login-lhs {
+		padding: 10px;
+	}
+	.welcome-msg {
+		margin: 15px;
+	}
+	.login-form-area {
+		padding: 30px;
+	}
+
+	/*PHC PAGE*/
+	.pull-up {
+	    margin-top: 30px;
+	}
+	.reports-area .col-md-4.text-center li {
+		display: block;
+	}
+	.internal-header.navbar-fixed-top {
+		position: relative;
+	}
+
+	.internal-header h4 {
+		font-size: 15px;
+	}
+	.internal-header h4 span {
+		font-size: 15px;
+    	margin-top: 5px;
+	}
+	.phc-ranking-title img {
+		max-width: 30px;
+	}
+	.phc-ranking-title {
+		font-size: 18px;
+		text-align: center;
+		display: block;
+	}
+	.phc-ranking-content {
+	    font-size: 14px;
+	    line-height: 24px;
+	    margin: 7px 7px 0;
+	}
+	.performance-review-area {
+		padding: 20px;
+	}
+	.outer-area {
+		overflow: scroll;
+    	width: 100%;
+	}
+	.inner-area {
+		min-width: 900px;
+		padding: 5px;
+	}
+	.table.report-card-table>tbody>tr:first-child>td {
+		font-size: 13px;
+	}
+	.table.report-card-table>tbody>tr:last-child>td {
+		font-size: 12px;
+	}
+	.table.fancy-table>tbody>tr>th+td, .table.fancy-table>tbody>tr td:first-child {
+		font-size: 12px;
+	}
+	.table.fancy-table>tbody>tr>th {
+		font-size: 12px;
+	}
+	.table.fancy-table>tbody>tr>td {
+		font-size: 14px;
+	}
+	.internal-table-area {
+	    padding-top: 10px;
+	}
+	.reports-area.navbar-fixed-top {
+		margin-bottom: 20px;
+		position: relative;
+		padding-top: 0px;
+	}
+	
+	.reports-area.navbar-fixed-top .container {
+		padding-right: 0px;
+    	padding-left: 0px;
+	}
+	.darkHeader {
+		padding-top: 0;
+		z-index: 1000;
+	}
+	/*pdf css*/
+	.responsive-box {
+		width: 100%;
+	}
+	.d-block {
+		display: block;
+		text-align: center;
+	}
+	.row-reverse {
+		display: flex;
+    	flex-direction: column-reverse;
+	}
+}
+

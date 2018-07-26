@@ -479,16 +479,21 @@ h5 {
 	font-family: 'Roboto-Bold';
 	font-size:26px;
 	color: #11427d;
-	line-height:90px;
+	display: inline-block;
 }
 .phc-ranking-content {
 	font-family: 'Roboto-Bold';
 	font-size:24px;
 	color: #11427d;
 	line-height:90px;
+	display: inline-block;
+	margin: 0 20px;
 }
 .phc-ranking-content span {
 	font-family: 'Roboto-Regular';
+}
+.performance-review-area {
+	padding: 0 50px;
 }
 .box-area {
 	-webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.4);
@@ -537,7 +542,7 @@ h5 {
 }
 
 .internal-table-area {
-	padding-top: 335px;
+	padding-top: 320px;
 }
 
 .table.fancy-table {
@@ -566,9 +571,11 @@ h5 {
 .table.fancy-table>tbody>tr>th+td {
 	text-align: left;
 	font-family: 'Roboto-Regular';
+	font-size: 14px;
 }
 .table.fancy-table>tbody>tr td:first-child {
     font-family: 'Roboto-Regular';
+    font-size: 14px;
 }
 .table.fancy-table>tbody>tr>th {
 	font-family: 'Roboto-Bold';
