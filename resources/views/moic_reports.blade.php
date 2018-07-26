@@ -26,10 +26,10 @@
                         PHC Ranking:
                      </div>
                      <div class="phc-ranking-content"> 
-                        {{Helpers::ordinal($report->phc_rank_in_block)}} <span>in block (of 8)</span>
+                        {{Helpers::ordinal($report->phc_rank_in_block)}} <span>in block (of {{$report->phcs_in_the_block}})</span>
                      </div>
                      <div class="phc-ranking-content">
-                        {{Helpers::ordinal($report->phc_rank_in_district)}} <span>in district (of 80)</span>
+                        {{Helpers::ordinal($report->phc_rank_in_district)}} <span>in district (of {{$report->phcs_in_the_block}})</span>
                      </div>
                   </div>
                </div>
@@ -95,30 +95,30 @@
                           	</div>
                           </div>
                           <table width="100%" class="table fancy-table">
-                             <tr>
-                                <th width="10%" rowspan="2" valign="middle">Utilization</th>
-                                <td width="20%">OPDs/day (>40)</td>
-                                <td width="12%" class="velvet-color">{{ $report->opd_max_score_achieved }}</td>
-                                <td width="9%" class="velvet-color">{{ $report->opd_score_achieved }}</td>
-                                <td width="10%" class="velvet-color">{{ $report->opd_target }}</td>
-                                <td width="9%" class="blue">{{ $report->opd_performance }}</td>
-                                <td width="10%" class="dark-green">{{ $report->opd_block }}</td>
-                                <td width="10%" class="dark-green">{{ $report->opd_district }}</td>
-                                <td width="10%" class="dark-green">{{ $report->opd_state }}</td>
+                             <tr data-title-attribute="{{$months[$report->month]}} 2018 Report Card">
+                                <th width="10%" rowspan="2" valign="middle" data-title-attribute="Program">Utilization</th>
+                                <td width="20%" data-title-attribute="Metric">OPDs/day (>40)</td>
+                                <td width="12%" data-title-attribute="Max score that can be achieved" class="velvet-color">{{ $report->opd_max_score_achieved }}</td>
+                                <td width="9%" data-title-attribute="Score achieved" class="velvet-color">{{ $report->opd_score_achieved }}</td>
+                                <td width="10%" data-title-attribute="Target" class="velvet-color">{{ $report->opd_target }}</td>
+                                <td width="9%" data-title-attribute="May'18 Performance" class="blue">{{ $report->opd_performance }}</td>
+                                <td width="10%" data-title-attribute="In the block" class="dark-green">{{ $report->opd_block }}</td>
+                                <td width="10%" data-title-attribute="In Alwar" class="dark-green">{{ $report->opd_district }}</td>
+                                <td width="10%" data-title-attribute="In Rajasthan" class="dark-green">{{ $report->opd_state }}</td>
                              </tr>
                              <tr>
-                                <td>Proportion of <br/> Institutional Delivery</td>
-                                <td class="velvet-color">{{ $report->pid_max_score_achieved }}</td>
-                                <td class="velvet-color">{{ $report->pid_score_achieved }}</td>
-                                <td class="velvet-color">{{ Helpers::convertToPercent($report->pid_target) }}%</td>
-                                <td class="blue">{{ Helpers::convertToPercent($report->pid_performance) }}%</td>
-                                <td class="dark-green">{{ $report->pid_block }}</td>
-                                <td class="dark-green">{{ $report->pid_district }}</td>
-                                <td class="dark-green">{{ $report->pid_state }}</td>
+                                <td data-title-attribute="Metric">Proportion of <br/> Institutional Delivery</td>
+                                <td data-title-attribute="Max score that can be achieved" class="velvet-color">{{ $report->pid_max_score_achieved }}</td>
+                                <td data-title-attribute="Score achieved" class="velvet-color">{{ $report->pid_score_achieved }}</td>
+                                <td data-title-attribute="Target" class="velvet-color">{{ Helpers::convertToPercent($report->pid_target) }}%</td>
+                                <td data-title-attribute="May'18 Performance" class="blue">{{ Helpers::convertToPercent($report->pid_performance) }}%</td>
+                                <td data-title-attribute="In the block" class="dark-green">{{ $report->pid_block }}</td>
+                                <td data-title-attribute="In Alwar" class="dark-green">{{ $report->pid_district }}</td>
+                                <td data-title-attribute="In Rajasthan" class="dark-green">{{ $report->pid_state }}</td>
                              </tr>
                           </table>
                           <table width="100%" class="table fancy-table">
-                             <tr>
+                             <tr data-title-attribute="{{$months[$report->month]}} 2018 Report Card">
                                 <th width="10%" rowspan="8" valign="middle">RMNCH + A</th>
                                 <td width="20%">Full Immunization Coverage * </td>
                                 <td width="12%" class="velvet-color">{{ $report->fic_max_score_achieved }}</td>
@@ -201,7 +201,7 @@
                              </tr>
                           </table>
                           <table width="100%" class="table fancy-table">
-                             <tr>
+                             <tr data-title-attribute="{{$months[$report->month]}} 2018 Report Card">
                                 <th width="10%" rowspan="3" valign="middle">CDs</th>
                                 <td width="20%">Pneumonia prevalence</td>
                                 <td width="12%" class="velvet-color">{{ $report->pneumonia_max_score_achieved }}</td>
@@ -234,7 +234,7 @@
                              </tr>
                           </table>
                           <table width="100%" class="table fancy-table">
-                             <tr>
+                             <tr data-title-attribute="{{$months[$report->month]}} 2018 Report Card">
                                 <th width="10%" rowspan="3" valign="middle">NCDs</th>
                                 <td width="20%">prevalence (old and new cases) %Hypertension </td>
                                 <td width="12%" class="velvet-color">{{ $report->hp_max_score_achieved }}</td>
@@ -267,7 +267,7 @@
                              </tr>
                           </table>
                           <table width="100%" class="table fancy-table">
-                             <tr>
+                             <tr data-title-attribute="{{$months[$report->month]}} 2018 Report Card">
                                 <th width="10%" rowspan="6" valign="middle">Governance</th>
                                 <td width="20%"># Days patient vouchers were updated this month </td>
                                 <td width="12%" class="velvet-color">{{ $report->days_patient_voucher_max_score_achieved }}</td>
@@ -330,7 +330,7 @@
                              </tr>
                           </table>
                           <table width="100%" class="table fancy-table">
-                             <tr>
+                             <tr data-title-attribute="{{$months[$report->month]}} 2018 Report Card">
                                 <th width="10%" rowspan="4" valign="middle">Reporting</th>
                                 <td width="20%">Pregnant Women registered on PCTS - line list vs. expected PW </td>
                                 <td width="12%" class="velvet-color">{{ $report->linelist_vs_expected_max_score_achieved }}</td>

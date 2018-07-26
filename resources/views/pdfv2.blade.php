@@ -29,10 +29,10 @@
                         <label style="font-size:0.9em; color: #11427d; margin: 0px; padding:0px;"><strong>PHC Ranking:</strong></label>
                     </li>
                     <li style="width: 30%; display: inline-block; vertical-align:middle;">
-                        <p style="font-size:0.9em ; color: #11427d; margin: 0px; padding:0;"><strong>{{Helpers::ordinal($report->phc_rank_in_block)}}</strong> in block (of 8)</p>
+                        <p style="font-size:0.9em ; color: #11427d; margin: 0px; padding:0;"><strong>{{Helpers::ordinal($report->phc_rank_in_block)}}</strong> in block (of {{$report->phcs_in_the_block}})</p>
                     </li>
                     <li style="width: 30%; display: inline-block; vertical-align:middle;">
-                            <p style="font-size:0.9em ; color: #11427d; margin: 0px;  padding:0;"><strong>{{Helpers::ordinal($report->phc_rank_in_district)}} </strong>in district (of 80)</p>
+                            <p style="font-size:0.9em ; color: #11427d; margin: 0px;  padding:0;"><strong>{{Helpers::ordinal($report->phc_rank_in_district)}} </strong>in district (of {{$report->phcs_in_the_block}})</p>
                     </li>
                 </ul>
             </div>
