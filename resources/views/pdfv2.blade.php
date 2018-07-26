@@ -70,6 +70,8 @@
                 <div style="display: table-cell; width: 85%;">
                     <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0; width: 100%;">
                         <li style="font-size: 0.6em; color: #000; display: table-cell; padding:5px 20px;  margin:0px; text-align: center; width: 25%">OPDs/day (>40)</li>
+                        <li style="font-size: 0.6em; color: #670f31; display: table-cell; padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->opd_max_score_achieved }}</li>
+                        <li style="font-size: 0.6em; color: #025fad; display: table-cell; padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->opd_score_achieved }}</li>
                         <li style="font-size: 0.6em; color: #670f31; display: table-cell; padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->opd_target }}</li>
                         <li style="font-size: 0.6em; color: #025fad; display: table-cell; padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->opd_performance }}</li>
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell; padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->opd_block }}</li>
@@ -79,6 +81,8 @@
                     <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0px; width: 100%;">
                         <li style="font-size: 0.6em; color: #000; display: table-cell; padding:5px 20px;  margin:0px; text-align: center; width: 25%">Proportion of
                                 Institutional Delivery</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->pid_max_score_achieved }}</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->pid_score_achieved }}</li>
                         <li style="font-size: 0.6em; color: #670f31; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->pid_target) }}%</li>
                         <li style="font-size: 0.6em; color: #025fad; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->pid_performance) }}%</li>
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->pid_block }}</li>
@@ -96,6 +100,8 @@
                 <div style="display: table-cell; width: 85%;">
                     <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0px; width: 100%;">
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 25%">Full Immunization Coverage * </li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->fic_max_score_achieved }}</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->fic_score_achieved }}</li>
                         <li style="font-size: 0.6em; color: #670f31; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->fic_target) }}%</li>
                         <li style="font-size: 0.6em; color: #025fad; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->fic_performance) }}%</li>
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->fic_block }}</li>
@@ -104,6 +110,8 @@
                     </ul>
                     <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0px; width: 100%;">
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 25%">ANC 3 Coverage * </li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->anc3_max_score_achieved }}</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->anc3_score_achieved }}</li>
                         <li style="font-size: 0.6em; color: #670f31; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->anc3_target) }}%</li>
                         <li style="font-size: 0.6em; color: #025fad; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->anc3_performance) }}%</li>
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->anc3_block }}</li>
@@ -112,6 +120,8 @@
                     </ul>
                     <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0px; width: 100%;">
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 25%">ANC 4 Coverage * </li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->anc4_max_score_achieved }}</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->anc4_score_achieved }}</li>
                         <li style="font-size: 0.6em; color: #670f31; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->anc4_target) }}%</li>
                         <li style="font-size: 0.6em; color: #025fad; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->anc4_performance) }}%</li>
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->anc4_block }}</li>
@@ -120,6 +130,8 @@
                     </ul>
                     <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0px; width: 100%;">
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 25%">ANC Registration (within 12 weeks) * </li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->anc12_max_score_achieved }}</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->anc12_score_achieved }}</li>
                         <li style="font-size: 0.6em; color: #670f31; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->anc12_target) }}%</li>
                         <li style="font-size: 0.6em; color: #025fad; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->anc12_performance) }}%</li>
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->anc12_block }}</li>
@@ -128,6 +140,8 @@
                     </ul>
                     <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0px; width: 100%;">
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 25%">Proportion of LBW among new born</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->plb_max_score_achieved }}</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->plb_score_achieved }}</li>
                         <li style="font-size: 0.6em; color: #670f31; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->plb_target) }}%</li>
                         <li style="font-size: 0.6em; color: #025fad; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->plb_performance) }}%</li>
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->plb_block }}</li>
@@ -136,6 +150,8 @@
                     </ul>
                     <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0px; width: 100%;">
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 25%">FP - IUCD Insertion %</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->fpiucd_max_score_achieved }}</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->fpiucdscore_achieved }}</li>
                         <li style="font-size: 0.6em; color: #670f31; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->fpiucd_target) }}%</li>
                         <li style="font-size: 0.6em; color: #025fad; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->fpiucd_performance) }}%</li>
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->fpiucd_block }}</li>
@@ -144,6 +160,8 @@
                     </ul>
                     <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0px; width: 100%;">
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 25%">FP - PPIUCD Insertion %</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->ppiucd_max_score_achieved }}</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->ppiucd_score_achieved }}</li>
                         <li style="font-size: 0.6em; color: #670f31; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->ppiucd_target) }}%</li>
                         <li style="font-size: 0.6em; color: #025fad; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->ppiucd_performance) }}%</li>
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->ppiucd_block }}</li>
@@ -152,6 +170,8 @@
                     </ul>
                     <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0px; width: 100%;">
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 25%">FP - Sterilization %</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->fp_max_score_achieved }}</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->fp_score_achieved }}</li>
                         <li style="font-size: 0.6em; color: #670f31; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->fp_sterilization_target) }}%</li>
                         <li style="font-size: 0.6em; color: #025fad; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->fp_sterilization_performance) }}%</li>
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->fp_sterilization_block }}</li>
@@ -169,6 +189,8 @@
                 <div style="display: table-cell; width: 85%;">
                     <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0px; width: 100%;">
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 25%">Pneumonia prevalence</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->pneumonia_max_score_achieved }}</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->pneumonia_score_achieved }}</li>
                         <li style="font-size: 0.6em; color: #670f31; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->pneumonia_target }}</li>
                         <li style="font-size: 0.6em; color: #025fad; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->pneumonia_performance }}</li>
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->pneumonia_block }}</li>
@@ -177,6 +199,8 @@
                     </ul>
                     <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0px; width: 100%;">
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 25%">Malaria slides collected</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->malaria_max_score_achieved }}</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->malaria_score_achieved }}</li>
                         <li style="font-size: 0.6em; color: #670f31; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->malaria_target) }}%</li>
                         <li style="font-size: 0.6em; color: #025fad; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->malaria_performance) }}%</li>
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->malaria_block }}</li>
@@ -185,6 +209,8 @@
                     </ul>
                     <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0px; width: 100%;">
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 25%">Diarrhea prevalence</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->diarrhea_max_score_achieved }}</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->diarrhea_score_achieved }}</li>
                         <li style="font-size: 0.6em; color: #670f31; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->diarrhea_target }}</li>
                         <li style="font-size: 0.6em; color: #025fad; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->diarrhea_performance }}</li>
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->diarrhea_block}}</li>
@@ -202,6 +228,8 @@
                 <div style="display: table-cell; width: 85%;">
                     <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0px; width: 100%;">
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 25%">prevalence (old and new cases) %Hypertension</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->hp_max_score_achieved }}</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->hp_score_achieved }}</li>
                         <li style="font-size: 0.6em; color: #670f31; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->hp_target) }}%</li>
                         <li style="font-size: 0.6em; color: #025fad; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->hp_performance) }}%</li>
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->hp_block }}</li>
@@ -210,6 +238,8 @@
                     </ul>
                     <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0px; width: 100%;">
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 25%">Diabetes prevalence (old and new cases) %</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->diabetes_max_score_achieved }}</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->diabetes_score_achieved }}</li>
                         <li style="font-size: 0.6em; color: #670f31; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->diabetes_target) }}%</li>
                         <li style="font-size: 0.6em; color: #025fad; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->diabetes_performance) }}%</li>
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->diabetes_block }}</li>
@@ -218,6 +248,8 @@
                     </ul>
                     <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0px; width: 100%;">
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 25%">CVD diagnosis (old and new cases) %</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->cvd_max_score_achieved }}</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->cvd_score_achieved }}</li>
                         <li style="font-size: 0.6em; color: #670f31; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->cvd_target) }}%</li>
                         <li style="font-size: 0.6em; color: #025fad; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->cvd_performance) }}%</li>
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->cvd_block}}</li>
@@ -236,6 +268,8 @@
                 <div style="display: table-cell; width: 85%;">
                     <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0px; width: 100%;">
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 25%"># Days patient vouchers were updated this month </li>
+                        <li style="font-size: 0.6em; color: #670f31; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->days_patient_voucher_max_score_achieved }}</li>
+                        <li style="font-size: 0.6em; color: #025fad; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->days_patient_voucher_score_achieved }}</li>
                         <li style="font-size: 0.6em; color: #670f31; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->days_patient_voucher_target }}</li>
                         <li style="font-size: 0.6em; color: #025fad; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->days_patient_voucher_performance }}</li>
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->days_patient_voucher_block }}</li>
@@ -244,6 +278,8 @@
                     </ul>
                     <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0px; width: 100%;">
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 25%">% Patient Vouchers recorded vs OPD for the month</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->patient_vouchers_max_score_achieved }}</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->patient_vouchers_score_achieved }}</li>
                         <li style="font-size: 0.6em; color: #670f31; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->patient_vouchers_target) }}%</li>
                         <li style="font-size: 0.6em; color: #025fad; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->patient_vouchers_performance) }}%</li>
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->patient_vouchers_block }}</li>
@@ -252,6 +288,8 @@
                     </ul>
                     <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0px; width: 100%;">
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 25%">CVD diagnosis (old and new cases) %</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->cvd_max_score_achieved }}</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->cvd_score_achieved }}</li>
                         <li style="font-size: 0.6em; color: #670f31; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->cvd_target) }}%</li>
                         <li style="font-size: 0.6em; color: #025fad; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->cvd_performance) }}%</li>
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->cvd_block}}</li>
@@ -260,6 +298,8 @@
                     </ul>
                     <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0px; width: 100%;">
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 25%">Med Availability >80% &verified by Patient Feedback</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->med_avail_feedback_max_score_achieved }}</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->med_avail_feedback_score_achieved }}</li>
                         <li style="font-size: 0.6em; color: #670f31; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->med_avail_feedback_target) }}%</li>
                         <li style="font-size: 0.6em; color: #025fad; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->med_avail_feedback_performance) }}%</li>
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->med_avail_feedback_block }}</li>
@@ -268,6 +308,8 @@
                     </ul>
                     <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0px; width: 100%;">
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 25%">Test Availability >80% & verified by Patient Feedback </li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->test_avail_feedback_max_score_achieved }}</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->test_avail_feedback_score_achieved}}</li>
                         <li style="font-size: 0.6em; color: #670f31; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->test_avail_target) }}%</li>
                         <li style="font-size: 0.6em; color: #025fad; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->test_avail_performance) }}%</li>
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->test_avail_block }}</li>
@@ -276,6 +318,8 @@
                     </ul>
                     <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0px; width: 100%;">
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 25%">Doctor Attendance >80% & verified by Patient Feedback</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->doc_avail_feedback_max_score_achieved }}</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->doc_avail_feedback_score_achieved }}</li>
                         <li style="font-size: 0.6em; color: #670f31; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->doc_avail_target) }}%</li>
                         <li style="font-size: 0.6em; color: #025fad; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->doc_avail_performance) }}%</li>
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->doc_avail_block }}</li>
@@ -284,6 +328,8 @@
                     </ul>
                     <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0px; width: 100%;">
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 25%">Rajdhara: % Fill Rate</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->rajdharaa_max_score_achieved }}</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->rajdharaa_score_achieved }}</li>
                         <li style="font-size: 0.6em; color: #670f31; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->rajdhara_target) }}%</li>
                         <li style="font-size: 0.6em; color: #025fad; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->rajdhara_performance) }}%</li>
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->rajdhara_block }}</li>
@@ -301,6 +347,8 @@
                 <div style="display: table-cell; width: 85%;">
                     <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0px; width: 100%;">
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 25%">Pregnant Women registered on PCTS - line list vs. expected PW</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->linelist_vs_expected_max_score_achieved }}</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->linelist_vs_expected_score_achieved }}</li>
                         <li style="font-size: 0.6em; color: #670f31; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->linelist_vs_expected_target) }}%</li>
                         <li style="font-size: 0.6em; color: #025fad; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->linelist_vs_expected_performance) }}%</li>
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->linelist_vs_expected_block }}</li>
@@ -309,6 +357,8 @@
                     </ul>
                     <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0px; width: 100%;">
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 25%">Live births registered on PCTS vs. expected * </li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->pcts_vs_expected_max_score_achieved }}</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->pcts_vs_expected_score_achieved }}</li>
                         <li style="font-size: 0.6em; color: #670f31; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->pcts_vs_expected_target) }}%</li>
                         <li style="font-size: 0.6em; color: #025fad; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->pcts_vs_expected_performance) }}%</li>
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->pcts_vs_expected_block }}</li>
@@ -317,6 +367,8 @@
                     </ul>
                     <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0px; width: 100%;">
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 25%">Institutional Deliveries (Summary(Form6,7) - LL) * </li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->id_max_score_achieved }}</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->id_score_achieved }}</li>
                         <li style="font-size: 0.6em; color: #670f31; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->id_target) }}%</li>
                         <li style="font-size: 0.6em; color: #025fad; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->id_performance) }}%</li>
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->id_block}}</li>
@@ -325,6 +377,8 @@
                     </ul>
                     <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0px; width: 100%;">
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 25%">Full Immunization (Summary – Line List) </li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->fi_max_score_achieved }}</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->fi_score_achieved }}</li>
                         <li style="font-size: 0.6em; color: #670f31; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->fi_target) }}%</li>
                         <li style="font-size: 0.6em; color: #025fad; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->fi_performance) }}%</li>
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->fi_block}}</li>
