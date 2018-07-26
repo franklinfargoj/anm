@@ -83,8 +83,8 @@
 	                             <tr>
 	                                <td width="10%" class="dark-blue">Program</td>
 	                                <td width="20%" class="text-left dark-blue" align="left">Metric</td>
-	                                <td width="12%" class="velvet-color">Max scene that can be achieved</td>
-	                                <td width="9%" class="velvet-color">Scene achieved</td>
+	                                <td width="12%" class="velvet-color">Max score that can be achieved</td>
+	                                <td width="9%" class="velvet-color">Score achieved</td>
 	                                <td width="10%" class="velvet-color">Target</td>
 	                                <td width="9%" class="blue">May'18 Performance</td>
 	                                <td width="10%" class="dark-green">In the block</td>
