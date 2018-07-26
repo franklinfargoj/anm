@@ -48,26 +48,32 @@ class TargetdataController extends Controller
 
     public function fetchTargetData()
     {
-        $target_data = AnmTargetDataModel::select('id', 'og_filename as filenames','filename', 'uploaded_on','schedule_at', 'status', 'created_at',\DB::raw('group_concat(anm_sms_initiated) as anm_sent'))
-            ->selectRaw("(CASE WHEN status='N' THEN 'Pending' WHEN status='Y' THEN 'Successful' END) as status")
-            ->groupBy('filename')
-            ->orderBy('created_at', 'DESC')
-            ->get();
+        $target_data = AnmTargetDataModel::select('id', 'og_filename as filenames','filename', 'uploaded_on','schedule_at', 'status', 'created_at',
+                \DB::raw('group_concat(distinct anm_sms_initiated) as anm_sent'),
+                \DB::raw('group_concat(distinct moic_sms_initiated) as moic_sent'))
+                ->selectRaw("(CASE WHEN status='N' THEN 'Pending' WHEN status='Y' THEN 'Successful' END) as status")
+                ->groupBy('filename')
+                ->orderBy('created_at', 'DESC')
+                ->get();
 
         $db = Datatables::of($target_data);
         $db->addColumn('sr_no', function ($target_data) {
-            static $i = 0;
-            $i++;
-            return $i;
-        })->rawColumns(['id']);
+                static $i = 0;
+                $i++;
+                return $i;
+                })->rawColumns(['id']);
         $db->addColumn('actions', function ($target_data) {
             return '<a href="' . route('processedfile', $target_data['id']) . '">View details</a>';
         })->addColumn('reschedule', function($target_data){
-            return '
-<input type="hidden" id="'.$target_data['filename'].'" value="'.$target_data['filename'].'">
-<input type="text" class="re_schedule" name="re_schedule" class="form-control">';
-        })->rawColumns(['actions','reschedule']);
 
+        $arr_anm = explode(',', $target_data['anm_sent']);
+        $arr_moic = explode(',', $target_data['moic_sent']);
+        if(empty ($arr_anm[1]) && empty ($arr_moic[1])){
+            return '<input type="hidden" id="'.$target_data['filename'].'" value="'.$target_data['filename'].'">
+                    <input type="text" class="re_schedule" name="re_schedule" class="form-control">';
+            }
+            return 'SMS\'s for this are already sent';
+        })->rawColumns(['actions','reschedule']);
 
         return $db->make(true);
     }
