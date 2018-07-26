@@ -53,6 +53,8 @@
             <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0px; width:100%;">
                 <li style="font-size:0.7em; font-weight:bold; color: #025fad; display: table-cell; padding:5px 20px; margin:0px; text-align: center; width: 15%">Program</li>
                 <li style="font-size:0.7em; font-weight:bold; color: #025fad; display: table-cell; padding: 5px 20px; margin:0px;  text-align: center; width: 25%">Metric</li>
+                <li style="font-size:0.7em; font-weight:bold; color: #025fad; display: table-cell; padding: 5px 20px; margin:0px;  text-align: center; width: 25%">Max score that can be achieved</li>
+                <li style="font-size:0.7em; font-weight:bold; color: #025fad; display: table-cell; padding: 5px 20px; margin:0px;  text-align: center; width: 25%">Score achieved</li>
                 <li style="font-size:0.7em; font-weight:bold; color: #670f31; display: table-cell; padding: 5px 20px; margin:0px;  text-align: center; width: 12%">Target</li>
                 <li style="font-size:0.7em; font-weight:bold; color: #025fad; display: table-cell; padding: 5px 20px; margin:0px;  text-align: center; width: 12%">{{$months[$report->month]}}'s {{$report->year}} Performance</li>
                 <li style="font-size:0.7em; font-weight:bold; color: #03522d; display: table-cell; padding: 5px 20px; margin:0px;  text-align: center; width: 12%">In the block   </li>
