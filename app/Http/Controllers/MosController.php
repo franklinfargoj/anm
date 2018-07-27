@@ -69,7 +69,7 @@ class MosController extends Controller
 
     public function rank_details($id)
     {
-        $links = \DB::table('moic_ranking_reports')->pluck('dr_weblink')->toArray();
+        $links = \DB::table('moic_ranking_reports')->pluck('dr_weblink', 'rank_id')->toArray();
         $file = MoicRanking::select('uploaded_file')->where('id',$id)->get()->toArray();
         $file_name = $file[0]['uploaded_file'];
 
@@ -87,8 +87,8 @@ class MosController extends Controller
             $modifyed = str_replace(')', '</span>', $modifyed);
             return '<span class="">'.$modifyed.'</span>';
         })->addColumn('link', function($moic) use($links){
-            if(in_array(md5($moic['id']), $links)){
-                return '<a href="'.url('/moic/report/'.md5($moic['id'])).'" target="_blank">View</a>';
+            if(!empty($links[$moic['id']])){
+                return '<a href="'.url('/scorecard/'.$links[$moic['id']]).'" target="_blank">View</a>';
             }
             return "Processing";
         })->rawColumns(['id', 'sms_span', 'link']);

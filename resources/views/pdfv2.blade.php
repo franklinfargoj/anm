@@ -389,6 +389,24 @@
                     </ul>
                 </div>
             </div>
+
+            <!-- patient satisfaction score -->
+            <div style="display: table; table-layout: fixed; padding: 0px; width: 100%;  border: 1px solid #d1d1d1; margin-bottom: 20px;">
+                <div style="display: table-cell; width: 40%; font-size:0.7em; font-weight:bold;  padding:5px 20px;  margin:0px; text-align: center; vertical-align: middle; color: #fff; background:#2a9dd0">
+                    <p>Patient Satisfaction Score</p>
+                </div>
+                <div style="display: table-cell; width: 60%;">
+                    <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0px; width: 100%;">
+                        <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 14%">{{ $report->patient_satisfaction_max_score_achieved }}</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 14%">{{ $report->patient_satisfaction_score_achieved }}</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 14%">{{ $report->patient_satisfaction_cut_off }}</li>
+                        <li style="font-size: 0.6em; color: #670f31; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 14%">{{ $report->patient_satisfaction_performance }}</li>
+                        <li style="font-size: 0.6em; color: #025fad; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 14%">{{ $report->patient_satisfaction_block }}</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 15%">{{ $report->patient_satisfaction_district }}</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 15%">{{ $report->patient_satisfaction_state }}</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 

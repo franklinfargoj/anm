@@ -36,7 +36,7 @@ Route::group(['middleware'=>'auth'], function (){
 
 });
 
-Route::get('/moic/report/{link}', 'MosController@showReport')->name('moic_report');
+Route::get('/scorecard/{link}', 'MosController@showReport')->name('moic_report');
 Route::get('/anm/{id}','WeblinkController@index')->name('weblink');
 Route::get('download-image','WeblinkController@downloadImage')->name('download-link');
 Auth::routes();

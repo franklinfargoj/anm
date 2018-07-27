@@ -61,11 +61,13 @@ class ExportRankingReports extends Command
                             $particular = reset($particular);
                             $weblink = '';
                             if(!empty($particular)){
+                                $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                                $str = substr(str_shuffle($chars), 0, 10);
                                 $weblink = md5($particular['id']);
                                 $insert[] = [
                                     'filename' => $file->uploaded_file,
                                     'district' => $ranking['district_name'],
-                                    'dr_weblink' => $weblink,
+                                    'dr_weblink' => $str,
                                     'block' => $ranking['block_name'],
                                     'phc_name' => $ranking['phc_name'],
                                     'moic_name' => $ranking['moic_name'],
@@ -73,6 +75,7 @@ class ExportRankingReports extends Command
                                     'year' => $year,
                                     'moic' => $ranking['moic_name'],
                                     'is_aadarsh_phc' => $ranking['adarsh_phc'],
+                                    'rank_id' => $particular['id'],
                                     'phc_rank_in_block' => ($ranking['phc_rank_in_the_block'])?$ranking['phc_rank_in_the_block']:0,
                                     'phcs_in_the_block' => ($ranking['phcs_in_the_block'])?$ranking['phcs_in_the_block']:0,
                                     'phc_rank_in_district' => ($ranking['phc_rank_in_the_district'])?$ranking['phc_rank_in_the_district']:0,
