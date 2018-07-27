@@ -371,6 +371,21 @@
                                 <td class="dark-green">{{ $report->fi_state }}</td>
                              </tr>
                           </table>
+
+
+                          <table width="100%" class="table fancy-table footer-table">
+                             <tr data-title-attribute="{{$months[$report->month]}} 2018 Report Card">
+                                <th width="30%" valign="middle">Patient Satisfaction Score</th>
+                                <td width="12%" class="velvet-color">{{ $report->patient_satisfaction_max_score_achieved }}</td>
+                                <td width="9%" class="velvet-color">{{ $report->patient_satisfaction_score_achieved }}</td>
+                                <td width="10%" class="velvet-color">{{ $report->patient_satisfaction_cut_off }}</td>
+                                <td width="9%" class="blue">{{ $report->patient_satisfaction_performance }}</td>
+                                <td width="10%" class="dark-green">{{ $report->patient_satisfaction_block }}</td>
+                                <td width="10%" class="dark-green">{{ $report->patient_satisfaction_district }}</td>
+                                <td width="10%" class="dark-green">{{ $report->patient_satisfaction_state }}</td>
+                             </tr>
+                          </table>
+
                     </div>
                  </div>
                </div>

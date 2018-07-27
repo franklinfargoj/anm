@@ -295,16 +295,24 @@ class ExportRankingReports extends Command
                                     'pss_state' => ($ranking['in_pss_state'])?$ranking['in_pss_state']:0,
 
                                     'created_at' => \Carbon\Carbon::now(),
-                                    'updated_at' => \Carbon\Carbon::now()
+                                    'updated_at' => \Carbon\Carbon::now(),
+
+                                    'patient_satisfaction_max_score_achieved' => ($ranking['patient_satisfaction_max_score_achieved'])?$ranking['patient_satisfaction_max_score_achieved']:'00',
+                                    'patient_satisfaction_score_achieved' => ($ranking['patient_satisfaction_score_achieved'])?$ranking['patient_satisfaction_score_achieved']:'00',
+                                    'patient_satisfaction_cut_off' => ($ranking['patient_satisfaction_cut_off'])?$ranking['patient_satisfaction_cut_off']:'00',
+                                    'patient_satisfaction_performance' => ($ranking['patient_satisfaction_performance'])?$ranking['patient_satisfaction_performance']:'00',
+                                    'patient_satisfaction_block' => ($ranking['patient_satisfaction_block'])?$ranking['patient_satisfaction_block']:'00',
+                                    'patient_satisfaction_district' => ($ranking['patient_satisfaction_district'])?$ranking['patient_satisfaction_district']:'00',
+                                    'patient_satisfaction_state' => ($ranking['patient_satisfaction_state'])?$ranking['patient_satisfaction_state']:'00',
                                 ];
                             }
                         }
                         DB::table('moic_ranking_reports')->insert($insert);
+                        MoicRanking::where('status', 'N')->update(['status' => 'Y']);
                         echo "Done..!!";
                     }else{
                         echo "Sheet name is invalid..!!";
                     }
-                    MoicRanking::where('status', 'N')->update(['status' => 'Y']);
                 }else{
                     echo $file->uploaded_file.' not exists in folder..!!';
                 }
