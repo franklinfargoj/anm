@@ -46,25 +46,29 @@ class MoicSmsDispatch extends Command
         $new_sms = MoicRanking::where('sms_sent_initiated', 0)->where('schedule_at', '<=', Carbon::now())->get();
         $count = count($new_sms);
         if($count > 0){
+            $links = \DB::table('moic_ranking_reports')->pluck('dr_weblink', 'rank_id')->toArray();
             $ids = $new_sms->pluck('id');
             $insert = [];
             echo $count.' new requests found'.PHP_EOL;
             foreach($new_sms as $sms){
-                $combined_sms = $sms->sms.' '.url('/moic/report/'.md5($sms->id));
-                $temp = [
-                    'filename' => $sms->uploaded_file,
-                    'dr_name' => $sms->dr_name_en,
-                    'mobile' => $sms->mobile,
-                    'sms' => $combined_sms,
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
-                ];
-                $status = Helpers::sendSmsUnicode($combined_sms, $sms->mobile);
-                if($status['status'] == 200 && (str_contains($status['response'], '402') == true)){
-                    $temp['is_sent'] = 1;
-                    $temp['sent_at'] = Carbon::now();
+                if(!empty($links[$sms->id])){
+                    $url = url('/scorecard/'.$links[$sms->id]);
+                    $combined_sms = $sms->sms.' '.$url;
+                    $temp = [
+                        'filename' => $sms->uploaded_file,
+                        'dr_name' => $sms->dr_name_en,
+                        'mobile' => $sms->mobile,
+                        'sms' => $combined_sms,
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now()
+                    ];
+                    $status = Helpers::sendSmsUnicode($combined_sms, $sms->mobile);
+                    if($status['status'] == 200 && (str_contains($status['response'], '402') == true)){
+                        $temp['is_sent'] = 1;
+                        $temp['sent_at'] = Carbon::now();
+                    }
+                    $insert[] = $temp;
                 }
-                $insert[] = $temp;
             }
             if(!empty($insert)){
                 DB::table('mois_anm_sms_logs')->insert($insert);
