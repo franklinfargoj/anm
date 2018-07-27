@@ -333,7 +333,7 @@ table thead tr{
 }
 table thead tr th, table tbody tr td{
 	border: 0px !important;
-	padding: 10px !important;
+	padding: 10px;
 }
 table thead tr th{
 	font-weight: bold !important;
@@ -455,7 +455,7 @@ h5 {
 	background-color: #f1f1f1;
 }
 .internal-header {
-	min-height: 180px;
+	min-height: 135px;
 	background: #11427d; /* Old browsers */
 	background: -moz-linear-gradient(-45deg, #11427d 0%, #2a9dd0 100%); 
 	background: -webkit-linear-gradient(-45deg, #11427d 0%,#2a9dd0 100%); 
@@ -468,24 +468,28 @@ h5 {
 	font-size: 26px;
 	font-family: 'Roboto-Bold';
 	margin-bottom: 0px;
+	display: inline-block;
 }
-.internal-header h4 span {
+.internal-header .box-area {
+	border-radius: 15px;
+}
+/*.internal-header h4 span {
 	display: block;
 	text-transform: uppercase;
 	font-size: 18px;
 	margin-top: 10px;
-}
+}*/
 .phc-ranking-title {
 	font-family: 'Roboto-Bold';
-	font-size:26px;
+	font-size:22px;
 	color: #11427d;
 	display: inline-block;
 }
 .phc-ranking-content {
 	font-family: 'Roboto-Bold';
-	font-size:24px;
+	font-size:20px;
 	color: #11427d;
-	line-height:90px;
+	line-height:70px;
 	display: inline-block;
 	margin: 0 20px;
 }
@@ -507,10 +511,11 @@ h5 {
 }
 .phc-ranking-title img {
 	margin-right: 20px;
+	height: 50px;
 }
 
 .reports-area {
-	padding-top: 195px;
+	padding-top: 150px;
 }
 .col-md-4.text-center:first-child h5 {
 	border-top-left-radius: 20px;
@@ -542,7 +547,7 @@ h5 {
 }
 
 .internal-table-area {
-	padding-top: 320px;
+	padding-top: 250px;
 }
 
 .table.fancy-table {
@@ -551,12 +556,13 @@ h5 {
     box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.4);
     border-radius: 20px;
     background-color: #ffffff;
+    margin-bottom: 15px;
 }
 
 .table.fancy-table>tbody>tr>td {	
 	font-family: 'Roboto-Bold';
     font-size: 16px;
-    padding: 10px;
+    padding: 5px;
     text-align: center;
     border-top: 0;
     vertical-align: bottom;
@@ -658,12 +664,17 @@ h5 {
 .mt-2 {
 	margin-top: 20px;
 }
-
+.date-area {
+	float: right;
+	text-transform: uppercase;
+    font-size: 18px;
+    margin-top: 14px;
+}
 @media (min-width: 768px) {
-.container {
-    width: 100%;
-}
-.internal-table-area {
-    padding-top: 340px;
-}
+	.container {
+	    width: 100%;
+	}
+	.internal-table-area {
+	    padding-top: 270px;
+	}
 }

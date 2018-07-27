@@ -13,9 +13,8 @@
          <div class="container">
             <div class="row">
                <div class="col-md-12">
-                  <h4>PHC {{$report->phc_name}} : Performance Review
-                     <span>{{$months[$report->month]}} 2018</span>
-                  </h4>
+                  <h4>PHC {{$report->phc_name}} : Performance Review</h4>
+                  <div class="date-area">{{$months[$report->month]}} 2018</div>
                </div>
             </div>
             <div class="box-area mt-1">
