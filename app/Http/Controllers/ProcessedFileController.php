@@ -37,7 +37,7 @@ class ProcessedFileController extends Controller
         $db = Datatables::of($processData);
         $db->addColumn('sr_no', function ($processData){ static $i = 0; $i++; return $i; }) ->rawColumns(['id']);
         $db->addColumn('weblink', function ($processData){
-            return url('/weblink/'.$processData["weblink"]);
+            return url('/anm/'.$processData["weblink"]);
         })->addColumn('anm_sms_span', function ($processData){
             return '<span class="">'.$processData['anm_custom_msg'].'</span>';
         })->addColumn('moic_sms_span', function ($processData){
@@ -119,11 +119,11 @@ class ProcessedFileController extends Controller
                         $value['anm_mobile_number'],
                         $value['performer_category'],
                         $value['scenerio'],
-                        url('/weblink/'.$value['weblink']),
+                        url('/anm/'.$value['weblink']),
                         $value['anm_custom_msg'],
                         $value['moic_custom_msg'],
-                        $value['anm_custom_msg'].url('/weblink/'.$value['weblink']),
-                        $value['moic_custom_msg'].url('/weblink/'.$value['weblink'])
+                        $value['anm_custom_msg'].url('/anm/'.$value['weblink']),
+                        $value['moic_custom_msg'].url('/anm/'.$value['weblink'])
                     );
                 }
                 $sheet->fromArray($excelData, null, 'A1', true, false);

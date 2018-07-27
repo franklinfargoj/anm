@@ -57,7 +57,7 @@ class BeneficiarySmsDispatch extends Command
                 if(!empty($found)){
                     $ids[] = $sms->id;
                     $array = reset($found);
-                    $combined_sms = $array['beneficiary_custom_msg'].' '.url('weblink/'.$array['weblink']);
+                    $combined_sms = $array['beneficiary_custom_msg'].' '.url('/anm/'.$array['weblink']);
                     $temp = [
                         'filename' => $sms->filename,
                         'name' => ($sms->phc_name != '')?$sms->phc_name:'',

@@ -55,7 +55,7 @@ class AnmSmsDispatch extends Command
                 $separated_anm = explode(',', $sms->anm_name);
                 $cnt = count($separated_num);
                 for($i=0; $i<$cnt; $i++){
-                    $combined_sms = $separated_msg[$i].' '.url('weblink/'.$sms->weblink);
+                    $combined_sms = $separated_msg[$i].' '.url('anm/'.$sms->weblink);
 //                    $combined_sms = 'test from wrong side'.' '.url('weblink/'.$sms->weblink);
 //                    $combined_sms = 'मोबाइलसेवामेंआपकास्वागतहै';
                     $temp = [

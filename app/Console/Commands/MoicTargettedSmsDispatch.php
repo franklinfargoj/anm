@@ -49,7 +49,7 @@ class MoicTargettedSmsDispatch extends Command
             $ids = $newsms->pluck('id');
             $insert = [];
             foreach ($newsms as $sms){
-                $combined_sms = $sms->moic_custom_msg.' '.url('weblink/'.$sms->weblink);
+                $combined_sms = $sms->moic_custom_msg.' '.url('/anm/'.$sms->weblink);
                 $temp = [
                     'filename' => $sms->filename,
                     'name' => $sms->moic_name,
