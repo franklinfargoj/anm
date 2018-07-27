@@ -6,7 +6,7 @@
  */
 
 namespace App\Classes;
-
+use Exception;
 
 /**
  * Class ConvertToUnicode

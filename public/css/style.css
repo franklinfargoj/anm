@@ -598,6 +598,19 @@ h5 {
 	vertical-align: middle;
 	border-top:none !important;
 }
+.table.fancy-table.footer-table{
+	border-radius: 10px;
+}
+.table.fancy-table.footer-table>tbody>tr>th+td{
+	font-family: 'Roboto-Bold';
+    font-size: 16px;
+    padding: 5px;
+    text-align: center;
+}
+.table.fancy-table.footer-table>tbody>tr>th{
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
 
 .reports-area {
 	transition: all 0.5s ease;
