@@ -167,14 +167,15 @@ class MosController extends Controller
                                         ->first()->toArray();
         $file_name = $file['uploaded_file'];
 
-        $moic_data = MoicRanking::select('block','phc_en','dr_name_en','mobile','email','ranking_pdf','sms')
+        $moic_data = MoicRanking::select('id','block','phc_en','dr_name_en','mobile','email','ranking_pdf','sms')
                                         ->where('uploaded_file',$file_name)
                                         ->get()
                                         ->toArray();
+        $links = \DB::table('moic_ranking_reports')->pluck('dr_weblink', 'rank_id')->toArray();
 
-        \Excel::create('moic_ranking'.time(), function($excel) use($moic_data) {
+        \Excel::create('moic_ranking'.time(), function($excel) use($moic_data,$links) {
 
-            $excel->sheet('moic', function ($sheet) use ($moic_data) {
+            $excel->sheet('moic', function ($sheet) use ($moic_data,$links) {
                 $excelData = [];
                 $excelData[] = [
                     'Block',
@@ -187,19 +188,27 @@ class MosController extends Controller
                 ];
 
                 foreach ($moic_data as $value) {
+                    if (array_key_exists($value['id'],$links))
+                    {
+                        $link = url('scorecard/'.$links[$value['id']]);
+                    }
+                    else
+                    {
+                        $link = null;
+                    }
+
                     $excelData[] = array(
                         $value['block'],
                         $value['phc_en'],
                         $value['dr_name_en'],
                         $value['mobile'],
                         $value['email'],
-                        url('/moic/rankings/'.$value['ranking_pdf']),
+                        $link,
                         $value['sms']
                     );
                 }
                 $sheet->fromArray($excelData, null, 'A1', true, false);
             });
-
         })->download('xlsx');
 
     }
