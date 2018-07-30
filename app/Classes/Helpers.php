@@ -104,10 +104,10 @@ class Helpers{
 
 	    if($number > 0){
 	        $percentNumber = $number*100;
-	        if(gettype($percentNumber) == 'integer'){
-	        	return $percentNumber;
+	        if(is_numeric($percentNumber) && floor($percentNumber) != $percentNumber){
+	        	return number_format((float)$percentNumber, 2, '.', '');
 	        }
-	        return number_format((float)$percentNumber, 2, '.', '');
+	        return $percentNumber;
         }else{
 	        return 0;
         }
