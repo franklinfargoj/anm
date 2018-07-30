@@ -19,7 +19,7 @@ class Helpers{
 	    else{
 		    for($i = 0; $i < $cnt; $i++){
 		        if($last == $phc[$i]){
-		            $topphctext .= rtrim($topphctext, ',').' तथा  '.$type.'  '.$phc[$i].'';
+		            $topphctext = rtrim($topphctext, ',').' तथा  '.$type.'  '.$phc[$i].'';
 		        }else{
 		            $topphctext .= $type.'  '.$phc[$i].', ';
 		        }
@@ -104,7 +104,10 @@ class Helpers{
 
 	    if($number > 0){
 	        $percentNumber = $number*100;
-	        return $percentNumber;
+	        if(gettype($percentNumber) == 'integer'){
+	        	return $percentNumber;
+	        }
+	        return number_format((float)$percentNumber, 2, '.', '');
         }else{
 	        return 0;
         }
