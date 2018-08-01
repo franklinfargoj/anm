@@ -50,7 +50,7 @@ class AnmSmsDispatch extends Command
             $ids = $newsms->pluck('id');
             $insert = [];
             foreach ($newsms as $sms){
-                $separated_msg = explode(',', $sms->anm_custom_msg);
+                $separated_msg = explode('==', $sms->anm_custom_msg);
                 $separated_num = explode(',', $sms->anm_mobile_number);
                 $separated_anm = explode(',', $sms->anm_name);
                 $cnt = count($separated_num);
