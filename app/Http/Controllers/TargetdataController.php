@@ -128,7 +128,7 @@ class TargetdataController extends Controller
                             }
                             $anmNameInHindi = implode(',', $separated);
                             foreach ($separated as $single) {
-                                $msg .= $single . ', क्या आप जानना चाहते हैं की ' . $months[$request->get('month')] . ' ' . $request->get('year') . ' में ' . $obj->convert_to_unicode2($value['phc_name_hindi']) . ' पीएचसी के किस एनम् ने सबसे अच्छा काम किया? जानने के लिए नीचे लिंक पर क्लिक करके देखिये:==';
+                                $msg .= rtrim($single, ' ') . ', क्या आप जानना चाहते हैं की ' . $months[$request->get('month')] . ' ' . $request->get('year') . ' में ' . $obj->convert_to_unicode2($value['phc_name_hindi']) . ' पीएचसी के किस एनम् ने सबसे अच्छा काम किया? जानने के लिए नीचे लिंक पर क्लिक करके देखिये:==';
                             }
                         }else{
                             $msg = $obj->convert_to_unicode2($value['anm_name_hindi']).', क्या आप जानना चाहते हैं की ' . $months[$request->get('month')] . ' ' . $request->get('year') . ' में ' . $obj->convert_to_unicode2($value['phc_name_hindi']) . ' पीएचसी के किस एनम् ने सबसे अच्छा काम किया? जानने के लिए नीचे लिंक पर क्लिक करके देखिये:';
