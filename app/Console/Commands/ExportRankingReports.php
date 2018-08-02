@@ -54,6 +54,7 @@ class ExportRankingReports extends Command
                         $rankings = Excel::selectSheets($sheetName[1])->load($path)->get()->toArray();
                         $insert = [];
                         foreach ($rankings as $ranking){
+
                             $month = $ranking['month_year']->format('m'); $year = $ranking['month_year']->format('Y');
                             $particular = array_filter($drs, function($index) use($ranking, $file, $month, $year){
                                 return (strtolower($index['phc_en']) == strtolower($ranking['phc_name']) && $index['month'] == $month && $index['year'] == $year && $index['uploaded_file'] == $file->uploaded_file);
@@ -185,6 +186,14 @@ class ExportRankingReports extends Command
                                     'diarrhea_district' => ($ranking['in_diarrhea_district'])?$ranking['in_diarrhea_district']:0,
                                     'diarrhea_state' => ($ranking['in_diarrhea_state'])?$ranking['in_diarrhea_state']:0,
 
+                                    'dengue_max_score_achieved' => ($ranking['dengue_max_score_that_can_be_achieved'])?$ranking['dengue_max_score_that_can_be_achieved']:0,
+                                    'dengue_score_achieved' => ($ranking['dengue_score_achieved'])?$ranking['dengue_score_achieved']:0,
+                                    'dengue_target' => ($ranking['dengue_cut_off'])?$ranking['dengue_cut_off']:0,
+                                    'dengue_performance' => ($ranking['dengue_performance'])?$ranking['dengue_performance']:0,
+                                    'dengue_block' => ($ranking['in_dengue_block'])?$ranking['in_dengue_block']:0,
+                                    'dengue_district' => ($ranking['in_dengue_district'])?$ranking['in_dengue_district']:0,
+                                    'dengue_state' => ($ranking['in_dengue_state'])?$ranking['in_dengue_state']:0,
+
                                     'hp_max_score_achieved' => ($ranking['hp_max_score_that_can_be_achieved'])?$ranking['hp_max_score_that_can_be_achieved']:0,
                                     'hp_score_achieved' => ($ranking['hp_score_achieved'])?$ranking['hp_score_achieved']:0,
                                     'hp_target' => ($ranking['hp_cut_off'])?$ranking['hp_cut_off']:0,
@@ -257,37 +266,37 @@ class ExportRankingReports extends Command
                                     'rajdhara_district' => ($ranking['in_rajdharaa_district'])?$ranking['in_rajdharaa_district']:0,
                                     'rajdhara_state' => ($ranking['in_rajdharaa_state'])?$ranking['in_rajdharaa_state']:0,
 
-                                    'linelist_vs_expected_max_score_achieved' => ($ranking['linelist_vs_expected_max_score_that_can_be_achieved'])?$ranking['linelist_vs_expected_max_score_that_can_be_achieved']:0,
-                                    'linelist_vs_expected_score_achieved' => ($ranking['linelist_vs_expected_score_achieved'])?$ranking['linelist_vs_expected_score_achieved']:0,
-                                    'linelist_vs_expected_target' => ($ranking['linelist_vs_expected_cut_off'])?$ranking['linelist_vs_expected_cut_off']:0,
-                                    'linelist_vs_expected_performance' => ($ranking['linelist_vs_expected_performance'])?$ranking['linelist_vs_expected_performance']:0,
-                                    'linelist_vs_expected_block' => ($ranking['in_linelist_vs_expected_block'])?$ranking['in_linelist_vs_expected_block']:0,
-                                    'linelist_vs_expected_district' => ($ranking['in_linelist_vs_expected_district'])?$ranking['in_linelist_vs_expected_district']:0,
-                                    'linelist_vs_expected_state' => ($ranking['in_linelist_vs_expected_state'])?$ranking['in_linelist_vs_expected_state']:0,
+                                    'linelist_vs_expected_max_score_achieved' => ($ranking['pregnant_woman_linelist_vs_expected_max_score_that_can_be_achieved'])?$ranking['pregnant_woman_linelist_vs_expected_max_score_that_can_be_achieved']:0,
+                                    'linelist_vs_expected_score_achieved' => ($ranking['pregnant_woman_linelist_vs_expected_score_achieved'])?$ranking['pregnant_woman_linelist_vs_expected_score_achieved']:0,
+                                    'linelist_vs_expected_target' => ($ranking['pregnant_woman_linelist_vs_expected_cut_off'])?$ranking['pregnant_woman_linelist_vs_expected_cut_off']:0,
+                                    'linelist_vs_expected_performance' => ($ranking['pregnant_woman_linelist_vs_expected_performance'])?$ranking['pregnant_woman_linelist_vs_expected_performance']:0,
+                                    'linelist_vs_expected_block' => ($ranking['pregnant_woman_in_linelist_vs_expected_block'])?$ranking['pregnant_woman_in_linelist_vs_expected_block']:0,
+                                    'linelist_vs_expected_district' => ($ranking['pregnant_woman_in_linelist_vs_expected_district'])?$ranking['pregnant_woman_in_linelist_vs_expected_district']:0,
+                                    'linelist_vs_expected_state' => ($ranking['pregnant_woman_in_linelist_vs_expected_state'])?$ranking['pregnant_woman_in_linelist_vs_expected_state']:0,
 
-                                    'pcts_vs_expected_max_score_achieved' => ($ranking['pcts_vs_expected_max_score_that_can_be_achieved'])?$ranking['pcts_vs_expected_max_score_that_can_be_achieved']:0,
-                                    'pcts_vs_expected_score_achieved' => ($ranking['pcts_vs_expected_score_achieved'])?$ranking['pcts_vs_expected_score_achieved']:0,
-                                    'pcts_vs_expected_target' => ($ranking['pcts_vs_expected_cut_off'])?$ranking['pcts_vs_expected_cut_off']:0,
-                                    'pcts_vs_expected_performance' => ($ranking['pcts_vs_expected_performance'])?$ranking['pcts_vs_expected_performance']:0,
-                                    'pcts_vs_expected_block' => ($ranking['in_pcts_vs_expected_block'])?$ranking['in_pcts_vs_expected_block']:0,
-                                    'pcts_vs_expected_district' => ($ranking['in_pcts_vs_expected_district'])?$ranking['in_pcts_vs_expected_district']:0,
-                                    'pcts_vs_expected_state' => ($ranking['in_pcts_vs_expected_state'])?$ranking['in_pcts_vs_expected_state']:0,
+                                    'pcts_vs_expected_max_score_achieved' => ($ranking['live_births_pcts_vs_expected_max_score_that_can_be_achieved'])?$ranking['live_births_pcts_vs_expected_max_score_that_can_be_achieved']:0,
+                                    'pcts_vs_expected_score_achieved' => ($ranking['live_births_pcts_vs_expected_score_achieved'])?$ranking['live_births_pcts_vs_expected_score_achieved']:0,
+                                    'pcts_vs_expected_target' => ($ranking['live_births_pcts_vs_expected_cut_off'])?$ranking['live_births_pcts_vs_expected_cut_off']:0,
+                                    'pcts_vs_expected_performance' => ($ranking['live_births_pcts_vs_expected_performance'])?$ranking['live_births_pcts_vs_expected_performance']:0,
+                                    'pcts_vs_expected_block' => ($ranking['live_births_in_pcts_vs_expected_block'])?$ranking['live_births_in_pcts_vs_expected_block']:0,
+                                    'pcts_vs_expected_district' => ($ranking['live_births_in_pcts_vs_expected_district'])?$ranking['live_births_in_pcts_vs_expected_district']:0,
+                                    'pcts_vs_expected_state' => ($ranking['live_births_in_pcts_vs_expected_state'])?$ranking['live_births_in_pcts_vs_expected_state']:0,
 
-                                    'id_max_score_achieved' => ($ranking['id_max_score_that_can_be_achieved'])?$ranking['id_max_score_that_can_be_achieved']:0,
-                                    'id_score_achieved' => ($ranking['id_score_achieved'])?$ranking['id_score_achieved']:0,
-                                    'id_target' => ($ranking['id_cut_off'])?$ranking['id_cut_off']:0,
-                                    'id_performance' => ($ranking['id_performance'])?$ranking['id_performance']:0,
-                                    'id_block' => ($ranking['in_id_block'])?$ranking['in_id_block']:0,
-                                    'id_district' => ($ranking['in_id_district'])?$ranking['in_id_district']:0,
-                                    'id_state' => ($ranking['in_id_state'])?$ranking['in_id_state']:0,
+                                    'id_max_score_achieved' => ($ranking['institutional_deliveries_max_score_that_can_be_achieved'])?$ranking['institutional_deliveries_max_score_that_can_be_achieved']:0,
+                                    'id_score_achieved' => ($ranking['institutional_deliveries_score_achieved'])?$ranking['institutional_deliveries_score_achieved']:0,
+                                    'id_target' => ($ranking['institutional_deliveries_cut_off'])?$ranking['institutional_deliveries_cut_off']:0,
+                                    'id_performance' => ($ranking['institutional_deliveries_performance'])?$ranking['institutional_deliveries_performance']:0,
+                                    'id_block' => ($ranking['in_institutional_deliveries_block'])?$ranking['in_institutional_deliveries_block']:0,
+                                    'id_district' => ($ranking['in_institutional_deliveries_district'])?$ranking['in_institutional_deliveries_district']:0,
+                                    'id_state' => ($ranking['in_institutional_deliveries_state'])?$ranking['in_institutional_deliveries_state']:0,
 
-                                    'fi_max_score_achieved' => ($ranking['fi_max_score_that_can_be_achieved'])?$ranking['fi_max_score_that_can_be_achieved']:0,
-                                    'fi_score_achieved' => ($ranking['fi_score_achieved'])?$ranking['fi_score_achieved']:0,
-                                    'fi_target' => ($ranking['fi_cut_off'])?$ranking['fi_cut_off']:0,
-                                    'fi_performance' => ($ranking['fi_performance'])?$ranking['fi_performance']:0,
-                                    'fi_block' => ($ranking['in_fi_block'])?$ranking['in_fi_block']:0,
-                                    'fi_district' => ($ranking['in_fi_district'])?$ranking['in_fi_district']:0,
-                                    'fi_state' => ($ranking['in_fi_state'])?$ranking['in_fi_state']:0,
+                                    'fi_max_score_achieved' => ($ranking['full_immunization_max_score_that_can_be_achieved'])?$ranking['full_immunization_max_score_that_can_be_achieved']:0,
+                                    'fi_score_achieved' => ($ranking['full_immunization_score_achieved'])?$ranking['full_immunization_score_achieved']:0,
+                                    'fi_target' => ($ranking['full_immunization_cut_off'])?$ranking['full_immunization_cut_off']:0,
+                                    'fi_performance' => ($ranking['full_immunization_performance'])?$ranking['full_immunization_performance']:0,
+                                    'fi_block' => ($ranking['in_full_immunization_block'])?$ranking['in_full_immunization_block']:0,
+                                    'fi_district' => ($ranking['in_full_immunization_district'])?$ranking['in_full_immunization_district']:0,
+                                    'fi_state' => ($ranking['in_full_immunization_state'])?$ranking['in_full_immunization_state']:0,
 
                                     'pss_max_score_achieved' => ($ranking['pss_max_score_that_can_be_achieved'])?$ranking['pss_max_score_that_can_be_achieved']:0,
                                     'pss_score_achieved' => ($ranking['pss_score_achieved'])?$ranking['pss_score_achieved']:0,
@@ -300,13 +309,13 @@ class ExportRankingReports extends Command
                                     'created_at' => \Carbon\Carbon::now(),
                                     'updated_at' => \Carbon\Carbon::now(),
 
-                                    'patient_satisfaction_max_score_achieved' => ($ranking['patient_satisfaction_max_score_achieved'])?$ranking['patient_satisfaction_max_score_achieved']:'00',
-                                    'patient_satisfaction_score_achieved' => ($ranking['patient_satisfaction_score_achieved'])?$ranking['patient_satisfaction_score_achieved']:'00',
-                                    'patient_satisfaction_cut_off' => ($ranking['patient_satisfaction_cut_off'])?$ranking['patient_satisfaction_cut_off']:'00',
-                                    'patient_satisfaction_performance' => ($ranking['patient_satisfaction_performance'])?$ranking['patient_satisfaction_performance']:'00',
-                                    'patient_satisfaction_block' => ($ranking['patient_satisfaction_block'])?$ranking['patient_satisfaction_block']:'00',
-                                    'patient_satisfaction_district' => ($ranking['patient_satisfaction_district'])?$ranking['patient_satisfaction_district']:'00',
-                                    'patient_satisfaction_state' => ($ranking['patient_satisfaction_state'])?$ranking['patient_satisfaction_state']:'00',
+                                    'patient_satisfaction_max_score_achieved' => ($ranking['pss_max_score_that_can_be_achieved'])?$ranking['pss_max_score_that_can_be_achieved']:'00',
+                                    'patient_satisfaction_score_achieved' => ($ranking['pss_score_achieved'])?$ranking['pss_score_achieved']:'00',
+                                    'patient_satisfaction_cut_off' => ($ranking['pss_cut_off'])?$ranking['pss_cut_off']:'00',
+                                    'patient_satisfaction_performance' => ($ranking['pss_performance'])?$ranking['pss_performance']:'00',
+                                    'patient_satisfaction_block' => ($ranking['in_pss_block'])?$ranking['in_pss_block']:'00',
+                                    'patient_satisfaction_district' => ($ranking['in_pss_district'])?$ranking['in_pss_district']:'00',
+                                    'patient_satisfaction_state' => ($ranking['in_pss_state'])?$ranking['in_pss_state']:'00',
                                 ];
                             }
                         }
