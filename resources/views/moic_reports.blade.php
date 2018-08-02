@@ -201,7 +201,7 @@
                           </table>
                           <table width="100%" class="table fancy-table">
                              <tr data-title-attribute="{{$months[$report->month]}} 2018 Report Card">
-                                <th width="10%" rowspan="3" valign="middle">CDs</th>
+                                <th width="10%" rowspan="4" valign="middle">CDs</th>
                                 <td width="20%">Pneumonia prevalence</td>
                                 <td width="12%" class="velvet-color">{{ $report->pneumonia_max_score_achieved }}</td>
                                 <td width="9%" class="velvet-color">{{ $report->pneumonia_score_achieved }}</td>
@@ -221,16 +221,32 @@
                                 <td class="dark-green">{{ Helpers::convertToPercent($report->malaria_district) }}</td>
                                 <td class="dark-green">{{ Helpers::convertToPercent($report->malaria_state) }}</td>
                              </tr>
+
                              <tr>
                                 <td>Diarrhea prevalence</td>
                                 <td class="velvet-color">{{ Helpers::convertToPercent($report->diarrhea_max_score_achieved) }}</td>
                                 <td class="velvet-color">{{ Helpers::convertToPercent($report->diarrhea_score_achieved) }}</td>
                                 <td class="velvet-color">{{ Helpers::convertToPercent($report->diarrhea_target) }}</td>
                                 <td class="blue">{{ Helpers::convertToPercent($report->diarrhea_performance) }}</td>
-                                <td class="dark-green">{{ Helpers::convertToPercent($report->diarrhea_block)}}</td%>
+                                <td class="dark-green">{{ Helpers::convertToPercent($report->diarrhea_block)}}</td>
                                 <td class="dark-green">{{ Helpers::convertToPercent($report->diarrhea_district) }}</td>
                                 <td class="dark-green">{{ Helpers::convertToPercent($report->diarrhea_state) }}</td>
                              </tr>
+
+                             <tr>
+                                <td>Dengue</td>
+                                <td class="velvet-color">{{ Helpers::convertToPercent($report->dengue_max_score_achieved) }}</td>
+                                <td class="velvet-color">{{ Helpers::convertToPercent($report->dengue_score_achieved) }}</td>
+                                <td class="velvet-color">{{ Helpers::convertToPercent($report->dengue_target) }}</td>
+                                <td class="blue">{{ Helpers::convertToPercent($report->dengue_performance) }}</td>
+                                <td class="dark-green">{{ Helpers::convertToPercent($report->dengue_block)}}</td>
+                                <td class="dark-green">{{ Helpers::convertToPercent($report->dengue_district) }}</td>
+                                <td class="dark-green">{{ Helpers::convertToPercent($report->dengue_state) }}</td>
+                             </tr>
+
+
+
+
                           </table>
                           <table width="100%" class="table fancy-table">
                              <tr data-title-attribute="{{$months[$report->month]}} 2018 Report Card">
@@ -300,7 +316,7 @@
                              <tr>
                                 <td>Test Availability >80% & verified by Patient Feedback </td>
                                 <td class="velvet-color">{{ Helpers::convertToPercent($report->test_avail_feedback_max_score_achieved) }}</td>
-                                <td class="velvet-color">{{ Helpers::convertToPercent($report->test_avail_feedback_score_achieved)}}</td%>
+                                <td class="velvet-color">{{ Helpers::convertToPercent($report->test_avail_feedback_score_achieved)}}</td>
                                 <td class="velvet-color">{{ Helpers::convertToPercent($report->test_avail_target) }}</td>
                                 <td class="blue">{{ Helpers::convertToPercent($report->test_avail_performance) }}</td>
                                 <td class="dark-green">{{ Helpers::convertToPercent($report->test_avail_block) }}</td>

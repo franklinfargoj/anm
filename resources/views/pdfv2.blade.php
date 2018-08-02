@@ -219,6 +219,18 @@
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->diarrhea_district)  }}</li>
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->diarrhea_state)  }}</li>
                     </ul>
+
+
+                    <ul style="list-style: none; display: table; table-layout: fixed; padding: 0px; margin:0px; width: 100%;">
+                        <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 25%">Dengue</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->dengue_max_score_achieved)  }}</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->dengue_score_achieved)  }}</li>
+                        <li style="font-size: 0.6em; color: #670f31; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->dengue_target)  }}</li>
+                        <li style="font-size: 0.6em; color: #025fad; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->dengue_performance)  }}</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->dengue_block) }}</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->dengue_district)  }}</li>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->dengue_state)  }}</li>
+                    </ul>
                 </div>
             </div>
 
@@ -254,7 +266,7 @@
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->cvd_score_achieved)  }}</li>
                         <li style="font-size: 0.6em; color: #670f31; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->cvd_target) }}</li>
                         <li style="font-size: 0.6em; color: #025fad; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->cvd_performance) }}</li>
-                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->cvd_block) }}</li%>
+                        <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->cvd_block) }}</li>
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->cvd_district)  }}</li>
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ Helpers::convertToPercent($report->cvd_state)  }}</li>
                     </ul>
