@@ -161,8 +161,8 @@ class TargetdataController extends Controller
                             'month' => $request->get('month'),
                             'year' => $request->get('year'),
                             'anm_custom_msg' => rtrim($msg, ','),
-                            'moic_custom_msg' => $obj->convert_to_unicode2($value['moic_name_hindi']) . ', क्या आप जानना चाहते हैं की ' . $months[$request->get('month')] . ' ' . $request->get('year') . ' में  ' . $obj->convert_to_unicode2($value['phc_name_hindi']) . ' पीएचसी के किस  एनम् ने सबसे अच्छा काम किया? जानने के लिए नीचे लिंक पर क्लिक करके देखिये:',
-                            'beneficiary_custom_msg' => 'क्या आप जानना चाहते हैं की ' . $months[$request->get('month')] . ' ' . $request->get('year') . ' में  ' . $obj->convert_to_unicode2($value['phc_name_hindi']) . ' पीएचसी के किस  एनम् ने सबसे अच्छा काम किया? जानने के लिए नीचे लिंक पर क्लिक करके देखिये:'
+                            'moic_custom_msg' => $obj->convert_to_unicode2($value['moic_name_hindi']) . ', क्या आप जानना चाहते हैं की ' . $months[$request->get('month')] . ' ' . $request->get('year') . ' में ' . $obj->convert_to_unicode2($value['phc_name_hindi']) . ' पीएचसी की कौनसी एनम् सबसे अच्छा काम करके, एक मिसाल बनी? जानने के लिए नीचे लिंक पर क्लिक करके देखिये:',
+                            'beneficiary_custom_msg' => 'क्या आप जानना चाहते हैं की ' . $months[$request->get('month')] . ' ' . $request->get('year') . ' में ' . $obj->convert_to_unicode2($value['phc_name_hindi']) . ' पीएचसी की कौनसी एनम् सबसे अच्छा काम करके, एक मिसाल बनी? जानने के लिए नीचे लिंक पर क्लिक करके देखिये:'
                         ];
                     }
                     if (!empty($arr)) {
