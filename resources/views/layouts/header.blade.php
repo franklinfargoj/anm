@@ -16,6 +16,7 @@
 
                         <a href="{{url('/')}}">ANM Performance</a>
                         <a href="{{url('/get-mos')}}">MOIC Performance</a>
+                        <a href="{{url('/p-feed')}}">Patient Feedback</a>
                         <a class="logout-btn" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <span class="glyphicon glyphicon-log-out"></span> Logout
                         </a>

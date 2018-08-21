@@ -34,6 +34,15 @@ Route::group(['middleware'=>'auth'], function (){
     Route::get('/ajax/{district}', 'TargetdataController@getBlocks');
     Route::get('/download/moic_zip/{name}', 'MosController@downloadZip');
 
+
+    Route::get('p-feed', 'FeedbackController@index');
+    Route::post('import-feedback', 'FeedbackController@importFile')->name('import.feedback');
+    Route::get('/feedback_files', 'FeedbackController@feedbackfiles');
+    Route::get('detail_feedback/{id}','FeedbackController@feedbackDetail')->name('detail_feedback');
+    Route::get('file_details/{id}', 'FeedbackController@file_details');
+    Route::get('export_feedback/{id}','FeedbackController@export_feedback')->name('export_feedback');
+    Route::post('feed_update', 'FeedbackController@update_feed_schedule');
+
 });
 
 Route::get('/scorecard/{link}', 'MosController@showReport')->name('moic_report');
