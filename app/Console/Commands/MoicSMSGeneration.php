@@ -62,7 +62,7 @@ class MoicSMSGeneration extends Command
                     $bottomphc = Helpers::renderHindi(array_column($bottom, 'phc_hin'), '');
                     foreach($moics as $single){
                         $sms = '';
-                        $sms = $single['dr_name_hin'].', क्या आप जानना चाहते हैं की '.$single['block_hin'].' ब्लॉक की किस पीएचसी ने किया '.$months[$single['month']].' '.$single['year']. ' के महीने में बेहतरीन प्रदर्शन? ';
+                        $sms = $single['dr_name_hin'].', क्या आप जानना चाहते हैं की '.$single['block_hin'].' ब्लॉक की कौनसी पीएचसी '.$months[$single['month']].' '.$single['year']. ' के महीने में बेहतरीन प्रदर्शन कर, एक मिसाल बनी? ';
                         $sms .= $single['block_hin'].' ब्लॉक में पीएचसी '.rtrim($topphctext, ', ').' अव्वल रहीं और इन् पीएचसीस के डॉक्टर - '.rtrim($topdoctext, ', ').'  ने सराहनीये कार्य किया। ';
                         $sms .= 'पीएचसी '.$middlephc.' के डॉक्टरों ने भी अच्छा कार्य किया। पीएचसी '.$bottomphc.'  में बेहतर परिणामों के लिए सुद्धारण की आवश्यकता है। ';
                         $sms .= 'रैंक को कैसे सुद्धारा जाये - जानने के लिए पीएचसी स्कोरकार्ड का प्रयोग करें। पीएचसी स्कोरकार्ड देखने के लिए यहाँ क्लिक करें:';

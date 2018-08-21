@@ -24,7 +24,7 @@
 
     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff;">
         <tr>
-            <td align="left" valign="middle"><img src="{{ asset('images/newsletter-img/pic1-left.jpg') }}" alt="" alt=""></td>
+            <td align="left" valign="middle"><img src="{{ asset('images/newsletter-img/pic1.jpg') }}" alt="" alt=""></td>
             <td align="center" style="font-weight: bold;">
                 @if(isset($lstData['TOP']['anm_name']) && count($lstData['TOP']['anm_name']) > 0)
                     <span style="color: #ec1d25; font-size: 20px;" class=""> {{ implode(',', $lstData['TOP']['anm_name']) }}<span>

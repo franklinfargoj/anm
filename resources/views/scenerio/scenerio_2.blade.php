@@ -21,7 +21,7 @@
 
 	<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff;">
 		<tr>
-			<td align="left" valign="middle" class="d-block"><img src="{{ asset('images/newsletter-img/pic1-left.jpg')}}" alt="" alt=""></td>
+			<td align="left" valign="middle" class="d-block"><img src="{{ asset('images/newsletter-img/pic1.jpg')}}" alt="" alt=""></td>
 			<td align="center" style="font-weight: bold;" class="d-block">
 				<span style="color: #ec1d25; font-size: 20px;">
 					@if(isset($lstData['TOP']['anm_name']) && count($lstData['TOP']['anm_name']) > 0)

@@ -20,8 +20,10 @@
 			<td>
 				<table width="100%" cellpadding="0" cellspacing="0" border="0" style="padding-bottom: 5px;">
 					<tr>
+						<td align="left"><img src="{{asset('images/mishaalred.png')}}" style="height: 80px;width: 80px;"></td>
 						<input type="hidden" id="scenerio" value="{{$scenes}}">
-						<td style="font-size: 18px; font-weight: bold; line-height: 24px; text-align: center;">जानना चाहते है की <span style="color: #ec1d25;">{{$current_month}} <span style="text-decoration: underline;">{{date('Y')}}</span></span>  में <br/> <span style="color: #ec1d25;">{{ $lstData['phc_name'] }} पी.एच.सी</span>  के किस {{strtoupper($type)}} ने सबसे अच्छा काम किया?</td>
+						<td style="font-size: 18px; font-weight: bold; line-height: 24px; text-align: center;">
+							जानना चाहते है की <span style="color: #ec1d25;">{{$current_month}} <span style="text-decoration: underline;">{{date('Y')}}</span></span>  में <br/> <span style="color: #ec1d25;">{{ $lstData['phc_name'] }} पी.एच.सी</span>  के किस {{strtoupper($type)}} ने सबसे अच्छा काम किया?</td>
 					</tr>
 				</table>
 

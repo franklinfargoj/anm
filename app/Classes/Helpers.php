@@ -105,7 +105,7 @@ class Helpers{
 	    if($number > 0){
 	        $percentNumber = $number*100;
 	        if(is_numeric($percentNumber) && floor($percentNumber) != $percentNumber){
-	        	return number_format((float)$percentNumber, 2, '.', '');
+	        	return preg_replace('/.00/', '', number_format((float)$percentNumber, 2, '.', ''));
 	        }
 	        return $percentNumber;
         }else{
