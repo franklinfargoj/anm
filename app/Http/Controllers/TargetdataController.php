@@ -274,6 +274,6 @@ class TargetdataController extends Controller
         $file_name =$data['file_name'];
         $date_time=$data['date_time'];
         $result = AnmTargetDataModel::where('filename',$file_name)->update(array('schedule_at'=>$date_time));
-        return;
+        return $result;
     }
 }

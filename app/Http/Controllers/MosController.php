@@ -257,13 +257,10 @@ class MosController extends Controller
     public function update_sms_schedule(Request $request)
     {
         $data = $request->toArray();
-
         $file_name =$data['file_name'];
         $date_time=$data['date_time'];
-
         $result = MoicRanking::where('uploaded_file',$file_name)->update(array('schedule_at'=>$date_time));
-
-        return;
+        return $result;
     }
 
 
