@@ -95,7 +95,7 @@
                     { "data": "phc" },
                     { "data": "doctor_name" },
                     { "data": " " },
-                    { "data": " " }
+                    { "data": "sms" }
                 ]
             });
         });

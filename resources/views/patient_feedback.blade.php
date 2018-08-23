@@ -135,7 +135,7 @@
                 "columns": [
                     { "data": "sr_no" },
                     { "data": "og_filename" },
-                    { "data": "created_at" },
+                    { "data": "uploaded_on" },
                     { "data": "actions" },
                     { "data": "schedule_at" },
                     { "data": "reschedule" }
@@ -172,7 +172,6 @@
                         _token: '{{  csrf_token()}}'
                     },
                     success: function(result){
-                        console.log(result);
                         location.reload();
                     },
                 });
