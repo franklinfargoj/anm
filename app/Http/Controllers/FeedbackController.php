@@ -27,14 +27,13 @@ class FeedbackController extends Controller
         return view('patient_feedback',compact('district'));
     }
 
-
-
-
     public function importFile(Feedback $request)
     {
+
         $obj = new ConvertToUnicode();
         if ($request->hasFile('sample_file')) {
             $extension = File::extension($request->sample_file->getClientOriginalName(''));
+
             $months = DB::table('master_months')->pluck('month_translated', 'id');
             if ($extension == "xlsx" || $extension == "xls") {
                 $path = $request->file('sample_file')->getRealPath();
@@ -44,6 +43,7 @@ class FeedbackController extends Controller
                 $day_time = Carbon::now()->toDateTimeString('Y-m-d');
                 if (count($data) > 0) {
                     foreach ($data as $key => $value) {
+
                         $arr[] = [
                             'district' => $value["district"],
                             'block_hindi' => $obj->convert_to_unicode2($value["block_name_in_hindi"]),
@@ -74,6 +74,9 @@ class FeedbackController extends Controller
                             'filename'=>$file_name,
                             'created_at'=>$day_time,
                             'schedule_at'=>  $request->get("schedule_at"),
+                            'month' => $request->get('month'),
+                            'year' => $request->get('year'),
+                            'sms'=> $obj->convert_to_unicode2($value["doctor_name_in_hindi"]).',क्या आप जानना चाहते/ चाहती  हैं की,'. $months[$request->get('month')]." ".'माह  मे'." ".$obj->convert_to_unicode2($value["phc_name_in_hindi"])." ".'आदर्श पी अच् सी के patients का अनुभव कैसा रहा?',
                         ];
                     }
                     if (!empty($arr)) {
@@ -97,61 +100,52 @@ class FeedbackController extends Controller
         }
     }
 
-
-
-
-
     public function feedbackfiles()
     {
-        $feedback = FeedbackModel::select('id','og_filename','filename','created_at','schedule_at')
+        $feedback = FeedbackModel::select('id','og_filename','filename','schedule_at')
+                                    ->selectRaw("DATE(created_at) as uploaded_on" )
                                     ->groupBy('filename')
                                     ->orderBy('created_at', 'DESC')
                                     ->get();
-
         $db = Datatables::of($feedback);
-        $db->addColumn('sr_no', function ($target_data) {
+
+        $db->addColumn('sr_no', function ($feedback) {
             static $i = 0;
             $i++;
             return $i;
-        })->rawColumns(['id']);
+        })->rawColumns(['sr_no']);
 
         $db->addColumn('actions', function ($feedback) {
             return '<a href="' . route('detail_feedback', $feedback['id']) . '">View details</a>';
         })->addColumn('reschedule', function($feedback){
-                return '<input type="hidden" id="'.$feedback['filename'].'" value="'.$feedback['filename'].'">
-                        <input type="text" class="re_schedule" name="re_schedule" class="form-control">';
+            return '<input type="hidden" id="'.$feedback['filename'].'" value="'.$feedback['filename'].'">
+                    <input type="text" class="re_schedule" name="re_schedule" class="form-control">';
         })->rawColumns(['actions','reschedule']);
 
         return $db->make(true);
     }
-
-
 
     public function feedbackDetail($id)
     {
         return view('feedback_detail',compact('id'));
     }
 
-
-
     public function file_details($id)
     {
         $file = FeedbackModel::select('filename')->where('id',$id)->get()->toArray();
         $file_name = $file[0]['filename'];
 
-        $feedback_details = FeedbackModel::select('id','phc','doctor_name','block_hindi')
+        $feedback_details = FeedbackModel::select('id','phc','doctor_name','block_hindi','sms')
                                         ->orderBy('created_at', 'DESC')
                                         ->where('filename',$file_name)
                                         ->get()->toArray();
 
         $db = Datatables::of($feedback_details);
-
         $db->addColumn('sr_no', function ($target_data) {
             static $i = 0;
             $i++;
             return $i;
         })->rawColumns(['id']);
-
         return $db->make(true);
     }
 
@@ -176,12 +170,10 @@ class FeedbackController extends Controller
                                         ->get()
                                         ->toArray();
 
-
         \Excel::create('Feedback'.time(), function($excel) use($feedback_data) {
             $excel->sheet('Patient_Feedback', function ($sheet) use ($feedback_data) {
                 $excelData = [];
                 $excelData[] = [
-
                     'District','Block Name in Hindi','PHC','PHC Name in hindi','Name of Incharge',
                     /*'Doctor name in hindi','Mobile No','People Responded For Doctor Availability',
                     'Patient Feedback Score For Doctor Availability',
@@ -190,35 +182,28 @@ class FeedbackController extends Controller
                     'Feedback For Medicine Availability','People Responded For Test Availability','Patient Feedback Score For Test Availibility',
                     '','','','',
                     '','','','','','',''*/
-
-
-
                 ];
                 foreach ($feedback_data as $value) {
-
                     $excelData[] = array(
                         $value['district'],
                         $value['block_hindi'],
                         $value['phc'],
                         $value['phc_hindi'],
                         $value['doctor_name'],
-
                     );
                 }
                 $sheet->fromArray($excelData, null, 'A1', true, false);
             });
         })->download('xlsx');
-
     }
 
     public function update_feed_schedule(Request $request)
     {
         $data = $request->toArray();
-
         $file_name =$data['filename'];
         $date_time=$data['date_time'];
         $result = FeedbackModel::where('filename',$file_name)->update(array('schedule_at'=>$date_time));
-        return;
+        return $result;
     }
 
     /**
