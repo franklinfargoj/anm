@@ -67,7 +67,7 @@
                             <th>Block</th>
                             <th>PHC Name</th>
                             <th>Dr. Name</th>
-                            <th>View</th>
+                            <th>Weblink</th>
                             <th>SMS</th>
                         </tr>
                         </thead>
@@ -94,10 +94,12 @@
                     { "data": "block_hindi" },
                     { "data": "phc" },
                     { "data": "doctor_name" },
-                    { "data": " " },
+                    { "data": "weblink" },
                     { "data": "sms" }
                 ]
             });
         });
     </script>
 @endsection
+
+

@@ -135,7 +135,7 @@ class FeedbackController extends Controller
         $file = FeedbackModel::select('filename')->where('id',$id)->get()->toArray();
         $file_name = $file[0]['filename'];
 
-        $feedback_details = FeedbackModel::select('id','phc','doctor_name','block_hindi','sms')
+        $feedback_details = FeedbackModel::select('id','phc','doctor_name','block_hindi','sms','weblink')
                                         ->orderBy('created_at', 'DESC')
                                         ->where('filename',$file_name)
                                         ->get()->toArray();
