@@ -157,31 +157,62 @@ class FeedbackController extends Controller
             ->first()->toArray();
         $file_name = $file['filename'];
 
-        $feedback_data = FeedbackModel::select('district','block_hindi','phc','phc_hindi','doctor_name','doctor_name_hindi',
-                                                'mobile_no','people_responded_for_doctor_availability','patient_feedback_score_for_doctor_availability','feedback_for_doctor_availability',
-                                                'people_responded_for_medicine_availability','patient_feedback_for_medicine_availibility','feedback_for_medicine_availability',
-                                               'people_responded_for_test_availability','patient_feedback_score_for_test_availibility'
-                                                ,'feedback_for_test_availability','people_responded_for_patient_satisfaction','patient_feedback_score_for_patient_satisfaction',
-                                                'feedback_for_patient_satisfaction','moic_attendance',
-                                                'stock_against_demand','types_of_test_conducted','no_of_patient_phone_number_received',
-                                                'opd','fill_rate')
-
-                                        ->where('filename',$file_name)
-                                        ->get()
-                                        ->toArray();
+        $feedback_data = FeedbackModel::select('district',
+                                                'block_hindi',
+                                                'phc',
+                                                'phc_hindi',
+                                                'doctor_name',
+                                                'doctor_name_hindi',
+                                                'mobile_no',
+                                                'people_responded_for_doctor_availability',
+                                                'patient_feedback_score_for_doctor_availability',
+                                                'feedback_for_doctor_availability',
+                                                'people_responded_for_medicine_availability',
+                                                'patient_feedback_for_medicine_availibility',
+                                                'feedback_for_medicine_availability',
+                                                'people_responded_for_test_availability',
+                                                'patient_feedback_score_for_test_availibility'
+                                                ,'feedback_for_test_availability',
+                                                'people_responded_for_patient_satisfaction',
+                                                'patient_feedback_score_for_patient_satisfaction',
+                                                'feedback_for_patient_satisfaction',
+                                                'moic_attendance',
+                                                'stock_against_demand',
+                                                'types_of_test_conducted',
+                                                'no_of_patient_phone_number_received',
+                                                'opd',
+                                                'fill_rate')
+                                        ->where('filename',$file_name)->get()->toArray();
 
         \Excel::create('Feedback'.time(), function($excel) use($feedback_data) {
             $excel->sheet('Patient_Feedback', function ($sheet) use ($feedback_data) {
                 $excelData = [];
                 $excelData[] = [
-                    'District','Block Name in Hindi','PHC','PHC Name in hindi','Name of Incharge',
-                    /*'Doctor name in hindi','Mobile No','People Responded For Doctor Availability',
+                    'District',
+                    'Block Name in Hindi',
+                    'PHC',
+                    'PHC Name in hindi',
+                    'Name of Incharge',
+                    'Doctor name in hindi',
+                    'Mobile No',
+                    'People Responded For Doctor Availability',
                     'Patient Feedback Score For Doctor Availability',
-                    'Feedback For Doctor Availability',                     '','','','','','','',
-                    'People Responded For Medicine Availability','Patient Feedback For Medicine Availibility',
-                    'Feedback For Medicine Availability','People Responded For Test Availability','Patient Feedback Score For Test Availibility',
-                    '','','','',
-                    '','','','','','',''*/
+                    'Feedback For Doctor Availability',
+                    'People Responded For Medicine Availability',
+                    'Patient Feedback For Medicine Availibility',
+                    'Feedback For Medicine Availability',
+                    'People Responded For Test Availability',
+                    'Patient Feedback Score For Test Availibility',
+                    'Feedback For Test Availability',
+                    'People Responded For Patient Satisfaction',
+                    'Patient Feedback Score For Patient Satisfaction',
+                    'Feedback For Patient Satisfaction',
+                    'MOIC Attendance',
+                    'Stock % against demand',
+                    'Types Of Test Conducted',
+                    'No of Patient Phone Number Received',
+                    'OPD',
+                    '% Fill Rate'
                 ];
                 foreach ($feedback_data as $value) {
                     $excelData[] = array(
@@ -190,6 +221,26 @@ class FeedbackController extends Controller
                         $value['phc'],
                         $value['phc_hindi'],
                         $value['doctor_name'],
+                        $value['doctor_name_hindi'],
+                        $value['mobile_no'],
+                        $value['people_responded_for_doctor_availability'],
+                        $value['patient_feedback_score_for_doctor_availability']*(100).'%', //percent
+                        $value['feedback_for_doctor_availability'],
+                        $value['people_responded_for_medicine_availability'],
+                        $value['patient_feedback_for_medicine_availibility']*(100).'%', //percent
+                        $value['feedback_for_medicine_availability'],
+                        $value['people_responded_for_test_availability'],
+                        $value['patient_feedback_score_for_test_availibility']*(100).'%', //percent
+                        $value['feedback_for_test_availability'],
+                        $value['people_responded_for_patient_satisfaction'],
+                        $value['patient_feedback_score_for_patient_satisfaction']*(100).'%', //percent
+                        $value['feedback_for_patient_satisfaction'],
+                        $value['moic_attendance'],
+                        $value['stock_against_demand'],
+                        $value['types_of_test_conducted'],
+                        $value['no_of_patient_phone_number_received'],
+                        $value['opd'],
+                        $value['fill_rate']*(100).'%', //percent
                     );
                 }
                 $sheet->fromArray($excelData, null, 'A1', true, false);
