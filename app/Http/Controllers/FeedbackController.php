@@ -141,11 +141,13 @@ class FeedbackController extends Controller
                                         ->get()->toArray();
 
         $db = Datatables::of($feedback_details);
-        $db->addColumn('sr_no', function ($target_data) {
-            static $i = 0;
-            $i++;
-            return $i;
-        })->rawColumns(['id']);
+
+        $db->addColumn('sr_no', function () { static $i = 0;  $i++; return $i; })->rawColumns(['id']);
+
+        $db->addColumn('weblink', function ($feedback_details){
+            return url('/feedback/'.$feedback_details["weblink"]);
+        })->rawColumns(['weblink']);
+
         return $db->make(true);
     }
 
@@ -256,16 +258,27 @@ class FeedbackController extends Controller
         $result = FeedbackModel::where('filename',$file_name)->update(array('schedule_at'=>$date_time));
         return $result;
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    
+    public function showReport($link)
     {
-        //
+        $feedbackdata = FeedbackModel::select(
+            'people_responded_for_doctor_availability',
+            'patient_feedback_score_for_doctor_availability',
+            'people_responded_for_medicine_availability',
+            'patient_feedback_for_medicine_availibility',
+            'people_responded_for_test_availability',
+            'patient_feedback_score_for_test_availibility',
+            'people_responded_for_patient_satisfaction',
+            'patient_feedback_score_for_patient_satisfaction',
+            'moic_attendance',
+            'stock_against_demand',
+            'types_of_test_conducted',
+            'opd',
+            'fill_rate',
+            'no_of_patient_phone_number_received'
+            )->where('weblink',$link)->get()->toArray();
+
+        return view('feedback')->with('feedbackdata',$feedbackdata[0]);
     }
 
     /**

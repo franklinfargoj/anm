@@ -94,7 +94,14 @@
                     { "data": "block_hindi" },
                     { "data": "phc" },
                     { "data": "doctor_name" },
-                    { "data": "weblink" },
+                    { "data": "weblink",
+                        "render": function(data, type) {
+                            if (type === 'display') {
+                                data = '<a href="' + data + '">' + data + '</a>';
+                            }
+                            return data;
+                        }
+                    },
                     { "data": "sms" }
                 ]
             });
