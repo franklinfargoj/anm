@@ -5,6 +5,8 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\FeedbackModel;
 use App\Classes\Helpers;
+use Carbon\Carbon;
+use DB;
 
 class FeedbackSmsDispatch extends Command
 {
@@ -39,20 +41,25 @@ class FeedbackSmsDispatch extends Command
      */
     public function handle()
     {
-        $newsms = FeedbackModel::select('complete_sms','mobile_no')
+        $newsms = FeedbackModel::select('complete_sms','mobile_no','id')
                                 ->where('sms_sent',0)
                                 ->where('mobile_no','!=','')
                                 ->where('complete_sms','!=','')
+                                ->where('schedule_at', '<=', Carbon::now())
                                 ->get()
                                 ->toArray();
 
-        if(!empty($newsms)){
+        if(count($newsms)>0){
             foreach($newsms as $sms){
                 $status = Helpers::sendSmsUnicode($sms['complete_sms'],$sms['mobile_no']);
-
-                dd($status);
+                if($status['status'] == 200 && (str_contains($status['response'], '402') == true)){
+                    $ids[] = $sms['id'];
                 }
             }
+            FeedbackModel::whereIn('id', $ids)->update(['sms_sent' => 1]);
+            echo "SMS sent to the respective doctor provided with a valid contact number".PHP_EOL;
+        }else{
+            echo "All sms requests are done".PHP_EOL;
+        }
     }
-
 }

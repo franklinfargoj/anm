@@ -13,7 +13,7 @@ class FeedbackSms extends Command
      *
      * @var string
      */
-    protected $signature = 'verify_null:complete_sms';
+    protected $signature = 'feedback:complete_sms';
 
     /**
      * The console command description.
