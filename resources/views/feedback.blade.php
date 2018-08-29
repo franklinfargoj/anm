@@ -78,15 +78,27 @@
                 <tbody style="color: #11427d; font-size: 30px;">
                 <tr>
                     <td>No of Patient phone no received</td>
-                    <td>{{ $feedbackdata['no_of_patient_phone_number_received'] }}</td>
+                    <td>
+                        @if ($feedbackdata['no_of_patient_phone_number_received'])
+                            {{ $feedbackdata['no_of_patient_phone_number_received'] }}
+                        @endif
+                    </td>
                 </tr>
                 <tr>
                     <td>Out Patient Department</td>
-                    <td>{{ $feedbackdata['opd'] }}</td>
+                    <td>
+                        @if($feedbackdata['opd'])
+                            {{ $feedbackdata['opd'] }}
+                        @endif
+                    </td>
                 </tr>
                 <tr>
                     <td>Percentage fill Rate</td>
-                    <td>{{ Helpers::convertToPercent($feedbackdata['fill_rate']) }}%</td>
+                    <td>
+                        @if($feedbackdata['fill_rate'])
+                            {{ Helpers::convertToPercent($feedbackdata['fill_rate']) }}%
+                        @endif
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -149,14 +161,22 @@
                                 <td width="25%" align="center">
                                     <table class="red-col">
                                         <tr>
-                                            <td align="center">{{ $feedbackdata['people_responded_for_doctor_availability'] }}</td>
+                                            <td align="center">
+                                                @if($feedbackdata['people_responded_for_doctor_availability'])
+                                                    {{ $feedbackdata['people_responded_for_doctor_availability'] }}
+                                                @endif
+                                            </td>
                                         </tr>
                                     </table>
                                 </td>
                                 <td width="25%" align="center">
                                     <table class="yellow-col">
                                         <tr>
-                                            <td align="center">{{ Helpers::convertToPercent($feedbackdata['patient_feedback_score_for_doctor_availability']) }}%</td>
+                                            <td align="center">
+                                                @if ($feedbackdata['patient_feedback_score_for_doctor_availability'])
+                                                    {{ Helpers::convertToPercent($feedbackdata['patient_feedback_score_for_doctor_availability']) }}%
+                                                @endif
+                                            </td>
                                         </tr>
                                     </table>
                                 </td>
@@ -172,7 +192,11 @@
                                 <td width="30%" align="center">
                                     <table class="red-col">
                                         <tr>
-                                            <td align="center">{{ Helpers::convertToPercent($feedbackdata['moic_attendance']) }}%</td>
+                                            <td align="center">
+                                                @if ($feedbackdata['moic_attendance'])
+                                                    {{ Helpers::convertToPercent($feedbackdata['moic_attendance']) }}%
+                                                @endif
+                                            </td>
                                         </tr>
                                     </table>
                                 </td>
@@ -184,7 +208,11 @@
                         <table width="100%">
                             <tbody>
                             <tr>
-                                <td style="font-size: 14px;">पर्याप्त फ़ोन नंबर ना होने के कारन पेशेंट एक्सपीरियंस पे निष्कर्ष निकालना मुश्किल है। पेशेंट एवं स्टाफ को पेशेंट फीडबैक के बारे में बताएं। </td>
+                                <td style="font-size: 14px;">
+                                    @if($feedbackdata['feedback_for_doctor_availability'])
+                                        {{ $feedbackdata['feedback_for_doctor_availability'] }}
+                                    @endif
+                                </td>
                             </tr>
                             </tbody>
                         </table>
@@ -203,14 +231,21 @@
                                 <td width="25%" align="center">
                                     <table class="red-col">
                                         <tr>
-                                            <td align="center">{{ $feedbackdata['people_responded_for_medicine_availability'] }}</td>
+                                            <td align="center">
+                                                @if($feedbackdata['people_responded_for_medicine_availability'])
+                                                    {{ $feedbackdata['people_responded_for_medicine_availability'] }}
+                                                @endif
+                                            </td>
                                         </tr>
                                     </table>
                                 </td>
                                 <td width="25%" align="center">
                                     <table class="yellow-col">
                                         <tr>
-                                            <td align="center">{{ Helpers::convertToPercent($feedbackdata['patient_feedback_for_medicine_availibility']) }}%</td>
+                                            <td align="center">
+                                                @if($feedbackdata['patient_feedback_for_medicine_availibility'])
+                                                    {{ Helpers::convertToPercent($feedbackdata['patient_feedback_for_medicine_availibility']) }}%</td>
+                                                @endif
                                         </tr>
                                     </table>
                                 </td>
@@ -226,7 +261,11 @@
                                 <td width="30%" align="center">
                                     <table class="yellow-col">
                                         <tr>
-                                            <td align="center">{{ $feedbackdata['stock_against_demand'] }}%</td>
+                                            <td align="center">
+                                                @if($feedbackdata['stock_against_demand'])
+                                                    {{ $feedbackdata['stock_against_demand'] }}%
+                                                @endif
+                                            </td>
                                         </tr>
                                     </table>
                                 </td>
@@ -238,7 +277,11 @@
                         <table width="100%">
                             <tbody>
                             <tr>
-                                <td style="font-size: 14px;">पर्याप्त फ़ोन नंबर ना होने के कारन पेशेंट एक्सपीरियंस पे निष्कर्ष निकालना मुश्किल है। पेशेंट एवं स्टाफ को पेशेंट फीडबैक के बारे में बताएं। </td>
+                                <td style="font-size: 14px;">
+                                    @if($feedbackdata['feedback_for_medicine_availability'])
+                                        {{ $feedbackdata['feedback_for_medicine_availability'] }}
+                                    @endif
+                                </td>
                             </tr>
                             </tbody>
                         </table>
@@ -257,14 +300,22 @@
                                 <td width="25%" align="center">
                                     <table class="red-col">
                                         <tr>
-                                            <td align="center">{{ $feedbackdata['people_responded_for_test_availability'] }}</td>
+                                            <td align="center">
+                                                @if($feedbackdata['people_responded_for_test_availability'])
+                                                    {{ $feedbackdata['people_responded_for_test_availability'] }}
+                                                @endif
+                                            </td>
                                         </tr>
                                     </table>
                                 </td>
                                 <td width="25%" align="center">
                                     <table class="yellow-col">
                                         <tr>
-                                            <td align="center">{{ Helpers::convertToPercent($feedbackdata['patient_feedback_score_for_test_availibility']) }}%</td>
+                                            <td align="center">
+                                            @if($feedbackdata['patient_feedback_score_for_test_availibility'])
+                                                {{ Helpers::convertToPercent($feedbackdata['patient_feedback_score_for_test_availibility']) }}%
+                                            @endif
+                                            </td>
                                         </tr>
                                     </table>
                                 </td>
@@ -280,7 +331,11 @@
                                 <td width="30%" align="center">
                                     <table class="red-col">
                                         <tr>
-                                            <td align="center">{{ Helpers::convertToPercent($feedbackdata['types_of_test_conducted']) }}%</td>
+                                            <td align="center">
+                                                @if($feedbackdata['types_of_test_conducted'])
+                                                    {{ Helpers::convertToPercent($feedbackdata['types_of_test_conducted']) }}%
+                                                @endif
+                                            </td>
                                         </tr>
                                     </table>
                                 </td>
@@ -292,7 +347,11 @@
                         <table width="100%">
                             <tbody>
                             <tr>
-                                <td style="font-size: 14px;font-family: 'devanagariregular';">पर्याप्त फ़ोन नंबर ना होने के कारन पेशेंट एक्सपीरियंस पे निष्कर्ष निकालना मुश्किल है। पेशेंट एवं स्टाफ को पेशेंट फीडबैक के बारे में बताएं। </td>
+                                <td style="font-size: 14px;font-family: 'devanagariregular';">
+                                    @if($feedbackdata['feedback_for_test_availability'])
+                                        {{ $feedbackdata['feedback_for_test_availability'] }}
+                                    @endif
+                                </td>
                             </tr>
                             </tbody>
                         </table>
@@ -311,14 +370,22 @@
                                 <td width="25%" align="center">
                                     <table class="red-col">
                                         <tr>
-                                            <td align="center">{{ $feedbackdata['people_responded_for_patient_satisfaction'] }}</td>
+                                            <td align="center">
+                                                @if ($feedbackdata['people_responded_for_patient_satisfaction'])
+                                                    {{ $feedbackdata['people_responded_for_patient_satisfaction'] }}
+                                                @endif
+                                            </td>
                                         </tr>
                                     </table>
                                 </td>
                                 <td width="25%" align="center">
                                     <table class="red-col">
                                         <tr>
-                                            <td align="center">{{ Helpers::convertToPercent($feedbackdata['patient_feedback_score_for_patient_satisfaction']) }}%</td>
+                                            <td align="center">
+                                                @if ($feedbackdata['patient_feedback_score_for_patient_satisfaction'])
+                                                    {{ Helpers::convertToPercent($feedbackdata['patient_feedback_score_for_patient_satisfaction']) }}%
+                                                @endif
+                                            </td>
                                         </tr>
                                     </table>
                                 </td>
@@ -340,7 +407,11 @@
                         <table width="100%">
                             <tbody>
                             <tr>
-                                <td style="font-size: 14px;">पर्याप्त फ़ोन नंबर ना होने के कारन पेशेंट एक्सपीरियंस पे निष्कर्ष निकालना मुश्किल है। पेशेंट एवं स्टाफ को पेशेंट फीडबैक के बारे में बताएं। </td>
+                                <td style="font-size: 14px;">
+                                   @if($feedbackdata['feedback_for_patient_satisfaction'])
+                                       {{ $feedbackdata['feedback_for_patient_satisfaction'] }}
+                                   @endif
+                                </td>
                             </tr>
                             </tbody>
                         </table>

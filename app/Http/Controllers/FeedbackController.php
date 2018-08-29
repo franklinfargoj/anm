@@ -29,7 +29,6 @@ class FeedbackController extends Controller
 
     public function importFile(Feedback $request)
     {
-
         $obj = new ConvertToUnicode();
         if ($request->hasFile('sample_file')) {
             $extension = File::extension($request->sample_file->getClientOriginalName(''));
@@ -141,16 +140,17 @@ class FeedbackController extends Controller
                                         ->get()->toArray();
 
         $db = Datatables::of($feedback_details);
-
         $db->addColumn('sr_no', function () { static $i = 0;  $i++; return $i; })->rawColumns(['id']);
-
         $db->addColumn('weblink', function ($feedback_details){
-            return url('/feedback/'.$feedback_details["weblink"]);
+            if($feedback_details["weblink"]){
+                //  return url('/feedback/'.$feedback_details["weblink"]);
+                return '<a href="'.url('/feedback/'.$feedback_details["weblink"]).'" target="_blank">Click !</a>';
+            }
+            return "Processing";
         })->rawColumns(['weblink']);
 
         return $db->make(true);
     }
-
 
     public function export_feedback($id)
     {
@@ -258,28 +258,33 @@ class FeedbackController extends Controller
         $result = FeedbackModel::where('filename',$file_name)->update(array('schedule_at'=>$date_time));
         return $result;
     }
-    
+
     public function showReport($link)
     {
-        $feedbackdata = FeedbackModel::select(
-            'people_responded_for_doctor_availability',
-            'patient_feedback_score_for_doctor_availability',
-            'people_responded_for_medicine_availability',
-            'patient_feedback_for_medicine_availibility',
-            'people_responded_for_test_availability',
-            'patient_feedback_score_for_test_availibility',
-            'people_responded_for_patient_satisfaction',
-            'patient_feedback_score_for_patient_satisfaction',
-            'moic_attendance',
-            'stock_against_demand',
-            'types_of_test_conducted',
-            'opd',
-            'fill_rate',
-            'no_of_patient_phone_number_received'
-            )->where('weblink',$link)->get()->toArray();
+                $feedbackdata = FeedbackModel::select(
+                    'people_responded_for_doctor_availability',
+                    'patient_feedback_score_for_doctor_availability',
+                    'people_responded_for_medicine_availability',
+                    'patient_feedback_for_medicine_availibility',
+                    'people_responded_for_test_availability',
+                    'patient_feedback_score_for_test_availibility',
+                    'people_responded_for_patient_satisfaction',
+                    'patient_feedback_score_for_patient_satisfaction',
+                    'moic_attendance',
+                    'stock_against_demand',
+                    'types_of_test_conducted',
+                    'opd',
+                    'fill_rate',
+                    'no_of_patient_phone_number_received',
 
-        return view('feedback')->with('feedbackdata',$feedbackdata[0]);
-    }
+                    'feedback_for_doctor_availability',
+                    'feedback_for_medicine_availability',
+                    'feedback_for_test_availability',
+                    'feedback_for_patient_satisfaction'
+                    )->where('weblink',$link)->get()->toArray();
+
+                return view('feedback')->with('feedbackdata',$feedbackdata[0]);
+         }
 
     /**
      * Show the form for editing the specified resource.
