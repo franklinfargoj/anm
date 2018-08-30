@@ -63,10 +63,27 @@
         <td>
             <table width="90%" style="margin: 0 auto;padding: 40px 0 80px 0; color: #fff;font-weight: 700; border-collapse: separate;">
                 <tr>
-                    <td style="font-size: 37px;">{{ $feedbackdata['phc'] }}({{ $feedbackdata['district'] }}) : Patient Feedback Survey</td>
+                    <td style="font-size: 37px;">
+                        @if($feedbackdata['phc'])
+                            {{ $feedbackdata['phc'] }}
+                        @endif
+
+                        @if($feedbackdata['district'])
+                            ({{ $feedbackdata['district'] }}) :
+                        @endif
+                        Patient Feedback Survey
+                    </td>
                 </tr>
                 <tr>
-                    <td style="font-size: 21px;">{{ $months[$feedbackdata['month']] }} {{ $feedbackdata['year'] }}</td>
+                    <td style="font-size: 21px;">
+                      @if($feedbackdata['month'])
+                        {{ $months[$feedbackdata['month']] }}
+                      @endif
+
+                      @if($feedbackdata['year'])
+                            {{ $feedbackdata['year'] }}
+                      @endif
+                    </td>
                 </tr>
             </table>
         </td>
