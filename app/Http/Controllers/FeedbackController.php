@@ -108,7 +108,7 @@ class FeedbackController extends Controller
 
     public function feedbackfiles()
     {
-        $feedback = FeedbackModel::select('id','og_filename','filename','schedule_at')
+        $feedback = FeedbackModel::select('id','og_filename','filename','schedule_at', \DB::raw('group_concat(distinct sms_sent) as sms_sent_initiateds'))
                                     ->selectRaw("DATE(created_at) as uploaded_on" )
                                     ->groupBy('filename')
                                     ->orderBy('created_at', 'DESC')
@@ -124,8 +124,12 @@ class FeedbackController extends Controller
         $db->addColumn('actions', function ($feedback) {
             return '<a href="' . route('detail_feedback', $feedback['id']) . '">View details</a>';
         })->addColumn('reschedule', function($feedback){
-            return '<input type="hidden" id="'.$feedback['filename'].'" value="'.$feedback['filename'].'">
+            $arr = explode(',', $feedback['sms_sent_initiateds']);
+            if(empty ($arr[1])) {
+                return '<input type="hidden" id="' . $feedback['filename'] . '" value="' . $feedback['filename'] . '">
                     <input type="text" class="re_schedule" name="re_schedule" class="form-control">';
+            }
+            return 'SMS\'s for this are already sent';
         })->rawColumns(['actions','reschedule']);
 
         return $db->make(true);
