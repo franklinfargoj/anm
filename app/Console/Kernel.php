@@ -49,9 +49,9 @@ class Kernel extends ConsoleKernel
         $schedule->command('moic:save_zip')->hourly();
         //****Rankings schedular ends************************
 
-        $schedule->command('feedback:weblink')->everyFiveMinutes();
-        $schedule->command('feedback:complete_sms')->everyFiveMinutes();
-        $schedule->command('feedback:sms_dispatch')->everyFiveMinutes();
+//        $schedule->command('feedback:weblink')->everyFiveMinutes();
+//        $schedule->command('feedback:complete_sms')->everyFiveMinutes();
+//        $schedule->command('feedback:sms_dispatch')->everyFiveMinutes();
     }
 
     /**
