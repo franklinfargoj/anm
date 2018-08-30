@@ -42,6 +42,12 @@ class FeedbackController extends Controller
                 $day_time = Carbon::now()->toDateTimeString('Y-m-d');
                 if (count($data) > 0) {
                     foreach ($data as $key => $value) {
+                        $gender = "";
+                        if($value['gender'] == 'male'){
+                            $gender = "चाहते";
+                        }else{
+                            $gender = "चाहती";
+                        }
 
                         $arr[] = [
                             'district' => $value["district"],
@@ -75,7 +81,8 @@ class FeedbackController extends Controller
                             'schedule_at'=>  $request->get("schedule_at"),
                             'month' => $request->get('month'),
                             'year' => $request->get('year'),
-                            'sms'=> $obj->convert_to_unicode2($value["doctor_name_in_hindi"]).',क्या आप जानना चाहते/ चाहती  हैं की,'. $months[$request->get('month')]." ".'माह  मे'." ".$obj->convert_to_unicode2($value["phc_name_in_hindi"])." ".'आदर्श पी अच् सी के patients का अनुभव कैसा रहा?',
+                            'dr_gender' => $value["gender"],
+                            'sms'=> $obj->convert_to_unicode2($value["doctor_name_in_hindi"]).',क्या आप जानना '.$gender.'  हैं की,'. $months[$request->get('month')]." ".'माह  मे'." ".$obj->convert_to_unicode2($value["phc_name_in_hindi"])." ".'आदर्श पी अच् सी के patients का अनुभव कैसा रहा?',
                         ];
                     }
                     if (!empty($arr)) {
@@ -261,7 +268,8 @@ class FeedbackController extends Controller
 
     public function showReport($link)
     {
-                $feedbackdata = FeedbackModel::select(
+        $months = \DB::table('master_months')->pluck('month_english', 'id')->toArray();
+        $feedback = FeedbackModel::select(
                     'people_responded_for_doctor_availability',
                     'patient_feedback_score_for_doctor_availability',
                     'people_responded_for_medicine_availability',
@@ -276,15 +284,18 @@ class FeedbackController extends Controller
                     'opd',
                     'fill_rate',
                     'no_of_patient_phone_number_received',
-
                     'feedback_for_doctor_availability',
                     'feedback_for_medicine_availability',
                     'feedback_for_test_availability',
-                    'feedback_for_patient_satisfaction'
+                    'feedback_for_patient_satisfaction',
+                    'phc',
+                    'district',
+                    'year',
+                    'month'
                     )->where('weblink',$link)->get()->toArray();
-
-                return view('feedback')->with('feedbackdata',$feedbackdata[0]);
-         }
+        $feedbackdata = $feedback[0];
+        return view('feedback', compact('feedbackdata', 'months'));
+    }
 
     /**
      * Show the form for editing the specified resource.
