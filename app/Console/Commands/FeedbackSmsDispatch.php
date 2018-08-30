@@ -49,7 +49,8 @@ class FeedbackSmsDispatch extends Command
                                 ->get()
                                 ->toArray();
 
-        if(count($newsms)>0){
+     if(count($newsms)>0){
+         $ids = [];
             foreach($newsms as $sms){
                 $status = Helpers::sendSmsUnicode($sms['complete_sms'],$sms['mobile_no']);
                 if($status['status'] == 200 && (str_contains($status['response'], '402') == true)){
@@ -59,7 +60,7 @@ class FeedbackSmsDispatch extends Command
             FeedbackModel::whereIn('id', $ids)->update(['sms_sent' => 1]);
             echo "SMS sent to the respective doctor provided with a valid contact number".PHP_EOL;
         }else{
-            echo "All sms requests are done".PHP_EOL;
+            echo "All sms requests are already completed.".PHP_EOL;
         }
     }
 }
