@@ -151,7 +151,7 @@ class FeedbackController extends Controller
         $db->addColumn('weblink', function ($feedback_details){
             if($feedback_details["weblink"]){
                 //  return url('/feedback/'.$feedback_details["weblink"]);
-                return '<a href="'.url('/feedback/'.$feedback_details["weblink"]).'" target="_blank"> Click !</a>';
+                return '<a href="'.url('/feedback/'.$feedback_details["weblink"]).'" target="_blank"> '.url('/feedback/'.$feedback_details["weblink"]).'</a>';
             }
             return "Processing";
         })->rawColumns(['weblink']);
