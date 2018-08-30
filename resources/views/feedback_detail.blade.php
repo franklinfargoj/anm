@@ -64,7 +64,7 @@
                         <thead>
                         <tr>
                             <th>Sr. No.</th>
-                            <th>Block</th>
+                            <th>District</th>
                             <th>PHC Name</th>
                             <th>Dr. Name</th>
                             <th>Weblink</th>
