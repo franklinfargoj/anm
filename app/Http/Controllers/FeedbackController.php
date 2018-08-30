@@ -141,17 +141,22 @@ class FeedbackController extends Controller
         $file = FeedbackModel::select('filename')->where('id',$id)->get()->toArray();
         $file_name = $file[0]['filename'];
 
-        $feedback_details = FeedbackModel::select('id','phc','doctor_name','district','sms','weblink')
+        $feedback_details = FeedbackModel::select('id','phc','doctor_name','district','sms','weblink',
+                                                    'feedback_for_doctor_availability',
+                                                    'feedback_for_medicine_availability',
+                                                    'feedback_for_test_availability',
+                                                    'feedback_for_patient_satisfaction'
+                                                    )
                                         ->orderBy('created_at', 'DESC')
                                         ->where('filename',$file_name)
                                         ->get()->toArray();
 
         $db = Datatables::of($feedback_details);
-        $db->addColumn('sr_no', function () { static $i = 0;  $i++; return $i; })->rawColumns(['id']);
+      //  $db->addColumn('sr_no', function () { static $i = 0;  $i++; return $i; })->rawColumns(['id']);
         $db->addColumn('weblink', function ($feedback_details){
             if($feedback_details["weblink"]){
                 //  return url('/feedback/'.$feedback_details["weblink"]);
-                return '<a href="'.url('/feedback/'.$feedback_details["weblink"]).'" target="_blank"> '.url('/feedback/'.$feedback_details["weblink"]).'</a>';
+                return '<a href="'.url('/feedback/'.$feedback_details["weblink"]).'" target="_blank"> Click !</a>';
             }
             return "Processing";
         })->rawColumns(['weblink']);

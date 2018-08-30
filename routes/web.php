@@ -35,7 +35,7 @@ Route::group(['middleware'=>'auth'], function (){
     Route::get('/download/moic_zip/{name}', 'MosController@downloadZip');
 
 
-    Route::get('p-feed', 'FeedbackController@index');
+    Route::get('feedback', 'FeedbackController@index');
     Route::post('import-feedback', 'FeedbackController@importFile')->name('import.feedback');
     Route::get('/feedback_files', 'FeedbackController@feedbackfiles');
     Route::get('detail_feedback/{id}','FeedbackController@feedbackDetail')->name('detail_feedback');

@@ -63,12 +63,23 @@
                     <table id="moic_rankings" class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>Sr. No.</th>
+
                             <th>District</th>
                             <th>PHC Name</th>
                             <th>Dr. Name</th>
                             <th>Weblink</th>
                             <th>SMS</th>
+
+                            <th>Doctor Availability</th>
+
+                            <th>Medicine Availability</th>
+
+                            <th>Test Availability </th>
+
+                            <th>Patient Satisfaction</th>
+
+
+
                         </tr>
                         </thead>
                     </table>
@@ -90,12 +101,15 @@
                 "info": true,
                 "ajax": "<?php echo url('/file_details/'.$id);?>",
                 "columns": [
-                    { "data": "sr_no" },
                     { "data": "district" },
                     { "data": "phc" },
                     { "data": "doctor_name" },
                     { "data": "weblink" },
-                    { "data": "sms" }
+                    { "data": "sms" },
+                    { "data": "feedback_for_doctor_availability" },
+                    { "data": "feedback_for_medicine_availability" },
+                    { "data": "feedback_for_test_availability" },
+                    { "data": "feedback_for_patient_satisfaction" }
                 ]
             });
         });
