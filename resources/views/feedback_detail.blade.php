@@ -91,7 +91,7 @@
                 "ajax": "<?php echo url('/file_details/'.$id);?>",
                 "columns": [
                     { "data": "sr_no" },
-                    { "data": "block_hindi" },
+                    { "data": "district" },
                     { "data": "phc" },
                     { "data": "doctor_name" },
                     { "data": "weblink" },
