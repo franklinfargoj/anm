@@ -68,7 +68,7 @@
             <td align="center" style="font-weight: bold;" class="d-block">
 				<span style="color: #ec1d25; font-size: 20px;">
                     {{--@if($type != 'beneficiary')--}}
-                        @if(isset($lstData['BOTTOM']['anm_name']) && count($lstData['BOTTOM']['anm_name']) > 1)
+                        @if(isset($lstData['BOTTOM']['anm_name']) && count($lstData['BOTTOM']['anm_name']) > 0)
                             <span class="">{{ implode(',', $lstData['BOTTOM']['anm_name']) }}</span>
 
                             एवं

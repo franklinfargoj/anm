@@ -44,7 +44,7 @@
 			<td align="left" valign="middle"><img src="{{ asset('images/newsletter-img/pic3-left.jpg')}}" alt="" alt=""></td>
 			<td align="center" style="font-weight: bold;">
 				<span style="color: #ec1d25; font-size: 20px;">
-					@if(isset($lstData['BOTTOM']['anm_name']) && count($lstData['BOTTOM']['anm_name']) > 1)
+					@if(isset($lstData['BOTTOM']['anm_name']) && count($lstData['BOTTOM']['anm_name']) > 0)
 					    <span class="">{{ implode(',', $lstData['BOTTOM']['anm_name']) }}</span>
 
 					    एवं
