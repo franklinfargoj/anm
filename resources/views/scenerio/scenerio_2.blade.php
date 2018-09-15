@@ -24,8 +24,8 @@
 			<td align="left" valign="middle" class="d-block"><img src="{{ asset('images/newsletter-img/pic1.jpg')}}" alt="" alt=""></td>
 			<td align="center" style="font-weight: bold;" class="d-block">
 				<span style="color: #ec1d25; font-size: 20px;">
-					@if(isset($lstData['TOP']['anm_name']) && count($lstData['TOP']['anm_name']) > 0)
-                        <span class=""> {{ implode(',', $lstData['TOP']['anm_name']) }}</span>
+					@if(isset($lstData['TOP']['subcenter']) && count($lstData['TOP']['subcenter']) > 0)
+                        <span class=""> {{ implode(',', $lstData['TOP']['subcenter']) }}</span>
                                 और
                         <span class=""> {{ $lstData['TOP']['end'] }}</span>
                     @else
@@ -41,8 +41,8 @@
 		<tr class="row-reverse">
 			<td align="center" style="font-weight: bold;" class="d-block">
 				<span style="color: #ec1d25; font-size: 20px;"><span style="font-size:20px; color: #000; display: block;">हमारी</span>
-					@if(isset($lstData['MIDDLE']['anm_name']) && count($lstData['MIDDLE']['anm_name']) > 0)
-                        <span style="color: #ec1d25; font-size: 20px;" class=""> {{ implode(',', $lstData['MIDDLE']['anm_name']) }}</span>
+					@if(isset($lstData['MIDDLE']['subcenter']) && count($lstData['MIDDLE']['subcenter']) > 0)
+                        <span style="color: #ec1d25; font-size: 20px;" class=""> {{ implode(',', $lstData['MIDDLE']['subcenter']) }}</span>
                                 और
                         <span style="color: #ec1d25; font-size: 20px;" class=""> {{ $lstData['MIDDLE']['end'] }}</span>
                     @else

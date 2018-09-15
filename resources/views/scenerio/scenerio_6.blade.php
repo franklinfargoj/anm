@@ -28,7 +28,7 @@
 			<td align="center" style="font-weight: bold; padding: 20px 60px;">
 				<span style="color: #ec1d25; font-size: 20px;">
 					<span style="font-size:20px; color: #000; display: block;">हमारी</span>
-					@if(isset($lstData['MIDDLE']['anm_name']) && count($lstData['MIDDLE']['anm_name']) > 0)
+					@if(isset($lstData['MIDDLE']['subcenter']) && count($lstData['MIDDLE']['subcenter']) > 0)
 					    <span class="">{{ implode(',', $lstData['MIDDLE']['anm_name']) }}</span>
 
 					    एवं

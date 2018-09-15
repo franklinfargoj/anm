@@ -25,8 +25,8 @@
             <td align="center" style="font-weight: bold;" class="d-block">
 
                 {{--@if($type != 'beneficiary')--}}
-                    @if(isset($lstData['TOP']['anm_name']) && count($lstData['TOP']['anm_name']) > 0)
-                        <span style="color: #ec1d25; font-size: 20px;" class=""> {{ implode(',', $lstData['TOP']['anm_name']) }}</span>
+                    @if(isset($lstData['TOP']['subcenter']) && count($lstData['TOP']['subcenter']) > 0)
+                        <span style="color: #ec1d25; font-size: 20px;" class=""> {{ implode(',', $lstData['TOP']['subcenter']) }}</span>
                                 और
                         <span style="color: #ec1d25; font-size: 20px;" class=""> {{ $lstData['TOP']['end'] }}</span>
                     @else
@@ -44,8 +44,8 @@
                 <span style="color: #ec1d25; font-size: 20px;">
                     <span style="font-size:20px; color: #000; display: block;">हमारी</span>
                     {{--@if($type != 'beneficiary')--}}
-                        @if(isset($lstData['MIDDLE']['anm_name']) && count($lstData['MIDDLE']['anm_name']) > 0)
-                            <span class="">{{ implode(',', $lstData['MIDDLE']['anm_name']) }}</span>
+                        @if(isset($lstData['MIDDLE']['subcenter']) && count($lstData['MIDDLE']['subcenter']) > 0)
+                            <span class="">{{ implode(',', $lstData['MIDDLE']['subcenter']) }}</span>
                             एवं
                            <span class="">{{ $lstData['MIDDLE']['end'] }}</span>
                         @else
@@ -68,8 +68,8 @@
             <td align="center" style="font-weight: bold;" class="d-block">
 				<span style="color: #ec1d25; font-size: 20px;">
                     {{--@if($type != 'beneficiary')--}}
-                        @if(isset($lstData['BOTTOM']['anm_name']) && count($lstData['BOTTOM']['anm_name']) > 0)
-                            <span class="">{{ implode(',', $lstData['BOTTOM']['anm_name']) }}</span>
+                        @if(isset($lstData['BOTTOM']['subcenter']) && count($lstData['BOTTOM']['subcenter']) > 0)
+                            <span class="">{{ implode(',', $lstData['BOTTOM']['subcenter']) }}</span>
 
                             एवं
 

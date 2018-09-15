@@ -26,7 +26,7 @@
 		<tr>
 			<td align="center" style="font-weight: bold; padding: 20px 60px;">
 				<span style="color: #ec1d25; font-size: 20px;">
-					@if(isset($lstData['TOP']['anm_name']) && count($lstData['TOP']['anm_name']) > 0)
+					@if(isset($lstData['TOP']['anm_name']) && count($lstData['TOP']['subcenter']) > 0)
                         <span class=""> {{ implode(',', $lstData['TOP']['anm_name']) }}</span>
                                 और
                         <span class=""> {{ $lstData['TOP']['end'] }}</span>
