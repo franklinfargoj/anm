@@ -96,7 +96,6 @@ class TargetdataController extends Controller
                 $web = array();
                 $beneficiary = array();
                 $moic = array();
-
                 if (count($data) > 0) {
                     $phcNameInHindi = "";
                     $moicNameInHindi = "";
@@ -120,21 +119,91 @@ class TargetdataController extends Controller
                         $msg = '';
                         $separated = $value['anm_name_hindi'];
                         $anmNameInHindi = $obj->convert_to_unicode2($value['anm_name_hindi']);
-                        if(str_contains($value['anm_name_hindi'], ',')){
-                            $separated = [];
-                            $exploded = explode(',', $value['anm_name_hindi']);
-                            foreach ($exploded as $single) {
-                                $separated[] = $obj->convert_to_unicode2($single);
+
+                        if($value["performer_category"] == "TOP"){
+                            if(str_contains($value['anm_name_hindi'], ',')){
+                                $separated = [];
+                                $exploded = explode(',', $value['anm_name_hindi']);
+                                foreach ($exploded as $single) {
+                                    $separated[] = $obj->convert_to_unicode2($single);
+                                }
+                                $anmNameInHindi = implode(',', $separated);
+                                foreach ($separated as $single) {
+                                   // $msg .= rtrim($single, ' ') . ', क्या आप जानना चाहते हैं की ' . $months[$request->get('month')] . ' ' . $request->get('year') . ' में ' . $obj->convert_to_unicode2($value['phc_name_hindi']) . ' पीएचसी की कौनसी एनम् सबसे अच्छा काम करके, एक मिसाल बनी? जानने के लिए नीचे लिंक पर क्लिक करके देखिये:';
+                                    $msg .= rtrim($single, ' ') .'दीदी बिाई हो! 8०% से अधिक बच्चों का टीकाकरणतथा ३०% सेअधिक गभयिती मदहलाओं के चार ANC चेकपकर ददखाने पर -'.$months[$request->get('month')] .' '.'के महीने में आपने, अपने PHC सेक्टर में अव्वल दर्जे  का काम कर ददखाया। 
+                                             हमें पूरी उम्मीद है कक आप अगले महीने भी इसी तरह काम करेंगे तथा साथ ही साथ अपने क्षेत्र की सभी ANMsके लिए भी मागयदर्यक बनते हुए उन्हें और बेहतर काम करने के लिए बढ़ावा देंगी!  बने रहिये -आप हम सब के ललएएक लमसाल हैं! 
+                                             जानने के लिए कि'.' '.$months[$request->get('month')].' '. 'की महीने में PHC' .' '.$obj->convert_to_unicode2($value['phc_name_hindi']).' '.'ANMsने कैसा काम ककया, नीचे ददए गए ललंक पर क्क्लक कीक्जए:==';
+                                }
+                            }else{
+                            $msg = $obj->convert_to_unicode2($value['anm_name_hindi']).'दीदी बधाई हो! 
+                                    8०% से अधिक बच्चों का टीकाकरण तथा ३०% से अधिक गर्भवती महिलाओं के चार ANC चेकप कर दिखाने पर -'.' '.$months[$request->get('month')].' '.'के महीने में आपने, अपने PHC सेक्टर में अव्वल दर्जे का काम कर दिखाया। हमें पूरी उम्मीद है कि आप अगले महीने भी इसी तरह काम करेंगे तथा साथ ही साथ अपने क्षेत्र की सभी ANMs के लिए भी मार्गदर्शक बनते हुए उन्हें और बेहतर काम करने के लिए बढ़ावा देंगी! बने रहिये -  आप हम सब के लिए एक मिसाल हैं!
+                                    जानने के लिए कि'.' '.$months[$request->get('month')].' '. 'की महीने में PHC'.' '.$obj->convert_to_unicode2($value['phc_name_hindi']).' '.'की ANMs ने कैसा काम किया, नीचे दिए गए लिंक पर क्लिक कीजिए:';
                             }
-                            $anmNameInHindi = implode(',', $separated);
-                            foreach ($separated as $single) {
-                                $msg .= rtrim($single, ' ') . ', क्या आप जानना चाहते हैं की ' . $months[$request->get('month')] . ' ' . $request->get('year') . ' में ' . $obj->convert_to_unicode2($value['phc_name_hindi']) . ' पीएचसी की कौनसी एनम् सबसे अच्छा काम करके, एक मिसाल बनी? जानने के लिए नीचे लिंक पर क्लिक करके देखिये:==';
-                            }
-                        }else{
-                            $msg = $obj->convert_to_unicode2($value['anm_name_hindi']).', क्या आप जानना चाहते हैं की ' . $months[$request->get('month')] . ' ' . $request->get('year') . ' में ' . $obj->convert_to_unicode2($value['phc_name_hindi']) . ' पीएचसी की कौनसी एनम् सबसे अच्छा काम करके, एक मिसाल बनी? जानने के लिए नीचे लिंक पर क्लिक करके देखिये:';
                         }
+
+                        elseif($value["performer_category"] == "MIDDLE"){
+                            if(str_contains($value['anm_name_hindi'], ',')){
+                                $separated = [];
+                                $exploded = explode(',', $value['anm_name_hindi']);
+
+                                foreach ($exploded as $single) {
+                                    $separated[] = $obj->convert_to_unicode2($single);
+                                }
+
+                                $anmNameInHindi = implode(',', $separated);
+
+                                foreach ($separated as $single) {
+                                    $msg .=rtrim($single, ' ') .' '.'दीदी, आपने'.' '.$months[$request->get('month')].' '. 'के महीने में  ७० – 80% बच्चों का टीकाकरण तथा १०- ३०% गर्भवती महिलाओं के चार ANC चेकप पूरे कर दिखाए। आप अपने लक्ष्य के बहुत पास पहुँच चुके हैं!
+                                     अगली बार आप कम से कम ८०% बच्चों का टीकाकरण तथा ३०% गर्भवती महिलाओं की चार ANC चेकप पूरे करिये ताकि आप अपने क्षेत्र में अव्वल नंबर पर आ पाएं और सबसे ज़्यादा हेल्थ सर्विसेज़ प्रदान करके, बाक़ी सभी ANMs के लिए एक मिसाल बन जाएं। 
+                                    जानने के लिए कि '.' '.$months[$request->get('month')].' '. 'की महीने में PHC'.' '.$obj->convert_to_unicode2($value['phc_name_hindi']).' '.'की ANMs ने कैसा काम किया, नीचे दिए गए लिंक पर क्लिक कीजिए:==';
+                                }
+                            }else{
+                                $msg = $obj->convert_to_unicode2($value['anm_name_hindi']).'दीदी, आपने'.' '.$months[$request->get('month')].' '.'के महीने में  ७० – 80% बच्चों का टीकाकरण तथा १०- ३०% गर्भवती महिलाओं के चार ANC चेकप पूरे कर दिखाए। आप अपने लक्ष्य के बहुत पास पहुँच चुके हैं! अगली बार आप कम से कम ८०% बच्चों का टीकाकरण तथा ३०% गर्भवती महिलाओं की चार ANC चेकप पूरे करिये ताकि आप अपने क्षेत्र में अव्वल नंबर पर आ पाएं और सबसे ज़्यादा हेल्थ सर्विसेज़ प्रदान करके, बाक़ी सभी ANMs के लिए एक मिसाल बन जाएं।
+                                       जानने के लिए कि '.' '.$months[$request->get('month')].' '. 'की महीने में PHC'.' '.$obj->convert_to_unicode2($value['phc_name_hindi']).' '. 'की ANMs ने कैसा काम किया, नीचे दिए गए लिंक पर क्लिक कीजिए:';
+                          }
+                        }
+
+                        elseif($value["performer_category"] == "BOTTOM"){
+                            if(str_contains($value['anm_name_hindi'], ',')){
+                                $separated = [];
+                                $exploded = explode(',', $value['anm_name_hindi']);
+                                foreach ($exploded as $single) {
+                                    $separated[] = $obj->convert_to_unicode2($single);
+                                }
+                                $anmNameInHindi = implode(',', $separated);
+                                foreach ($separated as $single) {
+                                    $msg .= rtrim($single, ' ') .' '.'दीदी,'.' '.$months[$request->get('month')].' '. 'के महीने में आपने MCHN डे पर मेहनत तो करी, पर अभी आपके क्षेत्र में ६०% से भी कम बच्चों का टीकाकरण  तथा १०% से भी कम गर्भवती महिलाओं के चार ANC चेकप हुए हैं। थोड़ी और मेहनत्त करने में जुट्ट जायिये, ताकि अगली बार आप कम से कम 6०% बच्चों का टीकाकरण तथा 10% गर्भवती महिलाओं की चार ANC चेकप पूरी करवा सकेंगे और अपने लक्ष्य के और करीब आ जाएँगे।
+                                            जानने के लिए कि'.' '.$months[$request->get('month')].' '. 'की महीने में PHC'.' '.$obj->convert_to_unicode2($value['phc_name_hindi']).' '.'की ANMs ने कैसा काम किया, नीचे दिए गए लिंक पर क्लिक कीजिए:==';
+                                }
+                            }else{
+
+                                $msg =$obj->convert_to_unicode2($value['anm_name_hindi']).'दीदी,'.' '.$months[$request->get('month')].' '.'के महीने में आपने MCHN डे पर मेहनत तो करी, पर अभी आपके क्षेत्र में ६०% से भी कम बच्चों का टीकाकरण  तथा १०% से भी कम गर्भवती महिलाओं के चार ANC चेकप हुए हैं। थोड़ी और मेहनत्त करने में जुट्ट जायिये, ताकि अगली बार आप कम से कम 6०% बच्चों का टीकाकरण तथा 10% गर्भवती महिलाओं की चार ANC चेकप पूरी करवा सकेंगे और अपने लक्ष्य के और करीब आ जाएँगे।
+                                जानने के लिए कि '.' '.$months[$request->get('month')].' '. 'की महीने में PHC'.' '.$obj->convert_to_unicode2($value['phc_name_hindi']).' '.'की ANMs ने कैसा काम किया, नीचे दिए गए लिंक पर क्लिक कीजिए:';
+                            }
+                        }
+
+//                        if(str_contains($value['anm_name_hindi'], ',')){
+//                            $separated = [];
+//                            $exploded = explode(',', $value['anm_name_hindi']);
+//                            foreach ($exploded as $single) {
+//                                $separated[] = $obj->convert_to_unicode2($single);
+//                            }
+//                            $anmNameInHindi = implode(',', $separated);
+//                            foreach ($separated as $single) {
+//                                $msg .= rtrim($single, ' ') . ', क्या आप जानना चाहते हैं की ' . $months[$request->get('month')] . ' ' . $request->get('year') . ' में ' . $obj->convert_to_unicode2($value['phc_name_hindi']) . ' पीएचसी की कौनसी एनम् सबसे अच्छा काम करके, एक मिसाल बनी? जानने के लिए नीचे लिंक पर क्लिक करके देखिये:==';
+//                            }
+//                        }else{
+//                            $msg = $obj->convert_to_unicode2($value['anm_name_hindi']).', क्या आप जानना चाहते हैं की ' . $months[$request->get('month')] . ' ' . $request->get('year') . ' में ' . $obj->convert_to_unicode2($value['phc_name_hindi']) . ' पीएचसी की कौनसी एनम् सबसे अच्छा काम करके, एक मिसाल बनी? जानने के लिए नीचे लिंक पर क्लिक करके देखिये:';
+//                        }
+
+
                         $phcNameInHindi = $obj->convert_to_unicode2($value["phc_name_hindi"]);
                         $moicNameInHindi = $obj->convert_to_unicode2($value["moic_name_hindi"]);
+                        if(!empty($value["subcenter_name_in_hindi"])){
+                            $subcenterNameInHindi = $obj->convert_to_unicode2($value["subcenter_name_in_hindi"]);
+                        }else{
+                            $subcenterNameInHindi = $obj->convert_to_unicode2($value["phc_name_hindi"]);
+                        }
 
                         $arr[] = [
                             'district' => $request->get("district"),
@@ -162,7 +231,8 @@ class TargetdataController extends Controller
                             'year' => $request->get('year'),
                             'anm_custom_msg' => rtrim($msg, ','),
                             'moic_custom_msg' => $obj->convert_to_unicode2($value['moic_name_hindi']) . ', क्या आप जानना चाहते हैं की ' . $months[$request->get('month')] . ' ' . $request->get('year') . ' में ' . $obj->convert_to_unicode2($value['phc_name_hindi']) . ' पीएचसी की कौनसी एनम् सबसे अच्छा काम करके, एक मिसाल बनी? जानने के लिए नीचे लिंक पर क्लिक करके देखिये:',
-                            'beneficiary_custom_msg' => 'क्या आप जानना चाहते हैं की ' . $months[$request->get('month')] . ' ' . $request->get('year') . ' में ' . $obj->convert_to_unicode2($value['phc_name_hindi']) . ' पीएचसी की कौनसी एनम् सबसे अच्छा काम करके, एक मिसाल बनी? जानने के लिए नीचे लिंक पर क्लिक करके देखिये:'
+                            'beneficiary_custom_msg' => 'क्या आप जानना चाहते हैं की ' . $months[$request->get('month')] . ' ' . $request->get('year') . ' में ' . $obj->convert_to_unicode2($value['phc_name_hindi']) . ' पीएचसी की कौनसी एनम् सबसे अच्छा काम करके, एक मिसाल बनी? जानने के लिए नीचे लिंक पर क्लिक करके देखिये:',
+                            'subcenter_hindi'=> $subcenterNameInHindi,
                         ];
                     }
                     if (!empty($arr)) {
