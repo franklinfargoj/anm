@@ -18,12 +18,11 @@ class WeblinkController extends Controller
 
     public function index($id)
     {
-        $anm_target_data = AnmTargetDataModel::select('district','phc_name','phc_hin','moic_name','moic_hin','moic_mobile_number','anm_name','anm_hin',
+        $anm_target_data = AnmTargetDataModel::select('district','phc_name','phc_hin','moic_name','moic_hin','moic_mobile_number','anm_name','anm_hin','subcenter_hindi',
                                                 'anm_mobile_number','performer_category','scenerio')
                                                 ->where('weblink',$id)
                                                 ->get()
                                                 ->toArray();
-
 
         $month_details = DB::table('master_months')
             ->pluck('month_translated', 'month_english')->toArray();
@@ -53,7 +52,6 @@ class WeblinkController extends Controller
         $lstAnmCategory = array();
 //        dd($targetDataVariable);
         foreach ($targetDataVariable as $value){
-
 //            if( strpos($value['anm_hin'], ',') !== false ) {
 //                $multipleAnms = explode(',',$value['anm_hin']);
 //                $anmArray = array();
@@ -77,8 +75,6 @@ class WeblinkController extends Controller
             $lstAnmCategory[$value['performer_category']][] = $value;
         }
 
-//        dd($lstAnmCategory);
-
         $lstData = array();
 
         if(!empty($lstAnmCategory['TOP'])){
@@ -95,15 +91,25 @@ class WeblinkController extends Controller
         {
             foreach($lstAnmCategory as $key => $value)
             {
-                foreach ($value as $anm => $details)
+                $lstValue = array();
+                $lstUniqueSubcenter = array();
+                foreach ($value as $uniqueValue)
                 {
-                    if(! next($value))
+                    if(in_array($uniqueValue['subcenter_hindi'],$lstUniqueSubcenter)){
+                        continue;
+                    }
+                    $lstUniqueSubcenter[] = $uniqueValue['subcenter_hindi'];
+                    $lstValue[] = $uniqueValue;
+                }
+                foreach ($lstValue as $anm => $details)
+                {
+                    if(! next($lstValue))
                     {
-                        $lstData[$key]['end'] = $details['anm_hin'];
+                        $lstData[$key]['end'] = $details['subcenter_hindi'];
                     }
                     else
                     {
-                        $lstData[$key]['anm_name'][] = $details['anm_hin'];
+                        $lstData[$key]['subcenter'][] = $details['subcenter_hindi'];
                     }
                 }
             }
