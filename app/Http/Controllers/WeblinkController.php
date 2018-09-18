@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\URL;
 
 class WeblinkController extends Controller
 {
-
     public function index($id)
     {
         $anm_target_data = AnmTargetDataModel::select('district','phc_name','phc_hin','moic_name','moic_hin','moic_mobile_number','anm_name','anm_hin','subcenter_hindi',
@@ -71,7 +70,6 @@ class WeblinkController extends Controller
 //                    $value['anm_name'] = 'test1';
 //                }
 //            }
-
             $lstAnmCategory[$value['performer_category']][] = $value;
         }
 
@@ -120,34 +118,32 @@ class WeblinkController extends Controller
                 $scenario = $targetDataVariable[0]['scenerio'];
                 $scenes = 'scenario_' . $scenario;
                 if ($scenario == 1) {
-                    return view('scenerio/scenerio_1', compact('lstData', 'type', 'current_month', 'next_month', 'scenes'));
+                    return view('scenerio/scenerio_01', compact('lstData', 'type', 'current_month', 'next_month', 'scenes'));
                 }
                 if ($scenario == 2) {
-                    return view('scenerio/scenerio_2', compact('lstData', 'current_month', 'type', 'next_month', 'scenes'));
+                    return view('scenerio/scenerio_02', compact('lstData', 'current_month', 'type', 'next_month', 'scenes'));
                 }
                 if ($scenario == 3) {
-                    return view('scenerio/scenerio_3', compact('current_month', 'lstData', 'type', 'next_month', 'scenes'));
+                      return view('scenerio/scenerio_03', compact('current_month', 'lstData', 'type', 'next_month', 'scenes'));
                 }
-                if ($scenario == 4) {
-                    return view('scenerio/scenerio_4', compact('current_month', 'lstData', 'type', 'next_month', 'scenes'));
+                if ($scenario == 4) {;
+                    return view('scenerio/scenerio_04', compact('current_month', 'lstData', 'type', 'next_month', 'scenes'));
                 }
                 if ($scenario == 5) {
-                    return view('scenerio/scenerio_5', compact('current_month', 'lstData', 'type', 'next_month', 'scenes'));
+                    return view('scenerio/scenerio_05', compact('current_month', 'lstData', 'type', 'next_month', 'scenes'));
                 }
                 if ($scenario == 6) {
-                    return view('scenerio/scenerio_6', compact('current_month', 'lstData', 'type', 'next_month', 'scenes'));
+                    return view('scenerio/scenerio_06', compact('current_month', 'lstData', 'type', 'next_month', 'scenes'));
                 }
                 if ($scenario == 7) {
-                    return view('scenerio/scenerio_7', compact('current_month', 'lstData', 'type', 'next_month', 'scenes'));
+                    return view('scenerio/scenerio_07', compact('current_month', 'lstData', 'type', 'next_month', 'scenes'));
                 }
                 if ($scenario == 8) {
-                    return view('scenerio/scenerio_8', compact('current_month', 'lstData', 'type', 'next_month'));
+                    return view('scenerio/scenerio_08', compact('current_month', 'lstData', 'type', 'next_month','scenes'));
                 }
-
             }else{
                 abort(404);
             }
-
     }
 
     public function downloadImage()
