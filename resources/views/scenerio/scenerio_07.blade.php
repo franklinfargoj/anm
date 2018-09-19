@@ -3,15 +3,21 @@
 <head>
     <title></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style type="text/css">
         body {
-            margin: 10px;
+            margin: 0px;
             padding: 0;
+        }
+        @media only screen and (max-width: 767px) {
+            body+table {
+                width:100% !important;
+            }
         }
     </style>
 </head>
 <body>
-<table width="540" cellpadding="0" cellspacing="0" border="0" align="center" style="font-family: Arial; background-color: #f0c94a; padding: 10px;">
+<table cellpadding="0" cellspacing="0" border="0" align="center" style="font-family: Arial; background-color: #f0c94a; padding: 10px;width:100%;max-width:540px;">
     <tr>
         <td>
             <table width="100%" cellpadding="0" cellspacing="0" border="0" style="padding-bottom: 15px;">
