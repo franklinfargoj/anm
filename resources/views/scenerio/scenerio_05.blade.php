@@ -60,8 +60,8 @@
                 @endif
             </table>
 
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff; padding-top: 30px;">
-                @if(!empty($lstData['MIDDLE']))
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff; padding-top: 30px;padding-bottom:30px;">
+            @if(!empty($lstData['MIDDLE']))
                     <tr>
                         <td align="center" style="font-weight: bold;">
 						<span style="color: #ec1d25; font-size: 22px;">
@@ -80,8 +80,8 @@
                 @endif
             </table>
 
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #fcc73b; padding-top: 5px;">
-                <tr>
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #fcc73b; padding:5px;">
+            <tr>
                     <td align="left" valign="middle"><img style="width:60px;" src="http://design.neosofttech.in/70/bcg/img/pic8-center.jpg" alt="" alt=""></td>
                     <td align="center">
                         <p style="color: #000; font-size: 20px; line-height: 30px; margin:0;">परिवार नियोजन के साधनो (कंडोम, कॉपर टी, अन्तरा, PPIUCD, नसबंदी आदि) का समय अनुसार उपयोग करने के लिए समुदाय को प्रेरित करें | </p>
@@ -89,7 +89,7 @@
                 </tr>
             </table>
 
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff; padding-top:10px;padding:5px;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff; padding:10px;">
                 <tr>
                     <td align="center" colspan="2" style="font-size: 18px; line-height: 30px; font-weight: bold; border-top: solid 3px #808080;padding-top:8px;">
 

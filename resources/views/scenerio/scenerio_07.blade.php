@@ -20,7 +20,7 @@
 <table cellpadding="0" cellspacing="0" border="0" align="center" style="font-family: Arial; background-color: #f0c94a; padding: 10px;width:100%;max-width:540px;">
     <tr>
         <td>
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="padding-bottom: 15px;">
+           <table width="100%" cellpadding="0" cellspacing="0" border="0" style="padding-bottom: 15px;">
                 <tr>
                     <td style="font-size: 22px; font-weight: bold; line-height: 32px; text-align: center;">जानना चाहते है की <span style="color: #ec1d25;">{{$current_month}} <span style="text-decoration: underline;">{{date('Y')}}</span></span> में <span style="color: #ec1d25;"> {{ $lstData['phc_name'] }} पी.एच.सी</span> <br/> के किस <span style="color: #ec1d25; font-size: 30px;"> {{strtoupper($type)}}</span> ने सबसे अच्छा काम किया?</td>
                 </tr>
@@ -40,7 +40,7 @@
                 </tr>
             </table>
 
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff; padding-top: 30px;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff; padding-top: 20px;">
                 @if(!empty($lstData['MIDDLE']))
                     <tr>
                         <td align="center" style="font-weight: bold;">
@@ -60,7 +60,7 @@
                 @endif
             </table>
 
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff; padding-top: 20px;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff; padding-top: 30px;padding-bottom: 20px;">
                 @if(!empty($lstData['BOTTOM']))
                 <tr>
                     <td align="left" valign="middle"><img style="width:135px;" src="http://design.neosofttech.in/50/rajesh/BCG/html/images/newsletter-img/pic3-left.jpg" alt="" alt=""></td>
@@ -80,7 +80,7 @@
                 @endif
             </table>
 
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #fcc73b; padding-top: 5px;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #fcc73b; padding:5px;">
                 <tr>
                     <td align="left" valign="middle"><img style="width:60px;" src="http://design.neosofttech.in/70/bcg/img/pic8-center.jpg" alt="" alt=""></td>
                     <td align="center">
@@ -89,7 +89,7 @@
                 </tr>
             </table>
 
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff; padding-top:10px;padding:5px;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff; padding:10px;">
                 <tr>
                     <td align="center" colspan="2" style="font-size: 18px; line-height: 30px; font-weight: bold; border-top: solid 3px #808080;padding-top:8px;">
 
