@@ -28,7 +28,7 @@
             </table>
 
             <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff; padding: 10px 25px;">
-                <tr>
+            <tr>
                     <td style="border-top: solid 2px #82b49b; border-bottom: solid 2px #82b49b; padding: 5px 0px;">
                         <table width="100%" cellpadding="0" cellspacing="0" border="0">
                             <tr>
@@ -62,7 +62,7 @@
             </table>
 
             <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff;padding:30px 10px 0;">
-                <tr>
+            <tr>
                     <td align="left" style="font-weight: bold;">
                         <p style="color: #000; font-size: 15px; line-height: 25px;margin:0;margin-bottom:5px;word-spacing:4px;">इस महिने <span style="color: #ec1d25; font-size: 15px;">PHC</span> {{ $lstData['phc_name'] }} के सेक्टर मे कोई भी <span style="color: #ec1d25; font-size: 15px;">Middle</span> परफॉर्मिंग <span style="color: #ec1d25; font-size: 15px;">सबसेन्टर</span> नहीं है।</p>
                         <p style="color: #000; font-size: 15px; line-height: 25px;margin:0;margin-bottom:5px;word-spacing:4px;">इस महिने <span style="color: #ec1d25; font-size: 15px;">PHC</span> {{ $lstData['phc_name'] }} के सेक्टर मे कोई भी <span style="color: #ec1d25; font-size: 15px;">Low</span> परफॉर्मिंग <span style="color: #ec1d25; font-size: 15px;">सबसेन्टर</span> नहीं है।</p>
