@@ -55,8 +55,9 @@
                             @else
                                 सबसेन्टर्स <span class="">{{ $lstData['BOTTOM']['end'] }}</span>
                             @endif
-                            <span>
-						<p style="color: #000; font-size: 15px; line-height: 30px; margin:0;">आपको भी 80% बच्चो का टीकाकरण एवं 30% से भी अधिक गर्भवती महिलाओ का चौथा ANC करके दिखाना है| थोड़ी और तैयारी करो| </p>
+                        <span>
+
+                        <p style="color: #000; font-size: 15px; line-height: 30px; margin:0;"> ने इस बार ठान लिया है, कि वे {{ $current_month }} के महिने में 80% बच्चों का टीकाकरण तथा 30% से भी अधिक गर्भवती महिलाओं का चौथा ANC चैकप भी पूरा करके दिखाएंगी । </p>
                         </td>
                     </tr>
                 @endif
