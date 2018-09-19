@@ -3,16 +3,22 @@
 <head>
     <title></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style type="text/css">
         body {
-            margin: 10px;
+            margin: 0px;
             padding: 0;
+        }
+        @media only screen and (max-width: 767px) {
+            body+table {
+                width:100% !important;
+            }
         }
     </style>
 </head>
 <body>
-<table width="540" cellpadding="0" cellspacing="0" border="0" align="center" style="font-family: Arial; background-color: #f0c94a; padding: 10px;">
-    <tr>
+<table cellpadding="0" cellspacing="0" border="0" align="center" style="font-family: Arial; background-color: #f0c94a; padding: 10px;width:100%;max-width:540px;">
+   <tr>
         <td>
             <table width="100%" cellpadding="0" cellspacing="0" border="0" style="padding-bottom: 15px;">
                 <tr>
@@ -93,7 +99,7 @@
                 </tr>
                 @endif
             </table>
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #fcc73b; padding-top: 5px;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #fcc73b; padding:5px;">
                 <tr>
                     <td align="left" valign="middle"><img style="width:60px;" src="http://design.neosofttech.in/70/bcg/img/pic8-center.jpg" alt="" alt=""></td>
                     <td align="center">
@@ -102,7 +108,7 @@
                 </tr>
             </table>
 
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff; padding-top:10px;padding:5px;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff; padding:10px;">
                 <tr>
                     <td align="center" colspan="2" style="font-size: 18px; line-height: 30px; font-weight: bold; border-top: solid 3px #808080;padding-top:8px;">
 
