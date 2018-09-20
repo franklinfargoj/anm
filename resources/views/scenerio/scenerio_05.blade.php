@@ -44,7 +44,7 @@
                 @if(!empty($lstData['TOP']))
                     <tr>
                         <td align="left" valign="middle"><img style="width:143px;" src="http://design.neosofttech.in/50/rajesh/BCG/html/images/newsletter-img/pic1-left.jpg" alt="" alt=""></td>
-                        <td align="center" style="font-weight: bold;">
+                        <td align="center" style="font-weight: bold;padding-right:5px;">
 						<span style="color: #ec1d25; font-size: 22px;">
                             @if(isset($lstData['TOP']['subcenter']) && count($lstData['TOP']['subcenter']) > 0)
                                 सबसेन्टर्स <span style="color: #ec1d25; font-size: 20px;" class=""> {{ implode(',', $lstData['TOP']['subcenter']) }}</span>

@@ -44,7 +44,7 @@
                 @if(!empty($lstData['TOP']))
                 <tr>
                     <td align="left" valign="middle"><img style="width:143px;" src="http://design.neosofttech.in/50/rajesh/BCG/html/images/newsletter-img/pic1-left.jpg" alt="" alt=""></td>
-                    <td align="center" style="font-weight: bold;">
+                    <td align="center" style="font-weight: bold;padding-right:5px;">
 						<span style="color: #ec1d25; font-size: 22px;">
                             @if(isset($lstData['TOP']['subcenter']) && count($lstData['TOP']['subcenter']) > 0)
                         सबसेन्टर्स <span style="color: #ec1d25; font-size: 20px;" class=""> {{ implode(',', $lstData['TOP']['subcenter']) }}</span>
@@ -63,7 +63,7 @@
             <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff; padding-top: 30px;">
                 @if(!empty($lstData['MIDDLE']))
                 <tr>
-                    <td align="center" style="font-weight: bold;">
+                    <td align="center" style="font-weight: bold;padding-left:5px;">
 						<span style="color: #ec1d25; font-size: 22px;">
                             @if(isset($lstData['MIDDLE']['subcenter']) && count($lstData['MIDDLE']['subcenter']) > 0)
                         सबसेन्टर्स <span class="">{{ implode(',', $lstData['MIDDLE']['subcenter']) }}</span>
@@ -112,10 +112,10 @@
                         बने रहिये: देखते है {{ $next_month }} {{ date('Y') }} में कौनसी <span style="color: #ec1d25; font-size: 15px;">सबसेन्टर्स</span> अव्वल नंबर का काम करके दिखाएगी|
                     </td>
                 </tr>
-
-
             </table>
         </td>
+
+
     </tr>
 </table>
 </body>
