@@ -14,7 +14,7 @@
             <div class="row">
                <div class="col-md-12">
                   <h4>PHC {{$report->phc_name}} : Performance Review</h4>
-                  <div class="date-area">{{$months[$report->month]}} 2018</div>
+                  <div class="date-area">{{$months[$report->month]}} {{$report->year}}</div>
                </div>
             </div>
             <div class="box-area mt-1">
@@ -78,7 +78,7 @@
                           	<div class="container">
                           		<table width="100%" class="table report-card-table fancy-table">
 	                             <tr>
-	                                <td colspan="2" class="blue-bg">{{$months[$report->month]}} 2018 Report Card</td>
+	                                <td colspan="2" class="blue-bg">{{$months[$report->month]}} {{$report->year}} Report Card</td>
 	                                <td colspan="4">MOIC Name: {{$report->moic_name}}</td>
 	                                <td colspan="3" class="grey-bg">Best Performing PHC</td>
 	                             </tr>
@@ -88,7 +88,7 @@
 	                                <td width="12%" class="velvet-color">Max score that can be achieved</td>
 	                                <td width="9%" class="velvet-color">Score achieved</td>
 	                                <td width="10%" class="velvet-color">Target</td>
-	                                <td width="9%" class="blue">May'18 Performance</td>
+	                                <td width="9%" class="blue">{{$months[$report->month]}} {{$report->year}} Performance</td>
 	                                <td width="10%" class="dark-green">In the block</td>
 	                                <td width="10%" class="dark-green">In Alwar</td>
 	                                <td width="10%" class="dark-green">In Rajasthan</td>
@@ -97,7 +97,7 @@
                           	</div>
                           </div>
                           <table width="100%" class="table fancy-table">
-                             <tr data-title-attribute="{{$months[$report->month]}} 2018 Report Card">
+                             <tr data-title-attribute="{{$months[$report->month]}} {{$report->year}} Report Card">
                                 <th width="10%" rowspan="2" valign="middle" data-title-attribute="Program">Utilization</th>
                                 <td width="20%" data-title-attribute="Metric">OPDs/day (>40)</td>
                                 <td width="12%" data-title-attribute="Max score that can be achieved" class="velvet-color">{{ $report->opd_max_score_achieved }}</td>
@@ -236,7 +236,7 @@
                                 <td class="dark-green">{{ Helpers::convertToPercent($report->diarrhea_state) }}</td>
                              </tr>
 
-                             <tr>
+{{--                             <tr>
                                 <td>Dengue</td>
                                 <td class="velvet-color">{{ Helpers::convertToPercent($report->dengue_max_score_achieved) }}</td>
                                 <td class="velvet-color">{{ Helpers::convertToPercent($report->dengue_score_achieved) }}</td>
@@ -245,7 +245,7 @@
                                 <td class="dark-green">{{ Helpers::convertToPercent($report->dengue_block)}}</td>
                                 <td class="dark-green">{{ Helpers::convertToPercent($report->dengue_district) }}</td>
                                 <td class="dark-green">{{ Helpers::convertToPercent($report->dengue_state) }}</td>
-                             </tr>
+                             </tr>--}}
 
 
 
@@ -336,7 +336,7 @@
                                 <td class="dark-green">{{ Helpers::convertToPercent($report->doc_avail_district) }}</td>
                                 <td class="dark-green">{{ Helpers::convertToPercent($report->doc_avail_state) }}</td>
                              </tr>
-                             <tr>
+{{--                             <tr>
                                 <td>Rajdhara: % Fill Rate</td>
                                 <td class="velvet-color">{{ Helpers::convertToPercent($report->rajdharaa_max_score_achieved) }}</td>
                                 <td class="velvet-color">{{ Helpers::convertToPercent($report->rajdharaa_score_achieved) }}</td>
@@ -345,7 +345,7 @@
                                 <td class="dark-green">{{ Helpers::convertToPercent($report->rajdhara_block) }}</td>
                                 <td class="dark-green">{{ Helpers::convertToPercent($report->rajdhara_district) }}</td>
                                 <td class="dark-green">{{ Helpers::convertToPercent($report->rajdhara_state) }}</td>
-                             </tr>
+                             </tr>--}}
                           </table>
                           <table width="100%" class="table fancy-table">
                              <tr data-title-attribute="{{$months[$report->month]}} 2018 Report Card">
