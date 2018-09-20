@@ -89,9 +89,9 @@
 	                                <td width="9%" class="velvet-color">Score achieved</td>
 	                                <td width="10%" class="velvet-color">Target</td>
 	                                <td width="9%" class="blue">{{$months[$report->month]}} {{$report->year}} Performance</td>
-	                                <td width="10%" class="dark-green">In the block</td>
-	                                <td width="10%" class="dark-green">In Alwar</td>
-	                                <td width="10%" class="dark-green">In Rajasthan</td>
+	                                <td width="10%" class="dark-green">Max score achieved in the block</td>
+	                                <td width="10%" class="dark-green">Max score achieved in Alwar</td>
+	                                <td width="10%" class="dark-green">Max score achieved in Rajasthan</td>
 	                             </tr>
 	                          </table>
                           	</div>
