@@ -25,7 +25,7 @@
                     <td align="center" valign="middle"><img style="width:143px;" src="http://design.neosofttech.in/70/bcg/img/misaal.png" alt="" alt=""></td>
                 </tr>
                 <tr>
-                    <td style="font-size: 22px; font-weight: bold; line-height: 32px; text-align: center;">जानना चाहते है की <span style="color: #ec1d25;">{{$current_month}}<span style="text-decoration: underline;">{{date('Y')}}</span></span> में <span style="color: #ec1d25;">{{ $lstData['phc_name'] }} पी.एच.सी</span> <br/> के किस <span style="color: #ec1d25; font-size: 30px;">{{strtoupper($type)}}</span> ने सबसे अच्छा काम किया?</td>
+                    <td style="font-size: 18px; font-weight: bold; line-height: 32px; text-align: center;">जानना चाहते है की <span style="color: #ec1d25;">{{$current_month}}<span style="text-decoration: underline;">{{date('Y')}}</span></span> में <span style="color: #ec1d25;">{{ $lstData['phc_name'] }} पी.एच.सी</span>  के किस <span style="color: #ec1d25; font-size: 20px;">{{strtoupper($type)}}</span> ने मिसाल  बन दिखाया?</td>
                 </tr>
             </table>
 
