@@ -1,31 +1,35 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style type="text/css">
-        body {
-            margin: 0px;
-            padding: 0;
-        }
-        @media only screen and (max-width: 767px) {
-            body+table {
-                width:100% !important;
-            }
-        }
-    </style>
-</head>
-<body>
-<table cellpadding="0" cellspacing="0" border="0" align="center" style="font-family: Arial; background-color: #f0c94a; padding: 10px;width:100%;max-width:540px;">
-   <tr>
-        <td>
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="padding-bottom: 15px;">
+            <html>
+            <head>
+                <title></title>
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <style type="text/css">
+                    body {
+                        margin: 0px;
+                        padding: 0;
+                    }
+                    @media only screen and (max-width: 767px) {
+                        body+table {
+                            width:100% !important;
+                        }
+                    }
+                </style>
+            </head>
+            <body>
+            <table cellpadding="0" cellspacing="0" border="0" align="center" style="font-family: Arial; background-color: #f0c94a; padding: 10px;width:100%;max-width:540px;">
                 <tr>
-                    <td style="font-size: 22px; font-weight: bold; line-height: 32px; text-align: center;">जानना चाहते है की <span style="color: #ec1d25;">{{$current_month}} <span style="text-decoration: underline;">{{date('Y')}}</span></span> में <span style="color: #ec1d25;">{{ $lstData['phc_name'] }} पी.एच.सी</span> <br/> के किस <span style="color: #ec1d25; font-size: 30px;">{{strtoupper($type)}}</span> ने सबसे अच्छा काम किया?</td>
-                </tr>
-            </table>
+                    <td>
+                        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="padding: 10px;background:#66ae96;">
+                            <tr>
+                                <td align="center" valign="middle"><img style="width:143px;" src="http://design.neosofttech.in/70/bcg/img/misaal.png" alt="" alt=""></td>
+                            </tr>
+                            <tr>
 
+                                <td style="font-size: 22px; font-weight: bold; line-height: 32px; text-align: center;">जानना चाहते है की <span style="color: #ec1d25;">{{$current_month}} <span style="text-decoration: underline;">{{date('Y')}}</span></span> में <span style="color: #ec1d25;">{{ $lstData['phc_name'] }} पी.एच.सी</span> <br/> के किस <span style="color: #ec1d25; font-size: 30px;">{{strtoupper($type)}}</span> ने सबसे अच्छा काम किया?</td>
+
+                            </tr>
+                        </table>
             <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff; padding: 10px 25px;">
                 <tr>
                     <td style="border-top: solid 2px #82b49b; border-bottom: solid 2px #82b49b; padding: 5px 0px;">
