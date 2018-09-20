@@ -63,7 +63,7 @@
             <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff; padding-top: 30px;padding-bottom:30px;">
             @if(!empty($lstData['MIDDLE']))
                     <tr>
-                        <td align="center" style="font-weight: bold;">
+                        <td align="center" style="font-weight: bold;padding-left:5px;">
 						<span style="color: #ec1d25; font-size: 22px;">
                             @if(isset($lstData['MIDDLE']['subcenter']) && count($lstData['MIDDLE']['subcenter']) > 0)
                                 सबसेन्टर्स <span class="">{{ implode(',', $lstData['MIDDLE']['subcenter']) }}</span>
@@ -81,7 +81,7 @@
             </table>
 
             <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #fcc73b; padding:5px;">
-            <tr>
+                <tr>
                     <td align="left" valign="middle"><img style="width:60px;" src="http://design.neosofttech.in/70/bcg/img/pic8-center.jpg" alt="" alt=""></td>
                     <td align="center">
                         <p style="color: #000; font-size: 20px; line-height: 30px; margin:0;">परिवार नियोजन के साधनो (कंडोम, कॉपर टी, अन्तरा, PPIUCD, नसबंदी आदि) का समय अनुसार उपयोग करने के लिए समुदाय को प्रेरित करें | </p>

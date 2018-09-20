@@ -52,9 +52,8 @@
                 @if(!empty($lstData['MIDDLE']))
                 <tr>
                     <td align="right" valign="middle"><img  style="width:143px;" src="http://design.neosofttech.in/70/bcg/img/pic11-right.jpg" alt="" alt=""></td>
-                    <td align="center" style="font-weight: bold;">
+                    <td align="center" style="font-weight: bold;padding-right:5px;">
 						<span style="color: #ec1d25; font-size: 22px;">
-
                              @if(isset($lstData['MIDDLE']['subcenter']) && count($lstData['MIDDLE']['subcenter']) > 0)
                                 सबसेन्टर्स <span class="">{{ implode(',', $lstData['MIDDLE']['subcenter']) }}</span>
                                 एवं
@@ -62,7 +61,6 @@
                             @else
                                 सबसेन्टर्स <span class="">{{ $lstData['MIDDLE']['end'] }}</span>
                             @endif
-
                         <span>
 						<p style="color: #000; font-size: 15px; line-height: 30px; margin:0;">दीदी ने भी अच्छा करने प्रयास किया 30% - 80% बच्चो का टीकाकरण कर दिखाया साथ ही साथ 10% - 30% गर्भवती महिलाओ का चौथा ANC चैकप भी पूरा किया!</p>
                     </td>
