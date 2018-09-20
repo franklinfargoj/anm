@@ -81,7 +81,7 @@
                         सबसेन्टर्स <span class="">{{ $lstData['BOTTOM']['end'] }}</span>
                             @endif
                         <span>
-						<p style="color: #000; font-size: 15px; line-height: 30px; margin:0;">आपको भी 80% बच्चो का टीकाकरण एवं 30% से भी अधिक गर्भवती महिलाओ का चौथा ANC करके दिखाना है| थोड़ी और तैयारी करो| </p>
+						<p style="color: #000; font-size: 15px; line-height: 30px; margin:0;"> को भी 80% बच्चो का टीकाकरण एवं 30% से भी अधिक गर्भवती महिलाओ का चौथा ANC करके दिखाना है| थोड़ी और तैयारी करो| </p>
                     </td>
                     <td align="left" valign="middle"><img style="width:135px;" src="http://design.neosofttech.in/70/bcg/img/pic10-left.jpg" alt="" alt=""></td>
                 </tr>

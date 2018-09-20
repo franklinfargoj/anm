@@ -54,7 +54,7 @@
                                 सबसेन्टर्स <span style="color: #ec1d25; font-size: 20px;" class=""> {{ $lstData['TOP']['end'] }}</span>
                             @endif
                             <span>
-						<p style="color: #000; font-size: 15px; line-height: 30px; margin:0;">आपने {{ $current_month }} में अव्वल दर्जे का काम कर दिखाया! आप में से कुछ <span style="color: #ec1d25; font-size: 24px;">ANMs</span> ने 80% बच्चो का टीकाकरण पूरा कर दिखाया तथा कुछ ने 30% गर्भवती महिलाओ का चौथा ANC चैकप भी पूरा किया!</p>
+						<p style="color: #000; font-size: 15px; line-height: 30px; margin:0;"> ने {{ $current_month }} में अव्वल दर्जे का काम कर दिखाया! आप में से कुछ <span style="color: #ec1d25; font-size: 24px;">ANMs</span> ने 80% बच्चो का टीकाकरण पूरा कर दिखाया तथा कुछ ने 30% गर्भवती महिलाओ का चौथा ANC चैकप भी पूरा किया!</p>
                         </td>
                     </tr>
                 @endif
@@ -73,7 +73,7 @@
                                 सबसेन्टर्स <span class="">{{ $lstData['MIDDLE']['end'] }}</span>
                             @endif
                             <span>
-						<p style="color: #000; font-size: 15px; line-height: 30px; margin:0;">दीदी ने भी अच्छा करने प्रयास किया 30% - 80% बच्चो का टीकाकरण कर दिखाया साथ ही साथ 10% - 30% गर्भवती महिलाओ का चौथा ANC चैकप भी पूरा किया!</p>
+						<p style="color: #000; font-size: 15px; line-height: 30px; margin:0;"> ने भी अच्छा करने प्रयास किया 30% - 80% बच्चो का टीकाकरण कर दिखाया साथ ही साथ 10% - 30% गर्भवती महिलाओ का चौथा ANC चैकप भी पूरा किया!</p>
                         </td>
                         <td align="right" valign="middle"><img  style="width:143px;" src="http://design.neosofttech.in/50/rajesh/BCG/html/images/newsletter-img/pic2-right.jpg" alt="" alt=""></td>
                     </tr>
