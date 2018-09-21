@@ -120,9 +120,9 @@
                              </tr>
                           </table>
                           <table width="100%" class="table fancy-table">
-                             <tr data-title-attribute="{{$months[$report->month]}} 2018 Report Card">
+                             <tr data-title-attribute="{{$months[$report->month]}} {{$report->year}} Report Card">
                                 <th width="10%" rowspan="8" valign="middle">RMNCH + A</th>
-                                <td width="20%">Full Immunization Coverage * </td>
+                                <td width="20%">Full Immunization Coverage  </td>
                                 <td width="12%" class="velvet-color">{{ Helpers::convertToPercent($report->fic_max_score_achieved) }}</td>
                                 <td width="9%" class="velvet-color">{{ Helpers::convertToPercent($report->fic_score_achieved) }}</td>
                                 <td width="10%" class="velvet-color">{{ Helpers::convertToPercent($report->fic_target) }}</td>
@@ -132,7 +132,7 @@
                                 <td width="10%" class="dark-green">{{ Helpers::convertToPercent($report->fic_state) }}</td>
                              </tr>
                              <tr>
-                                <td>ANC 3 Coverage * </td>
+                                <td>ANC 3 Coverage  </td>
                                 <td class="velvet-color">{{ Helpers::convertToPercent($report->anc3_max_score_achieved) }}</td>
                                 <td class="velvet-color">{{ Helpers::convertToPercent($report->anc3_score_achieved) }}</td>
                                 <td class="velvet-color">{{ Helpers::convertToPercent($report->anc3_target) }}</td>
@@ -142,7 +142,7 @@
                                 <td class="dark-green">{{ Helpers::convertToPercent($report->anc3_state) }}</td>
                              </tr>
                              <tr>
-                                <td>ANC 4 Coverage * </td>
+                                <td>ANC 4 Coverage  </td>
                                 <td class="velvet-color">{{ Helpers::convertToPercent($report->anc4_max_score_achieved) }}</td>
                                 <td class="velvet-color">{{ Helpers::convertToPercent($report->anc4_score_achieved) }}</td>
                                 <td class="velvet-color">{{ Helpers::convertToPercent($report->anc4_target) }}</td>
@@ -152,7 +152,7 @@
                                 <td class="dark-green">{{ Helpers::convertToPercent($report->anc4_state) }}</td>
                              </tr>
                              <tr>
-                                <td>ANC Registration (within 12 weeks) * </td>
+                                <td>ANC Registration (within 12 weeks)  </td>
                                 <td class="velvet-color">{{ Helpers::convertToPercent($report->anc12_max_score_achieved) }}</td>
                                 <td class="velvet-color">{{ Helpers::convertToPercent($report->anc12_score_achieved) }}</td>
                                 <td class="velvet-color">{{ Helpers::convertToPercent($report->anc12_target) }}</td>
@@ -203,7 +203,7 @@
                              </tr>
                           </table>
                           <table width="100%" class="table fancy-table">
-                             <tr data-title-attribute="{{$months[$report->month]}} 2018 Report Card">
+                             <tr data-title-attribute="{{$months[$report->month]}} {{$report->year}} Report Card">
                                 <th width="10%" rowspan="4" valign="middle">CDs</th>
                                 <td width="20%">Pneumonia prevalence</td>
                                 <td width="12%" class="velvet-color">{{ $report->pneumonia_max_score_achieved }}</td>
@@ -252,7 +252,7 @@
 
                           </table>
                           <table width="100%" class="table fancy-table">
-                             <tr data-title-attribute="{{$months[$report->month]}} 2018 Report Card">
+                             <tr data-title-attribute="{{$months[$report->month]}} {{$report->year}} Report Card">
                                 <th width="10%" rowspan="3" valign="middle">NCDs</th>
                                 <td width="20%">prevalence (old and new cases) %Hypertension </td>
                                 <td width="12%" class="velvet-color">{{ Helpers::convertToPercent($report->hp_max_score_achieved) }}</td>
@@ -285,7 +285,7 @@
                              </tr>
                           </table>
                           <table width="100%" class="table fancy-table">
-                             <tr data-title-attribute="{{$months[$report->month]}} 2018 Report Card">
+                             <tr data-title-attribute="{{$months[$report->month]}} {{$report->year}} Report Card">
                                 <th width="10%" rowspan="6" valign="middle">Governance</th>
                                 <td width="20%"># Days patient vouchers were updated this month </td>
                                 <td width="12%" class="velvet-color">{{ $report->days_patient_voucher_max_score_achieved }}</td>
@@ -348,7 +348,7 @@
                              </tr>--}}
                           </table>
                           <table width="100%" class="table fancy-table">
-                             <tr data-title-attribute="{{$months[$report->month]}} 2018 Report Card">
+                             <tr data-title-attribute="{{$months[$report->month]}} {{$report->year}} Report Card">
                                 <th width="10%" rowspan="4" valign="middle">Reporting</th>
                                 <td width="20%">Pregnant Women registered on PCTS - line list vs. expected PW </td>
                                 <td width="12%" class="velvet-color">{{ Helpers::convertToPercent($report->linelist_vs_expected_max_score_achieved) }}</td>
@@ -360,7 +360,7 @@
                                 <td width="10%" class="dark-green">{{ Helpers::convertToPercent($report->linelist_vs_expected_state) }}</td>
                              </tr>
                              <tr>
-                                <td>Live births registered on PCTS vs. expected * </td>
+                                <td>Live births registered on PCTS vs. expected  </td>
                                 <td class="velvet-color">{{ Helpers::convertToPercent($report->pcts_vs_expected_max_score_achieved) }}</td>
                                 <td class="velvet-color">{{ Helpers::convertToPercent($report->pcts_vs_expected_score_achieved) }}</td>
                                 <td class="velvet-color">{{ Helpers::convertToPercent($report->pcts_vs_expected_target) }}</td>
@@ -370,7 +370,7 @@
                                 <td class="dark-green">{{ Helpers::convertToPercent($report->pcts_vs_expected_state) }}</td>
                              </tr>
                              <tr>
-                                <td>Institutional Deliveries (Summary(Form6,7) - LL) * </td>
+                                <td>Institutional Deliveries (Summary(Form6,7) - LL)  </td>
                                 <td class="velvet-color">{{ Helpers::convertToPercent($report->id_max_score_achieved) }}</td>
                                 <td class="velvet-color">{{ Helpers::convertToPercent($report->id_score_achieved) }}</td>
                                 <td class="velvet-color">{{ Helpers::convertToPercent($report->id_target) }}</td>
@@ -393,7 +393,7 @@
 
 
                           <table width="100%" class="table fancy-table footer-table">
-                             <tr data-title-attribute="{{$months[$report->month]}} 2018 Report Card">
+                             <tr data-title-attribute="{{$months[$report->month]}} {{$report->year}} Report Card">
                                 <th width="30%" valign="middle">Patient Satisfaction Score</th>
                                 <td width="12%" class="velvet-color">{{ Helpers::convertToPercent($report->patient_satisfaction_max_score_achieved) }}</td>
                                 <td width="9%" class="velvet-color">{{ Helpers::convertToPercent($report->patient_satisfaction_score_achieved) }}</td>
