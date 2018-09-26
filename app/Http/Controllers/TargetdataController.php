@@ -205,7 +205,7 @@ class TargetdataController extends Controller
                             'anm_name' => $value["anm_name"],
                             'anm_hin' => $anmNameInHindi,
                             'anm_mobile_number' => $value["anm_phone_number"],
-                            'performer_category' => $value["performer_category"],
+                            'performer_category' => strtoupper($value["performer_category"]),
                             'scenerio' => $value["scenario"],
                             'created_at' => $day_time,
                             'uploaded_on' => $day,
