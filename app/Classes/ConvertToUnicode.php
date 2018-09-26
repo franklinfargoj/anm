@@ -20,7 +20,8 @@ Class ConvertToUnicode {
     }
     public function setStringToConvert($stringtoconvert = ''){
         if($stringtoconvert == '' || is_null($stringtoconvert)){
-            throw new Exception('String cannot be blank');
+//            throw new Exception('String cannot be blank');
+            $this->modified_substring = "Testing";
         }
         $this->modified_substring = $stringtoconvert;
     }
