@@ -65,7 +65,7 @@
                                 सबसेन्टर्स <span class="">{{ $lstData['MIDDLE']['end'] }}</span>
                             @endif
                         <span>
-						<p style="color: #000; font-size: 15px; line-height: 30px; margin:0;">ने अच्छा करने का प्रयास किया 60% से अधिक बच्चो का टीकाकरण कर दिखाया, साथ ही साथ 10% से अधिक गर्भवती महिलाओं का ANC चैकप भी पूरा किया!</p>
+						<p style="color: #000; font-size: 15px; line-height: 30px; margin:0;">ने अच्छा करने का प्रयास किया 60% से अधिक बच्चो का टीकाकरण कर दिखाया, साथ ही साथ 10% से अधिक गर्भवती महिलाओं का ANC चैकप भी पूरा किया! थोड़ी और मेहनत करे और अगले महीने सब ANMs के लिए एक मिसाल बन जाए!</p>
                     </td>
                 </tr>
                 @endif
@@ -94,7 +94,7 @@
                 </tr>
                 <tr>
                     <td align="center" colspan="2" style="font-size: 15px; line-height: 30px;border-top: solid 2px #000;">
-                        बने रहिये: देखते है {{ $next_month }} {{ date('Y') }} में कौनसी <span style="color: #ec1d25; font-size: 15px;">सबसेन्टर्स</span> अव्वल नंबर का काम करके दिखाएगी|
+                        बने रहिये: देखते है {{ $next_month }} {{ date('Y') }} में कौनसा <span style="color: #ec1d25; font-size: 15px;">सबसेंटर</span> मिसाल बनकर दिखायेगा!
                     </td>
                 </tr>
             </table>

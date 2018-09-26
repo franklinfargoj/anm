@@ -105,7 +105,7 @@
                 </tr>
                 <tr>
                     <td align="center" colspan="2" style="font-size: 15px; line-height: 30px;border-top: solid 2px #000;">
-                        बने रहिये: देखते है {{ $next_month }} {{ date('Y') }} में कौनसी <span style="color: #ec1d25; font-size: 15px;">सबसेन्टर्स</span> अव्वल नंबर का काम करके दिखाएगी|
+                        बने रहिये: देखते है {{ $next_month }} {{ date('Y') }} में कौनसा <span style="color: #ec1d25; font-size: 15px;">सबसेंटर</span> मिसाल बनकर दिखायेगा!
                     </td>
                 </tr>
             </table>
