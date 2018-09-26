@@ -17,8 +17,7 @@ class WeblinkController extends Controller
 {
     public function index($id)
     {
-        $anm_target_data = AnmTargetDataModel::select('district','phc_name','phc_hin','moic_name','moic_hin','moic_mobile_number','anm_name','anm_hin','subcenter_hindi',
-                                                'anm_mobile_number','performer_category','scenerio')
+        $anm_target_data = AnmTargetDataModel::select('phc_name','scenerio')
                                                 ->where('weblink',$id)
                                                 ->get()
                                                 ->toArray();
@@ -46,30 +45,14 @@ class WeblinkController extends Controller
 
         $targetDataVariable = $anm_target_data;
         $type = 'anm';
-
-
         $lstAnmCategory = array();
-//        dd($targetDataVariable);
-        foreach ($targetDataVariable as $value){
-//            if( strpos($value['anm_hin'], ',') !== false ) {
-//                $multipleAnms = explode(',',$value['anm_hin']);
-//                $anmArray = array();
-//                foreach($multipleAnms as $anm){
-//                    if(array_key_exists($anm,$anm_detail)){
-//                        $anmName = $anm_detail[$anm];
-//                    }else{
-//                        $anmName = $anm;
-//                    }
-//                    $anmArray[] = $anmName;
-//                }
-//                $value['anm_name'] = implode('&#93;',$anmArray);
-//            }else{
-//                if(array_key_exists($value['anm_name'],$anm_detail)){
-//                    $value['anm_name'] = $anm_detail[$value['anm_name']];
-//                }else{
-//                    $value['anm_name'] = 'test1';
-//                }
-//            }
+        $last_target_data = AnmTargetDataModel::select('district','phc_name','phc_hin','moic_name','moic_hin','moic_mobile_number','anm_name','anm_hin','subcenter_hindi',
+            'anm_mobile_number','performer_category','scenerio')
+            ->where('phc_name',$targetDataVariable[0]['phc_name'])
+            ->get()
+            ->toArray();
+
+        foreach ($last_target_data as $value){
             $lstAnmCategory[$value['performer_category']][] = $value;
         }
 
@@ -84,7 +67,7 @@ class WeblinkController extends Controller
         if(!empty($lstAnmCategory['BOTTOM'])){
             $lstData['phc_name'] = $lstAnmCategory['BOTTOM'][0]['phc_hin'];
         }
-
+        
         if($type == 'anm')
         {
             foreach($lstAnmCategory as $key => $value)
@@ -113,7 +96,7 @@ class WeblinkController extends Controller
             }
         }
 
-            if(!empty($targetDataVariable)){
+        if(!empty($targetDataVariable)){
 
                 $scenario = $targetDataVariable[0]['scenerio'];
                 $scenes = 'scenario_' . $scenario;

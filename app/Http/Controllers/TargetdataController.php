@@ -101,16 +101,16 @@ class TargetdataController extends Controller
                     $moicNameInHindi = "";
                     $anmNameInHindi = "";
                     foreach ($data as $key => $value) {
+
+                        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                        $str = substr(str_shuffle($chars), 0, 10);
+                        $web[$value["phc_name"]] = $str;
+
+                        $str1 = substr(str_shuffle($chars), 0, 10);
+                        $beneficiary[] = $value["phc_name"];
+                        $beneficiary[$value["phc_name"]] = $str1;
+
                         if (!in_array($value["phc_name"], $web)) {
-                            $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-                            $str = substr(str_shuffle($chars), 0, 10);
-                            $web[] = $value["phc_name"];
-                            $web[$value["phc_name"]] = $str;
-
-                            $str1 = substr(str_shuffle($chars), 0, 10);
-                            $beneficiary[] = $value["phc_name"];
-                            $beneficiary[$value["phc_name"]] = $str1;
-
                             $str2 = substr(str_shuffle($chars), 0, 10);
                             $moic[] = $value["phc_name"];
                             $moic[$value["phc_name"]] = $str2;
@@ -187,8 +187,8 @@ class TargetdataController extends Controller
 
                         $phcNameInHindi = $obj->convert_to_unicode2($value["phc_name_hindi"]);
                         $moicNameInHindi = $obj->convert_to_unicode2($value["moic_name_hindi"]);
-                        if(!empty($value["subcenter_name_in_hindi"])){
-                            $subcenterNameInHindi = $obj->convert_to_unicode2($value["subcenter_name_in_hindi"]);
+                        if(!empty($value["subcenter_name_hindi"])){
+                            $subcenterNameInHindi = $obj->convert_to_unicode2($value["subcenter_name_hindi"]);
                         }else{
                             $subcenterNameInHindi = $obj->convert_to_unicode2($value["phc_name_hindi"]);
                         }
@@ -220,7 +220,7 @@ class TargetdataController extends Controller
                             'anm_custom_msg' => rtrim($msg, ','),
                             'moic_custom_msg' => $obj->convert_to_unicode2($value['moic_name_hindi']) . ', क्या आप जानना चाहते हैं की ' . $months[$request->get('month')] . ' ' . $request->get('year') . ' में ' . $obj->convert_to_unicode2($value['phc_name_hindi']) . ' पीएचसी की कौनसी एनम् सबसे अच्छा काम करके, एक मिसाल बनी? जानने के लिए नीचे लिंक पर क्लिक करके देखिये:',
                             'beneficiary_custom_msg' => 'क्या आप जानना चाहते हैं की ' . $months[$request->get('month')] . ' ' . $request->get('year') . ' में ' . $obj->convert_to_unicode2($value['phc_name_hindi']) . ' पीएचसी की कौनसी एनम् सबसे अच्छा काम करके, एक मिसाल बनी? जानने के लिए नीचे लिंक पर क्लिक करके देखिये:',
-                            'subcenter_hindi'=> $subcenterNameInHindi,
+                            'subcenter_hindi'=> trim($subcenterNameInHindi),
                         ];
                     }
                     if (!empty($arr)) {
