@@ -58,7 +58,7 @@
                             @endif
                             <span>
 
-                         <p style="color: #000; font-size: 15px; line-height: 30px; margin:0;">ने {{$current_month}} में सब के लिए एक मिस्साल बन दिखाया है!<br> आपकी <span style="color: #ec1d25; font-size: 24px;">ANMs</span> ने आस पास के 90% से भी अधिक बच्चो का टीकाकरण पूरा कर दिखाया, साथ ही साथ 50% से अधिक गर्भवती महिलाओं का चौथा ANC चैकप भी पूरा किया!</p>
+                         <p style="color: #000; font-size: 15px; line-height: 30px; margin:0;">ने {{$current_month}} में सब के लिए एक मिसाल बन दिखाया है!<br> आपकी <span style="color: #ec1d25; font-size: 24px;">ANMs</span> ने आस पास के 90% से भी अधिक बच्चो का टीकाकरण पूरा कर दिखाया, साथ ही साथ 50% से अधिक गर्भवती महिलाओं का चौथा ANC चैकप भी पूरा किया!</p>
                          </td>
                     </tr>
                 @endif
