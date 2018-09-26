@@ -65,8 +65,7 @@
                                 सबसेन्टर्स <span class="">{{ $lstData['BOTTOM']['end'] }}</span>
                             @endif
                         <span>
-
-                        <p style="color: #000; font-size: 15px; line-height: 30px; margin:0;"> ने इस बार ठान लिया है, कि वे {{ $current_month }} के महिने में 80% बच्चों का टीकाकरण तथा 30% से भी अधिक गर्भवती महिलाओं का चौथा ANC चैकप भी पूरा करके दिखाएंगी । </p>
+						<p style="color: #000; font-size: 15px; line-height: 30px; margin:0;">को भी 60% से अधिक बच्चो का टीकाकरण एवं 10% से भी अधिक गर्भवती महिलाओं का चौथा ANC चैकप करके दिखाना है | थोड़ी और तैयारी करो!</p>
                         </td>
                     </tr>
                 @endif
