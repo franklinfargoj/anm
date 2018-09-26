@@ -120,7 +120,7 @@ class TargetdataController extends Controller
                         $separated = $value['anm_name_hindi'];
                         $anmNameInHindi = $obj->convert_to_unicode2($value['anm_name_hindi']);
 
-                        if($value["performer_category"] == "TOP"){
+                        if(strtoupper($value["performer_category"]) == "TOP"){
                             if(str_contains($value['anm_name_hindi'], ',')){
                                 $separated = [];
                                 $exploded = explode(',', $value['anm_name_hindi']);
@@ -136,7 +136,7 @@ class TargetdataController extends Controller
                             }
                         }
 
-                        elseif($value["performer_category"] == "MIDDLE"){
+                        elseif(strtoupper($value["performer_category"]) == "MIDDLE"){
                             if(str_contains($value['anm_name_hindi'], ',')){
                                 $separated = [];
                                 $exploded = explode(',', $value['anm_name_hindi']);
@@ -155,7 +155,7 @@ class TargetdataController extends Controller
                             }
                         }
 
-                        elseif($value["performer_category"] == "BOTTOM"){
+                        elseif(strtoupper($value["performer_category"]) == "BOTTOM"){
                             if(str_contains($value['anm_name_hindi'], ',')){
                                 $separated = [];
                                 $exploded = explode(',', $value['anm_name_hindi']);
