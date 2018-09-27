@@ -17,32 +17,35 @@ class WeblinkController extends Controller
 {
     public function index($id)
     {
-        $anm_target_data = AnmTargetDataModel::select('phc_name','scenerio')
+        $anm_target_data = AnmTargetDataModel::select('phc_name','scenerio','month','year')
                                                 ->where('weblink',$id)
                                                 ->get()
                                                 ->toArray();
 
+        $selected_month = DB::table('master_months')
+                            ->select('month_english','id')
+                            ->where('id', $anm_target_data[0]['month'])->first();
+
+        $current_month = $selected_month->month_english;
+        $next_mt = date('F', strtotime('+1 month', strtotime($anm_target_data[0]['year'].'-'.$anm_target_data[0]['month'].'-'.'01')));
+
         $month_details = DB::table('master_months')
             ->pluck('month_translated', 'month_english')->toArray();
-
-        $current_month = date('F');
 
         if(array_key_exists($current_month, $month_details))
         {
             $current_month = $month_details[$current_month];
+            $next_month = $month_details[$next_mt];
         }
-
-        $next_month = date('F',strtotime('first day of +1 month'));
-
-        if(array_key_exists($next_month, $month_details))
-        {
-            $next_month = $month_details[$next_month];
-        }
-
+//        $next_month = date('F',strtotime('first day of +1 month'));
+//
+//        if(array_key_exists($next_month, $month_details))
+//        {
+//            $next_month = $month_details[$next_month];
+//        }
         $targetDataVariable = array();
         $anm_moic_code = array();
         $anm_beneficiary_code = array();
-
         $targetDataVariable = $anm_target_data;
         $type = 'anm';
         $lstAnmCategory = array();
@@ -67,7 +70,7 @@ class WeblinkController extends Controller
         if(!empty($lstAnmCategory['BOTTOM'])){
             $lstData['phc_name'] = $lstAnmCategory['BOTTOM'][0]['phc_hin'];
         }
-        
+
         if($type == 'anm')
         {
             foreach($lstAnmCategory as $key => $value)
