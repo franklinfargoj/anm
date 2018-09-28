@@ -115,6 +115,9 @@ class MosController extends Controller
 
                 if (count($data)>0) {
                     foreach ($data as $key => $value) {
+                        if($value['block']==null){
+                            continue;
+                        }
                         $phcNameInHindi = $obj->convert_to_unicode2($value["phc_name_in_hindi"]);
                         $doctorNameInHindi = $obj->convert_to_unicode2($value["doctor_name_in_hindi"]);
                         $blockNameInHindi = $obj->convert_to_unicode2($value["block_name_in_hindi"]);
