@@ -17,6 +17,7 @@ use App\Classes\ConvertToUnicode;
 use Chumper\Zipper\Zipper;
 use App\RankingZip;
 use Session;
+use DB;
 
 
 
@@ -241,6 +242,29 @@ class MosController extends Controller
 
     public function showReport($link)
     {
+
+        $ip = $this->getRealIpAddr();
+        $insert = [];
+        $temp_feedback_logs = [
+            'ip_address' => $ip ,
+            'clicked_at' => Carbon::now(),
+            'link' => $link,
+            'created_at' => Carbon::now()
+        ];
+        $insert = $temp_feedback_logs;
+
+
+
+        $already_clicked = DB::table('moic_logs')->select('id')->where('link',$link)->get();
+
+
+
+        if(count($already_clicked) == 0){
+            DB::table('moic_logs')->insert($insert);
+        }
+
+
+
         $months = \DB::table('master_months')->pluck('month_english', 'id')->toArray();
         $report = \DB::table('moic_ranking_reports')->where('dr_weblink', $link)->get()->toArray();
         if(!empty($report)){
@@ -250,6 +274,28 @@ class MosController extends Controller
             return redirect('/get-mos');
         }
     }
+
+
+
+    public function getRealIpAddr()
+    {
+        if (!empty($_SERVER['HTTP_CLIENT_IP']))   //check ip from share internet
+        {
+            $ip=$_SERVER['HTTP_CLIENT_IP'];
+        }
+        elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))   //to check ip is pass from proxy
+        {
+            $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
+        }
+        else
+        {
+            $ip=$_SERVER['REMOTE_ADDR'];
+        }
+        return $ip;
+    }
+
+
+
 
     public function downloadZip($path)
     {
