@@ -100,13 +100,13 @@
                              <tr data-title-attribute="{{$months[$report->month]}} {{$report->year}} Report Card">
                                 <th width="10%" rowspan="2" valign="middle" data-title-attribute="Program">Utilization</th>
                                 <td width="20%" data-title-attribute="Metric">OPDs/day (>40)</td>
-                                <td width="12%" data-title-attribute="Max score that can be achieved" class="velvet-color">{{ $report->opd_max_score_achieved }}</td>
-                                <td width="9%" data-title-attribute="Score achieved" class="velvet-color">{{ $report->opd_score_achieved }}</td>
-                                <td width="10%" data-title-attribute="Target" class="velvet-color">{{ $report->opd_target }}</td>
-                                <td width="9%" data-title-attribute="May'18 Performance" class="blue">{{ $report->opd_performance }}</td>
-                                <td width="10%" data-title-attribute="In the block" class="dark-green">{{ $report->opd_block }}</td>
-                                <td width="10%" data-title-attribute="In Alwar" class="dark-green">{{ $report->opd_district }}</td>
-                                <td width="10%" data-title-attribute="In Rajasthan" class="dark-green">{{ $report->opd_state }}</td>
+                                <td width="12%" data-title-attribute="Max score that can be achieved" class="velvet-color">{{ number_format((float)$report->opd_max_score_achieved, 2, '.' ,'') }}</td>
+                                <td width="9%" data-title-attribute="Score achieved" class="velvet-color">{{ number_format((float)$report->opd_score_achieved, 2, '.' ,'') }}</td>
+                                <td width="10%" data-title-attribute="Target" class="velvet-color">{{ number_format((float)$report->opd_target, 2, '.' ,'') }}</td>
+                                <td width="9%" data-title-attribute="May'18 Performance" class="blue">{{ number_format((float)$report->opd_performance, 2, '.' ,'') }}</td>
+                                <td width="10%" data-title-attribute="In the block" class="dark-green">{{ number_format((float)$report->opd_block, 2, '.' ,'') }}</td>
+                                <td width="10%" data-title-attribute="In Alwar" class="dark-green">{{ number_format((float)$report->opd_district, 2, '.' ,'') }}</td>
+                                <td width="10%" data-title-attribute="In Rajasthan" class="dark-green">{{ number_format((float)$report->opd_state, 2, '.' ,'') }}</td>
                              </tr>
                              <tr>
                                 <td data-title-attribute="Metric">Proportion of <br/> Institutional Delivery</td>
@@ -161,16 +161,21 @@
                                 <td class="dark-green">{{ Helpers::convertToPercent($report->anc12_district) }}</td>
                                 <td class="dark-green">{{ Helpers::convertToPercent($report->anc12_state) }}</td>
                              </tr>
+
+
                              <tr>
                                 <td>Proportion of LBW among new born</td>
                                 <td class="velvet-color">{{ Helpers::convertToPercent($report->plb_max_score_achieved) }}</td>
                                 <td class="velvet-color">{{ Helpers::convertToPercent($report->plb_score_achieved) }}</td>
-                                <td class="velvet-color">{{ Helpers::convertToPercent($report->plb_target) }}</td>
+                                <td class="velvet-color">{{$report->plb_target}}</td>
                                 <td class="blue">{{ Helpers::convertToPercent($report->plb_performance) }}</td>
                                 <td class="dark-green">{{ Helpers::convertToPercent($report->plb_block) }}</td>
                                 <td class="dark-green">{{ Helpers::convertToPercent($report->plb_district) }}</td>
                                 <td class="dark-green">{{ Helpers::convertToPercent($report->plb_state) }}</td>
                              </tr>
+
+
+
                              <tr>
                                 <td>FP - IUCD Insertion %</td>
                                 <td class="velvet-color">{{ Helpers::convertToPercent($report->fpiucd_max_score_achieved) }}</td>
@@ -206,13 +211,13 @@
                              <tr data-title-attribute="{{$months[$report->month]}} {{$report->year}} Report Card">
                                 <th width="10%" rowspan="4" valign="middle">CDs</th>
                                 <td width="20%">Pneumonia prevalence</td>
-                                <td width="12%" class="velvet-color">{{ $report->pneumonia_max_score_achieved }}</td>
-                                <td width="9%" class="velvet-color">{{ $report->pneumonia_score_achieved }}</td>
-                                <td width="10%" class="velvet-color">{{ $report->pneumonia_target }}</td>
-                                <td width="9%" class="blue">{{ $report->pneumonia_performance }}</td>
-                                <td width="10%" class="dark-green">{{ $report->pneumonia_block }}</td>
-                                <td width="10%" class="dark-green">{{ $report->pneumonia_district }}</td>
-                                <td width="10%" class="dark-green">{{ $report->pneumonia_state }}</td>
+                                <td width="12%" class="velvet-color">{{ number_format((float)$report->pneumonia_max_score_achieved, 2, '.' ,'') }}</td>
+                                <td width="9%" class="velvet-color">{{ number_format((float)$report->pneumonia_score_achieved, 2, '.' ,'') }}</td>
+                                <td width="10%" class="velvet-color">{{ number_format((float)$report->pneumonia_target, 2, '.' ,'') }}</td>
+                                <td width="9%" class="blue">{{ number_format((float)$report->pneumonia_performance, 2, '.' ,'') }}</td>
+                                <td width="10%" class="dark-green">{{  number_format((float)$report->pneumonia_block, 2, '.' ,'') }}</td>
+                                <td width="10%" class="dark-green">{{   number_format((float)$report->pneumonia_district, 2, '.' ,'') }}</td>
+                                <td width="10%" class="dark-green"> {{  number_format((float)$report->pneumonia_state, 2, '.' ,'') }}</td>
                              </tr>
                              <tr>
                                 <td>Malaria slides collected</td>
@@ -284,14 +289,17 @@
                              <tr data-title-attribute="{{$months[$report->month]}} {{$report->year}} Report Card">
                                 <th width="10%" rowspan="6" valign="middle">Governance</th>
                                 <td width="20%"># Days patient vouchers were updated this month </td>
-                                <td width="12%" class="velvet-color">{{ $report->days_patient_voucher_max_score_achieved }}</td>
-                                <td width="9%" class="velvet-color">{{ $report->days_patient_voucher_score_achieved }}</td>
-                                <td width="10%" class="velvet-color">{{ $report->days_patient_voucher_target }}</td>
-                                <td width="9%" class="blue">{{ $report->days_patient_voucher_performance }}</td>
-                                <td width="10%" class="dark-green">{{ $report->days_patient_voucher_block }}</td>
-                                <td width="10%" class="dark-green">{{ $report->days_patient_voucher_district }}</td>
-                                <td width="10%" class="dark-green">{{ $report->days_patient_voucher_state }}</td>
+                                <td width="12%" class="velvet-color">{{ number_format((float)$report->days_patient_voucher_max_score_achieved, 2, '.' ,'') }}</td>
+                                <td width="9%" class="velvet-color">{{ number_format((float)$report->days_patient_voucher_score_achieved, 2, '.' ,'') }}</td>
+                                <td width="10%" class="velvet-color">{{ number_format((float)$report->days_patient_voucher_target, 2, '.' ,'') }}</td>
+                                <td width="9%" class="blue">{{ number_format((float)$report->days_patient_voucher_performance, 2, '.' ,'') }}</td>
+                                <td width="10%" class="dark-green">{{ number_format((float)$report->days_patient_voucher_block, 2, '.' ,'') }}</td>
+                                <td width="10%" class="dark-green">{{ number_format((float)$report->days_patient_voucher_district, 2, '.' ,'') }}</td>
+                                <td width="10%" class="dark-green">{{ number_format((float)$report->days_patient_voucher_state, 2, '.' ,'') }}</td>
                              </tr>
+
+
+
                              <tr>
                                 <td>% Patient Vouchers recorded vs OPD for the month</td>
                                 <td class="velvet-color">{{ Helpers::convertToPercent($report->patient_vouchers_max_score_achieved) }}</td>
