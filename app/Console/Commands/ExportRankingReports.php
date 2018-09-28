@@ -55,6 +55,10 @@ class ExportRankingReports extends Command
                         $insert = [];
                         foreach ($rankings as $ranking){
 
+                            if($ranking['month_year'] ==null){
+                                continue;
+                            }
+
                             $month = $ranking['month_year']->format('m'); $year = $ranking['month_year']->format('Y');
                             $particular = array_filter($drs, function($index) use($ranking, $file, $month, $year){
                                 return (strtolower($index['phc_en']) == strtolower($ranking['phc_name']) && $index['month'] == $month && $index['year'] == $year && $index['uploaded_file'] == $file->uploaded_file);
