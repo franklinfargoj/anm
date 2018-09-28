@@ -31,7 +31,7 @@
                         {{Helpers::ordinal($report->phc_rank_in_district)}} <span>in district (of {{$report->phcs_in_the_district}})</span>
                      </div>
                      <div class="site-logo pull-right">
-                        <img src="{{asset('images/mishaal-logo.png')}}" class="img-responsive" style="height: 70px;width: 85px;">
+                        <img src="{{asset('images/mishaal-logo.png')}}" class="img-responsive" style="height: 84px;width: 105px;">
                      </div>
                   </div>
                </div>
@@ -89,9 +89,9 @@
 	                                <td width="9%" class="velvet-color">Score achieved</td>
 	                                <td width="10%" class="velvet-color">Target</td>
 	                                <td width="9%" class="blue">{{$months[$report->month]}} {{$report->year}} Performance</td>
-	                                <td width="10%" class="dark-green">Max score achieved in the block</td>
-	                                <td width="10%" class="dark-green">Max score achieved in Alwar</td>
-	                                <td width="10%" class="dark-green">Max score achieved in Rajasthan</td>
+	                                <td width="10%" class="dark-green">Best in block</td>
+	                                <td width="10%" class="dark-green">Best in Alwar</td>
+	                                <td width="10%" class="dark-green">Best in Rajasthan</td>
 	                             </tr>
 	                          </table>
                           	</div>
@@ -235,7 +235,7 @@
                                 <td class="dark-green">{{ Helpers::convertToPercent($report->diarrhea_district) }}</td>
                                 <td class="dark-green">{{ Helpers::convertToPercent($report->diarrhea_state) }}</td>
                              </tr>
-
+                          </table>
 {{--                             <tr>
                                 <td>Dengue</td>
                                 <td class="velvet-color">{{ Helpers::convertToPercent($report->dengue_max_score_achieved) }}</td>
@@ -247,11 +247,7 @@
                                 <td class="dark-green">{{ Helpers::convertToPercent($report->dengue_state) }}</td>
                              </tr>--}}
 
-
-
-
-                          </table>
-                          <table width="100%" class="table fancy-table">
+{{--                          <table width="100%" class="table fancy-table">
                              <tr data-title-attribute="{{$months[$report->month]}} {{$report->year}} Report Card">
                                 <th width="10%" rowspan="3" valign="middle">NCDs</th>
                                 <td width="20%">prevalence (old and new cases) %Hypertension </td>
@@ -283,7 +279,7 @@
                                 <td class="dark-green">{{ Helpers::convertToPercent($report->cvd_district) }}</td>
                                 <td class="dark-green">{{ Helpers::convertToPercent($report->cvd_state) }}</td>
                              </tr>
-                          </table>
+                          </table>--}}
                           <table width="100%" class="table fancy-table">
                              <tr data-title-attribute="{{$months[$report->month]}} {{$report->year}} Report Card">
                                 <th width="10%" rowspan="6" valign="middle">Governance</th>
