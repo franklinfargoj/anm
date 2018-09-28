@@ -56,10 +56,27 @@ class MoicSMSGeneration extends Command
                     $bottom = array_filter($moics, function($single){
                         return (trim($single['scenerio']) == 'Bottom');
                     });
-                    $topphctext = Helpers::renderHindi(array_column($tops, 'phc_hin'), '');
-                    $topdoctext = Helpers::renderHindi(array_column($tops, 'dr_name_hin'), '');
-                    $middlephc = Helpers::renderHindi(array_column($middle, 'phc_hin'), '');
-                    $bottomphc = Helpers::renderHindi(array_column($bottom, 'phc_hin'), '');
+
+                    if($tops){
+                        $topphctext = Helpers::renderHindi(array_column($tops, 'phc_hin'), '');
+                        $topdoctext = Helpers::renderHindi(array_column($tops, 'dr_name_hin'), '');
+                    }else{
+                        $topphctext = '';
+                        $topdoctext = '';
+                    }
+
+                    if($middle){
+                        $middlephc = Helpers::renderHindi(array_column($middle, 'phc_hin'), '');
+                    }else{
+                        $middlephc = '';
+                    }
+
+                    if($bottom){
+                        $bottomphc = Helpers::renderHindi(array_column($bottom, 'phc_hin'), '');
+                    }else{
+                        $bottomphc = '';
+                    }
+
                     foreach($moics as $single){
                         $sms = '';
                         $sms = $single['dr_name_hin'].', क्या आप जानना चाहते हैं की '.$single['block_hin'].' ब्लॉक की कौनसी पीएचसी '.$months[$single['month']].' '.$single['year']. ' के महीने में बेहतरीन प्रदर्शन कर, एक मिसाल बनी? ';
