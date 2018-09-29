@@ -66,6 +66,7 @@ class ExportRankingReports extends Command
                             $particular = reset($particular);
                             $weblink = '';
                             if(!empty($particular)){
+
                                 $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
                                 $str = substr(str_shuffle($chars), 0, 10);
                                 $weblink = md5($particular['id']);
@@ -126,7 +127,7 @@ class ExportRankingReports extends Command
                                     'anc4_district' => ($ranking['in_anc4_district'])?$ranking['in_anc4_district']:0,
                                     'anc4_state' => ($ranking['in_anc4_state'])?$ranking['in_anc4_state']:0,
 
-                                    'anc12_max_score_achieved' => ($ranking['anc12_cut_off'])?$ranking['anc12_cut_off']:0,
+                                    'anc12_max_score_achieved' => ($ranking['anc12_cut_off'])?$ranking['anc12_max_score_that_can_be_achieved']:0,
                                     'anc12_score_achieved' => ($ranking['anc12_cut_off'])?$ranking['anc12_cut_off']:0,
                                     'anc12_target' => ($ranking['anc12_cut_off'])?$ranking['anc12_cut_off']:0,
                                     'anc12_performance' => ($ranking['anc12_performance'])?$ranking['anc12_performance']:0,
@@ -323,6 +324,7 @@ class ExportRankingReports extends Command
                                 ];
                             }
                         }
+
                         DB::table('moic_ranking_reports')->insert($insert);
                         MoicRanking::where('status', 'N')->update(['status' => 'Y']);
                         echo "Done..!!";
