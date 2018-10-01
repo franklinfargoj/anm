@@ -12,6 +12,7 @@ use App\AnmDetailsModel;
 use Illuminate\Support\Facades\DB;
 use Anam\PhantomMagick\Converter;
 use Illuminate\Support\Facades\URL;
+use Carbon\Carbon;
 
 class WeblinkController extends Controller
 {
@@ -99,6 +100,21 @@ class WeblinkController extends Controller
             }
         }
 
+        $ip = $this->getRealIpAddr();
+        $insert = [];
+        $anm_weblink_logs = [
+            'ip_address' => $ip ,
+            'clicked_at' => Carbon::now(),
+            'link' => $id,
+            'created_at' => Carbon::now()
+        ];
+        $insert = $anm_weblink_logs;
+        $already_clicked = DB::table('anm_weblink_logs')->select('id')->where('link',$id)->get();
+
+        if(count($already_clicked) == 0){
+            DB::table('anm_weblink_logs')->insert($insert);
+        }
+
         if(!empty($targetDataVariable)){
 
                 $scenario = $targetDataVariable[0]['scenerio'];
@@ -130,6 +146,23 @@ class WeblinkController extends Controller
             }else{
                 abort(404);
             }
+    }
+
+    public function getRealIpAddr()
+    {
+        if (!empty($_SERVER['HTTP_CLIENT_IP']))   //check ip from share internet
+        {
+            $ip=$_SERVER['HTTP_CLIENT_IP'];
+        }
+        elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))   //to check ip is pass from proxy
+        {
+            $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
+        }
+        else
+        {
+            $ip=$_SERVER['REMOTE_ADDR'];
+        }
+        return $ip;
     }
 
     public function downloadImage()
