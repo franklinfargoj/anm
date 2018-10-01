@@ -127,8 +127,8 @@ class ExportRankingReports extends Command
                                     'anc4_district' => ($ranking['in_anc4_district'])?$ranking['in_anc4_district']:0,
                                     'anc4_state' => ($ranking['in_anc4_state'])?$ranking['in_anc4_state']:0,
 
-                                    'anc12_max_score_achieved' => ($ranking['anc12_cut_off'])?$ranking['anc12_max_score_that_can_be_achieved']:0,
-                                    'anc12_score_achieved' => ($ranking['anc12_cut_off'])?$ranking['anc12_cut_off']:0,
+                                    'anc12_max_score_achieved' => ($ranking['anc12_max_score_that_can_be_achieved'])?$ranking['anc12_max_score_that_can_be_achieved']:0,
+                                    'anc12_score_achieved' => ($ranking['anc12_score_achieved'])?$ranking['anc12_score_achieved']:0,
                                     'anc12_target' => ($ranking['anc12_cut_off'])?$ranking['anc12_cut_off']:0,
                                     'anc12_performance' => ($ranking['anc12_performance'])?$ranking['anc12_performance']:0,
                                     'anc12_block' => ($ranking['in_anc12_block'])?$ranking['in_anc12_block']:0,
@@ -167,7 +167,7 @@ class ExportRankingReports extends Command
                                     'fp_sterilization_district' => ($ranking['in_fp_sterilization_district'])?$ranking['in_fp_sterilization_district']:0,
                                     'fp_sterilization_state' => ($ranking['in_fp_sterilization_state'])?$ranking['in_fp_sterilization_state']:0,
 
-                                    'pneumonia_max_score_achieved' => ($ranking['pneumonia_cut_off'])?$ranking['pneumonia_cut_off']:0,
+                                    'pneumonia_max_score_achieved' => ($ranking['pneumonia_max_score_that_can_be_achieved'])?$ranking['pneumonia_max_score_that_can_be_achieved']:0,
                                     'pneumonia_score_achieved' => ($ranking['pneumonia_score_achieved'])?$ranking['pneumonia_score_achieved']:0,
                                     'pneumonia_target' => ($ranking['pneumonia_cut_off'])?$ranking['pneumonia_cut_off']:0,
                                     'pneumonia_performance' => ($ranking['pneumonia_performance'])?$ranking['pneumonia_performance']:0,
