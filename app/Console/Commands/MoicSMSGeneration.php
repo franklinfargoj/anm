@@ -48,13 +48,13 @@ class MoicSMSGeneration extends Command
                 $months = DB::table('master_months')->pluck('month_translated', 'id');
                 foreach($grouped as $group => $moics){
                     $tops = array_filter($moics, function($single){
-                        return (trim($single['scenerio']) == 'Top');
+                        return (trim($single['scenerio']) == 'TOP');
                     });
                     $middle = array_filter($moics, function($single){
-                        return (trim($single['scenerio']) == 'Middle');
+                        return (trim($single['scenerio']) == 'MIDDLE');
                     });
                     $bottom = array_filter($moics, function($single){
-                        return (trim($single['scenerio']) == 'Bottom');
+                        return (trim($single['scenerio']) == 'BOTTOM');
                     });
 
                     if($tops){
