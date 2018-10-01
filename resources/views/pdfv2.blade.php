@@ -146,7 +146,7 @@
                         <li style="font-size: 0.6em; color: #000; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 25%">Proportion of LBW among new born</li>
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ number_format((float)$report->plb_max_score_achieved, 0, '.' ,'') }}</li>
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ number_format((float)$report->plb_score_achieved, 1, '.' ,'') }}</li>
-                        <li style="font-size: 0.6em; color: #670f31; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->plb_target }}%</li>
+                        <li style="font-size: 0.6em; color: #670f31; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ $report->plb_target }}</li>
                         <li style="font-size: 0.6em; color: #025fad; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ number_format((float)$report->plb_performance, 0, '.' ,'') }}%</li>
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ number_format((float)$report->plb_block, 0, '.' ,'') }}%</li>
                         <li style="font-size: 0.6em; color: #03522d; display: table-cell;  padding:5px 20px;  margin:0px; text-align: center; width: 12%">{{ number_format((float)$report->plb_district, 0, '.' ,'') }}%</li>
