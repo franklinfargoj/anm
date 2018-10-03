@@ -31,7 +31,7 @@
                         {{Helpers::ordinal($report->phc_rank_in_district)}} <span>in district (of {{$report->phcs_in_the_district}})</span>
                      </div>
                      <div class="site-logo pull-right">
-                        <img src="{{asset('images/mishaal-logo.png')}}" class="img-responsive" style="height: 84px;width: 105px;">
+                        <img src="{{asset('images/mishaal-logo.png')}}" class="img-responsive" style="height: 72px;margin: 5px 0;">
                      </div>
                   </div>
                </div>
