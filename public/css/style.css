@@ -691,3 +691,5 @@ h5 {
 	    padding-top: 270px;
 	}
 }
+
+@media (max-width: 600px){ .container { width: 1200px; } }
