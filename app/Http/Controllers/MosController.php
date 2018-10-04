@@ -57,8 +57,9 @@ class MosController extends Controller
                         ';
             }
             return 'SMS\'s for this are already sent';
-        })->rawColumns(['actions', 'download_zip', 'reschedule']);
-
+        })->addColumn('delete_file', function ($moic) {
+                      return '<a href="'.route('deleteFile',$moic['id']).'">Delete</a>';
+        })->rawColumns(['actions', 'download_zip', 'reschedule','delete_file']);
         return $db->make(true);
     }
 
@@ -164,7 +165,6 @@ class MosController extends Controller
         }
     }
 
-
     public function export_mos($id){
         $file = MoicRanking::select('uploaded_file')
                                         ->where('id',$id)
@@ -217,7 +217,6 @@ class MosController extends Controller
 
     }
 
-
     public function testZip($value='')
     {
         $zipper = new Zipper;
@@ -229,7 +228,6 @@ class MosController extends Controller
         return ['status' => 'Done'];
     }
 
-
     public function unzip()
     {
         $zipper = new Zipper;
@@ -238,11 +236,8 @@ class MosController extends Controller
         return ['status' => 'Done'];
     }
 
-
-
     public function showReport($link)
     {
-
         $ip = $this->getRealIpAddr();
         $insert = [];
         $temp_feedback_logs = [
@@ -252,19 +247,10 @@ class MosController extends Controller
             'created_at' => Carbon::now()
         ];
         $insert = $temp_feedback_logs;
-
-
-
         $already_clicked = DB::table('moic_logs')->select('id')->where('link',$link)->get();
-
-
-
         if(count($already_clicked) == 0){
             DB::table('moic_logs')->insert($insert);
         }
-
-
-
         $months = \DB::table('master_months')->pluck('month_english', 'id')->toArray();
         $report = \DB::table('moic_ranking_reports')->where('dr_weblink', $link)->get()->toArray();
         if(!empty($report)){
@@ -274,8 +260,6 @@ class MosController extends Controller
             return redirect('/get-mos');
         }
     }
-
-
 
     public function getRealIpAddr()
     {
@@ -294,9 +278,6 @@ class MosController extends Controller
         return $ip;
     }
 
-
-
-
     public function downloadZip($path)
     {
         $path = public_path().'/moic/rankings/zips/'.$path.'/'.$path.'.zip';
@@ -312,6 +293,14 @@ class MosController extends Controller
         return $result;
     }
 
-
+    public function deleteFile($id)
+    {
+        $file_name = MoicRanking::select('uploaded_file','og_moic_filename')
+                             ->where('id',$id)
+                             ->first()->toArray();
+        $result = MoicRanking::where('uploaded_file',$file_name['uploaded_file'])->delete();
+        Session::flash('error','File deleted');
+        return back();
+    }
 
 }
