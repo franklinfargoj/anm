@@ -65,7 +65,6 @@ class TargetdataController extends Controller
         $db->addColumn('actions', function ($target_data) {
             return '<a href="' . route('processedfile', $target_data['id']) . '">View details</a>';
         })->addColumn('reschedule', function($target_data){
-
         $arr_anm = explode(',', $target_data['anm_sent']);
         $arr_moic = explode(',', $target_data['moic_sent']);
         if(empty ($arr_anm[1]) && empty ($arr_moic[1])){
@@ -73,7 +72,9 @@ class TargetdataController extends Controller
                     <input type="text" class="re_schedule" name="re_schedule" class="form-control">';
             }
             return 'SMS\'s for this are already sent';
-        })->rawColumns(['actions','reschedule']);
+        })->addColumn('delete_file', function ($target_data) {
+            return '<a href="'.route('deleteAnmFile',$target_data['id']).'">Delete</a>';
+        })->rawColumns(['actions','reschedule','delete_file']);
 
         return $db->make(true);
     }
@@ -244,75 +245,14 @@ class TargetdataController extends Controller
     }
 
 
-/*    public function homePage()
+    public function deleteFile($id)
     {
-        return view('home');
-    }*/
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $file_name = AnmTargetDataModel::select('filename','og_filename')
+            ->where('id',$id)
+            ->first()->toArray();
+        $result = AnmTargetDataModel::where('filename',$file_name['filename'])->delete();
+        Session::flash('error','File deleted');
+        return back();
     }
 
 
