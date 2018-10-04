@@ -110,6 +110,7 @@
                                     <th>Action</th>
                                     <th>SMS On</th>
                                     <th>Reschedule</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
                             </table>
@@ -140,7 +141,8 @@
                     { "data": "status" },
                     { "data": "actions" },
                     { "data": "schedule_at" },
-                    { "data": "reschedule" }
+                    { "data": "reschedule" },
+                    { "data": "delete_file"}
                 ],
                 /* rowCallback: function (row, data,index){
                      var html = $.map(data['tag'], function(array){ return array['title']});
