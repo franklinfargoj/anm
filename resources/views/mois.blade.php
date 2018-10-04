@@ -108,6 +108,7 @@
                             <th>Download Zip</th>
                             <th>SMS On</th>
                             <th>Reschedule</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                     </table>
@@ -134,7 +135,8 @@
                     { "data": "actions" },
                     { "data": "download_zip" },
                     { "data": "schedule_at" },
-                    { "data": "reschedule" }
+                    { "data": "reschedule" },
+                    { "data": "delete_file"}
                 ],
             });
         });
