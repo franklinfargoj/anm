@@ -712,3 +712,18 @@ h5 {
 {
 	table.table { width: 630px; }
 }
+
+@media (max-width: 480px){
+	.table.fancy-table>tbody>tr td:first-child{
+		font-size: 20px;
+	}
+	.table.fancy-table.report-card-table>tbody>tr td:first-child{
+		  font-size: 15px;
+	}
+	.table.fancy-table>tbody>tr>th+td{
+		font-size: 18px;
+	}
+	.table.fancy-table>tbody>tr>th{
+		font-size: 20px;
+	}
+}
