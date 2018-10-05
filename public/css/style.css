@@ -692,4 +692,18 @@ h5 {
 	}
 }
 
-@media (max-width: 600px){ .container { width: 1200px; } }
+@media (max-width: 890px){
+	.phc-ranking-title img {
+		margin-right: 5px;
+	}
+	.phc-ranking-content{
+		margin: 0 0 0 4px;
+		font-size: 18px;
+	}
+}
+
+@media (max-width: 766px){
+	.reports-area { padding-top: 220px; }
+	.internal-table-area { padding-top: 390px;
+	}
+}
