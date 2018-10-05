@@ -707,3 +707,8 @@ h5 {
 	.internal-table-area { padding-top: 390px;
 	}
 }
+
+@media (max-width: 630px)
+{
+	table.table { width: 630px; }
+}
