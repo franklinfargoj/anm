@@ -67,13 +67,21 @@ class TargetdataController extends Controller
         })->addColumn('reschedule', function($target_data){
         $arr_anm = explode(',', $target_data['anm_sent']);
         $arr_moic = explode(',', $target_data['moic_sent']);
-        if(empty ($arr_anm[1]) && empty ($arr_moic[1])){
-            return '<input type="hidden" id="'.$target_data['filename'].'" value="'.$target_data['filename'].'">
-                    <input type="text" class="re_schedule" name="re_schedule" class="form-control">';
-            }
-            return 'SMS\'s for this are already sent';
+            if( in_array("1", $arr_anm) || in_array("1", $arr_moic)){
+                     return 'SMS\'s for this are already sent';
+                }
+                else{
+                    return '<input type="hidden" id="'.$target_data['filename'].'" value="'.$target_data['filename'].'">
+                        <input type="text" class="re_schedule" name="re_schedule" class="form-control">';
+                }
         })->addColumn('delete_file', function ($target_data) {
-            return '<a href="'.route('deleteAnmFile',$target_data['id']).'">Delete</a>';
+            $arr_anm = explode(',', $target_data['anm_sent']);
+            if(in_array("1", $arr_anm)){
+                return 'SMS already sent';
+            }
+            else{
+                return '<a href="'.route('deleteAnmFile',$target_data['id']).'">Delete</a>';
+            }
         })->rawColumns(['actions','reschedule','delete_file']);
 
         return $db->make(true);
