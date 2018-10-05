@@ -49,16 +49,22 @@ class MosController extends Controller
             }
             return "Processing";
         })->addColumn('reschedule', function($moic){
-            $arr = explode(',', $moic['sms_sent_initiateds']);
 
-            if(empty ($arr[1])){
+            $arr_reschedule = explode(',', $moic['sms_sent_initiateds']);
+            if(in_array("1", $arr_reschedule)){
+                return 'SMS already sent';
+            }else{
                 return '<input type="hidden" id="'.$moic['uploaded_file'].'" value="'.$moic['id'].'">
-                        <input type="text" class="re_schedule" name="re_schedule" class="form-control">
-                        ';
+                        <input type="text" class="re_schedule" name="re_schedule" class="form-control">';
             }
-            return 'SMS\'s for this are already sent';
         })->addColumn('delete_file', function ($moic) {
-                      return '<a href="'.route('deleteFile',$moic['id']).'">Delete</a>';
+
+            $arr_delete = explode(',', $moic['sms_sent_initiateds']);
+            if(in_array("1", $arr_delete)){
+                return 'SMS already sent';
+            }else{
+                return '<a href="' . route('deleteFile', $moic['id']) . '">Delete</a>';
+            }
         })->rawColumns(['actions', 'download_zip', 'reschedule','delete_file']);
         return $db->make(true);
     }
