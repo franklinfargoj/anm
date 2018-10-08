@@ -577,11 +577,11 @@ h5 {
 .table.fancy-table>tbody>tr>th+td {
 	text-align: left;
 	font-family: 'Roboto-Regular';
-	font-size: 16px;
+	font-size: 20px;
 }
 .table.fancy-table>tbody>tr td:first-child {
     font-family: 'Roboto-Regular';
-    font-size: 16px;
+    font-size: 20px;
 }
 .table.fancy-table>tbody>tr>th {
 	font-family: 'Roboto-Bold';
