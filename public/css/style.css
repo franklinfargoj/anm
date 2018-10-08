@@ -702,7 +702,7 @@ h5 {
 	}
 }
 
-@media (max-width: 766px){
+/*@media (max-width: 766px){
 	.reports-area { padding-top: 220px; }
 	.internal-table-area { padding-top: 390px;
 	}
@@ -726,4 +726,4 @@ h5 {
 	.table.fancy-table>tbody>tr>th{
 		font-size: 20px;
 	}
-}
+}*/
