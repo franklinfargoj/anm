@@ -82,7 +82,7 @@ class DashboardController extends Controller
                 ->where('id',$id)->get()->toArray();
         $filename = $file[0]['filename'];
 
-        $file_data = AnmTargetDataModel::select('weblink','anm_sms_initiated AS sms_sent','anm_weblink_logs.ip_address','anm_weblink_logs.clicked_at')
+        $file_data = AnmTargetDataModel::select('weblink','anm_sms_initiated AS sms_sent','anm_weblink_logs.ip_address','anm_weblink_logs.clicked_at','anm_weblink_logs.mobile_no')
                 ->leftJoin('anm_weblink_logs', 'anm_target_data.weblink', '=', 'anm_weblink_logs.link')
                 ->where('filename',$filename)->paginate(10);
 
