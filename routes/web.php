@@ -12,7 +12,16 @@
 */
 Route::group(['middleware'=>'auth'], function (){
 
-    Route::get('/', 'TargetdataController@index')->name('dashboard');
+    Route::get('/', 'DashboardController@index');
+    Route::get('listfile', 'DashboardController@listing')->name('listfile');
+    Route::get('dashboardfile/{id}','DashboardController@dashboardfile')->name('dashboardfile');
+
+    Route::get('Anm/{id}', 'DashboardController@anm_details')->name('anm');
+    Route::get('Moic/{id}', 'DashboardController@moic_details')->name('moic');
+    Route::get('Feedback/{id}', 'DashboardController@feedback_details')->name('feedback');
+
+
+    Route::get('get-anm', 'TargetdataController@index')->name('dashboard');
     Route::post('import-file', 'TargetdataController@importFile')->name('import.file');
     Route::get('/get-anm-target-data', 'TargetdataController@fetchTargetData');
     Route::post('anm_sms_update', 'TargetdataController@update_sms_schedule')->name('anm_sms_update');
