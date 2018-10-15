@@ -113,6 +113,9 @@ class WeblinkController extends Controller
 
         if(count($already_clicked) == 0){
             DB::table('anm_weblink_logs')->insert($insert);
+            DB::update('update anm_weblink_logs
+               set weblink_id=(select id from anm_target_data where anm_target_data.weblink=anm_weblink_logs.link)
+               WHERE weblink_id = 0');
         }
 
         if(!empty($targetDataVariable)){
