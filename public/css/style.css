@@ -702,6 +702,19 @@ h5 {
 	}
 }
 
+
+.header-links a {
+	padding: 10px;
+	margin: 0 0 0 20px;
+	display: inline-block;
+}
+.header-links a.active {
+	background: #ffffff;
+	color: #337ab7;
+}
+
+
+
 /*@media (max-width: 766px){
 	.reports-area { padding-top: 220px; }
 	.internal-table-area { padding-top: 390px;
