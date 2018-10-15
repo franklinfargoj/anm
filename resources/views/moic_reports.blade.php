@@ -334,7 +334,7 @@
                                 <td class="dark-green">{{ number_format((float)$report->id_state, 0, '.' ,'') }}%</td>
                              </tr>
                              <tr>
-                                <td>FI(Summary – LL/Target) </td>
+                                <td>FI(Summary -LL/Target) </td>
                                 <td class="velvet-color">{{ number_format((float)$report->fi_max_score_achieved, 0, '.' ,'') }}</td>
                                 <td class="velvet-color">{{ number_format((float)$report->fi_score_achieved, 1, '.' ,'') }}</td>
                                 <td class="velvet-color">{{ number_format((float)$report->fi_target, 0, '.' ,'') }}%</td>
