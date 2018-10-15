@@ -242,4 +242,7 @@ return [
 
     ],
 
+
+    'modules' => ['1'=>'Anm','2'=>'Moic','3'=>'Feedback']
+
 ];
