@@ -43,6 +43,7 @@
                             <th>Sr. No.</th>
                             <th>Weblink</th>
                             <th>SMS sent</th>
+                            <th>Mobile no.</th>
                             <th>IP address</th>
                             <th>Clicked at</th>
                         </tr>
@@ -87,6 +88,12 @@
                                 <td>Yes</td>
                             @else
                                 <td>No</td>
+                            @endif
+
+                            @if($value->mobile_no)
+                                <td>{{ $value->mobile_no }}</td>
+                            @else
+                                <td>----</td>
                             @endif
 
                             @if($value->ip_address)
