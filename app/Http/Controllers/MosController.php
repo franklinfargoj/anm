@@ -256,6 +256,10 @@ class MosController extends Controller
         $already_clicked = DB::table('moic_logs')->select('id')->where('link',$link)->get();
         if(count($already_clicked) == 0){
             DB::table('moic_logs')->insert($insert);
+
+            DB::update('update moic_logs
+               set weblink_id=(select id from moic_ranking_reports where moic_ranking_reports.dr_weblink=moic_logs.link)
+               WHERE weblink_id = 0');
         }
         $months = \DB::table('master_months')->pluck('month_english', 'id')->toArray();
         $report = \DB::table('moic_ranking_reports')->where('dr_weblink', $link)->get()->toArray();
