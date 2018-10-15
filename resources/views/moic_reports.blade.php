@@ -109,7 +109,7 @@
                                 <td width="10%" data-title-attribute="In Rajasthan" class="dark-green">{{ number_format((float)$report->opd_state, 0, '.' ,'') }}</td>
                              </tr>
                              <tr>
-                                <td data-title-attribute="Metric">Proportion of <br/> Institutional Delivery</td>
+                                <td data-title-attribute="Metric">% Institutional Deliveries</td>
                                 <td data-title-attribute="Max score that can be achieved" class="velvet-color">{{ number_format((float)$report->pid_max_score_achieved, 0, '.' ,'') }}</td>
                                 <td data-title-attribute="Score achieved" class="velvet-color">{{ number_format((float)$report->pid_score_achieved, 1, '.' ,'') }}</td>
                                 <td data-title-attribute="Target" class="velvet-color">{{ number_format((float)$report->pid_target, 0, '.' ,'') }}%</td>
@@ -123,7 +123,7 @@
 
                              <tr data-title-attribute="{{$months[$report->month]}} {{$report->year}} Report Card">
                                 <th width="10%" rowspan="8" valign="middle">RMNCH + A</th>
-                                <td width="20%">Full Immunization Coverage  </td>
+                                <td width="20%">% Full Immunization</td>
                                 <td width="12%" class="velvet-color">{{ number_format((float)$report->fic_max_score_achieved, 0, '.' ,'') }}</td>
                                 <td width="9%" class="velvet-color">{{ number_format((float)$report->fic_score_achieved, 1, '.' ,'') }}</td>
                                 <td width="10%" class="velvet-color">{{ number_format((float)$report->fic_target, 0, '.' ,'') }}%</td>
@@ -179,7 +179,7 @@
 
 
                              <tr>
-                                <td>FP - IUCD Insertion %</td>
+                                <td>IUCD Insertion %</td>
                                 <td class="velvet-color">{{ number_format((float)$report->fpiucd_max_score_achieved, 0, '.' ,'') }}</td>
                                 <td class="velvet-color">{{ number_format((float)$report->fpiucdscore_achieved, 1, '.' ,'') }}</td>
                                 <td class="velvet-color">{{ number_format((float)$report->fpiucd_target, 0, '.' ,'') }}%</td>
@@ -189,7 +189,7 @@
                                 <td class="dark-green">{{ number_format((float)$report->fpiucd_state, 0, '.' ,'') }}%</td>
                              </tr>
                              <tr>
-                                <td>FP - PPIUCD Insertion %</td>
+                                <td>PPIUCD Insertion %</td>
                                 <td class="velvet-color">{{ number_format((float)$report->ppiucd_max_score_achieved, 0, '.' ,'') }}</td>
                                 <td class="velvet-color">{{ number_format((float)$report->ppiucd_score_achieved, 1, '.' ,'') }}</td>
                                 <td class="velvet-color">{{ number_format((float)$report->ppiucd_target, 0, '.' ,'') }}%</td>
@@ -199,7 +199,7 @@
                                 <td class="dark-green">{{ number_format((float)$report->ppiucd_state, 0, '.' ,'') }}%</td>
                              </tr>
                              <tr>
-                                <td>FP - Sterilization %</td>
+                                <td>Sterilization %</td>
                                 <td class="velvet-color">{{ number_format((float)$report->fp_max_score_achieved, 0, '.' ,'') }}</td>
                                 <td class="velvet-color">{{ number_format((float)$report->fp_score_achieved, 1, '.' ,'') }}</td>
                                 <td class="velvet-color">{{ number_format((float)$report->fp_sterilization_target, 0, '.' ,'') }}%</td>
@@ -222,7 +222,7 @@
                                 <td width="10%" class="dark-green"> {{  number_format((float)$report->pneumonia_state, 0, '.' ,'') }}%</td>
                              </tr>
                              <tr>
-                                <td>Malaria slides collected</td>
+                                <td>% Malaria slides collected</td>
                                 <td class="velvet-color">{{ number_format((float)$report->malaria_max_score_achieved, 0, '.' ,'') }}</td>
                                 <td class="velvet-color">{{ number_format((float)$report->malaria_score_achieved, 1, '.' ,'')}}</td>
                                 <td class="velvet-color">{{ number_format((float)$report->malaria_target, 0, '.' ,'') }}%</td>
@@ -247,7 +247,7 @@
                           <table width="100%" class="table fancy-table">
                              <tr data-title-attribute="{{$months[$report->month]}} {{$report->year}} Report Card">
                                 <th width="10%" rowspan="6" valign="middle">Governance</th>
-                                <td width="20%"># Days patient vouchers were updated this month </td>
+                                <td width="20%"># Days patient vouchers were updated</td>
                                 <td width="12%" class="velvet-color">{{ number_format((float)$report->days_patient_voucher_max_score_achieved, 0, '.' ,'') }}</td>
                                 <td width="9%" class="velvet-color">{{ number_format((float)$report->days_patient_voucher_score_achieved, 1, '.' ,'') }}</td>
                                 <td width="10%" class="velvet-color">{{ number_format((float)$report->days_patient_voucher_target, 0, '.' ,'') }}</td>
@@ -260,7 +260,7 @@
 
 
                              <tr>
-                                <td>% Patient Vouchers recorded vs OPD for the month</td>
+                                <td>% Patient Vouchers recorded vs OPD</td>
                                 <td class="velvet-color">{{ number_format((float)$report->patient_vouchers_max_score_achieved, 0, '.' ,'') }}</td>
                                 <td class="velvet-color">{{ number_format((float)$report->patient_vouchers_score_achieved, 1, '.' ,'') }}</td>
                                 <td class="velvet-color">{{ number_format((float)$report->patient_vouchers_target, 0, '.' ,'') }}%</td>
@@ -270,7 +270,7 @@
                                 <td class="dark-green">{{ number_format((float)$report->patient_vouchers_state, 0, '.' ,'') }}%</td>
                              </tr>
                              <tr>
-                                <td>Med Availability >80% &verified by Patient Feedback</td>
+                                <td>Med Availability >80%</td>
                                 <td class="velvet-color">{{ number_format((float)$report->med_avail_feedback_max_score_achieved, 0, '.' ,'') }}</td>
                                 <td class="velvet-color">{{ number_format((float)$report->med_avail_feedback_score_achieved, 1, '.' ,'') }}</td>
                                 <td class="velvet-color">{{ number_format((float)$report->med_avail_feedback_target, 0, '.' ,'') }}%</td>
@@ -280,7 +280,7 @@
                                 <td class="dark-green">{{ number_format((float)$report->med_avail_feedback_state, 0, '.' ,'') }}%</td>
                              </tr>
                              <tr>
-                                <td>Test Availability >80% & verified by Patient Feedback </td>
+                                <td>Test Availability >80%</td>
                                 <td class="velvet-color">{{ number_format((float)$report->test_avail_feedback_max_score_achieved, 0, '.' ,'') }}</td>
                                 <td class="velvet-color">{{ number_format((float)$report->test_avail_feedback_score_achieved, 1, '.' ,'') }}</td>
                                 <td class="velvet-color">{{ number_format((float)$report->test_avail_target, 0, '.' ,'') }}%</td>
@@ -290,7 +290,7 @@
                                 <td>{{ number_format((float)$report->test_avail_state, 0, '.' ,'')}}%</td>
                              </tr>
                              <tr>
-                                <td>Doctor Attendance >80% & verified by Patient Feedback</td>
+                                <td>Doctor Attendance > 80%</td>
                                 <td class="velvet-color">{{ number_format((float)$report->doc_avail_feedback_max_score_achieved, 0, '.' ,'') }}</td>
                                 <td class="velvet-color">{{ number_format((float)$report->doc_avail_feedback_score_achieved, 1, '.' ,'') }}</td>
                                 <td class="velvet-color">{{ number_format((float)$report->doc_avail_target, 0, '.' ,'') }}%</td>
@@ -324,7 +324,7 @@
                                 <td class="dark-green">{{ number_format((float)$report->pcts_vs_expected_state, 0, '.' ,'') }}%</td>
                              </tr>
                              <tr>
-                                <td>Institutional Deliveries (Summary(Form6,7) - LL)  </td>
+                                <td>Institutional Deliveries (Summary - LL/Target)  </td>
                                 <td class="velvet-color">{{ number_format((float)$report->id_max_score_achieved, 0, '.' ,'') }}</td>
                                 <td class="velvet-color">{{ number_format((float)$report->id_score_achieved, 1, '.' ,'') }}</td>
                                 <td class="velvet-color">{{ number_format((float)$report->id_target, 0, '.' ,'') }}%</td>
@@ -334,7 +334,7 @@
                                 <td class="dark-green">{{ number_format((float)$report->id_state, 0, '.' ,'') }}%</td>
                              </tr>
                              <tr>
-                                <td>Full Immunization (Summary – Line List) </td>
+                                <td>FI(Summary – LL/Target) </td>
                                 <td class="velvet-color">{{ number_format((float)$report->fi_max_score_achieved, 0, '.' ,'') }}</td>
                                 <td class="velvet-color">{{ number_format((float)$report->fi_score_achieved, 1, '.' ,'') }}</td>
                                 <td class="velvet-color">{{ number_format((float)$report->fi_target, 0, '.' ,'') }}%</td>
