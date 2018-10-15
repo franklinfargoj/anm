@@ -9,6 +9,9 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/date/bootstrap-datetimepicker.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/date/bootstrap-datetimepicker.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/date/datepicker.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/date/jquery-ui.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/date/jquery-ui.theme.min.css') }}">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
@@ -22,10 +25,12 @@
 </body>
 
 <script type="text/javascript" src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/date/bootstrap-datetimepicker.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/date/bootstrap-datepicker.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/date/bootstrap-datetimepicker.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/datatables.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/dataTables.responsive.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/date/jquery-ui.min.js') }}"></script>
 
 @yield('js')
 </html>
