@@ -54,7 +54,7 @@
 
                                     <td>{{ $value['weblink'] }}</td>
 
-                                    @if($value['anm_sms_initiated'])
+                                    @if($value['weblink'])
                                     <td>Yes</td>
                                     @else
                                     <td>No</td>
@@ -74,42 +74,42 @@
 
                                 </tr>
                             @endforeach--}}
-                        @php $i = 1;@endphp
-                        @foreach ($file_data as $value)
 
-                            <tr>
-                                <td>{{ $i++ }}</td>
+                    @php $i = $file_data->perPage() * ($file_data->currentPage() -1); @endphp
+                    @foreach ($file_data as $value)
 
-                                <td>{{ $value->weblink }}</td>
+                        <tr>
+                            <td> {{ ++$i }} </td>
 
-                                @if($value->sms_sent)
-                                    <td>Yes</td>
-                                @else
-                                    <td>No</td>
-                                @endif
+                            <td>{{ $value->weblink }}</td>
 
-                                @if($value->ip_address)
-                                    <td>{{ $value->ip_address }}</td>
-                                @else
-                                    <td>----</td>
-                                @endif
+                            @if($value->sms_sent)
+                                <td>Yes</td>
+                            @else
+                                <td>No</td>
+                            @endif
 
-                                @if($value->clicked_at)
-                                    <td>{{ $value->clicked_at }}</td>
-                                @else
-                                    <td>----</td>
-                                @endif
+                            @if($value->ip_address)
+                                <td>{{ $value->ip_address }}</td>
+                            @else
+                                <td>----</td>
+                            @endif
 
-                            </tr>
-                        @endforeach
+                            @if($value->clicked_at)
+                                <td>{{ $value->clicked_at }}</td>
+                            @else
+                                <td>----</td>
+                            @endif
 
-                    </table>
-                    {{ $file_data->links() }}
+                        </tr>
+                    @endforeach
+                </table>
+                {{ $file_data->links() }}
 
-                </div>
-            </div>
-        </div>
-    </section>
+</div>
+</div>
+</div>
+</section>
 
 @endsection
 
