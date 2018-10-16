@@ -95,7 +95,7 @@ class DashboardController extends Controller
                              ->where('id',$id)->get()->toArray();
         $filename = $file[0]['uploaded_file'];
 
-        $file_data = DB::table('moic_ranking_reports')->select('dr_weblink as weblink','moic_logs.ip_address','moic_logs.clicked_at','moic_ranking.sms_sent_initiated AS sms_sent')
+        $file_data = DB::table('moic_ranking_reports')->select('dr_weblink as weblink','moic_logs.ip_address','moic_logs.clicked_at','moic_ranking.sms_sent_initiated AS sms_sent','moic_logs.mobile_no')
                                 ->leftJoin('moic_logs', 'moic_ranking_reports.dr_weblink', '=', 'moic_logs.link')
                                 ->leftJoin('moic_ranking', 'moic_ranking_reports.id', '=', 'moic_ranking.id')
                                 ->where('filename',$filename)->paginate(10);
