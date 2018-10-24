@@ -83,7 +83,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h3>Uploaded File Details</h3>
+
+                    @if($category=="Anm")
+                        <h3>Anm files</h3>
+                    @elseif($category=="Moic")
+                        <h3>Moic files</h3>
+                    @elseif($category=="Feedback")
+                        <h3>Feedback files</h3>
+                    @endif
+
                     <table id="uploadData" class="table table-bordered table-striped">
                         <thead>
                         <tr>
