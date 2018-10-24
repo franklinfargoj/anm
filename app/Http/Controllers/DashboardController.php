@@ -15,8 +15,8 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $list_data = '';
-        return view('dashboard',compact('list_data'));
+        $category = '';$list_data = '';
+        return view('dashboard',compact('list_data','category'));
     }
 
     public function listing(Request $request)
