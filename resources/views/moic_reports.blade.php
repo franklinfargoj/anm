@@ -91,7 +91,7 @@
 	                                <td width="9%" class="blue">{{$months[$report->month]}} {{$report->year}} Performance</td>
 	                                <td width="10%" class="dark-green">Best in block</td>
 	                                <td width="10%" class="dark-green">Best in Alwar</td>
-	                                <td width="10%" class="dark-green">Best in Rajasthan</td>
+	                               {{-- <td width="10%" class="dark-green">Best in Rajasthan</td>--}}
 	                             </tr>
 	                          </table>
                           	</div>
@@ -106,7 +106,7 @@
                                 <td width="9%" data-title-attribute="May'18 Performance" class="blue">{{ number_format((float)$report->opd_performance, 0, '.' ,'') }}</td>
                                 <td width="10%" data-title-attribute="In the block" class="dark-green">{{ number_format((float)$report->opd_block, 0, '.' ,'') }}</td>
                                 <td width="10%" data-title-attribute="In Alwar" class="dark-green">{{ number_format((float)$report->opd_district, 0, '.' ,'') }}</td>
-                                <td width="10%" data-title-attribute="In Rajasthan" class="dark-green">{{ number_format((float)$report->opd_state, 0, '.' ,'') }}</td>
+                               {{-- <td width="10%" data-title-attribute="In Rajasthan" class="dark-green">{{ number_format((float)$report->opd_state, 0, '.' ,'') }}</td>--}}
                              </tr>
                              <tr>
                                 <td data-title-attribute="Metric">% Institutional Deliveries</td>
@@ -116,7 +116,7 @@
                                 <td data-title-attribute="May'18 Performance" class="blue">{{ number_format((float)$report->pid_performance, 0, '.' ,'') }}%</td>
                                 <td data-title-attribute="In the block" class="dark-green">{{ number_format((float)$report->pid_block, 0, '.' ,'') }}%</td>
                                 <td data-title-attribute="In Alwar" class="dark-green">{{ number_format((float)$report->pid_district, 0, '.' ,'') }}%</td>
-                                <td data-title-attribute="In Rajasthan" class="dark-green">{{ number_format((float)$report->pid_state, 0, '.' ,'') }}%</td>
+                               {{-- <td data-title-attribute="In Rajasthan" class="dark-green">{{ number_format((float)$report->pid_state, 0, '.' ,'') }}%</td>--}}
                              </tr>
                           </table>
                           <table width="100%" class="table fancy-table">
@@ -130,7 +130,7 @@
                                 <td width="9%" class="blue">{{ number_format((float)$report->fic_performance, 0, '.' ,'') }}%</td>
                                 <td width="10%" class="dark-green">{{ number_format((float)$report->fic_block, 0, '.' ,'') }}%</td>
                                 <td width="10%" class="dark-green">{{ number_format((float)$report->fic_district, 0, '.' ,'') }}%</td>
-                                <td width="10%" class="dark-green">{{ number_format((float)$report->fic_state, 0, '.' ,'') }}%</td>
+                                {{--<td width="10%" class="dark-green">{{ number_format((float)$report->fic_state, 0, '.' ,'') }}%</td>--}}
                              </tr>
 
                              <tr>
@@ -141,7 +141,7 @@
                                 <td class="blue">{{ number_format((float)$report->anc3_performance, 0, '.' ,'') }}%</td>
                                 <td class="dark-green">{{ number_format((float)$report->anc3_block, 0, '.' ,'') }}%</td>
                                 <td class="dark-green">{{ number_format((float)$report->anc3_district, 0, '.' ,'') }}%</td>
-                                <td class="dark-green">{{ number_format((float)$report->anc3_state, 0, '.' ,'') }}%</td>
+                                {{--<td class="dark-green">{{ number_format((float)$report->anc3_state, 0, '.' ,'') }}%</td>--}}
                              </tr>
                              <tr>
                                 <td>ANC 4 Coverage  </td>
@@ -151,7 +151,7 @@
                                 <td class="blue">{{ number_format((float)$report->anc4_performance, 0, '.' ,'') }}%</td>
                                 <td class="dark-green">{{ number_format((float)$report->anc4_block, 0, '.' ,'') }}%</td>
                                 <td class="dark-green">{{ number_format((float)$report->anc4_district, 0, '.' ,'') }}%</td>
-                                <td class="dark-green">{{ number_format((float)$report->anc4_state, 0, '.' ,'') }}%</td>
+                                {{--<td class="dark-green">{{ number_format((float)$report->anc4_state, 0, '.' ,'') }}%</td>--}}
                              </tr>
                              <tr>
                                 <td>ANC Registration (within 12 weeks)  </td>
@@ -161,7 +161,7 @@
                                 <td class="blue">{{ number_format((float)$report->anc12_performance, 0, '.' ,'') }}%</td>
                                 <td class="dark-green">{{ number_format((float)$report->anc12_block, 0, '.' ,'') }}%</td>
                                 <td class="dark-green">{{ number_format((float)$report->anc12_district, 0, '.' ,'') }}%</td>
-                                <td class="dark-green">{{ number_format((float)$report->anc12_state, 0, '.' ,'') }}%</td>
+                                {{--<td class="dark-green">{{ number_format((float)$report->anc12_state, 0, '.' ,'') }}%</td>--}}
                              </tr>
 
 
@@ -173,7 +173,7 @@
                                 <td class="blue">{{ number_format((float)$report->plb_performance, 0, '.' ,'') }}%</td>
                                 <td class="dark-green">{{ number_format((float)$report->plb_block, 0, '.' ,'') }}%</td>
                                 <td class="dark-green">{{ number_format((float)$report->plb_district, 0, '.' ,'') }}%</td>
-                                <td class="dark-green">{{ number_format((float)$report->plb_state, 0, '.' ,'') }}%</td>
+                                {{--<td class="dark-green">{{ number_format((float)$report->plb_state, 0, '.' ,'') }}%</td>--}}
                              </tr>
 
 
@@ -186,7 +186,7 @@
                                 <td class="blue">{{ number_format((float)$report->fpiucd_performance, 0, '.' ,'') }}%</td>
                                 <td class="dark-green">{{ number_format((float)$report->fpiucd_block, 0, '.' ,'') }}%</td>
                                 <td class="dark-green">{{ number_format((float)$report->fpiucd_district, 0, '.' ,'') }}%</td>
-                                <td class="dark-green">{{ number_format((float)$report->fpiucd_state, 0, '.' ,'') }}%</td>
+                                {{--<td class="dark-green">{{ number_format((float)$report->fpiucd_state, 0, '.' ,'') }}%</td>--}}
                              </tr>
                              <tr>
                                 <td>PPIUCD Insertion %</td>
@@ -196,7 +196,7 @@
                                 <td class="blue">{{ number_format((float)$report->ppiucd_performance, 0, '.' ,'') }}%</td>
                                 <td class="dark-green">{{ number_format((float)$report->ppiucd_block, 0, '.' ,'') }}%</td>
                                 <td class="dark-green">{{ number_format((float)$report->ppiucd_district, 0, '.' ,'') }}%</td>
-                                <td class="dark-green">{{ number_format((float)$report->ppiucd_state, 0, '.' ,'') }}%</td>
+                                {{--<td class="dark-green">{{ number_format((float)$report->ppiucd_state, 0, '.' ,'') }}%</td>--}}
                              </tr>
                              <tr>
                                 <td>Sterilization %</td>
@@ -206,7 +206,7 @@
                                 <td class="blue">{{ number_format((float)$report->fp_sterilization_performance, 0, '.' ,'') }}%</td>
                                 <td class="dark-green">{{ number_format((float)$report->fp_sterilization_block, 0, '.' ,'') }}%</td>
                                 <td class="dark-green">{{ number_format((float)$report->fp_sterilization_district, 0, '.' ,'') }}%</td>
-                                <td class="dark-green">{{ number_format((float)$report->fp_sterilization_state, 0, '.' ,'') }}%</td>
+                               {{-- <td class="dark-green">{{ number_format((float)$report->fp_sterilization_state, 0, '.' ,'') }}%</td>--}}
                              </tr>
                           </table>
                           <table width="100%" class="table fancy-table">
@@ -219,7 +219,7 @@
                                 <td width="9%" class="blue">{{ number_format((float)$report->pneumonia_performance, 0, '.' ,'') }}%</td>
                                 <td width="10%" class="dark-green">{{  number_format((float)$report->pneumonia_block, 0, '.' ,'') }}%</td>
                                 <td width="10%" class="dark-green">{{   number_format((float)$report->pneumonia_district, 0, '.' ,'') }}%</td>
-                                <td width="10%" class="dark-green"> {{  number_format((float)$report->pneumonia_state, 0, '.' ,'') }}%</td>
+                                {{--<td width="10%" class="dark-green"> {{  number_format((float)$report->pneumonia_state, 0, '.' ,'') }}%</td>--}}
                              </tr>
                              <tr>
                                 <td>% Malaria slides collected</td>
@@ -229,7 +229,7 @@
                                 <td class="blue">{{ number_format((float)$report->malaria_performance, 0, '.' ,'') }}%</td>
                                 <td class="dark-green">{{ number_format((float)$report->malaria_block, 0, '.' ,'') }}%</td>
                                 <td class="dark-green">{{ number_format((float)$report->malaria_district, 0, '.' ,'') }}%</td>
-                                <td class="dark-green">{{ number_format((float)$report->malaria_state, 0, '.' ,'') }}%</td>
+                                {{--<td class="dark-green">{{ number_format((float)$report->malaria_state, 0, '.' ,'') }}%</td>--}}
                              </tr>
 
                              <tr>
@@ -240,7 +240,7 @@
                                 <td class="blue">{{ number_format((float)$report->diarrhea_performance, 0, '.' ,'') }}%</td>
                                 <td class="dark-green">{{ number_format((float)$report->diarrhea_block, 0, '.' ,'')}}%</td>
                                 <td class="dark-green">{{ number_format((float)$report->diarrhea_district, 0, '.' ,'') }}%</td>
-                                <td class="dark-green">{{ number_format((float)$report->diarrhea_state, 0, '.' ,'') }}%</td>
+                                {{--<td class="dark-green">{{ number_format((float)$report->diarrhea_state, 0, '.' ,'') }}%</td>--}}
                              </tr>
                           </table>
 
@@ -254,7 +254,7 @@
                                 <td width="9%" class="blue">{{ number_format((float)$report->days_patient_voucher_performance, 0, '.' ,'') }}</td>
                                 <td width="10%" class="dark-green">{{ number_format((float)$report->days_patient_voucher_block, 0, '.' ,'') }}</td>
                                 <td width="10%" class="dark-green">{{ number_format((float)$report->days_patient_voucher_district, 0, '.' ,'') }}</td>
-                                <td width="10%" class="dark-green">{{ number_format((float)$report->days_patient_voucher_state, 0, '.' ,'') }}</td>
+                               {{-- <td width="10%" class="dark-green">{{ number_format((float)$report->days_patient_voucher_state, 0, '.' ,'') }}</td>--}}
                              </tr>
 
 
@@ -267,7 +267,7 @@
                                 <td class="blue">{{ number_format((float)$report->patient_vouchers_performance, 0, '.' ,'') }}%</td>
                                 <td class="dark-green">{{ number_format((float)$report->patient_vouchers_block, 0, '.' ,'') }}%</td>
                                 <td class="dark-green">{{ number_format((float)$report->patient_vouchers_district, 0, '.' ,'') }}%</td>
-                                <td class="dark-green">{{ number_format((float)$report->patient_vouchers_state, 0, '.' ,'') }}%</td>
+                               {{-- <td class="dark-green">{{ number_format((float)$report->patient_vouchers_state, 0, '.' ,'') }}%</td>--}}
                              </tr>
                              <tr>
                                 <td>Med Availability >80%</td>
@@ -277,7 +277,7 @@
                                 <td class="blue">{{ number_format((float)$report->med_avail_feedback_performance, 0, '.' ,'') }}%</td>
                                 <td class="dark-green">{{ number_format((float)$report->med_avail_feedback_block, 0, '.' ,'') }}%</td>
                                 <td class="dark-green">{{ number_format((float)$report->med_avail_feedback_district, 0, '.' ,'') }}%</td>
-                                <td class="dark-green">{{ number_format((float)$report->med_avail_feedback_state, 0, '.' ,'') }}%</td>
+                               {{-- <td class="dark-green">{{ number_format((float)$report->med_avail_feedback_state, 0, '.' ,'') }}%</td>--}}
                              </tr>
                              <tr>
                                 <td>Test Availability >80%</td>
@@ -287,7 +287,7 @@
                                 <td class="blue">{{ number_format((float)$report->test_avail_performance, 0, '.' ,'') }}%</td>
                                 <td class="dark-green">{{ number_format((float)$report->test_avail_block, 0, '.' ,'') }}%</td>
                                 <td>{{ number_format((float)$report->test_avail_district, 0, '.' ,'') }}%</td>
-                                <td>{{ number_format((float)$report->test_avail_state, 0, '.' ,'')}}%</td>
+                                {{--<td>{{ number_format((float)$report->test_avail_state, 0, '.' ,'')}}%</td>--}}
                              </tr>
                              <tr>
                                 <td>Doctor Attendance > 80%</td>
@@ -297,7 +297,7 @@
                                 <td class="blue">{{ number_format((float)$report->doc_avail_performance, 0, '.' ,'') }}%</td>
                                 <td class="dark-green">{{ number_format((float)$report->doc_avail_block, 0, '.' ,'') }}%</td>
                                 <td class="dark-green">{{ number_format((float)$report->doc_avail_district, 0, '.' ,'') }}%</td>
-                                <td class="dark-green">{{ number_format((float)$report->doc_avail_state, 0, '.' ,'') }}%</td>
+                               {{-- <td class="dark-green">{{ number_format((float)$report->doc_avail_state, 0, '.' ,'') }}%</td>--}}
                              </tr>
 
                           </table>
@@ -311,7 +311,7 @@
                                 <td width="9%" class="blue">{{ number_format((float)$report->linelist_vs_expected_performance, 0, '.' ,'') }}%</td>
                                 <td width="10%" class="dark-green">{{ number_format((float)$report->linelist_vs_expected_block, 0, '.' ,'') }}%</td>
                                 <td width="10%" class="dark-green">{{ number_format((float)$report->linelist_vs_expected_district, 0, '.' ,'') }}%</td>
-                                <td width="10%" class="dark-green">{{ number_format((float)$report->linelist_vs_expected_state, 0, '.' ,'') }}%</td>
+                                {{--<td width="10%" class="dark-green">{{ number_format((float)$report->linelist_vs_expected_state, 0, '.' ,'') }}%</td>--}}
                              </tr>
                              <tr>
                                 <td>Live births registered on PCTS vs. expected  </td>
@@ -321,7 +321,7 @@
                                 <td class="blue">{{ number_format((float)$report->pcts_vs_expected_performance, 0, '.' ,'') }}%</td>
                                 <td class="dark-green">{{ number_format((float)$report->pcts_vs_expected_block, 0, '.' ,'') }}%</td>
                                 <td class="dark-green">{{ number_format((float)$report->pcts_vs_expected_district,0, '.' ,'') }}%</td>
-                                <td class="dark-green">{{ number_format((float)$report->pcts_vs_expected_state, 0, '.' ,'') }}%</td>
+                               {{-- <td class="dark-green">{{ number_format((float)$report->pcts_vs_expected_state, 0, '.' ,'') }}%</td>--}}
                              </tr>
                              <tr>
                                 <td>Institutional Deliveries (Summary - LL/Target)  </td>
@@ -331,7 +331,7 @@
                                 <td class="blue">{{ number_format((float)$report->id_performance, 0, '.' ,'') }}%</td>
                                 <td class="dark-green">{{ number_format((float)$report->id_block, 0, '.' ,'') }}%</td>
                                 <td class="dark-green">{{ number_format((float)$report->id_district, 0, '.' ,'') }}%</td>
-                                <td class="dark-green">{{ number_format((float)$report->id_state, 0, '.' ,'') }}%</td>
+                                {{--<td class="dark-green">{{ number_format((float)$report->id_state, 0, '.' ,'') }}%</td>--}}
                              </tr>
                              <tr>
                                 <td>FI(Summary -LL/Target) </td>
@@ -341,7 +341,7 @@
                                 <td class="blue">{{ number_format((float)$report->fi_performance, 0, '.' ,'') }}%</td>
                                 <td class="dark-green">{{ number_format((float)$report->fi_block, 0, '.' ,'') }}%</td>
                                 <td class="dark-green">{{ number_format((float)$report->fi_district, 0, '.' ,'') }}%</td>
-                                <td class="dark-green">{{ number_format((float)$report->fi_state, 0, '.' ,'') }}%</td>
+                               {{-- <td class="dark-green">{{ number_format((float)$report->fi_state, 0, '.' ,'') }}%</td>--}}
                              </tr>
                           </table>
 
@@ -355,7 +355,7 @@
                                 <td width="9%" class="blue">{{ number_format((float)$report->patient_satisfaction_performance, 0, '.' ,'') }}%</td>
                                 <td width="10%" class="dark-green">{{ number_format((float)$report->patient_satisfaction_block, 0, '.' ,'') }}%</td>
                                 <td width="10%" class="dark-green">{{ number_format((float)$report->patient_satisfaction_district, 0, '.' ,'') }}%</td>
-                                <td width="10%" class="dark-green">{{ number_format((float)$report->patient_satisfaction_state, 0, '.' ,'') }}%</td>
+                               {{-- <td width="10%" class="dark-green">{{ number_format((float)$report->patient_satisfaction_state, 0, '.' ,'') }}%</td>--}}
                              </tr>
                           </table>
 
