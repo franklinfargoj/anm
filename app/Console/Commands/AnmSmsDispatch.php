@@ -7,8 +7,7 @@ use App\AnmTargetDataModel;
 use DB;
 use App\Classes\Helpers;
 use Carbon\Carbon;
-
-
+use phpDocumentor\Reflection\Types\Null_;
 
 class AnmSmsDispatch extends Command
 {
@@ -47,8 +46,8 @@ class AnmSmsDispatch extends Command
         $cnt = count($newsms);
         if($cnt > 0){
             echo $cnt." new anm sms requests found".PHP_EOL;
-            $ids = $newsms->pluck('id');
-            $insert = [];
+            $insert_data = [];
+            $ids= [];
             foreach ($newsms as $sms){
                 $separated_msg = explode('==', $sms->anm_custom_msg);
                 $separated_num = explode(',', $sms->anm_mobile_number);
@@ -56,8 +55,6 @@ class AnmSmsDispatch extends Command
                 $cnt = count($separated_num);
                 for($i=0; $i<$cnt; $i++){
                     $combined_sms = $separated_msg[$i].' '.url('/anm/'.$sms->weblink);
-//                    $combined_sms = 'test from wrong side'.' '.url('weblink/'.$sms->weblink);
-//                    $combined_sms = 'मोबाइलसेवामेंआपकास्वागतहै';
                     $temp = [
                         'filename' => $sms->filename,
                         'name' => $separated_anm[$i],
@@ -70,17 +67,22 @@ class AnmSmsDispatch extends Command
 
                     $status = Helpers::sendSmsUnicode($combined_sms, $separated_num[$i]);
                     if($status['status'] == 200 && (str_contains($status['response'], '402') == true)){
+                        $ids[] = $sms->id;
                         $temp['is_sent'] = 1;
                         $temp['sent_at'] = Carbon::now();
+                    }else{
+                        $temp['is_sent'] = 0;
+                        $temp['sent_at'] = NULL;
                     }
-                    $insert[] = $temp;
+                    $insert_data[] = $temp;
                 }
             }
-            if(!empty($insert)){
-                DB::table('anm_mos_smslogs')->insert($insert);
+
+            if(!empty($insert_data)){
+                DB::table('anm_mos_smslogs')->insert($insert_data);
                 AnmTargetDataModel::whereIn('id', $ids)->update(['anm_sms_initiated' => 1]);
             }
-            echo "Dispatched!!".PHP_EOL;
+            echo count($ids)." "."SMS Dispatched!!".PHP_EOL;
         }else{
             echo "All new anm sms requests are dispatched".PHP_EOL;
         }
@@ -89,14 +91,16 @@ class AnmSmsDispatch extends Command
         $fails = DB::table('anm_mos_smslogs')->where('is_sent', 0)->whereNUll('sent_at')->get();
         $count = count($fails);
         if($count > 0){
-            $ids = $fails->pluck('id');
-            $insert = [];
             echo $count.' failed requests found'.PHP_EOL;
             foreach($fails as $sms){
                 $status = Helpers::sendSmsUnicode($sms->sms, $sms->mobile);
                 if($status['status'] == 200 && (str_contains($status['response'], '402') == true)){
                     $temp['is_sent'] = 1;
                     $temp['sent_at'] = Carbon::now();
+                    DB::table('anm_mos_smslogs')->where('id', $sms->id)->update($temp);
+                }else{
+                    $temp['is_sent'] = 0;
+                    $temp['sent_at'] = NULL;
                     DB::table('anm_mos_smslogs')->where('id', $sms->id)->update($temp);
                 }
             }
