@@ -47,8 +47,8 @@ class MoicSmsDispatch extends Command
         $count = count($new_sms);
         if($count > 0){
             $links = \DB::table('moic_ranking_reports')->pluck('dr_weblink', 'rank_id')->toArray();
-            $ids = $new_sms->pluck('id');
-            $insert = [];
+            $ids = [];
+            $insert_data = [];
             echo $count.' new requests found'.PHP_EOL;
             foreach($new_sms as $sms){
                 if(!empty($links[$sms->id])){
@@ -64,17 +64,21 @@ class MoicSmsDispatch extends Command
                     ];
                     $status = Helpers::sendSmsUnicode($combined_sms, $sms->mobile);
                     if($status['status'] == 200 && (str_contains($status['response'], '402') == true)){
+                        $ids[] = $sms->id;
                         $temp['is_sent'] = 1;
                         $temp['sent_at'] = Carbon::now();
+                    }else{
+                        $temp['is_sent'] = 0;
+                        $temp['sent_at'] = NULL;
                     }
-                    $insert[] = $temp;
+                    $insert_data[] = $temp;
                 }
             }
-            if(!empty($insert)){
-                DB::table('mois_anm_sms_logs')->insert($insert);
+            if(!empty($insert_data)){
+                DB::table('mois_anm_sms_logs')->insert($insert_data);
                 MoicRanking::whereIn('id',$ids)->update(['sms_sent_initiated' => 1]);
             }
-            echo "Done!!".PHP_EOL;
+            echo count($ids)." "."SMS Dispatched!!".PHP_EOL;
         }else{
             echo "All sms requests are done".PHP_EOL;
         }
@@ -83,7 +87,6 @@ class MoicSmsDispatch extends Command
         $fails = DB::table('mois_anm_sms_logs')->where('is_sent', 0)->whereNUll('sent_at')->get();
         $count = count($fails);
         if($count > 0){
-            $ids = $fails->pluck('id');
             $insert = [];
             echo $count.' failed requests found'.PHP_EOL;
             foreach($fails as $sms){
@@ -91,6 +94,10 @@ class MoicSmsDispatch extends Command
                 if($status['status'] == 200 && (str_contains($status['response'], '402') == true)){
                     $temp['is_sent'] = 1;
                     $temp['sent_at'] = Carbon::now();
+                    DB::table('mois_anm_sms_logs')->where('id', $sms->id)->update($temp);
+                }else{
+                    $temp['is_sent'] = 0;
+                    $temp['sent_at'] = NULL;
                     DB::table('mois_anm_sms_logs')->where('id', $sms->id)->update($temp);
                 }
             }
