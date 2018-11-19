@@ -153,7 +153,8 @@
 
         var d1 = new Date();
         var d2 = new Date();
-        d1.setHours(+d2.getHours()+2);
+        //d1.setHours(+d2.getHours()+2);
+        d1.setMinutes(+d2.getMinutes()+15);
 
         $("#schedule_at").datetimepicker({
             autoclose: true,
