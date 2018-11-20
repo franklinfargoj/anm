@@ -84,7 +84,7 @@ class MoicSmsDispatch extends Command
         }
 
         //Attempt to send failed sms again
-        $fails = DB::table('mois_anm_sms_logs')->where('is_sent', 0)->whereNUll('sent_at')->get();
+/*        $fails = DB::table('mois_anm_sms_logs')->where('is_sent', 0)->whereNUll('sent_at')->get();
         $count = count($fails);
         if($count > 0){
             $insert = [];
@@ -104,6 +104,7 @@ class MoicSmsDispatch extends Command
             echo "Done!!".PHP_EOL;
         }else{
             echo "All failed sms requests are done".PHP_EOL;
-        }
+        }*/
+
     }
 }
