@@ -66,18 +66,52 @@ class MoicSMSGeneration extends Command
                     }
 
                     if($middle){
-                        $middlephc = Helpers::renderHindi(array_column($middle, 'phc_hin'), '');
+//                        $middlephc = Helpers::renderHindi(array_column($middle, 'phc_hin'), '');
+                        $middlePhcArray = array_column($middle, 'phc_hin');
                     }else{
                         $middlephc = '';
+                        $middlePhcArray = '';
                     }
 
                     if($bottom){
-                        $bottomphc = Helpers::renderHindi(array_column($bottom, 'phc_hin'), '');
+//                        $bottomphc = Helpers::renderHindi(array_column($bottom, 'phc_hin'), '');
+                        $bottomPhcArray = array_column($bottom, 'phc_hin');
                     }else{
                         $bottomphc = '';
+                        $bottomPhcArray= '';
                     }
 
+                    $listMiddlePhc = "";
+                    $listBottomPhc = "";
+
                     foreach($moics as $single){
+
+                        $listMiddlePhc = array_slice($middlePhcArray,0,3);
+                        if(in_array($single['phc_hin'],$listMiddlePhc)){
+                            $middlephc = Helpers::renderHindi($listMiddlePhc, '');
+                        }else{
+                            if($single['scenerio']=='MIDDLE') {
+                                $actualKey = count($listMiddlePhc) - 1;
+                                $listMiddlePhc[$actualKey] = $single['phc_hin'];
+                                $middlephc = Helpers::renderHindi($listMiddlePhc, '');
+                            }else{
+                                $middlephc = Helpers::renderHindi($listMiddlePhc, '');
+                            }
+                        }
+
+                        $listBottomPhc = array_slice($bottomPhcArray,0,3);
+                        if(in_array($single['phc_hin'],$listBottomPhc)){
+                            $bottomphc = Helpers::renderHindi($listBottomPhc, '');
+                        }else{
+                            if($single['scenerio']=='BOTTOM') {
+                                $actualKey = count($listBottomPhc) - 1;
+                                $listBottomPhc[$actualKey] = $single['phc_hin'];
+                                $bottomphc = Helpers::renderHindi($listBottomPhc, '');
+                            }else{
+                                $bottomphc = Helpers::renderHindi($listBottomPhc, '');
+                            }
+                        }
+
                         $sms = '';
                         $sms = $single['dr_name_hin'].', क्या आप जानना चाहते हैं की '.$single['block_hin'].' ब्लॉक की कौनसी पीएचसी '.$months[$single['month']].' '.$single['year']. ' के महीने में बेहतरीन प्रदर्शन कर, एक मिसाल बनी? ';
                         $sms .= $single['block_hin'].' ब्लॉक में पीएचसी '.rtrim($topphctext, ', ').' अव्वल रहीं और इन् पीएचसीस के डॉक्टर - '.rtrim($topdoctext, ', ').'  ने सराहनीये कार्य किया। ';
