@@ -87,7 +87,7 @@ class AnmSmsDispatch extends Command
             echo "All new anm sms requests are dispatched".PHP_EOL;
         }
 
-        //Attempt to send failed sms again
+/*        //Attempt to send failed sms again
         $fails = DB::table('anm_mos_smslogs')->where('is_sent', 0)->whereNUll('sent_at')->get();
         $count = count($fails);
         if($count > 0){
@@ -107,6 +107,6 @@ class AnmSmsDispatch extends Command
             echo "Dispatched!!".PHP_EOL;
         }else{
             echo "All failed sms requests are done".PHP_EOL;
-        }
+        }*/
     }
 }
