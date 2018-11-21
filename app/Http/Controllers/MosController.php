@@ -31,7 +31,7 @@ class MosController extends Controller
 
     public function fetchRankingData(){
 
-        $moic = MoicRanking::select('id','og_moic_filename AS filenames', 'zip_path', 'schedule_at','uploaded_file', \DB::raw('group_concat(distinct sms_sent_initiated) as sms_sent_initiateds'))
+        $moic = MoicRanking::select('id','og_moic_filename AS filenames', 'zip_path', 'schedule_at','uploaded_file','created_at', \DB::raw('group_concat(distinct sms_sent_initiated) as sms_sent_initiateds'))
             ->selectRaw("DATE(created_at) as uploaded_on" )
             ->groupBy('uploaded_file')
             ->orderBy('created_at', 'DESC')
@@ -63,7 +63,13 @@ class MosController extends Controller
             if(in_array("1", $arr_delete)){
                 return 'SMS already sent';
             }else{
-                return '<a href="' . route('deleteFile', $moic['id']) . '">Delete</a>';
+                $currentTime = time();
+                $created_at = strtotime('+10 minutes', strtotime($moic['created_at']));
+                    if($created_at > $currentTime){
+                        return '<a href="' . route('deleteFile', $moic['id']) . '" class="moicdisabled">Delete</a>';
+                    }else{
+                        return '<a href="' . route('deleteFile', $moic['id']) . '">Delete</a>';
+                    }
             }
         })->rawColumns(['actions', 'download_zip', 'reschedule','delete_file']);
         return $db->make(true);
