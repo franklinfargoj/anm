@@ -40,7 +40,8 @@ class MoicSMSGeneration extends Command
      */
     public function handle()
     {
-        $moic = MoicRanking::whereNull('sms')->get();
+        $moic = MoicRanking::whereNull('sms')->orderBy('id','ASC')->get();
+        
         if(count($moic) > 0){
             $files = $moic->groupBy('uploaded_file');
             foreach($files as $file){
@@ -56,6 +57,7 @@ class MoicSMSGeneration extends Command
                     $bottom = array_filter($moics, function($single){
                         return (trim($single['scenerio']) == 'BOTTOM');
                     });
+                   
 
                     if($tops){
                         $topphctext = Helpers::renderHindi(array_column($tops, 'phc_hin'), '');
@@ -83,7 +85,6 @@ class MoicSMSGeneration extends Command
 
                     $listMiddlePhc = "";
                     $listBottomPhc = "";
-
                     foreach($moics as $single){
 
                         $listMiddlePhc = array_slice($middlePhcArray,0,3);
