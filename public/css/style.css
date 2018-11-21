@@ -109,6 +109,11 @@ h1 {
     font-weight: bold;
     color: #20669d;
 }
+
+.d-block {
+	display: block;
+}
+
 .page-title{
 	padding: 0px 20px 11px 0px;
 	position: relative;
@@ -565,7 +570,7 @@ h5 {
     padding: 5px;
     text-align: center;
     border-top: 0;
-    vertical-align: bottom;
+    vertical-align: middle;
 }
 
 .table.fancy-table>tbody>tr>td.text-left{
@@ -713,7 +718,10 @@ h5 {
 	color: #337ab7;
 }
 
-
+a.moicdisabled {
+	pointer-events: none;
+	cursor: default;
+}
 
 /*@media (max-width: 766px){
 	.reports-area { padding-top: 220px; }
