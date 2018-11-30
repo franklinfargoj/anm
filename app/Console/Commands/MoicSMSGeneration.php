@@ -128,7 +128,7 @@ class MoicSMSGeneration extends Command
 
                         $rank = Helpers::ordinal_suffix($single['rank']);
                         $sms = '';
-                        $sms = 'क्या आप बने अक्टूबर के महीने में एक मिसाल?'.'<br>';
+                        $sms = 'क्या आप बने अक्टूबर के महीने में एक मिसाल?';
                         $sms.= $single['dr_name_hin'].',आपकी PHC'.' '.$single['phc_hin'].' '.$months[$single['month']].' '.'के महीने मे'.' '.$single['block_hin'].' '.'में'.' '.$rank.' '.' नंबर पे आयी'.' ';
                         if(!empty($topphctext)){
                             $sms .= $single['block_hin'].' '.'ब्लॉक में PHC '.' '.rtrim($topphctext, ',').' '.'ने इस महीने सब के लिए एक मिसाल बन दिखाया और इन् पीएचसीस के '.' '.rtrim($topdoctext, ',').' '.'ने सराहनीये कार्य किया है।';
