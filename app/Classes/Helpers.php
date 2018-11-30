@@ -29,6 +29,8 @@ class Helpers{
 	}
 
 
+
+
 	/**
 	 *Send a sms
 	 *@param string $sms, string $mobile //maybe comma separated
@@ -211,6 +213,20 @@ class Helpers{
 		curl_close($ch);
 		return $data;
     }
+
+
+    public static function ordinal_suffix($num){ $num = $num % 100;
+        // protect against large numbers
+        if($num < 11 || $num > 13){
+            switch($num % 10){
+                case 1: return $num.'st';
+                case 2: return $num.'nd';
+                case 3: return $num.'rd';
+            }
+        }
+        return $num.'th';
+    }
+
 
 }
 ?>
