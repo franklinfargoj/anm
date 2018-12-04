@@ -153,7 +153,8 @@ class MosController extends Controller
                             'month' => $request->get('month'),
                             'year' => $request->get('year'),
                             'created_at'=> Carbon::now(),
-                            'updated_at'=> Carbon::now()
+                            'updated_at'=> Carbon::now(),
+                            'rank'=>$value["rank"]
                         ];
                     }
                     if (!empty($arr)) {
