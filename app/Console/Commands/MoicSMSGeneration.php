@@ -40,64 +40,135 @@ class MoicSMSGeneration extends Command
      */
     public function handle()
     {
-        $moic = MoicRanking::whereNull('sms')->orderBy('id','ASC')->get();
-        if(count($moic) > 0){
+        $moic = MoicRanking::whereNull('sms')->orderBy('id', 'ASC')->get();
+        if (count($moic) > 0) {
             $files = $moic->groupBy('uploaded_file');
-            foreach($files as $file){
+            foreach ($files as $file) {
                 $grouped = $file->groupBy('block')->toArray();
                 $months = DB::table('master_months')->pluck('month_translated', 'id');
-                foreach($grouped as $group => $moics){
-                    $tops = array_filter($moics, function($single){
-                        return (trim($single['scenerio']) == 'TOP');
-                    });
-                    $middle = array_filter($moics, function($single){
-                        return (trim($single['scenerio']) == 'MIDDLE');
-                    });
-                    $bottom = array_filter($moics, function($single){
-                        return (trim($single['scenerio']) == 'BOTTOM');
-                    });
-                   
 
-                    if(!empty($tops)){
-                        if($tops){
-                            $topphctext = Helpers::renderHindi(array_column($tops, 'phc_hin'), '');
-                            $topdoctext = Helpers::renderHindi(array_column($tops, 'dr_name_hin'), '');
-                        }else{
-                            $topphctext = '';
-                            $topdoctext = '';
-                        }
+                $lstArray = array();
+                foreach ($grouped as $group => $moics) {
+                    foreach($moics as $toppers){
+                        $lstArray[$toppers['block']][$toppers['rank']] = $toppers;
                     }
+                }
 
-                    if(!empty($middle)) {
-                        if ($middle) {
-//                          $middlephc = Helpers::renderHindi(array_column($middle, 'phc_hin'), '');
-                            $middlePhcArray = array_column($middle, 'phc_hin');
-                        } else {
-                            $middlephc = '';
-                            $middlePhcArray = '';
+                foreach($lstArray as $blockName => $rankName){
+                    foreach($rankName as $key => $value){
+
+                        $rank = Helpers::ordinal_suffix($value['rank']);
+                        $sms = '';
+                        $sms = "क्या आप बने अपने ज़िले में मिसाल? \r\n";
+                        if($value['scenerio'] == "TOP"){
+                            $sms.= $value['dr_name_hin'].' '.$months[$value['month']].' '.'में आपकी PHC'.' '.$value['phc_hin'].'अलवर ज़िले के सर्वश्रेष्ठ PHCs में से एक है !आपकी PHC'.' '.$value['block_hin'].' '. 'ब्लॉक में '.$rank.'नंबर पे आयी |';
+                        }elseif ($value['scenerio'] == "MIDDLE"){
+                            $sms.= $value['dr_name_hin'].' '.$months[$value['month']] .'में आपकी PHC'.$value['phc_hin'].' ने अलवर ज़िले में अच्छा प्रदर्शन किया |आप और मेहनत कर, अलवर के सर्वश्रेष्ठ PHCs में आने की कोशिश करें !आपकी PHC' .$value['block_hin']. 'ब्लॉक में '.$rank.'नंबर पे आयी |';
+                        }elseif ($value['scenerio'] == "BOTTOM"){
+                            $sms.= $value['dr_name_hin'].' '.$months[$value['month']] .'में आपकी PHC '.$value['phc_hin'].' अलवर ज़िले के अधिकांश PHCs से पीछे रही |आप और मेहनत कर, अलवर के सर्वश्रेष्ठ PHCs में आने की कोशिश करें !आपकी PHC' .$value['block_hin']. 'ब्लॉक में '.$rank.'नंबर पे आयी |';
                         }
-                    }else{
-                        $middlePhcArray = '';
+                        $sms.= $value['block_hin'].' '.'ब्लॉक में PHC'.' '.$rankName[1]['phc_hin'].' '.'और'.' '.$rankName[2]['phc_hin'].''.'इस महीने अव्वल रहे और इन् PHCs के'.' '.$rankName[1]['dr_name_hin'].'और'.' '.$rankName[2]['dr_name_hin'].'ने अच्छा कार्य किया !';
+                        $sms.='अगले महीने रैंक को और इम्प्रूव करने के लिए निचे दिए गए पीएचसी स्कोरकार्ड लिंक पर क्लिक करें और स्कोरकार्ड का प्रयोग सेक्टर मीटिंग्स में अवश्य करें। ';
+
+                        $indiv_moic = MoicRanking::find($value['id']);
+                        $indiv_moic->sms = $sms;
+                        $indiv_moic->save();
+                        echo "Updated.".PHP_EOL;
                     }
+                }
 
-                    if(!empty($bottom)) {
-                        if ($bottom) {
-//                          $bottomphc = Helpers::renderHindi(array_column($bottom, 'phc_hin'), '');
-                            $bottomPhcArray = array_column($bottom, 'phc_hin');
-                        } else {
-                            $bottomphc = '';
-                            $bottomPhcArray = '';
-                        }
-                    }else{
-                        $bottomPhcArray = '';
-                    }
+            }
+        }
+    }
+}
 
-                    $listMiddlePhc = "";
-                    $listBottomPhc = "";
 
-                    foreach($moics as $single){
 
-                        /*if(!empty($middlePhcArray)){
+
+
+
+
+//                exit;
+//
+//                    $lstArray = array();
+//                    foreach($moics as $segregation){
+//
+//                        if($segregation['rank'] == 1 || $segregation['rank'] == 2){
+//                            $lstArray['toppers'][] = $segregation;
+//                        }else{
+//                            $lstArray[$segregation['rank']] = $segregation;
+//                        }
+//                        dd($lstArray);
+//                    }
+//
+//
+//                    $price = array();
+//                    foreach ($moics as $key => $row)
+//                    {
+//                        $price[$key] = $row['rank'];
+//                    }
+//                    array_multisort($price, SORT_ASC, $moics);
+//
+//                    dd($price);
+
+
+
+
+
+
+                    /*                    $tops = array_filter($moics, function($single){  //4
+                                            return (trim($single['scenerio']) == 'TOP');
+                                        });
+                                        $middle = array_filter($moics, function($single){  //5
+                                            return (trim($single['scenerio']) == 'MIDDLE');
+                                        });
+                                        $bottom = array_filter($moics, function($single){  //5
+                                            return (trim($single['scenerio']) == 'BOTTOM');
+                                        });
+
+                                        if(!empty($tops)){
+                                            if($tops){
+                                                $topphctext = Helpers::renderHindi(array_column($tops, 'phc_hin'), '');
+                                                $topdoctext = Helpers::renderHindi(array_column($tops, 'dr_name_hin'), '');
+                                            }else{
+                                                $topphctext = '';
+                                                $topdoctext = '';
+                                            }
+                                        }
+
+                                        if(!empty($middle)) {
+                                            if ($middle) {
+                    //                          $middlephc = Helpers::renderHindi(array_column($middle, 'phc_hin'), '');
+                                                $middlePhcArray = array_column($middle, 'phc_hin');
+                                            } else {
+                                                $middlephc = '';
+                                                $middlePhcArray = '';
+                                            }
+                                        }else{
+                                            $middlePhcArray = '';
+                                        }
+
+                                        if(!empty($bottom)) {
+                                            if ($bottom) {
+                    //                          $bottomphc = Helpers::renderHindi(array_column($bottom, 'phc_hin'), '');
+                                                $bottomPhcArray = array_column($bottom, 'phc_hin');
+                                            } else {
+                                                $bottomphc = '';
+                                                $bottomPhcArray = '';
+                                            }
+                                        }else{
+                                            $bottomPhcArray = '';
+                                        }
+
+                                        $listMiddlePhc = "";
+                                        $listBottomPhc = "";*/
+
+                    //foreach($moics as $single){
+
+
+
+
+/*                        if(!empty($middlePhcArray)){
                             $listMiddlePhc = array_slice($middlePhcArray,0,3);
                             if(in_array($single['phc_hin'],$listMiddlePhc)){
                                 $middlephc = Helpers::renderHindi($listMiddlePhc, '');
@@ -127,14 +198,39 @@ class MoicSMSGeneration extends Command
                             }
                         }*/
 
-                        $rank = Helpers::ordinal_suffix($single['rank']);
-                        $sms = '';
-                        $sms = "क्या आप बने अक्टूबर के महीने में एक मिसाल? \r\n";
-                        $sms.= $single['dr_name_hin'].',आपकी PHC'.' '.$single['phc_hin'].' '.$months[$single['month']].' '.'के महीने मे'.' '.$single['block_hin'].' '.'में'.' '.$rank.' '.' नंबर पे आयी'.' ';
+//                        $rank = Helpers::ordinal_suffix($single['rank']);
+//                        $sms = '';
+//                        $sms = "क्या आप बने अपने ज़िले में मिसाल? \r\n";
+//                        if($single['scenerio'] == 'TOP'){
+//                            $sms.= $single['dr_name_hin'].' '.$months[$single['month']].' '.'में आपकी PHC'.$single['phc_hin'].'अलवर ज़िले के सर्वश्रेष्ठ PHCs में से एक है !आपकी PHC'.' '.$single['block_hin'].' '. 'ब्लॉक में '.$rank.'नंबर पे आयी |';
+//                        }elseif($single['scenerio'] == 'MIDDLE'){
+//                            $sms.= $single['dr_name_hin'].' '.$months[$single['month']] .'में आपकी PHC'.$single['phc_hin'].' ने अलवर ज़िले में अच्छा प्रदर्शन किया |आप और मेहनत कर, अलवर के सर्वश्रेष्ठ PHCs में आने की कोशिश करें !आपकी PHC' .$single['block_hin']. 'ब्लॉक में '.$rank.'नंबर पे आयी |';
+//                        }elseif($single['scenerio'] == 'BOTTOM'){
+//                            $sms.= $single['dr_name_hin'].' '.$months[$single['month']] .'में आपकी PHC '.$single['phc_hin'].' अलवर ज़िले के अधिकांश PHCs से पीछे रही |आप और मेहनत कर, अलवर के सर्वश्रेष्ठ PHCs में आने की कोशिश करें !आपकी PHC' .$single['block_hin']. 'ब्लॉक में '.$rank.'नंबर पे आयी |';
+//                        }
+//                        $sms.= $single['block_hin'].'ब्लॉक में PHC' .''.''.''. 'इस महीने अव्वल रहे और इन् PHCs के' .' '. '     '. ' '.'ने अच्छा कार्य किया !';
+//                        $sms.='अगले महीने रैंक को और इम्प्रूव करने के लिए निचे दिए गए पीएचसी स्कोरकार्ड लिंक पर क्लिक करें और स्कोरकार्ड का प्रयोग सेक्टर मीटिंग्स में अवश्य करें। ';
+//
+//                        $indiv_moic = MoicRanking::find($single['id']);
+//                        $indiv_moic->sms = $sms;
+//                        $indiv_moic->save();
+//                        echo "Updated.".PHP_EOL;
+//                    }
+//                }
+//            }
+//        }else{
+//            echo "All sms's are updated.".PHP_EOL;
+//        }
+//    }
+//}
+
+
+
+/*                        $sms.= $single['dr_name_hin'].',आपकी PHC'.' '.$single['phc_hin'].' '.$months[$single['month']].' '.'के महीने मे'.' '.$single['block_hin'].' '.'में'.' '.$rank.' '.' नंबर पे आयी'.' ';
                         if(!empty($topphctext)){
                             $sms .= $single['block_hin'].' '.'ब्लॉक में PHC'.' '.rtrim($topphctext,',').' '.'ने इस महीने सब के लिए एक मिसाल बन दिखाया और इन् पीएचसीस के '.' '.rtrim($topdoctext,',').' '.'ने सराहनीये कार्य किया है।';
                         }
-                        $sms.=' अगले महीने रैंक को और इम्प्रूव करने के लिए निचे दिए गए पीएचसी स्कोरकार्ड लिंक पर क्लिक करें और स्कोरकार्ड का प्रयोग सेक्टर मीटिंग्स में अवश्य करें।';
+                        $sms.=' अगले महीने रैंक को और इम्प्रूव करने के लिए निचे दिए गए पीएचसी स्कोरकार्ड लिंक पर क्लिक करें और स्कोरकार्ड का प्रयोग सेक्टर मीटिंग्स में अवश्य करें।';*/
 
 //                        $sms = '';
 //                        $sms = $single['dr_name_hin'].', क्या आप जानना चाहते हैं की '.$single['block_hin'].' ब्लॉक की कौनसी पीएचसी '.$months[$single['month']].' '.$single['year']. ' के महीने में बेहतरीन प्रदर्शन कर, एक मिसाल बनी? ';
@@ -148,16 +244,3 @@ class MoicSMSGeneration extends Command
 //                        $sms .= 'पीएचसी ' . $bottomphc . '  में बेहतर परिणामों के लिए सुद्धारण की आवश्यकता है।';
 //                        }
 //                        $sms .= 'रैंक को कैसे सुद्धारा जाये-जानने के लिए पीएचसी स्कोरकार्ड का प्रयोग करें। पीएचसी स्कोरकार्ड देखने के लिए यहाँ क्लिक करें:';
-
-                        $indiv_moic = MoicRanking::find($single['id']);
-                        $indiv_moic->sms = $sms;
-                        $indiv_moic->save();
-                        echo "Updated.".PHP_EOL;
-                    }
-                }
-            }
-        }else{
-            echo "All sms's are updated.".PHP_EOL;
-        }
-    }
-}
