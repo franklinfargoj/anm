@@ -55,7 +55,7 @@
                                 सबसेन्टर्स <span class="">{{ $lstData['MIDDLE']['end'] }}</span>
                             @endif
                             <span>
-                            <p style="color: #000; font-size: 15px; line-height: 30px; margin:0;">ने अच्छा करने का प्रयास किया 60% से अधिक बच्चो का टीकाकरण कर दिखाया, साथ ही साथ 10% से अधिक गर्भवती महिलाओं का चौथा ANC चैकप भी पूरा किया!</p>
+                            <p style="color: #000; font-size: 15px; line-height: 30px; margin:0;">ने अच्छा करने का प्रयास किया 40% से अधिक बच्चो का टीकाकरण कर दिखाया, साथ ही साथ 20% से अधिक गर्भवती महिलाओं का चौथा ANC चैकप भी पूरा किया!</p>
                         </td>
                         <td align="right" valign="middle"><img  style="width:143px;" src="http://design.neosofttech.in/50/rajesh/BCG/html/images/newsletter-img/pic2-right.jpg" alt="" alt=""></td>
                     </tr>
@@ -76,7 +76,7 @@
                         सबसेन्टर्स <span class="">{{ $lstData['BOTTOM']['end'] }}</span>
                             @endif
                         <span>
-                        <p style="color: #000; font-size: 15px; line-height: 30px; margin:0;">को भी 60% से अधिक बच्चो का टीकाकरण एवं 10% से भी अधिक गर्भवती महिलाओं का चौथा ANC चैकप करके दिखाना है | थोड़ी और तैयारी करो!</p>
+                        <p style="color: #000; font-size: 15px; line-height: 30px; margin:0;">को भी 40% से अधिक बच्चो का टीकाकरण एवं 20% से भी अधिक गर्भवती महिलाओं का चौथा ANC चैकप करके दिखाना है | थोड़ी और तैयारी करो!</p>
                     </td>
                 </tr>
                 @endif
