@@ -43,6 +43,8 @@ class AnmSmsDispatch extends Command
     public function handle()
     {
         $newsms = AnmTargetDataModel::where('anm_sms_initiated', 0)->where('schedule_at', '<', Carbon::now())->get();
+        print_r($newsms);
+        exit;
         $cnt = count($newsms);
         if($cnt > 0){
             echo $cnt." new anm sms requests found".PHP_EOL;
