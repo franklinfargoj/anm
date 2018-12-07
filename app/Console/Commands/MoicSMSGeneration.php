@@ -63,7 +63,7 @@ class MoicSMSGeneration extends Command
 
                         if($value['scenerio'] == "TOP"){
                             $sms.= $value['dr_name_hin'].', '.$months[$value['month']].' '.'में आपकी PHC'.' '.$value['phc_hin'].'अलवर ज़िले के सर्वश्रेष्ठ PHCs में से एक है !आपकी PHC'.' '.$value['block_hin'].' '. 'ब्लॉक में '.$rank.'नंबर पे आयी |';
-                        }elseif ($value['scenerio'] == "MIDDLE"){
+                        }elseif ($value['scenerio'] == "MID"){
                             $sms.= $value['dr_name_hin'].', '.$months[$value['month']] .' '.'में आपकी PHC'.' '.$value['phc_hin'].' ने अलवर ज़िले में अच्छा प्रदर्शन किया |आप और मेहनत कर, अलवर के सर्वश्रेष्ठ PHCs में आने की कोशिश करें !आपकी PHC'.' '.$value['block_hin'].' '.'ब्लॉक में '.' '.$rank.' '.'नंबर पे आयी |';
                         }elseif ($value['scenerio'] == "BOTTOM"){
                             $sms.= $value['dr_name_hin'].', '.$months[$value['month']] .' '.'में आपकी PHC '.' '.$value['phc_hin'].' अलवर ज़िले के अधिकांश PHCs से पीछे रही |आप और मेहनत कर, अलवर के सर्वश्रेष्ठ PHCs में आने की कोशिश करें !आपकी PHC'.' '.$value['block_hin'].' '.'ब्लॉक में '.' '.$rank.' '.'नंबर पे आयी |';
