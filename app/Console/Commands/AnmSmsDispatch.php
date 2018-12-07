@@ -48,8 +48,6 @@ class AnmSmsDispatch extends Command
             echo $cnt." new anm sms requests found".PHP_EOL;
             $insert_data = [];
             $ids= [];
-            print_r($newsms->toArray());
-            exit;
             foreach ($newsms as $sms){
                 $separated_msg = explode('==', $sms->anm_custom_msg);
                 $separated_num = explode(',', $sms->anm_mobile_number);
