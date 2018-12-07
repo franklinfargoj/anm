@@ -50,6 +50,7 @@ class MoicSmsDispatch extends Command
             $ids = [];
             $insert_data = [];
             echo $count.' new requests found'.PHP_EOL;
+            
             foreach($new_sms as $sms){
                 if(!empty($links[$sms->id])){
                     $url = url('/scorecard/'.$links[$sms->id]);
