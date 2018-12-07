@@ -105,6 +105,7 @@ class TargetdataController extends Controller
                 $web = array();
                 $beneficiary = array();
                 $moic = array();
+                dd(count($data));
                 if (count($data) > 0) {
                     $phcNameInHindi = "";
                     $moicNameInHindi = "";
