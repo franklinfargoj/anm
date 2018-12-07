@@ -65,7 +65,7 @@
                                 सबसेन्टर्स <span class="">{{ $lstData['BOTTOM']['end'] }}</span>
                             @endif
                         <span>
-						<p style="color: #000; font-size: 15px; line-height: 30px; margin:0;">को भी 60% से अधिक बच्चो का टीकाकरण एवं 10% से भी अधिक गर्भवती महिलाओं का चौथा ANC चैकप करके दिखाना है | थोड़ी और तैयारी करो!</p>
+						<p style="color: #000; font-size: 15px; line-height: 30px; margin:0;">को भी 40% से अधिक बच्चो का टीकाकरण एवं 20% से भी अधिक गर्भवती महिलाओं का चौथा ANC चैकप करके दिखाना है | थोड़ी और तैयारी करो!</p>
                         </td>
                     </tr>
                 @endif
