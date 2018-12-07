@@ -69,7 +69,7 @@ class MoicSMSGeneration extends Command
                             $sms.= $value['dr_name_hin'].', '.$months[$value['month']] .' '.'में आपकी PHC '.' '.$value['phc_hin'].' अलवर ज़िले के अधिकांश PHCs से पीछे रही |आप और मेहनत कर, अलवर के सर्वश्रेष्ठ PHCs में आने की कोशिश करें !आपकी PHC'.' '.$value['block_hin'].' '.'ब्लॉक में '.' '.$rank.' '.'नंबर पे आयी |';
                         }
                         $sms.= $value['block_hin'].' '.'ब्लॉक में PHC'.' '.$rankName[1]['phc_hin'].' '.'और'.' '.$rankName[2]['phc_hin'].' '.'इस महीने अव्वल रहे और इन् PHCs के'.' '.$rankName[1]['dr_name_hin'].' '.'और'.' '.$rankName[2]['dr_name_hin'].' '.'ने अच्छा कार्य किया !';
-                        $sms.='अगले महीने रैंक को और इम्प्रूव करने के लिए निचे दिए गए पीएचसी स्कोरकार्ड लिंक पर क्लिक करें और स्कोरकार्ड का प्रयोग सेक्टर मीटिंग्स में अवश्य करें। ';
+                        $sms.='अगले महीने रैंक को और इम्प्रूव करने के लिए नीचे दिए गए PHC स्कोरकार्ड लिंक पर क्लिक करें और स्कोरकार्ड का प्रयोग सेक्टर मीटिंग्स में अवश्य करें। ';
                         $indiv_moic = MoicRanking::find($value['id']);
                         $indiv_moic->sms = $sms;
                         //$indiv_moic->save();
