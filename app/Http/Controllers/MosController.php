@@ -275,7 +275,8 @@ class MosController extends Controller
             $report = $report[0];
             return view('moic_reports', compact('report', 'months'));
         }else{
-            return redirect('/get-mos');
+            dd('This url is not found,please wait for next sms');
+            //return redirect('/get-mos');
         }
     }
 
