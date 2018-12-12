@@ -42,47 +42,66 @@ class MoicSMSGeneration extends Command
     {
         $moic = MoicRanking::whereNull('sms')->where('sms_sent_initiated',0)->orderBy('id', 'ASC')->get();
         
-        if (count($moic) > 0) {
-            $files = $moic->groupBy('uploaded_file');
-            foreach ($files as $file) {
-                $grouped = $file->groupBy('block')->toArray();
-                $months = DB::table('master_months')->pluck('month_translated', 'id');
+        if (count($moic) === 0) {
+            echo "No data found to generate sms.".PHP_EOL;
+            return;
+        }
 
-                $lstArray = array();
-                foreach ($grouped as $group => $moics) {
-                    foreach($moics as $toppers){
-                        $lstArray[$toppers['block']][$toppers['rank']] = $toppers;
-                    }
+        $files = $moic->groupBy('uploaded_file');
+        foreach ($files as $file) {
+            $grouped = $file->groupBy('block')->toArray();
+            $months = DB::table('master_months')->pluck('month_translated', 'id');
+
+            $lstArray = array();
+            foreach ($grouped as $group => $moics) {
+                foreach($moics as $toppers){
+                    $lstArray[$toppers['block']][$toppers['rank']] = $toppers;
                 }
-                
-                foreach($lstArray as $blockName => $rankName){
-                    foreach($rankName as $key => $value){
+            }
+            
+            foreach($lstArray as $blockName => $rankName) {
+                foreach($rankName as $key => $value) {
+                    
+                    $rank = Helpers::ordinal_suffix($value['rank']);
+                    $drNames = $value['dr_name_hin'];
+                    if (strpos($value['dr_name_hin'], 'ए') !== FALSE) {
+                        $drNames = explode('ए', $value['dr_name_hin']);
+                    } elseif (strpos($value['dr_name_hin'], ',') !== FALSE) {
+                        $drNames = explode(',', $value['dr_name_hin']);
+                    }
 
-                        $rank = Helpers::ordinal_suffix($value['rank']);
+                    if (is_string($drNames)) {
+                        $drNames = [ $drNames ];
+                    }
+
+                    $sms_list = [];
+                    foreach ($drNames as $drName) {
+                        
                         $sms = '';
                         $sms = "क्या आप बने अपने ज़िले में मिसाल? \r\n";
-
-                        if($value['scenerio'] == "TOP"){
-                            $sms.= $value['dr_name_hin'].', '.$months[$value['month']].' '.'में आपकी PHC'.' '.$value['phc_hin'].'अलवर ज़िले के सर्वश्रेष्ठ PHCs में से एक है !आपकी PHC'.' '.$value['block_hin'].' '. 'ब्लॉक में '.$rank.'नंबर पे आयी |';
-                        }elseif ($value['scenerio'] == "MID"){
-                            $sms.= $value['dr_name_hin'].', '.$months[$value['month']] .' '.'में आपकी PHC'.' '.$value['phc_hin'].' ने अलवर ज़िले में अच्छा प्रदर्शन किया |आप और मेहनत कर, अलवर के सर्वश्रेष्ठ PHCs में आने की कोशिश करें !आपकी PHC'.' '.$value['block_hin'].' '.'ब्लॉक में '.' '.$rank.' '.'नंबर पे आयी |';
-                        }elseif ($value['scenerio'] == "BOTTOM"){
-                            $sms.= $value['dr_name_hin'].', '.$months[$value['month']] .' '.'में आपकी PHC '.' '.$value['phc_hin'].' अलवर ज़िले के अधिकांश PHCs से पीछे रही |आप और मेहनत कर, अलवर के सर्वश्रेष्ठ PHCs में आने की कोशिश करें !आपकी PHC'.' '.$value['block_hin'].' '.'ब्लॉक में '.' '.$rank.' '.'नंबर पे आयी |';
+                        if($value['scenerio'] == "TOP") {
+                            $sms.= $drName.', '.$months[$value['month']].' '.'में आपकी PHC'.' '.$value['phc_hin'].'अलवर ज़िले के सर्वश्रेष्ठ PHCs में से एक है !आपकी PHC'.' '.$value['block_hin'].' '. 'ब्लॉक में '.$rank.'नंबर पे आयी |';
+                        } elseif ($value['scenerio'] == "MID") {
+                            $sms.= $drName.', '.$months[$value['month']] .' '.'में आपकी PHC'.' '.$value['phc_hin'].' ने अलवर ज़िले में अच्छा प्रदर्शन किया |आप और मेहनत कर, अलवर के सर्वश्रेष्ठ PHCs में आने की कोशिश करें !आपकी PHC'.' '.$value['block_hin'].' '.'ब्लॉक में '.' '.$rank.' '.'नंबर पे आयी |';
+                        } elseif ($value['scenerio'] == "BOTTOM") {
+                            $sms.= $drName.', '.$months[$value['month']] .' '.'में आपकी PHC '.' '.$value['phc_hin'].' अलवर ज़िले के अधिकांश PHCs से पीछे रही |आप और मेहनत कर, अलवर के सर्वश्रेष्ठ PHCs में आने की कोशिश करें !आपकी PHC'.' '.$value['block_hin'].' '.'ब्लॉक में '.' '.$rank.' '.'नंबर पे आयी |';
                         }
                         // print_r($value['scenerio']);
                         
                         
                         $sms.= $value['block_hin'].' '.'ब्लॉक में PHC'.' '.$rankName[1]['phc_hin'].' '.'और'.' '.$rankName[2]['phc_hin'].' '.'इस महीने अव्वल रहे और इन् PHCs के'.' '.$rankName[1]['dr_name_hin'].' '.'और'.' '.$rankName[2]['dr_name_hin'].' '.'ने अच्छा कार्य किया !';
-
+    
                         $sms.='अगले महीने रैंक को और इम्प्रूव करने के लिए नीचे दिए गए PHC स्कोरकार्ड लिंक पर क्लिक करें और स्कोरकार्ड का प्रयोग सेक्टर मीटिंग्स में अवश्य करें। ';
+                        $sms_list[] = $sms;
 
-                        $indiv_moic = MoicRanking::find($value['id']);
-                        $indiv_moic->sms = $sms;
-                        $indiv_moic->save();
-                        echo "Updated.".PHP_EOL;
                     }
-                }
 
+                    $indiv_moic = MoicRanking::find($value['id']);
+                    // $indiv_moic->sms = $sms;
+                    $indiv_moic->sms = implode('@@', $sms_list);
+                    $indiv_moic->save();
+                    echo "Updated.".PHP_EOL;
+                }
             }
         }
     }
