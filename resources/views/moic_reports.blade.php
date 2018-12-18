@@ -251,11 +251,11 @@
                                 <td width="20%">Pneumonia prevalence</td>
                                 <td width="12%" class="velvet-color">{{ number_format((float)$report->pneumonia_max_score_achieved, 0, '.' ,'') }}</td>
                                 <td width="9%" class="velvet-color">{{ number_format((float)$report->pneumonia_score_achieved, 1, '.' ,'') }}</td>
-                                <td width="10%" class="velvet-color">{{ number_format((float)$report->pneumonia_target, 0, '.' ,'') }}%</td>
-                                <td width="9%" class="blue">{{ number_format((float)$report->pneumonia_performance, 0, '.' ,'') }}%</td>
-                                <td width="10%" class="dark-green">{{  number_format((float)$report->pneumonia_block, 0, '.' ,'') }}%</td>
-                                <td width="10%" class="dark-green">{{   number_format((float)$report->pneumonia_district, 0, '.' ,'') }}%</td>
-                                {{--<td width="10%" class="dark-green"> {{  number_format((float)$report->pneumonia_state, 0, '.' ,'') }}%</td>--}}
+                                <td width="10%" class="velvet-color">{{ number_format($report->pneumonia_target, 2, '.' ,'') }}%</td>
+                                <td width="9%" class="blue">{{ number_format($report->pneumonia_performance, 2, '.' ,'') }}%</td>
+                                <td width="10%" class="dark-green">{{  number_format($report->pneumonia_block, 2, '.' ,'') }}%</td>
+                                <td width="10%" class="dark-green">{{   number_format($report->pneumonia_district, 2, '.' ,'') }}%</td>
+                                {{--<td width="10%" class="dark-green"> {{  number_format($report->pneumonia_state, 2, '.' ,'') }}%</td>--}}
                              </tr>
                              <tr>
                                 <td>% Malaria slides collected</td>
@@ -272,11 +272,11 @@
                                 <td>Diarrhea prevalence</td>
                                 <td class="velvet-color">{{ number_format((float)$report->diarrhea_max_score_achieved, 0, '.' ,'') }}</td>
                                 <td class="velvet-color">{{ number_format((float)$report->diarrhea_score_achieved, 1, '.' ,'') }}</td>
-                                <td class="velvet-color">{{ number_format((float)$report->diarrhea_target, 0, '.' ,'') }}%</td>
-                                <td class="blue">{{ number_format((float)$report->diarrhea_performance, 0, '.' ,'') }}%</td>
-                                <td class="dark-green">{{ number_format((float)$report->diarrhea_block, 0, '.' ,'')}}%</td>
-                                <td class="dark-green">{{ number_format((float)$report->diarrhea_district, 0, '.' ,'') }}%</td>
-                                {{--<td class="dark-green">{{ number_format((float)$report->diarrhea_state, 0, '.' ,'') }}%</td>--}}
+                                <td class="velvet-color">{{ number_format($report->diarrhea_target, 2, '.' ,'') }}%</td>
+                                <td class="blue">{{ number_format($report->diarrhea_performance, 2, '.' ,'') }}%</td>
+                                <td class="dark-green">{{ number_format($report->diarrhea_block, 2, '.' ,'')}}%</td>
+                                <td class="dark-green">{{ number_format($report->diarrhea_district, 2, '.' ,'') }}%</td>
+                                {{--<td class="dark-green">{{ number_format($report->diarrhea_state, 2, '.' ,'') }}%</td>--}}
                              </tr>
                           </table>
 

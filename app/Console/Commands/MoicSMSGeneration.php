@@ -40,6 +40,7 @@ class MoicSMSGeneration extends Command
      */
     public function handle()
     {
+
         $moic = MoicRanking::whereNull('sms')->where('sms_sent_initiated',0)->orderBy('id', 'ASC')->get();
         
         if (count($moic) === 0) {
@@ -88,9 +89,8 @@ class MoicSMSGeneration extends Command
                         }
                         // print_r($value['scenerio']);
                         
-                        
                         $sms.= $value['block_hin'].' '.'ब्लॉक में PHC'.' '.$rankName[1]['phc_hin'].' '.'और'.' '.$rankName[2]['phc_hin'].' '.'इस महीने अव्वल रहे और इन् PHCs के'.' '.$rankName[1]['dr_name_hin'].' '.'और'.' '.$rankName[2]['dr_name_hin'].' '.'ने अच्छा कार्य किया !';
-    
+                        
                         $sms.='अगले महीने रैंक को और इम्प्रूव करने के लिए नीचे दिए गए PHC स्कोरकार्ड लिंक पर क्लिक करें और स्कोरकार्ड का प्रयोग सेक्टर मीटिंग्स में अवश्य करें। ';
                         $sms_list[] = $sms;
 
