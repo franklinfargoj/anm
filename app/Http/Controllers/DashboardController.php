@@ -57,9 +57,6 @@ class DashboardController extends Controller
                                      }
             $list_data = $list_data->groupBy('uploaded_file')->get()->toArray();
 
-            echo '<pre>';
-            print_r($list_data);
-            exit;
         }elseif ($category == 'Feedback'){
 
             dd('Feedback');
