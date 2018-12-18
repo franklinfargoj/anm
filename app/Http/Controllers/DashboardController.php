@@ -57,6 +57,9 @@ class DashboardController extends Controller
                                      }
             $list_data = $list_data->groupBy('uploaded_file')->get()->toArray();
 
+            echo '<pre>';
+            print_r($list_data);
+            exit;
         }elseif ($category == 'Feedback'){
 
             dd('Feedback');
@@ -96,8 +99,8 @@ class DashboardController extends Controller
         $filename = $file[0]['uploaded_file'];
 
         $file_data = DB::table('moic_ranking_reports')->select('dr_weblink as weblink','moic_logs.ip_address','moic_logs.clicked_at','moic_ranking.sms_sent_initiated AS sms_sent','moic_logs.mobile_no')
+                                ->leftJoin('moic_ranking', 'moic_ranking_reports.rank_id', '=', 'moic_ranking.id')
                                 ->leftJoin('moic_logs', 'moic_ranking_reports.dr_weblink', '=', 'moic_logs.link')
-                                ->leftJoin('moic_ranking', 'moic_ranking_reports.id', '=', 'moic_ranking.id')
                                 ->where('filename',$filename)->paginate(10);
 
         return view('dashboarddetails',compact('file_data'));
