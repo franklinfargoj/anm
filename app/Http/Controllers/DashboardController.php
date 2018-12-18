@@ -48,7 +48,7 @@ class DashboardController extends Controller
                                                 SUM(IF(sms_sent_initiated=1, 1, 0)) AS countSentSms,
                                                 COUNT(moic_logs.weblink_id) as weblink_opened,
                                                 COUNT(moic_ranking.og_moic_filename) AS total_rows')
-                                    ->leftjoin('moic_ranking_reports', 'moic_ranking.id', '=', 'moic_ranking_reports.id')
+                                    ->leftjoin('moic_ranking_reports', 'moic_ranking.id', '=', 'moic_ranking_reports.rank_id')
                                     ->leftjoin('moic_logs', 'moic_ranking_reports.id', '=', 'moic_logs.weblink_id');
                                      if($request->from_date){
                                          $list_data->where('moic_ranking.created_at','>=',$request->from_date);
