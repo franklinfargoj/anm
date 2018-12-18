@@ -57,7 +57,7 @@
                         सबसेन्टर्स <span style="color: #ec1d25; font-size: 20px;" class=""> {{ $lstData['TOP']['end'] }}</span>
                             @endif
                         <span>
-                        <p style="color: #000; font-size: 15px; line-height: 30px; margin:0;">ने {{$current_month}} में सब के लिए एक मिसाल बन दिखाया है!<br> आपकी <span style="color: #ec1d25; font-size: 24px;">ANMs</span> ने आस पास के 60% से भी अधिक बच्चो का टीकाकरण पूरा कर दिखाया, साथ ही साथ 50% से अधिक गर्भवती महिलाओं का चौथा ANC चैकप भी पूरा किया! बने रहिये - हम अगले महीने फिर आपको मिसाल बनते देखने के लिए उत्तेजित है!</p>
+                        <p style="color: #000; font-size: 15px; line-height: 30px; margin:0;">ने {{$current_month}} में सब के लिए एक मिसाल बन दिखाया है!<br> आपकी <span style="color: #ec1d25; font-size: 24px;">ANMs</span> ने आस पास के 90% से भी अधिक बच्चो का टीकाकरण पूरा कर दिखाया, साथ ही साथ 45% से अधिक गर्भवती महिलाओं का चौथा ANC चैकप भी पूरा किया! बने रहिये - हम अगले महीने फिर आपको मिसाल बनते देखने के लिए उत्तेजित है!</p>
                     </td>
                 </tr>
                 @endif
@@ -84,7 +84,7 @@
                         सबसेन्टर्स <span class="">{{ $lstData['BOTTOM']['end'] }}</span>
                             @endif
                         <span>
-                        <p style="color: #000; font-size: 15px; line-height: 30px; margin:0;">को भी 40% से अधिक बच्चो का टीकाकरण एवं 20% से भी अधिक गर्भवती महिलाओं का चौथा ANC चैकप करके दिखाना है | थोड़ी और तैयारी करो!</p>
+                        <p style="color: #000; font-size: 15px; line-height: 30px; margin:0;">को भी 60% से अधिक बच्चो का टीकाकरण एवं 15% से भी अधिक गर्भवती महिलाओं का चौथा ANC चैकप करके दिखाना है | थोड़ी और तैयारी करो!</p>
 						</td>
                     <td align="left" valign="middle"><img style="width:135px;" src="http://design.neosofttech.in/70/bcg/img/pic10-left.jpg" alt="" alt=""></td>
                 </tr>
