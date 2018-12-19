@@ -41,6 +41,12 @@ class Kernel extends ConsoleKernel
         //$schedule->command('moic:targetted_sms')->everyThirtyMinutes();
         //$schedule->command('beneficiary:sms_dispatch')->everyThirtyMinutes();
         // $schedule->command('anm:sms_dispatch')->everyThirtyMinutes();
+
+        //$schedule->command('moic:sms_create')->everyFiveMinutes();
+        //$schedule->command('moic:sms_dispatch')->everyTenMinutes();
+        //$schedule->command('moic:targetted_sms')->everyThirtyMinutes();
+        //$schedule->command('beneficiary:sms_dispatch')->everyThirtyMinutes();
+        //$schedule->command('anm:sms_dispatch')->everyThirtyMinutes();
         //****sms scheduler ends*****************************
 
 

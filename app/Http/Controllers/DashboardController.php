@@ -41,14 +41,15 @@ class DashboardController extends Controller
                                             }
             $list_data = $list_data->groupBy('filename')->get()->toArray();
 
-        }elseif ($category == 'Moic'){
+        }elseif ($category == 'Moic'){  
 
+            
             $list_data = MoicRanking::selectRaw('og_moic_filename as og_filename,moic_ranking.created_at as uploaded_on,moic_ranking.id,
                                                 SUM(IF(sms_sent_initiated=1, 1, 0)) AS countSentSms,
                                                 COUNT(moic_logs.weblink_id) as weblink_opened,
                                                 COUNT(moic_ranking.og_moic_filename) AS total_rows')
-                                    ->leftjoin('moic_ranking_reports', 'moic_ranking.id', '=', 'moic_ranking_reports.id')
-                                    ->leftjoin('moic_logs', 'moic_ranking.id', '=', 'moic_logs.weblink_id');
+                                    ->leftjoin('moic_ranking_reports', 'moic_ranking.id', '=', 'moic_ranking_reports.rank_id')
+                                    ->leftjoin('moic_logs', 'moic_ranking_reports.id', '=', 'moic_logs.weblink_id');
                                      if($request->from_date){
                                          $list_data->where('moic_ranking.created_at','>=',$request->from_date);
                                      }
@@ -56,7 +57,9 @@ class DashboardController extends Controller
                                          $list_data ->where('moic_ranking.created_at','<=',$request->to_date);
                                      }
             $list_data = $list_data->groupBy('uploaded_file')->get()->toArray();
+            
 
+            //print_r($queries);exit;
         }elseif ($category == 'Feedback'){
 
             dd('Feedback');
@@ -70,8 +73,9 @@ class DashboardController extends Controller
                                         }
             $list_data =  $list_data->groupBy('filename')->get()->toArray();
             
-            dd($list_data);
+            //dd($list_data);
         }
+        //dd($list_data);
 
         return view('dashboard',compact('list_data','category'));
     }
@@ -96,8 +100,8 @@ class DashboardController extends Controller
         $filename = $file[0]['uploaded_file'];
 
         $file_data = DB::table('moic_ranking_reports')->select('dr_weblink as weblink','moic_logs.ip_address','moic_logs.clicked_at','moic_ranking.sms_sent_initiated AS sms_sent','moic_logs.mobile_no')
+                                ->leftJoin('moic_ranking', 'moic_ranking_reports.rank_id', '=', 'moic_ranking.id')
                                 ->leftJoin('moic_logs', 'moic_ranking_reports.dr_weblink', '=', 'moic_logs.link')
-                                ->leftJoin('moic_ranking', 'moic_ranking_reports.id', '=', 'moic_ranking.id')
                                 ->where('filename',$filename)->paginate(10);
 
         return view('dashboarddetails',compact('file_data'));
