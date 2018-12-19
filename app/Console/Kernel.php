@@ -33,13 +33,14 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('custom:command')->everyFiveMinutes();
+        //$schedule->command('unopened_weblinks:anm')->daily();
 
         //****sms scheduler starts**************************
         $schedule->command('moic:sms_create')->everyFiveMinutes();
-        $schedule->command('moic:sms_dispatch')->everyTenMinutes();
+        // $schedule->command('moic:sms_dispatch')->everyTenMinutes();
         //$schedule->command('moic:targetted_sms')->everyThirtyMinutes();
         //$schedule->command('beneficiary:sms_dispatch')->everyThirtyMinutes();
-        $schedule->command('anm:sms_dispatch')->everyThirtyMinutes();
+        // $schedule->command('anm:sms_dispatch')->everyThirtyMinutes();
         //****sms scheduler ends*****************************
 
 
@@ -51,7 +52,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('feedback:weblink')->everyFiveMinutes();
         $schedule->command('feedback:complete_sms')->everyFiveMinutes();
-//        $schedule->command('feedback:sms_dispatch')->everyFiveMinutes();
+        //$schedule->command('feedback:sms_dispatch')->everyFiveMinutes();
     }
 
     /**

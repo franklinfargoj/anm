@@ -213,7 +213,7 @@
                           <table width="100%" class="table fancy-table">
                              <tr data-title-attribute="{{$months[$report->month]}} {{$report->year}} Report Card">
                                 <th width="10%" rowspan="3" valign="middle">NCDs</th>
-                                <td width="20%">prevalence (old and new cases) %Hypertension </td>
+                                <td width="21%">%Hypertension prevalence</td>
                                 <td width="12%" class="velvet-color">{{ number_format((float)$report->hp_max_score_achieved, 0, '.' ,'') }}</td>
                                 <td width="10%" class="velvet-color">{{ number_format((float)$report->hp_score_achieved, 1, '.' ,'') }}</td>
                                 <td width="10%" class="velvet-color">{{ number_format((float)$report->hp_target, 0, '.' ,'') }}</td>
@@ -223,7 +223,7 @@
                                 {{--<td width="10%" class="dark-green">{{ $report->hp_state }}</td>--}}
                              </tr>
                              <tr>
-                                <td>Diabetes prevalence (old and new cases) %</td>
+                                <td>%Diabetes prevalence</td>
                                 <td class="velvet-color">{{ number_format((float)$report->diabetes_max_score_achieved, 0, '.' ,'') }}</td>
                                 <td class="velvet-color">{{ number_format((float)$report->diabetes_score_achieved, 1, '.' ,'') }}</td>
                                 <td class="velvet-color">{{ number_format((float)$report->diabetes_target, 0, '.' ,'') }}</td>
@@ -233,7 +233,7 @@
                                {{-- <td class="dark-green">{{ $report->diabetes_state }}</td>--}}
                              </tr>
                              <tr>
-                                <td>CVD diagnosis (old and new cases) %</td>
+                                <td>%CVD diagnosis</td>
                                 <td class="velvet-color">{{ number_format((float)$report->cvd_max_score_achieved, 0, '.' ,'') }}</td>
                                 <td class="velvet-color">{{ number_format((float)$report->cvd_score_achieved, 1, '.' ,'') }}</td>
                                 <td class="velvet-color">{{ number_format((float)$report->cvd_target, 0, '.' ,'') }}</td>
