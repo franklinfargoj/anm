@@ -117,6 +117,10 @@ class WeblinkController extends Controller
                set weblink_id=(select id from anm_target_data where anm_target_data.weblink=anm_weblink_logs.link),
                 mobile_no=(select anm_mobile_number from anm_target_data where anm_target_data.weblink=anm_weblink_logs.link)
                WHERE weblink_id = 0');
+        }else{
+            DB::table('anm_weblink_logs')
+                ->where('link',$id)
+                ->update(['ip_address' => $ip,'clicked_at' =>Carbon::now()]);
         }
 
         if(!empty($targetDataVariable)){
