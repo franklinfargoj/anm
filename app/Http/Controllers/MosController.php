@@ -268,6 +268,10 @@ class MosController extends Controller
                set weblink_id=(select id from moic_ranking_reports where moic_ranking_reports.dr_weblink=moic_logs.link),
                mobile_no=(select mobile from moic_ranking where moic_ranking.id=moic_logs.weblink_id)
                WHERE weblink_id = 0');
+        }else{
+            DB::table('moic_logs')
+                ->where('link',$link)
+                ->update(['ip_address' => $ip,'clicked_at' =>Carbon::now()]);
         }
         $months = \DB::table('master_months')->pluck('month_english', 'id')->toArray();
         $report = \DB::table('moic_ranking_reports')->where('dr_weblink', $link)->get()->toArray();
