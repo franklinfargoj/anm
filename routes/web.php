@@ -16,6 +16,9 @@ Route::group(['middleware'=>'auth'], function (){
     Route::get('listfile', 'DashboardController@listing')->name('listfile');
     Route::get('dashboardfile/{id}','DashboardController@dashboardfile')->name('dashboardfile');
 
+    Route::get('Anmgraph/{id}','GraphController@index');
+    Route::get('Moicgraph/{id}','GraphController@graphMoic');
+
     Route::get('Anm/{id}', 'DashboardController@anm_details')->name('anm');
     Route::get('Moic/{id}', 'DashboardController@moic_details')->name('moic');
     Route::get('Feedback/{id}', 'DashboardController@feedback_details')->name('feedback');
@@ -51,6 +54,14 @@ Route::group(['middleware'=>'auth'], function (){
     Route::get('file_details/{id}', 'FeedbackController@file_details');
     Route::get('export_feedback/{id}','FeedbackController@export_feedback')->name('export_feedback');
     Route::post('feed_update', 'FeedbackController@update_feed_schedule');
+
+
+    Route::get('get-nudges', 'NudgeController@index');
+    Route::post('import-nudgefile', 'NudgeController@importNudgeFile')->name('import.nudgefile');
+    Route::get('/get-nudge-data', 'NudgeController@fetchNudgesFiles');
+    Route::get('nudgedetails/{id}', 'NudgeController@nudgeFileDetails')->name('nudgedetails');
+    Route::get('nudgefile/{id}', 'NudgeController@detail_nudge')->name('nudgefile');
+    Route::get('deleteNudge/{id}','NudgeController@deleteFile')->name('deleteNudge');
 
 });
 
