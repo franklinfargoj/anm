@@ -13,6 +13,7 @@
 
             </div>
             <div class="col-md-6 text-right header-links">
+                        <a class="{{ (\Request::is('get-nudges') || \Request::is('nudgedetails/*')) ? "active" : ''}}" href="{{url('get-nudges')}}">Nudges</a>
                         <a class="{{ (\Request::is('get-anm') || \Request::is('processedfile/*')) ? "active" : ''}}" href="{{url('get-anm')}}">ANM Performance</a>
                         <a class="{{ (\Request::is('get-mos') || \Request::is('rankingdetails/*'))? "active" : ''}}"  href="{{url('/get-mos')}}">MOIC Performance</a>
                         <a class="{{ (\Request::is('feedback')|| \Request::is('detail_feedback/*')) ? "active" : ''}}" href="{{url('/feedback')}}">Patient Feedback</a>
