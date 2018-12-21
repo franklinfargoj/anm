@@ -13,8 +13,6 @@
         </div>
     </section>
 
-    <a style="margin-left: 1050px;" class="btn btn-default" href="{{ url('/') }}">Back</a>
-
     @if (session()->has('error'))
         <p class="alert alert-danger">
             {{ session()->get('error') }}<br>
@@ -32,7 +30,6 @@
             {{ session()->get('success') }}
         </p>
     @endif
-
 
     {!!  Form::open(array('route' => 'listfile','method'=>'GET','files'=>'true')) !!}
     <section>
@@ -75,22 +72,18 @@
     </section>
     {!! Form::close() !!}
 
-
-
     <section>
-
-
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
 
-                    @if($category=="Anm")
-                        <h3>Anm files</h3>
-                    @elseif($category=="Moic")
-                        <h3>Moic files</h3>
-                    @elseif($category=="Feedback")
-                        <h3>Feedback files</h3>
-                    @endif
+                            @if($category=="Anm")
+                                <h3>Anm files</h3>
+                            @elseif($category=="Moic")
+                                <h3>Moic files</h3>
+                            @elseif($category=="Feedback")
+                                <h3>Feedback files</h3>
+                            @endif
 
                     <table id="uploadData" class="table table-bordered table-striped">
                         <thead>
@@ -102,6 +95,7 @@
                             <th>Number of sms sent</th>
                             <th>Weblinks Opened</th>
                             <th>Action</th>
+
                         </tr>
                         </thead>
 
@@ -117,6 +111,7 @@
                             <td>{{ $value['countSentSms'] }}</td>
                             <td>{{ $value['weblink_opened'] }}</td>
                             <td> <a href="{{ url($category.'/'.$value['id']) }}">View details</a></td>
+                           
                         </tr>
                         @endforeach
                         @endif
@@ -144,9 +139,6 @@
                 </div>
             </div>
         </div>
-
-
-
     </section>
 
 @endsection
