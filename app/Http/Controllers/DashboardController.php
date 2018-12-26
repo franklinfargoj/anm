@@ -39,11 +39,10 @@ class DashboardController extends Controller
                                             {
                                                 $list_data->where('uploaded_on', '<=', $request->to_date);
                                             }
-            $list_data = $list_data->groupBy('filename')->get()->toArray();
+            $list_data = $list_data->groupBy('filename')->orderBy('uploaded_on', 'DESC')->get()->toArray();
 
         }elseif ($category == 'Moic'){  
 
-            
             $list_data = MoicRanking::selectRaw('og_moic_filename as og_filename,moic_ranking.created_at as uploaded_on,moic_ranking.id,
                                                 SUM(IF(sms_sent_initiated=1, 1, 0)) AS countSentSms,
                                                 COUNT(moic_logs.weblink_id) as weblink_opened,
@@ -56,7 +55,7 @@ class DashboardController extends Controller
                                      if($request->to_date){
                                          $list_data ->where('moic_ranking.created_at','<=',$request->to_date);
                                      }
-            $list_data = $list_data->groupBy('uploaded_file')->get()->toArray();
+            $list_data = $list_data->groupBy('uploaded_file')->orderBy('uploaded_on', 'DESC')->get()->toArray();
             
 
             //print_r($queries);exit;
