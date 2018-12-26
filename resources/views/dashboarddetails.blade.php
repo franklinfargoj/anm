@@ -6,14 +6,19 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="page-title">File Details</h1>
+                    <h1 class="page-title">File Details
+                        <a style="margin-left: 1050px;" class="btn btn-default" href="{{ url('/') }}">Back</a>
+                    </h1>
+
                 </div>
+
             </div>
         </div>
     </section>
 
-    <a style="margin-left: 1050px;" class="btn btn-default" href="{{ url('/') }}">Back</a>
 
+     <a style="margin-left: 1050px;" class="btn btn-default" href="{{ route('weblinks_excel_export',$id) }}">Export to Excel</a>
+    
     @if (session()->has('error'))
         <p class="alert alert-danger">
             {{ session()->get('error') }}<br>

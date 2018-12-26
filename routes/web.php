@@ -63,6 +63,10 @@ Route::group(['middleware'=>'auth'], function (){
     Route::get('nudgefile/{id}', 'NudgeController@detail_nudge')->name('nudgefile');
     Route::get('deleteNudge/{id}','NudgeController@deleteFile')->name('deleteNudge');
 
+
+
+    Route::get('weblinks_excel_export/{id}', 'DashboardController@weblinks_export')->name('weblinks_excel_export');
+
 });
 
 Route::get('/feedback/{link}', 'FeedbackController@showReport')->name('feedback');

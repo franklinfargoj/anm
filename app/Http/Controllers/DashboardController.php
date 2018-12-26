@@ -89,7 +89,7 @@ class DashboardController extends Controller
                 ->leftJoin('anm_weblink_logs', 'anm_target_data.weblink', '=', 'anm_weblink_logs.link')
                 ->where('filename',$filename)->paginate(10);
 
-        return view('dashboarddetails',compact('file_data'));
+        return view('dashboarddetails',compact('file_data','id'));
     }
 
     public function moic_details($id){
@@ -103,7 +103,7 @@ class DashboardController extends Controller
                                 ->leftJoin('moic_logs', 'moic_ranking_reports.dr_weblink', '=', 'moic_logs.link')
                                 ->where('filename',$filename)->paginate(10);
 
-        return view('dashboarddetails',compact('file_data'));
+        return view('dashboarddetails',compact('file_data','id'));
     }
 
     public function feedback_details($id){
@@ -122,15 +122,47 @@ class DashboardController extends Controller
     }
 
 
+
+    public function weblinks_export($id)
+    {
+        $file = AnmTargetDataModel::select('filename')
+            ->where('id',$id)
+            ->first();
+
+        $data = AnmTargetDataModel::select('weblink','anm_sms_initiated','anm_weblink_logs.ip_address','anm_weblink_logs.clicked_at','anm_weblink_logs.mobile_no')
+                                ->leftJoin('anm_weblink_logs', 'anm_target_data.id', '=', 'anm_weblink_logs.weblink_id')
+                                ->where('filename',$file['filename'])
+                                ->get()
+                                ->toArray();
+
+        \Excel::create('anm_weblink'.time(), function($excel) use($data) {
+            $excel->sheet('target_data', function($sheet) use($data) {
+                $excelData = [];
+                $excelData[] = [
+                    'Weblink',
+                    'Mobile number',
+                    'SMS sent(y/n)',
+                    'IP address',
+                    'Clicked at'
+                ];
+
+                foreach ($data as $value) {
+                    $excelData[] = array(
+                        $value['weblink'],
+                        $value['mobile_no'],
+                        $value['anm_sms_initiated'],
+                        $value['ip_address'],
+                        $value['clicked_at']
+                    );
+                }
+                $sheet->fromArray($excelData, null, 'A1', true, false);
+            });
+        })->download('xlsx');
+    }
+
+
 }
 
 
 
-/*
-// return Datatables::of($list_data)->make(true);
-if(!$dataTables->getRequest()->ajax()){
-    //dd($list_data);
-    return $dataTables->of($list_data)->make(true);
-}*/
-// return view('dashboard',compact('modules','list_data'));
 
