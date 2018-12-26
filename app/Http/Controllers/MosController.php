@@ -266,7 +266,9 @@ class MosController extends Controller
 
             DB::update('update moic_logs
                set weblink_id=(select id from moic_ranking_reports where moic_ranking_reports.dr_weblink=moic_logs.link),
-               mobile_no=(select mobile from moic_ranking where moic_ranking.id=moic_logs.weblink_id)
+               mobile_no=(select mobile from moic_ranking where
+               moic_ranking_reports.filename=moic_ranking.uploaded_file and
+                moic_ranking_reports.id=moic_logs.weblink_id)
                WHERE weblink_id = 0');
         }else{
             DB::table('moic_logs')
