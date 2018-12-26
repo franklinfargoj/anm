@@ -48,7 +48,7 @@ class Kernel extends ConsoleKernel
         //$schedule->command('beneficiary:sms_dispatch')->everyThirtyMinutes();
         //$schedule->command('anm:sms_dispatch')->everyThirtyMinutes();
 
-       // $schedule->command('nudge:dispatch_sms')->everyThirtyMinutes();
+        $schedule->command('nudge:dispatch_sms')->everyThirtyMinutes();
 
         //****sms scheduler ends*****************************
 
