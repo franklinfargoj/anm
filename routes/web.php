@@ -66,7 +66,8 @@ Route::group(['middleware'=>'auth'], function (){
 
 
 
-    Route::get('weblinks_excel_export/{id}', 'DashboardController@weblinks_export')->name('weblinks_excel_export');
+    Route::get('weblinks_anm_export/{id}', 'DashboardController@anm_weblinks_export')->name('weblinks_anm_export');
+    Route::get('weblinks_moic_export/{id}', 'DashboardController@moic_weblinks_export')->name('weblinks_moic_export');
 
 });
 
