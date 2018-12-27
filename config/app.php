@@ -243,6 +243,6 @@ return [
     ],
 
 
-    'modules' => ['1'=>'Anm','2'=>'Moic','3'=>'Feedback']
+    'modules' => ['1'=>'Anm','2'=>'Moic','3'=>'Feedback','4'=>'Nudges']
 
 ];
