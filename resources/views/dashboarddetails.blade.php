@@ -16,9 +16,13 @@
         </div>
     </section>
 
+    @if($category == "Anm")
+        <a style="margin-left: 988px;" class="btn btn-default" href="{{ route('weblinks_anm_export',$id) }}">Excel export Anm</a>
+    @elseif($category == "Moic")
+        <a style="margin-left: 988px;" class="btn btn-default" href="{{ route('weblinks_moic_export',$id) }}">Excel export Moic</a>
+    @endif
 
-     <a style="margin-left: 1050px;" class="btn btn-default" href="{{ route('weblinks_excel_export',$id) }}">Export to Excel</a>
-    
+
     @if (session()->has('error'))
         <p class="alert alert-danger">
             {{ session()->get('error') }}<br>
