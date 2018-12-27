@@ -87,29 +87,30 @@ class DashboardController extends Controller
 
     public function anm_details($id){
 
+        $category = 'Anm';
         $file = AnmTargetDataModel::select('filename')
                 ->where('id',$id)->get()->toArray();
-        $filename = $file[0]['filename'];
 
         $file_data = AnmTargetDataModel::select('weblink','anm_sms_initiated AS sms_sent','anm_weblink_logs.ip_address','anm_weblink_logs.clicked_at','anm_weblink_logs.mobile_no')
                 ->leftJoin('anm_weblink_logs', 'anm_target_data.weblink', '=', 'anm_weblink_logs.link')
-                ->where('filename',$filename)->paginate(10);
+                ->where('filename',$file[0]['filename'])->paginate(10);
 
-        return view('dashboarddetails',compact('file_data','id'));
+
+        return view('dashboarddetails',compact('file_data','id','category'));
     }
 
     public function moic_details($id){
 
+        $category = 'Moic';
         $file = MoicRanking::select('uploaded_file')
                              ->where('id',$id)->get()->toArray();
-        $filename = $file[0]['uploaded_file'];
 
         $file_data = DB::table('moic_ranking_reports')->select('dr_weblink as weblink','moic_logs.ip_address','moic_logs.clicked_at','moic_ranking.sms_sent_initiated AS sms_sent','moic_logs.mobile_no')
                                 ->leftJoin('moic_ranking', 'moic_ranking_reports.rank_id', '=', 'moic_ranking.id')
                                 ->leftJoin('moic_logs', 'moic_ranking_reports.dr_weblink', '=', 'moic_logs.link')
-                                ->where('filename',$filename)->paginate(10);
+                                ->where('filename',$file[0]['uploaded_file'])->paginate(10);
 
-        return view('dashboarddetails',compact('file_data','id'));
+        return view('dashboarddetails',compact('file_data','id','category'));
     }
 
     public function feedback_details($id){
@@ -133,8 +134,8 @@ class DashboardController extends Controller
         return view('nudge_detail',compact('id','location'));
     }
 
-
-    public function weblinks_export($id)
+    //ANM weblinks excel download
+    public function anm_weblinks_export($id)
     {
         $file = AnmTargetDataModel::select('filename')
             ->where('id',$id)
@@ -147,7 +148,7 @@ class DashboardController extends Controller
                                 ->toArray();
 
         \Excel::create('anm_weblink'.time(), function($excel) use($data) {
-            $excel->sheet('target_data', function($sheet) use($data) {
+            $excel->sheet('anm_weblink', function($sheet) use($data) {
                 $excelData = [];
                 $excelData[] = [
                     'Weblink',
@@ -164,6 +165,50 @@ class DashboardController extends Controller
                         $value['anm_sms_initiated'],
                         $value['ip_address'],
                         $value['clicked_at']
+                    );
+                }
+                $sheet->fromArray($excelData, null, 'A1', true, false);
+            });
+        })->download('xlsx');
+    }
+
+    //MOIC weblinks excel download
+    public function moic_weblinks_export($id)
+    {
+        $file = MoicRanking::select('uploaded_file')
+                            ->where('id',$id)
+                            ->first();
+
+        $file_data = DB::table('moic_ranking_reports')->select('dr_weblink as weblink','moic_logs.ip_address','moic_logs.clicked_at','moic_ranking.sms_sent_initiated AS sms_sent','moic_logs.mobile_no')
+            ->leftJoin('moic_ranking', 'moic_ranking_reports.rank_id', '=', 'moic_ranking.id')
+            ->leftJoin('moic_logs', 'moic_ranking_reports.dr_weblink', '=', 'moic_logs.link')
+            ->where('filename',$file['uploaded_file'])->get()->toArray();
+
+        \Excel::create('moic_weblink'.time(), function($excel) use($file_data) {
+            $excel->sheet('moic_weblink', function($sheet) use($file_data) {
+                $excelData = [];
+                $excelData[] = [
+                    'Weblink',
+                    'Mobile number',
+                    'SMS sent(y/n)',
+                    'IP address',
+                    'Clicked at'
+                ];
+
+                foreach ($file_data as $value) {
+
+                    if($value->sms_sent == 0){
+                        $sms = '';
+                    }else{
+                        $sms = 'Yes';
+                    }
+
+                    $excelData[] = array(
+                        url('/').'/scorecard/'.$value->weblink,
+                        $value->mobile_no,
+                        $sms,
+                        $value->ip_address,
+                        $value->clicked_at
                     );
                 }
                 $sheet->fromArray($excelData, null, 'A1', true, false);
