@@ -89,7 +89,8 @@ class NudgeController extends Controller
     //Load nudge details file
     public function nudgeFileDetails($id)
     {
-        return view('nudge_detail',compact('id'));
+        $location = 'nudge_file';
+        return view('nudge_detail',compact('id','location'));
     }
 
     //Displays individual nudge file details
