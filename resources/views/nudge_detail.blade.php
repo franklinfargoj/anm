@@ -24,15 +24,24 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <p>Nudge file details</p>
+                    <h4>Nudge file details</h4>
                 </div>
             </div>
         </div>
     </section>
 
+
+
+    @if($location == 'nudge_file')
     <section style="margin-left: 1050px;">
         <a  class="btn btn-default" href="{{ url('get-nudges') }}">Back</a>
     </section></br>
+    @elseif($location == 'dashboard')
+        <section style="margin-left: 1050px;">
+            <a  class="btn btn-default" href="{{ url('/') }}">Dashboard</a>
+        </section></br>
+    @endif
+
 
     <section>
         <div class="container">
