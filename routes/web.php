@@ -22,6 +22,7 @@ Route::group(['middleware'=>'auth'], function (){
     Route::get('Anm/{id}', 'DashboardController@anm_details')->name('anm');
     Route::get('Moic/{id}', 'DashboardController@moic_details')->name('moic');
     Route::get('Feedback/{id}', 'DashboardController@feedback_details')->name('feedback');
+    Route::get('Nudges/{id}', 'DashboardController@nudge_details')->name('nudge');
 
 
     Route::get('get-anm', 'TargetdataController@index')->name('dashboard');
