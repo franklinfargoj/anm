@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\AnmTargetDataModel;
 use App\MoicRanking;
 use App\FeedbackModel;
+use App\NudgeModel;
 use DB;
 //use DataTables;
 use Yajra\Datatables\Datatables;
@@ -56,13 +57,10 @@ class DashboardController extends Controller
                                          $list_data ->where('moic_ranking.created_at','<=',$request->to_date);
                                      }
             $list_data = $list_data->groupBy('uploaded_file')->orderBy('uploaded_on', 'DESC')->get()->toArray();
-            
 
-            //print_r($queries);exit;
         }elseif ($category == 'Feedback'){
 
             dd('Feedback');
-
             $list_data = FeedbackModel::selectRaw('og_filename,created_at as uploaded_on,id,COUNT(filename) AS total_rows');
                                         if($request->from_date){
                                             $list_data->where('created_at','>=',$request->from_date);
@@ -71,10 +69,18 @@ class DashboardController extends Controller
                                             $list_data ->where('created_at','<=',$request->to_date);
                                         }
             $list_data =  $list_data->groupBy('filename')->get()->toArray();
-            
-            //dd($list_data);
+        }elseif ($category == 'Nudges'){
+
+            $list_data = NudgeModel::selectRaw('id,og_filename,schedule_at,created_at as uploaded_on,COUNT(id)AS total_rows,SUM(IF(sms_sent=1, 1, 0)) AS countSentSms');
+                                        if($request->from_date){
+                                            $list_data->where('created_at','>=',$request->from_date);
+                                        }
+                                        if($request->to_date){
+                                            $list_data ->where('created_at','<=',$request->to_date);
+                                        }
+            $list_data = $list_data->groupBy('filename')
+                                      ->get()->toArray();
         }
-        //dd($list_data);
 
         return view('dashboard',compact('list_data','category'));
     }
@@ -121,6 +127,11 @@ class DashboardController extends Controller
         return view('dashboarddetails');
     }
 
+    //displays nudge file details
+    public function nudge_details($id){
+        $location = 'dashboard';
+        return view('nudge_detail',compact('id','location'));
+    }
 
 
     public function weblinks_export($id)
