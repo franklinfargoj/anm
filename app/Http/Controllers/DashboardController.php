@@ -159,10 +159,16 @@ class DashboardController extends Controller
                 ];
 
                 foreach ($data as $value) {
+                    if($value['anm_sms_initiated'] == 0){
+                        $sms = '';
+                    }else{
+                        $sms = 'Yes';
+                    }
+
                     $excelData[] = array(
                         $value['weblink'],
                         $value['mobile_no'],
-                        $value['anm_sms_initiated'],
+                        $sms,
                         $value['ip_address'],
                         $value['clicked_at']
                     );
