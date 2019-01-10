@@ -154,7 +154,8 @@ class MosController extends Controller
                             'year' => $request->get('year'),
                             'created_at'=> Carbon::now(),
                             'updated_at'=> Carbon::now(),
-                            'rank'=>$value["rank"]
+                            'rank'=>$value["rank"],
+                            'sr_no'=>trim($value['sr_no']),
                         ];
                     }
                     if (!empty($arr)) {
@@ -252,24 +253,31 @@ class MosController extends Controller
     public function showReport($link)
     {
         $ip = $this->getRealIpAddr();
-        $insert = [];
-        $temp_feedback_logs = [
+        $temp_moic_logs = [
             'ip_address' => $ip ,
             'clicked_at' => Carbon::now(),
             'link' => $link,
             'created_at' => Carbon::now()
         ];
-        $insert = $temp_feedback_logs;
         $already_clicked = DB::table('moic_logs')->select('id')->where('link',$link)->get();
         if(count($already_clicked) == 0){
-            DB::table('moic_logs')->insert($insert);
 
-            DB::update('update moic_logs
-               set weblink_id=(select id from moic_ranking_reports where moic_ranking_reports.dr_weblink=moic_logs.link),
-               mobile_no=(select mobile from moic_ranking where
-               moic_ranking_reports.filename=moic_ranking.uploaded_file and
-                moic_ranking_reports.id=moic_logs.weblink_id)
-               WHERE weblink_id = 0');
+            DB::table('moic_logs')->insert($temp_moic_logs);
+
+            $moic_data = MoicRanking::leftJoin('moic_ranking_reports', 'moic_ranking_reports.sr_no', '=', 'moic_ranking.sr_no')
+                                    ->where('moic_ranking_reports.dr_weblink', $link)
+                                    ->select('moic_ranking.mobile','moic_ranking_reports.id')->first();
+
+            $mobile = $moic_data->mobile;
+            $weblink_id = $moic_data->id;
+
+            DB::table('moic_logs')
+                ->where('link', $link)
+                ->update([
+                    'mobile_no' => $mobile,
+                    'weblink_id' => $weblink_id
+                ]);
+
         }else{
             DB::table('moic_logs')
                 ->where('link',$link)
