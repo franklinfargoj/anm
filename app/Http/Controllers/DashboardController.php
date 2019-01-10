@@ -103,12 +103,17 @@ class DashboardController extends Controller
 
         $category = 'Moic';
         $file = MoicRanking::select('uploaded_file')
-                             ->where('id',$id)->get()->toArray();
+                             ->where('id',$id)->first();
 
-        $file_data = DB::table('moic_ranking_reports')->select('dr_weblink as weblink','moic_logs.ip_address','moic_logs.clicked_at','moic_ranking.sms_sent_initiated AS sms_sent','moic_logs.mobile_no')
-                                ->leftJoin('moic_ranking', 'moic_ranking_reports.rank_id', '=', 'moic_ranking.id')
-                                ->leftJoin('moic_logs', 'moic_ranking_reports.dr_weblink', '=', 'moic_logs.link')
-                                ->where('filename',$file[0]['uploaded_file'])->paginate(10);
+        $file_data = DB::table('moic_ranking_reports')->select('moic_ranking_reports.dr_weblink as weblink',
+                                                               'moic_logs.ip_address',
+                                                               'moic_logs.clicked_at','moic_logs.mobile_no',
+                                                               'moic_ranking.sms_sent_initiated AS sms_sent' )
+            ->leftJoin('moic_ranking','moic_ranking_reports.sr_no','=','moic_ranking.sr_no')
+            ->leftJoin('moic_logs','moic_ranking_reports.dr_weblink','=','moic_logs.link')
+            ->where('filename',$file->uploaded_file)
+            ->groupBy('moic_ranking_reports.dr_weblink')
+            ->paginate(10);
 
         return view('dashboarddetails',compact('file_data','id','category'));
     }
