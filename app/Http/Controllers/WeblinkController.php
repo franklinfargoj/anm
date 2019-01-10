@@ -18,7 +18,7 @@ class WeblinkController extends Controller
 {
     public function index($id)
     {
-        $anm_target_data = AnmTargetDataModel::select('phc_name','scenerio','month','year')
+        $anm_target_data = AnmTargetDataModel::select('phc_name','scenerio','month','year','filename')
                                                 ->where('weblink',$id)
                                                 ->get()
                                                 ->toArray();
@@ -53,9 +53,9 @@ class WeblinkController extends Controller
         $last_target_data = AnmTargetDataModel::select('district','phc_name','phc_hin','moic_name','moic_hin','moic_mobile_number','anm_name','anm_hin','subcenter_hindi',
             'anm_mobile_number','performer_category','scenerio')
             ->where('phc_name',$targetDataVariable[0]['phc_name'])
+            ->where('filename',$targetDataVariable[0]['filename'])
             ->get()
             ->toArray();
-
         foreach ($last_target_data as $value){
             $lstAnmCategory[$value['performer_category']][] = $value;
         }
@@ -101,18 +101,18 @@ class WeblinkController extends Controller
         }
 
         $ip = $this->getRealIpAddr();
-        $insert = [];
+       // $insert = [];
         $anm_weblink_logs = [
             'ip_address' => $ip ,
             'clicked_at' => Carbon::now(),
             'link' => $id,
             'created_at' => Carbon::now()
         ];
-        $insert = $anm_weblink_logs;
+     //   $insert = $anm_weblink_logs;
         $already_clicked = DB::table('anm_weblink_logs')->select('id')->where('link',$id)->get();
 
         if(count($already_clicked) == 0){
-            DB::table('anm_weblink_logs')->insert($insert);
+            DB::table('anm_weblink_logs')->insert($anm_weblink_logs);
             DB::update('update anm_weblink_logs
                set weblink_id=(select id from anm_target_data where anm_target_data.weblink=anm_weblink_logs.link),
                 mobile_no=(select anm_mobile_number from anm_target_data where anm_target_data.weblink=anm_weblink_logs.link)
