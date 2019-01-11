@@ -53,8 +53,13 @@
                             <th>Weblink</th>
                             <th>SMS sent</th>
                             <th>Mobile no.</th>
-                            <th>IP address</th>
-                            <th>Clicked at</th>
+                            <th>IP address 1</th>
+                            <th>Clicked at 1</th>
+                            <th>IP address 2</th>
+                            <th>Clicked at 2</th>
+                            <th>IP address 3</th>
+                            <th>Clicked at 3</th>
+
                         </tr>
                         </thead>
 {{--                        @php $i = 1;@endphp
@@ -93,9 +98,9 @@
 
                             <td>{{ $value->weblink }}</td>
 
-                            @if($value->sms_sent)
+                            @if($value->sms_sent == 1)
                                 <td>Yes</td>
-                            @else
+                            @elseif($value->sms_sent == 2 || $value->sms_sent == 0)
                                 <td>No</td>
                             @endif
 
@@ -113,6 +118,31 @@
 
                             @if($value->clicked_at)
                                 <td>{{ $value->clicked_at }}</td>
+                            @else
+                                <td>----</td>
+                            @endif
+
+
+                            @if($value->ip_address)
+                                <td>{{ $value->ip_address2 }}</td>
+                            @else
+                                <td>----</td>
+                            @endif
+
+                            @if($value->clicked_at)
+                                <td>{{ $value->clicked_at2 }}</td>
+                            @else
+                                <td>----</td>
+                            @endif
+
+                            @if($value->ip_address)
+                                <td>{{ $value->ip_address3 }}</td>
+                            @else
+                                <td>----</td>
+                            @endif
+
+                            @if($value->clicked_at)
+                                <td>{{ $value->clicked_at3 }}</td>
                             @else
                                 <td>----</td>
                             @endif
