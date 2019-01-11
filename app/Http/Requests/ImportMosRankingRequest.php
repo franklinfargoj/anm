@@ -27,7 +27,7 @@ class ImportMosRankingRequest extends FormRequest
             'month' => 'required',
             'year' => 'required',
             'sample_file' => 'required',
-            'schedule_at' => 'required'
+//            'schedule_at' => 'required'
 //            'sample_file' => 'required|mimes:application/vnd.ms-excel'
         ];
     }
@@ -38,7 +38,7 @@ class ImportMosRankingRequest extends FormRequest
             'month.required' => 'Select month',
             'year.required' => 'Select year',
             'sample_file.required' => 'Please upload excel file',
-            'schedule_at.required' => 'Please select SMS schedule date and time.'
+//            'schedule_at.required' => 'Please select SMS schedule date and time.'
 //            'sample_file.mimes' => 'Please upload valid excel'
         ];
     }

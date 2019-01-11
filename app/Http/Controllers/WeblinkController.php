@@ -101,26 +101,38 @@ class WeblinkController extends Controller
         }
 
         $ip = $this->getRealIpAddr();
-       // $insert = [];
+
         $anm_weblink_logs = [
             'ip_address' => $ip ,
             'clicked_at' => Carbon::now(),
             'link' => $id,
-            'created_at' => Carbon::now()
+            'created_at' => Carbon::now(),
+            'click_count' => 1
         ];
-     //   $insert = $anm_weblink_logs;
-        $already_clicked = DB::table('anm_weblink_logs')->select('id')->where('link',$id)->get();
 
-        if(count($already_clicked) == 0){
+        $already_clicked = DB::table('anm_weblink_logs')->select('id','click_count')->where('link',$id)->get()->first();
+
+        if(count($already_clicked) == 0 ){
+
             DB::table('anm_weblink_logs')->insert($anm_weblink_logs);
+
             DB::update('update anm_weblink_logs
                set weblink_id=(select id from anm_target_data where anm_target_data.weblink=anm_weblink_logs.link),
                 mobile_no=(select anm_mobile_number from anm_target_data where anm_target_data.weblink=anm_weblink_logs.link)
                WHERE weblink_id = 0');
-        }else{
+
+        }elseif($already_clicked->click_count == 1){
+
             DB::table('anm_weblink_logs')
                 ->where('link',$id)
-                ->update(['ip_address' => $ip,'clicked_at' =>Carbon::now()]);
+                ->update(['ip_address2' => $ip,'clicked_at2' =>Carbon::now(), 'click_count'=>2 ]);
+
+        }elseif($already_clicked->click_count == 2){
+
+            DB::table('anm_weblink_logs')
+                ->where('link',$id)
+                ->update(['ip_address3' => $ip,'clicked_at3' =>Carbon::now(),'click_count'=>3]);
+
         }
 
         if(!empty($targetDataVariable)){
