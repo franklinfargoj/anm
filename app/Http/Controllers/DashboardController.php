@@ -22,7 +22,6 @@ class DashboardController extends Controller
 
     public function listing(Request $request)
     {
-
        $category = $request['category_module'];
 
         if($category == 'Anm'){
@@ -91,7 +90,8 @@ class DashboardController extends Controller
         $file = AnmTargetDataModel::select('filename')
                 ->where('id',$id)->get()->toArray();
 
-        $file_data = AnmTargetDataModel::select('weblink','anm_sms_initiated AS sms_sent','anm_weblink_logs.ip_address','anm_weblink_logs.clicked_at','anm_weblink_logs.mobile_no')
+        $file_data = AnmTargetDataModel::select('weblink','anm_sms_initiated AS sms_sent','anm_weblink_logs.ip_address','anm_weblink_logs.clicked_at',
+            'anm_mobile_number AS mobile_no','anm_weblink_logs.ip_address2','anm_weblink_logs.clicked_at2','anm_weblink_logs.ip_address3','anm_weblink_logs.clicked_at3')
                 ->leftJoin('anm_weblink_logs', 'anm_target_data.weblink', '=', 'anm_weblink_logs.link')
                 ->where('filename',$file[0]['filename'])->paginate(10);
 
@@ -164,8 +164,8 @@ class DashboardController extends Controller
                 ];
 
                 foreach ($data as $value) {
-                    if($value['anm_sms_initiated'] == 0){
-                        $sms = '';
+                    if($value['anm_sms_initiated'] == 0 || $value['anm_sms_initiated'] == 2){
+                        $sms = 'No';
                     }else{
                         $sms = 'Yes';
                     }
