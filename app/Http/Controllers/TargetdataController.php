@@ -69,17 +69,17 @@ class TargetdataController extends Controller
         $arr_moic = explode(',', $target_data['moic_sent']);
             if( in_array("1", $arr_anm) || in_array("1", $arr_moic)){
                      return 'SMS\'s for this are already sent';
-                }
-                else{
+                }elseif (in_array("0", $arr_anm)){
                     return '<input type="hidden" id="'.$target_data['filename'].'" value="'.$target_data['filename'].'">
                         <input type="text" class="re_schedule" name="re_schedule" class="form-control">';
-                }
+                }elseif (in_array("2", $arr_anm)){
+                return 'SMS\'s for this file are disabled';
+            }
         })->addColumn('delete_file', function ($target_data) {
             $arr_anm = explode(',', $target_data['anm_sent']);
             if(in_array("1", $arr_anm)){
                 return 'SMS already sent';
-            }
-            else{
+            }else{
                 return '<a href="'.route('deleteAnmFile',$target_data['id']).'">Delete</a>';
             }
         })->rawColumns(['actions','reschedule','delete_file']);
@@ -89,6 +89,7 @@ class TargetdataController extends Controller
 
     public function importFile(ImportAnmRequest $request)
     {
+    //    dd($request->all());
         $obj = new ConvertToUnicode();
         //$this->validate($request, array('sample_file' => 'required'));;
         if ($request->hasFile('sample_file')) {
@@ -202,35 +203,72 @@ class TargetdataController extends Controller
                             $subcenterNameInHindi = $obj->convert_to_unicode2($value["phc_name_hindi"]);
                         }
 
-                        $arr[] = [
-                            'district' => $request->get("district"),
-                            'block' => $value["block"],
-                            'subcenter' => $value["phcsc"],
-                            'phc_name' => strtolower($value["phc_name"]),
-                            'phc_hin' => $phcNameInHindi,
-                            'moic_name' => $value["moic_name"],
-                            'moic_hin' => $moicNameInHindi,
-                            'moic_mobile_number' => $value["moic_phone_number"],
-                            'anm_name' => $value["anm_name"],
-                            'anm_hin' => $anmNameInHindi,
-                            'anm_mobile_number' => $value["anm_phone_number"],
-                            'performer_category' => strtoupper($value["performer_category"]),
-                            'scenerio' => $value["scenario"],
-                            'created_at' => $day_time,
-                            'uploaded_on' => $day,
-                            'weblink' => $web[$value["phc_name"]],
-                            'schedule_at'=>  $request->get("schedule_at"),
-                            'filename' => $file_name,
-                            'og_filename' => $og_file_name,
-                            /*'beneficiary_code'=> $beneficiary[$value["phc_name"]],
-                            'moic_code'=>$moic[$value["phc_name"]],*/
-                            'month' => $request->get('month'),
-                            'year' => $request->get('year'),
-                            'anm_custom_msg' => rtrim($msg, ','),
-                            'moic_custom_msg' => $obj->convert_to_unicode2($value['moic_name_hindi']) . ', क्या आप जानना चाहते हैं की ' . $months[$request->get('month')] . ' ' . $request->get('year') . ' में ' . $obj->convert_to_unicode2($value['phc_name_hindi']) . ' पीएचसी की कौनसी एनम् सबसे अच्छा काम करके, एक मिसाल बनी? जानने के लिए नीचे लिंक पर क्लिक करके देखिये:',
-                            'beneficiary_custom_msg' => 'क्या आप जानना चाहते हैं की ' . $months[$request->get('month')] . ' ' . $request->get('year') . ' में ' . $obj->convert_to_unicode2($value['phc_name_hindi']) . ' पीएचसी की कौनसी एनम् सबसे अच्छा काम करके, एक मिसाल बनी? जानने के लिए नीचे लिंक पर क्लिक करके देखिये:',
-                            'subcenter_hindi'=> trim($subcenterNameInHindi),
-                        ];
+                        if($request->get("disable_sms")){
+                            $arr[] = [
+                                'district' => $request->get("district"),
+                                'block' => $value["block"],
+                                'subcenter' => $value["phcsc"],
+                                'phc_name' => strtolower($value["phc_name"]),
+                                'phc_hin' => $phcNameInHindi,
+                                'moic_name' => $value["moic_name"],
+                                'moic_hin' => $moicNameInHindi,
+                                'moic_mobile_number' => $value["moic_phone_number"],
+                                'anm_name' => $value["anm_name"],
+                                'anm_hin' => $anmNameInHindi,
+                                'anm_mobile_number' => $value["anm_phone_number"],
+                                'performer_category' => strtoupper($value["performer_category"]),
+                                'scenerio' => $value["scenario"],
+                                'created_at' => $day_time,
+                                'uploaded_on' => $day,
+                                'weblink' => $web[$value["phc_name"]],
+                                'schedule_at'=>  $request->get("schedule_at"),
+                                'anm_sms_initiated' => 2,                    //set by default to 1  so it wont schedule sms
+                                'filename' => $file_name,
+                                'og_filename' => $og_file_name,
+                                'month' => $request->get('month'),
+                                'year' => $request->get('year'),
+                                'anm_custom_msg' => rtrim($msg, ','),
+                                'moic_custom_msg' => '----',
+                                'beneficiary_custom_msg' => '----',
+                                'subcenter_hindi'=> trim($subcenterNameInHindi),
+                            ];
+
+                        }else{
+
+                            $this->validate($request, [
+                                'schedule_at' => 'required'
+                            ]);
+
+                            $arr[] = [
+                                'district' => $request->get("district"),
+                                'block' => $value["block"],
+                                'subcenter' => $value["phcsc"],
+                                'phc_name' => strtolower($value["phc_name"]),
+                                'phc_hin' => $phcNameInHindi,
+                                'moic_name' => $value["moic_name"],
+                                'moic_hin' => $moicNameInHindi,
+                                'moic_mobile_number' => $value["moic_phone_number"],
+                                'anm_name' => $value["anm_name"],
+                                'anm_hin' => $anmNameInHindi,
+                                'anm_mobile_number' => $value["anm_phone_number"],
+                                'performer_category' => strtoupper($value["performer_category"]),
+                                'scenerio' => $value["scenario"],
+                                'created_at' => $day_time,
+                                'uploaded_on' => $day,
+                                'weblink' => $web[$value["phc_name"]],
+                                'schedule_at'=>  $request->get("schedule_at"),
+                                'filename' => $file_name,
+                                'og_filename' => $og_file_name,
+                                /*'beneficiary_code'=> $beneficiary[$value["phc_name"]],
+                                'moic_code'=>$moic[$value["phc_name"]],*/
+                                'month' => $request->get('month'),
+                                'year' => $request->get('year'),
+                                'anm_custom_msg' => rtrim($msg, ','),
+                                'moic_custom_msg' => $obj->convert_to_unicode2($value['moic_name_hindi']) . ', क्या आप जानना चाहते हैं की ' . $months[$request->get('month')] . ' ' . $request->get('year') . ' में ' . $obj->convert_to_unicode2($value['phc_name_hindi']) . ' पीएचसी की कौनसी एनम् सबसे अच्छा काम करके, एक मिसाल बनी? जानने के लिए नीचे लिंक पर क्लिक करके देखिये:',
+                                'beneficiary_custom_msg' => 'क्या आप जानना चाहते हैं की ' . $months[$request->get('month')] . ' ' . $request->get('year') . ' में ' . $obj->convert_to_unicode2($value['phc_name_hindi']) . ' पीएचसी की कौनसी एनम् सबसे अच्छा काम करके, एक मिसाल बनी? जानने के लिए नीचे लिंक पर क्लिक करके देखिये:',
+                                'subcenter_hindi'=> trim($subcenterNameInHindi),
+                            ];
+                        }
                     }
                     if (!empty($arr)) {
                         $inserted = DB::table('anm_target_data')->insert($arr);
