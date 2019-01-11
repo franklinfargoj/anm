@@ -181,6 +181,7 @@ return [
         'Anam\PhantomMagick\ConverterServiceProvider',
         Chumper\Zipper\ZipperServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        Fx3costa\LaravelChartJs\Providers\ChartjsServiceProvider::class,
 
     ],
 
@@ -239,7 +240,7 @@ return [
         'Zipper' => Chumper\Zipper\Zipper::class,
         'Helpers' => App\Classes\Helpers::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
-
+        'Chart' =>Fx3costa\LaravelChartJs\Providers\ChartjsServiceProvider::class,
     ],
 
 

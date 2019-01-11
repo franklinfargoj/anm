@@ -31,6 +31,7 @@
 <script type="text/javascript" src="{{ asset('js/datatables.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/dataTables.responsive.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/date/jquery-ui.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/Chart.js') }}"></script>
 
 @yield('js')
 </html>
