@@ -75,7 +75,7 @@
 
                 <div class="col-sm-2">
                     <div class="form-group">
-                        <label><input type='checkbox' onclick='handleClick(this);'>Disable sms schedule</label>
+                        <label><input type='checkbox' name="disable_sms" onclick='handleClick(this);'>Disable sms schedule</label>
                     </div>
                 </div>
 
