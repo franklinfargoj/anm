@@ -66,8 +66,13 @@
                     </div>
                 </div>
 
-
                 <div class="col-sm-2">
+                    <div class="form-group">
+                        <label><input type='checkbox' name="disable_sms" onclick='handleClick(this);'>Disable sms schedule</label>
+                    </div>
+                </div>
+
+                <div class="col-sm-2 schedule_at1">
                     <div class="form-group">
                         <label>SMS schedule</label>
                         <input type="text" id="schedule_at" name="schedule_at" placeholder="Select date and time" class="form-control">
@@ -174,5 +179,15 @@
                 });
             });
         });
+
+        function handleClick(cb) {
+            if (!cb.checked) {
+                $(".schedule_at1").fadeIn();
+            }
+            else{
+                $(".schedule_at1").fadeOut();
+                $("#schedule_at").val('');
+            }
+        }
     </script>
 @endsection
