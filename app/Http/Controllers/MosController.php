@@ -49,13 +49,15 @@ class MosController extends Controller
             }
             return "Processing";
         })->addColumn('reschedule', function($moic){
-
             $arr_reschedule = explode(',', $moic['sms_sent_initiateds']);
             if(in_array("1", $arr_reschedule)){
                 return 'SMS already sent';
-            }else{
+            }elseif(in_array("0", $arr_reschedule)){
+
                 return '<input type="hidden" id="'.$moic['uploaded_file'].'" value="'.$moic['id'].'">
                         <input type="text" class="re_schedule" name="re_schedule" class="form-control">';
+            }elseif (in_array("2", $arr_reschedule)){
+                return 'SMS\'s for this file are disabled';
             }
         })->addColumn('delete_file', function ($moic) {
 
@@ -135,28 +137,63 @@ class MosController extends Controller
                         $phcNameInHindi = $obj->convert_to_unicode2($value["phc_name_in_hindi"]);
                         $doctorNameInHindi = $obj->convert_to_unicode2($value["doctor_name_in_hindi"]);
                         $blockNameInHindi = $obj->convert_to_unicode2($value["block_name_in_hindi"]);
-                        $arr[] = [
-                            'block' => $value["block"],
-                            'block_hin' => $blockNameInHindi,
-                            'phc_en' =>$value["phc"],
-                            'phc_hin' => $phcNameInHindi,
-                            'dr_name_en' =>$value["name_of_incharge"],
-                            'dr_name_hin' =>$doctorNameInHindi,
-                            'mobile' =>$value["mobile_no"],
-                            'email' => $value["email_id"],
-                            'scenerio' => strtoupper($value["performance"]),
-                            'og_moic_filename'=> $moic_filename,
-                            'uploaded_file' => $file_name,
-                            'ranking_pdf' => '',
-                            'zip_path' => '',
-                            'schedule_at'=>  $request->get("schedule_at"),
-                            'month' => $request->get('month'),
-                            'year' => $request->get('year'),
-                            'created_at'=> Carbon::now(),
-                            'updated_at'=> Carbon::now(),
-                            'rank'=>$value["rank"],
-                            'sr_no'=>trim($value['sr_no']),
-                        ];
+
+                        if($request->get("disable_sms")){
+
+                            $arr[] = [
+                                'block' => $value["block"],
+                                'block_hin' => $blockNameInHindi,
+                                'phc_en' =>$value["phc"],
+                                'phc_hin' => $phcNameInHindi,
+                                'dr_name_en' =>$value["name_of_incharge"],
+                                'dr_name_hin' =>$doctorNameInHindi,
+                                'mobile' =>$value["mobile_no"],
+                                'email' => $value["email_id"],
+                                'scenerio' => strtoupper($value["performance"]),
+                                'og_moic_filename'=> $moic_filename,
+                                'uploaded_file' => $file_name,
+                                'ranking_pdf' => '',
+                                'zip_path' => '',
+                                'schedule_at'=>  $request->get("schedule_at"),
+                                'month' => $request->get('month'),
+                                'year' => $request->get('year'),
+                                'created_at'=> Carbon::now(),
+                                'updated_at'=> Carbon::now(),
+                                'rank'=>$value["rank"],
+                                'sr_no'=>trim($value['sr_no']),
+                                'sms_sent_initiated' => 2,                    //set by default to 2  so it wont schedule sms
+                            ];
+
+                        }else{
+
+                            $this->validate($request, [
+                                'schedule_at' => 'required'
+                            ]);
+
+                            $arr[] = [
+                                'block' => $value["block"],
+                                'block_hin' => $blockNameInHindi,
+                                'phc_en' =>$value["phc"],
+                                'phc_hin' => $phcNameInHindi,
+                                'dr_name_en' =>$value["name_of_incharge"],
+                                'dr_name_hin' =>$doctorNameInHindi,
+                                'mobile' =>$value["mobile_no"],
+                                'email' => $value["email_id"],
+                                'scenerio' => strtoupper($value["performance"]),
+                                'og_moic_filename'=> $moic_filename,
+                                'uploaded_file' => $file_name,
+                                'ranking_pdf' => '',
+                                'zip_path' => '',
+                                'schedule_at'=>  $request->get("schedule_at"),
+                                'month' => $request->get('month'),
+                                'year' => $request->get('year'),
+                                'created_at'=> Carbon::now(),
+                                'updated_at'=> Carbon::now(),
+                                'rank'=>$value["rank"],
+                                'sr_no'=>trim($value['sr_no']),
+                            ];
+                        }
+
                     }
                     if (!empty($arr)) {
                         $dir = 'moic/imports'; $pdfdir = 'moic/rankings';
