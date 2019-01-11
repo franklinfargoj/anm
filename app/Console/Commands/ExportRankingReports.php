@@ -70,7 +70,7 @@ class ExportRankingReports extends Command
             $insert = [];
             foreach ($rankings as $ranking) {
 
-                if($ranking['month_year'] == null){
+                    if($ranking['month_year'] == null){
                     continue;
                 }
 
@@ -108,6 +108,7 @@ class ExportRankingReports extends Command
     private function generateInsert($file, $ranking, $str, $month, $year, $particular)
     {
         return [
+            'sr_no'=>trim($ranking['sr_no']),
             'filename' => $file->uploaded_file,
             'district' => $ranking['district_name'],
             'dr_weblink' => $str,
