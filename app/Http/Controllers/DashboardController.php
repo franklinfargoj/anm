@@ -107,7 +107,7 @@ class DashboardController extends Controller
 
         $file_data = DB::table('moic_ranking_reports')->select('moic_ranking_reports.dr_weblink as weblink',
                                                                'moic_logs.ip_address',
-                                                               'moic_logs.clicked_at','moic_logs.mobile_no',
+                                                               'moic_logs.clicked_at','moic_ranking.mobile as mobile_no',
                                                                'moic_ranking.sms_sent_initiated AS sms_sent',
             'moic_logs.ip_address2','moic_logs.clicked_at2','moic_logs.ip_address3','moic_logs.clicked_at3')
             ->leftJoin('moic_ranking','moic_ranking_reports.sr_no','=','moic_ranking.sr_no')
@@ -200,10 +200,12 @@ class DashboardController extends Controller
                             ->where('id',$id)
                             ->first();
 
-        $file_data = DB::table('moic_ranking_reports')->select('dr_weblink as weblink','moic_logs.ip_address','moic_logs.clicked_at','moic_ranking.sms_sent_initiated AS sms_sent','moic_logs.mobile_no')
-            ->leftJoin('moic_ranking', 'moic_ranking_reports.rank_id', '=', 'moic_ranking.id')
+        $file_data = DB::table('moic_ranking_reports')->select('dr_weblink as weblink','moic_logs.ip_address','moic_logs.clicked_at',
+            'moic_ranking.sms_sent_initiated AS sms_sent','moic_ranking.mobile','moic_logs.ip_address2','moic_logs.clicked_at2','moic_logs.ip_address3','moic_logs.clicked_at3')
+            ->leftJoin('moic_ranking', 'moic_ranking_reports.sr_no', '=', 'moic_ranking.sr_no')
             ->leftJoin('moic_logs', 'moic_ranking_reports.dr_weblink', '=', 'moic_logs.link')
             ->where('filename',$file['uploaded_file'])->get()->toArray();
+
 
         \Excel::create('moic_weblink'.time(), function($excel) use($file_data) {
             $excel->sheet('moic_weblink', function($sheet) use($file_data) {
@@ -212,8 +214,12 @@ class DashboardController extends Controller
                     'Weblink',
                     'Mobile number',
                     'SMS sent(y/n)',
-                    'IP address',
-                    'Clicked at'
+                    'IP address1',
+                    'Clicked at1',
+                    'IP address 2',
+                    'IP2 Clicked at',
+                    'IP address 3',
+                    'IP3 Clicked at'
                 ];
 
                 foreach ($file_data as $value) {
@@ -226,10 +232,16 @@ class DashboardController extends Controller
 
                     $excelData[] = array(
                         url('/').'/scorecard/'.$value->weblink,
-                        $value->mobile_no,
+                        $value->mobile,
                         $sms,
                         $value->ip_address,
-                        $value->clicked_at
+                        $value->clicked_at,
+
+                        $value->ip_address2,
+                        $value->clicked_at2,
+                        $value->ip_address3,
+                        $value->clicked_at3
+
                     );
                 }
                 $sheet->fromArray($excelData, null, 'A1', true, false);
