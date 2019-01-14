@@ -146,7 +146,8 @@ class DashboardController extends Controller
             ->where('id',$id)
             ->first();
 
-        $data = AnmTargetDataModel::select('weblink','anm_sms_initiated','anm_weblink_logs.ip_address','anm_weblink_logs.clicked_at','anm_weblink_logs.mobile_no')
+        $data = AnmTargetDataModel::select('weblink','anm_sms_initiated','anm_mobile_number',
+            'anm_weblink_logs.ip_address','anm_weblink_logs.clicked_at','anm_weblink_logs.ip_address2','anm_weblink_logs.clicked_at2','anm_weblink_logs.ip_address3','anm_weblink_logs.clicked_at3')
                                 ->leftJoin('anm_weblink_logs', 'anm_target_data.id', '=', 'anm_weblink_logs.weblink_id')
                                 ->where('filename',$file['filename'])
                                 ->get()
@@ -159,8 +160,12 @@ class DashboardController extends Controller
                     'Weblink',
                     'Mobile number',
                     'SMS sent(y/n)',
-                    'IP address',
-                    'Clicked at'
+                    'IP address1',
+                    'Clicked at1',
+                    'IP address 2',
+                    'IP2 Clicked at',
+                    'IP address 3',
+                    'IP3 Clicked at'
                 ];
 
                 foreach ($data as $value) {
@@ -172,10 +177,14 @@ class DashboardController extends Controller
 
                     $excelData[] = array(
                         $value['weblink'],
-                        $value['mobile_no'],
+                        $value['anm_mobile_number'],
                         $sms,
                         $value['ip_address'],
-                        $value['clicked_at']
+                        $value['clicked_at'],
+                        $value['ip_address2'],
+                        $value['clicked_at2'],
+                        $value['ip_address3'],
+                        $value['clicked_at3'],
                     );
                 }
                 $sheet->fromArray($excelData, null, 'A1', true, false);
