@@ -294,17 +294,18 @@ class MosController extends Controller
             'ip_address' => $ip ,
             'clicked_at' => Carbon::now(),
             'link' => $link,
-            'created_at' => Carbon::now()
+            'created_at' => Carbon::now(),
+            'click_count' => 1
         ];
-        $already_clicked = DB::table('moic_logs')->select('id')->where('link',$link)->get();
+
+        $already_clicked = DB::table('moic_logs')->select('id','click_count')->where('link',$link)->get()->first();
+
         if(count($already_clicked) == 0){
 
             DB::table('moic_logs')->insert($temp_moic_logs);
-
             $moic_data = MoicRanking::leftJoin('moic_ranking_reports', 'moic_ranking_reports.sr_no', '=', 'moic_ranking.sr_no')
                                     ->where('moic_ranking_reports.dr_weblink', $link)
-                                    ->select('moic_ranking.mobile','moic_ranking_reports.id')->first();
-
+                                    ->select('moic_ranking.mobile','moic_ranking_reports.id')->get()->first();
             $mobile = $moic_data->mobile;
             $weblink_id = $moic_data->id;
 
@@ -315,11 +316,16 @@ class MosController extends Controller
                     'weblink_id' => $weblink_id
                 ]);
 
-        }else{
+        }elseif($already_clicked->click_count == 1){
             DB::table('moic_logs')
                 ->where('link',$link)
-                ->update(['ip_address' => $ip,'clicked_at' =>Carbon::now()]);
+                ->update(['ip_address2' => $ip,'clicked_at2' =>Carbon::now(),'click_count'=>2]);
+        }elseif($already_clicked->click_count == 2){
+            DB::table('moic_logs')
+                ->where('link',$link)
+                ->update(['ip_address3' => $ip,'clicked_at3' =>Carbon::now(),'click_count'=>3]);
         }
+
         $months = \DB::table('master_months')->pluck('month_english', 'id')->toArray();
         $report = \DB::table('moic_ranking_reports')->where('dr_weblink', $link)->get()->toArray();
         if(!empty($report)){
