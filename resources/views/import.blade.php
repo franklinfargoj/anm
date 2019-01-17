@@ -66,7 +66,7 @@
                     <div class="form-group">
                         <label>Year</label>
                         <select class="form-control" name="year">
-                            @foreach (range(date('Y'), 2025) as $key => $value) {
+                            @foreach (range(2017, 2025) as $key => $value) {
                                 <option>{{$value}}</option>;
                             @endforeach
                         </select>
