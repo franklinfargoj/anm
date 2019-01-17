@@ -57,7 +57,7 @@ class MosController extends Controller
                 return '<input type="hidden" id="'.$moic['uploaded_file'].'" value="'.$moic['id'].'">
                         <input type="text" class="re_schedule" name="re_schedule" class="form-control">';
             }elseif (in_array("2", $arr_reschedule)){
-                return 'SMS\'s for this file are disabled';
+                return 'SMS\'s are disabled';
             }
         })->addColumn('delete_file', function ($moic) {
 

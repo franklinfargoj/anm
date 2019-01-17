@@ -43,7 +43,6 @@ class TargetdataController extends Controller
             $query->where('district_name', $first_district);
         })->pluck('block_name', 'id');
         return view('import', compact('district', 'block'));
-
     }
 
     public function fetchTargetData()
@@ -73,7 +72,7 @@ class TargetdataController extends Controller
                     return '<input type="hidden" id="'.$target_data['filename'].'" value="'.$target_data['filename'].'">
                         <input type="text" class="re_schedule" name="re_schedule" class="form-control">';
                 }elseif (in_array("2", $arr_anm)){
-                return 'SMS\'s for this file are disabled';
+                return 'SMS\'s disabled';
             }
         })->addColumn('delete_file', function ($target_data) {
             $arr_anm = explode(',', $target_data['anm_sent']);
