@@ -41,7 +41,7 @@ class NudgeSmsDispatch extends Command
      */
     public function handle()
     {
-        $newsms = NudgeModel::where('sms_sent', 0)->where('schedule_at', '<', Carbon::now())->get()->toArray();
+        $newsms = NudgeModel::where('sms_sent', 0)->where('schedule_at', '<', Carbon::now())->whereNull('deleted_at')->get()->toArray();
         $cnt = count($newsms);
 
         if($cnt > 0){
