@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\NudgeModel;
 use Carbon\Carbon;
+use DB;
 use App\Classes\Helpers;
 
 
@@ -41,7 +42,11 @@ class NudgeSmsDispatch extends Command
      */
     public function handle()
     {
+        DB::connection()->enableQueryLog();
         $newsms = NudgeModel::where('sms_sent', 0)->where('schedule_at', '<', Carbon::now())->whereNull('deleted_at')->get()->toArray();
+        $queries = DB::getQueryLog();
+
+        print_r($queries);exit;
         $cnt = count($newsms);
 
         if($cnt > 0){
