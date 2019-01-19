@@ -50,7 +50,7 @@ class NudgeSmsDispatch extends Command
             foreach ($newsms as $sms){
                 $message = $sms['message'];
                 $phone_no = $sms['phone_no'];
-                $status = Helpers::sendSmsUnicode($message,$phone_no);
+                //$status = Helpers::sendSmsUnicode($message,$phone_no);
                 $ids[] = $sms['id'];
                 /*if($status['status'] == 200 && (str_contains($status['response'], '402') == true)){
                     $ids[] = $sms['id'];
