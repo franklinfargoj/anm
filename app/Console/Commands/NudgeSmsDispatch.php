@@ -43,7 +43,7 @@ class NudgeSmsDispatch extends Command
     public function handle()
     {
         DB::connection()->enableQueryLog();
-        $newsms = NudgeModel::where('sms_sent', 0)->where('schedule_at', '<', Carbon::now())->whereNull('deleted_at')->get()->toArray();
+        $newsms = NudgeModel::where('sms_sent', 0)->where('schedule_at', '<', Carbon::now())->get()->toArray();
         $queries = DB::getQueryLog();
 
         print_r($queries);exit;
