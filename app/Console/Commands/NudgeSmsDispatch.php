@@ -47,6 +47,8 @@ class NudgeSmsDispatch extends Command
         if($cnt > 0){
             $ids= [];
             echo $cnt." new nudge sms requests found".PHP_EOL;
+            print_r($newsms);
+            exit;
             foreach ($newsms as $sms){
                 $message = $sms['message'];
                 $phone_no = $sms['phone_no'];
