@@ -42,33 +42,27 @@ class NudgeSmsDispatch extends Command
      */
     public function handle()
     {
-        DB::connection()->enableQueryLog();
-        $newsms = NudgeModel::where('sms_sent', 0)->where('schedule_at', '<', Carbon::now())->get()->toArray();
-        $queries = DB::getQueryLog();
-
-        print_r($queries);exit;
+        $date = date('Y-m-d H:i:s');
+        $newsms = NudgeModel::where('sms_sent', 0)->where('schedule_at', '<', $date)->get()->toArray();
         $cnt = count($newsms);
 
         if($cnt > 0){
             $ids= [];
             echo $cnt." new nudge sms requests found".PHP_EOL;
-            print_r($newsms);
-            exit;
+            
             foreach ($newsms as $sms){
                 $message = $sms['message'];
                 $phone_no = $sms['phone_no'];
-                //$status = Helpers::sendSmsUnicode($message,$phone_no);
+                $status = Helpers::sendSmsUnicode($message,$phone_no);
                 $ids[] = $sms['id'];
-                /*if($status['status'] == 200 && (str_contains($status['response'], '402') == true)){
+                if($status['status'] == 200 && (str_contains($status['response'], '402') == true)){
                     $ids[] = $sms['id'];
                     $temp['sms_sent'] = 1;
                 }else{
                     $temp['sms_sent'] = 0;
-                }*/
-                
+                }      
             }
-            print_r($ids);
-            exit;
+            
             NudgeModel::whereIn('id', $ids)->update(['sms_sent' => 1]);
             echo count($ids)." "."nudge message dispatched".PHP_EOL;
         }else{
