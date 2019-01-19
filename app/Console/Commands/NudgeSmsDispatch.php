@@ -51,14 +51,18 @@ class NudgeSmsDispatch extends Command
                 $message = $sms['message'];
                 $phone_no = $sms['phone_no'];
                 $status = Helpers::sendSmsUnicode($message,$phone_no);
-                if($status['status'] == 200 && (str_contains($status['response'], '402') == true)){
+                $ids[] = $sms['id'];
+                /*if($status['status'] == 200 && (str_contains($status['response'], '402') == true)){
                     $ids[] = $sms['id'];
                     $temp['sms_sent'] = 1;
                 }else{
                     $temp['sms_sent'] = 0;
-                }
-                NudgeModel::whereIn('id', $ids)->update(['sms_sent' => 1]);
+                }*/
+                
             }
+            print_r($ids);
+            exit;
+            NudgeModel::whereIn('id', $ids)->update(['sms_sent' => 1]);
             echo count($ids)." "."nudge message dispatched".PHP_EOL;
         }else{
             echo "All nudge sms are dispatched till date.".PHP_EOL;
