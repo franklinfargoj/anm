@@ -25,7 +25,7 @@ class BeneficiarySmsDispatch extends Command
      *
      * @var string
      */
-    protected $description = 'Send sms to moic from targetted data';
+    protected $description = 'Send sms to beneficiary from targetted data';
 
     /**
      * Create a new command instance.

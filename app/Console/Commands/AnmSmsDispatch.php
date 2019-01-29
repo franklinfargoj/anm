@@ -23,7 +23,7 @@ class AnmSmsDispatch extends Command
      *
      * @var string
      */
-    protected $description = 'Send sms to moic from targetted data';
+    protected $description = 'Send sms to anm from targetted data';
 
     /**
      * Create a new command instance.
