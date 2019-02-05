@@ -215,7 +215,7 @@ class DashboardController extends Controller
                     'Mobile number',
                     'SMS sent(y/n)',
                     'IP address1',
-                    'Clicked at1',
+                    'IP1 Clicked at',
                     'IP address 2',
                     'IP2 Clicked at',
                     'IP address 3',
