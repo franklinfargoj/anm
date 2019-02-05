@@ -225,7 +225,7 @@ class DashboardController extends Controller
                 foreach ($file_data as $value) {
 
                     if($value->sms_sent == 0){
-                        $sms = '';
+                        $sms = 'No';
                     }else{
                         $sms = 'Yes';
                     }
