@@ -204,7 +204,9 @@ class DashboardController extends Controller
             'moic_ranking.sms_sent_initiated AS sms_sent','moic_ranking.mobile','moic_logs.ip_address2','moic_logs.clicked_at2','moic_logs.ip_address3','moic_logs.clicked_at3')
             ->leftJoin('moic_ranking', 'moic_ranking_reports.sr_no', '=', 'moic_ranking.sr_no')
             ->leftJoin('moic_logs', 'moic_ranking_reports.dr_weblink', '=', 'moic_logs.link')
-            ->where('filename',$file['uploaded_file'])->get()->toArray();
+            ->where('filename',$file['uploaded_file'])
+            ->groupBy('moic_ranking_reports.dr_weblink')
+            ->get()->toArray();
 
 
         \Excel::create('moic_weblink'.time(), function($excel) use($file_data) {
