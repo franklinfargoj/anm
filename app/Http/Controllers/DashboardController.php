@@ -177,7 +177,7 @@ class DashboardController extends Controller
                     }
 
                     $excelData[] = array(
-                        $value['weblink'],
+                        url('/').'/anm/'.$value['weblink'],
                         $value['anm_mobile_number'],
                         $sms,
                         $value['ip_address'],

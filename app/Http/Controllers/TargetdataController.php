@@ -112,7 +112,7 @@ class TargetdataController extends Controller
                     foreach ($data as $key => $value) {
 
                         $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-                        $str = substr(str_shuffle($chars), 0, 10);
+                        $str = substr(str_shuffle($chars), 0, 10).time();
                         $web[$value["phc_name"]] = $str;
 
                         $str1 = substr(str_shuffle($chars), 0, 10);
