@@ -86,7 +86,7 @@ class ExportRankingReports extends Command
                     continue;
                 }
                 
-                $str = substr(str_shuffle($chars), 0, 10);
+                $str = substr(str_shuffle($chars), 0, 10).time();
                 $weblink = md5($particular['id']);
                 
                 $insert[] = $this->generateInsert($file, $ranking, $str, $month, $year, $particular);
