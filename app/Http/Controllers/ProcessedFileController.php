@@ -19,16 +19,21 @@ class ProcessedFileController extends Controller
      */
     public function index($id)
     {
-        return view('processedfile',compact('id'));
+        $status = AnmTargetDataModel::select('status')
+            ->where('id',$id)
+            ->first()->toArray();
+        return view('processedfile',compact('id','status'));
     }
-
 
     public function fetchProcessData($id){
         $file_name = AnmTargetDataModel::select('filename')
                     ->where('id',$id)
                     ->first();
 
-        $processData = AnmTargetDataModel::select('id','block','phc_name', 'subcenter','weblink','beneficiary_code','moic_code', 'anm_custom_msg', 'moic_custom_msg', 'beneficiary_custom_msg')
+      //  echo $file_name;die;
+
+        $processData = AnmTargetDataModel::select('id','block','phc_name', 'subcenter','weblink','beneficiary_code','moic_code', 'anm_custom_msg',
+            'moic_custom_msg', 'beneficiary_custom_msg')
                                         ->where('status','Y')
                                         ->where('filename','LIKE',$file_name['filename'])
                                         ->get()
@@ -54,7 +59,7 @@ class ProcessedFileController extends Controller
 
    public function export($request){
 
-        $file = AnmTargetDataModel::select('filename')
+       $file = AnmTargetDataModel::select('filename')
                     ->where('id',$request)
                     ->first();
         $file_name = $file['filename'];
@@ -86,119 +91,100 @@ class ProcessedFileController extends Controller
                                               ->where('filename','=',$file_name)
                                               ->get()
                                               ->toArray();
+       \Excel::create('target_data'.time(), function($excel) use($anm_target_data,$beneficiary_data,$block_name,$weblink,$message) {
 
-        \Excel::create('target_data'.time(), function($excel) use($anm_target_data,$beneficiary_data,$block_name,$weblink,$message) {
+           $excel->sheet('target_data', function($sheet) use($anm_target_data) {
+               $excelData = [];
+               $excelData[] = [
+                   'District',
+                   'Block',
+                   'Phc Name',
+                   'MOIC Name',
+                   'MOIC Phone Number',
+                   'ANM Name',
+                   'ANM Phone Number',
+                   'Performer Category',
+                   'Scenario',
+                   'Weblink',
+                   'Anm customised text message',
+                   'MOIC customised text message',
+                   'Final Anm sms',
+                   'Final Moic sms'
+               ];
 
-            $excel->sheet('target_data', function($sheet) use($anm_target_data) {
-                $excelData = [];
-                $excelData[] = [
-                    'District',
-                    'Block',
-                    'Phc Name',
-                    'MOIC Name',
-                    'MOIC Phone Number',
-                    'ANM Name',
-                    'ANM Phone Number',
-                    'Performer Category',
-                    'Scenario',
-                    'Weblink',
-                    'Anm customised text message',
-                    'MOIC customised text message',
-                    'Final Anm sms',
-                    'Final Moic sms'
-                ];
+               foreach ($anm_target_data as $value) {
+                   $excelData[] = array(
+                       $value['district']['district_name'],
+                       $value['block'],
+                       ucwords($value['phc_name']),
+                       $value['moic_name'],
+                       $value['moic_mobile_number'],
+                       $value['anm_name'],
+                       $value['anm_mobile_number'],
+                       $value['performer_category'],
+                       $value['scenerio'],
+                       url('/anm/'.$value['weblink']),
+                       $value['anm_custom_msg'],
+                       $value['moic_custom_msg'],
+                       $value['anm_custom_msg'].url('/anm/'.$value['weblink']),
+                       $value['moic_custom_msg'].url('/anm/'.$value['weblink'])
+                   );
+               }
+               $sheet->fromArray($excelData, null, 'A1', true, false);
+           });
 
-                foreach ($anm_target_data as $value) {
-                    $excelData[] = array(
-                        $value['district']['district_name'],
-                        $value['block'],
-                        ucwords($value['phc_name']),
-                        $value['moic_name'],
-                        $value['moic_mobile_number'],
-                        $value['anm_name'],
-                        $value['anm_mobile_number'],
-                        $value['performer_category'],
-                        $value['scenerio'],
-                        url('/anm/'.$value['weblink']),
-                        $value['anm_custom_msg'],
-                        $value['moic_custom_msg'],
-                        $value['anm_custom_msg'].url('/anm/'.$value['weblink']),
-                        $value['moic_custom_msg'].url('/anm/'.$value['weblink'])
-                    );
-                }
-                $sheet->fromArray($excelData, null, 'A1', true, false);
-            });
+           $excel->sheet('beneficiary', function($sheet) use($beneficiary_data,$block_name,$weblink,$message) {
+               $excelData = [];
 
-            $excel->sheet('beneficiary', function($sheet) use($beneficiary_data,$block_name,$weblink,$message) {
-                $excelData = [];
+               $excelData[] = [
+                   'District',
+                   'Block',
+                   'Phc Name',
+                   'Beneficiary Phone Number',
+                   'Weblink',
+                   'Beneficiary message',
+                   'Final sms'
+               ];
 
-                $excelData[] = [
-                    'District',
-                    'Block',
-                    'Phc Name',
-                    'Beneficiary Phone Number',
-                    'Weblink',
-                    'Beneficiary message',
-                    'Final sms'
-                ];
+               foreach ($beneficiary_data as $value) {
 
-                foreach ($beneficiary_data as $value) {
+                   if(array_key_exists($value['phc_name'],$weblink)){
+                       $weblink_text = $weblink[$value['phc_name']];
+                   }else{
+                       $weblink_text = null;
+                   }
 
-                    if(array_key_exists($value['phc_name'],$weblink)){
-                        $weblink_text = $weblink[$value['phc_name']];
-                    }else{
-                        $weblink_text = null;
-                    }
+                   if($weblink_text != null){
+                       $link_weblink_text = url('/weblink',$weblink_text);
+                   }else{
+                       $link_weblink_text = null;
+                   }
 
-                    if($weblink_text != null){
-                        $link_weblink_text = url('/weblink',$weblink_text);
-                    }else{
-                        $link_weblink_text = null;
-                    }
+                   if(array_key_exists($value['phc_name'],$message)){
+                       $message_text = $message[$value['phc_name']];
+                   }else{
+                       $message_text = null;
+                   }
 
-                    if(array_key_exists($value['phc_name'],$message)){
-                        $message_text = $message[$value['phc_name']];
-                    }else{
-                        $message_text = null;
-                    }
+                   $excelData[] = array(
+                       $value['district_name'],
+                       ucwords($block_name),
+                       ucwords($value['phc_name']),
+                       $value['beneficary_mobile_number'],
+                       $link_weblink_text,
+                       $message_text,
+                       $message_text.$link_weblink_text,
 
-                    $excelData[] = array(
-                        $value['district_name'],
-                        ucwords($block_name),
-                        ucwords($value['phc_name']),
-                        $value['beneficary_mobile_number'],
-                        $link_weblink_text,
-                        $message_text,
-                        $message_text.$link_weblink_text,
+                   );
+               }
+               $sheet->fromArray($excelData, null, 'A1', true, false);
+           });
 
-                    );
-                }
-                $sheet->fromArray($excelData, null, 'A1', true, false);
-            });
+       })->download('xlsx');
 
-        })->download('xlsx');
 
-    }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+   }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.

@@ -33,7 +33,7 @@
 
 
     @if($location == 'nudge_file')
-    <section style="margin-left: 1050px;">
+    <section style="margin-left: 1315px;">
         <a  class="btn btn-default" href="{{ url('get-nudges') }}">Back</a>
     </section></br>
     @elseif($location == 'dashboard')

@@ -9,11 +9,13 @@
                 </div>
             </div>
 
-            <div class="row mb-1">
-                <div class="col-md-12 text-right">
-                    <a  class="btn btn-primary" id="export-btn" href="{{ route('excel_import',$id) }}">Export to excel</a>
+            @if($status['status'] == 'Y')
+                <div class="row mb-1">
+                    <div class="col-md-12 text-right">
+                        <a  class="btn btn-primary" id="export-btn" href="{{ route('excel_import',$id) }}">Export to excel</a>
+                    </div>
                 </div>
-            </div>
+            @endif
         </div>
     </section>
 
@@ -28,7 +30,6 @@
                             <th>Block</th>
                             <th>PHC Name</th>
                             <th>Subcenter</th>
-
                             <th>Web Link</th>
                             <th>ANM Customised Message</th>
                             <th>MOIC Customised Message</th>
@@ -36,8 +37,7 @@
                         </tr>
                         </thead>
                     </table>
-
-                    <a  class="btn btn-default" href="{{ url('/') }}">Back</a>
+                    <a  class="btn btn-default" href="{{ url('get-anm') }}">Back</a>
                 </div>
             </div>
         </div>
